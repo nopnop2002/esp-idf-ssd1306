@@ -1,0 +1,45 @@
+menu "SSD1306 Configuration"
+
+    config MODEL
+        int "SSD1306 Model"
+        range 1 2
+        default 1
+        help
+            1 : SSD1306_128x64 (128x64 panel)
+            2 : SSD1306_128x32 (128x32 panel)
+
+    config SCL_GPIO
+        int "SCL GPIO number"
+        range 0 34
+        default 22
+        help
+            GPIO number (IOxx) to I2C SCL.
+
+            Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to I2C.
+
+            GPIOs 35-39 are input-only so cannot be used as outputs.
+
+    config SDA_GPIO
+        int "SDA GPIO number"
+        range 0 34
+        default 21
+        help
+            GPIO number (IOxx) to I2C SDA.
+
+            Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to I2C.
+
+            GPIOs 35-39 are input-only so cannot be used as outputs.
+
+    config RESET_GPIO
+        int "RESET GPIO number"
+        range -1 34
+        default -1
+        help
+            GPIO number (IOxx) to RESET.
+
+			When it is -1, RESET isn't performed.
+            Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to I2C.
+
+            GPIOs 35-39 are input-only so cannot be used as outputs.
+
+endmenu
