@@ -43,8 +43,8 @@ void app_main(void)
 		ssd1306_display_text(dev, 2, "SSD1306 128x32", 14, true);
 		ssd1306_display_text(dev, 3, "Hello World!!", 13, true);
 	}
-	//vTaskDelay(10000 / portTICK_PERIOD_MS);
-	vTaskDelay(30000 / portTICK_PERIOD_MS);
+	vTaskDelay(10000 / portTICK_PERIOD_MS);
+	//vTaskDelay(30000 / portTICK_PERIOD_MS);
 	
 	// Horizontal Scroll
 	ssd1306_clear_screen(dev, false);
