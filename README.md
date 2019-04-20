@@ -11,6 +11,13 @@ CONFIG_SDA_GPIO
 CONFIG_SCL_GPIO   
 CONFIG_RESET_GPIO   
 
+```
+git clone https://github.com/nopnop2002/esp-idf-ssd1306
+cd esp-idf-ssd1306/
+make menuconfig
+make flash
+```
+
 ![config](https://user-images.githubusercontent.com/6020549/56449085-4f458380-6350-11e9-95f8-8583c3f78e80.jpg)
 
 ---
