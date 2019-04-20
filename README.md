@@ -1,7 +1,8 @@
 # esp-idf-ssd1306
 Sample code for driving OLED display with SSD1306 driver via ESP-IDF's I2C master driver.   
 
-I consulted the following repository.   
+
+I used this repository as a reference.   
 https://github.com/yanbe/ssd1306-esp-idf-i2c   
 
 You have to set this config value with menuconfig.   
