@@ -3,6 +3,7 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "ssd1306.h"
+#include "font8x8_basic.h"
 
 // You have to set this config value with menuconfig
 // CONFIG_MODEL
@@ -43,8 +44,21 @@ void app_main(void)
 		ssd1306_display_text(dev, 2, "SSD1306 128x32", 14, true);
 		ssd1306_display_text(dev, 3, "Hello World!!", 13, true);
 	}
-	vTaskDelay(10000 / portTICK_PERIOD_MS);
-	//vTaskDelay(30000 / portTICK_PERIOD_MS);
+	vTaskDelay(3000 / portTICK_PERIOD_MS);
+    
+	// Display Count Down
+    uint8_t image[24];
+    memset(image, 0, sizeof(image));
+	ssd1306_display_image(dev, 2, (6*8-1), image, sizeof(image));
+	ssd1306_display_image(dev, 3, (6*8-1), image, sizeof(image));
+	ssd1306_display_image(dev, 4, (6*8-1), image, sizeof(image));
+	for(int font=0x39;font>0x30;font--) {
+    	memset(image, 0, sizeof(image));
+		ssd1306_display_image(dev, 3, (7*8-1), image, 8);
+		memcpy(image, font8x8_basic_tr[font], 8);
+		ssd1306_display_image(dev, 3, (7*8-1), image, 8);
+		vTaskDelay(1000 / portTICK_PERIOD_MS);
+	}
 	
 	// Horizontal Scroll
 	ssd1306_clear_screen(dev, false);

@@ -133,8 +133,7 @@ void ssd1306_display_text(SSD1306_t dev, int page, char * text, int text_len, bo
 	}
 }
 
-// images[32*4]
-void ssd1306_display_font(SSD1306_t dev, int page, int seg, uint8_t * images, int width, int height) {
+void ssd1306_display_image(SSD1306_t dev, int page, int seg, uint8_t * images, int width) {
 	i2c_cmd_handle_t cmd;
 
 	if (page >= dev._pages) return;
@@ -142,38 +141,35 @@ void ssd1306_display_font(SSD1306_t dev, int page, int seg, uint8_t * images, in
 
 	uint8_t startLow = seg & 0x0F;
 	uint8_t startHigh = (seg >> 4) & 0x0F;
-	uint8_t numPages = height / 8;
-	uint8_t index = 0;
-	
-	for (uint8_t cur_page=0; cur_page < numPages; cur_page++) {
-		index = cur_page * 32;  // 0,32,64,96
-		cmd = i2c_cmd_link_create();
-		i2c_master_start(cmd);
-		i2c_master_write_byte(cmd, (dev._address << 1) | I2C_MASTER_WRITE, true);
 
-		i2c_master_write_byte(cmd, OLED_CONTROL_BYTE_CMD_STREAM, true);
-		// Set Lower Column Start Address for Page Addressing Mode
-		i2c_master_write_byte(cmd, (0x00 + startLow), true);
-		// Set Higher Column Start Address for Page Addressing Mode
-		i2c_master_write_byte(cmd, (0x10 + startHigh), true);
-		// Set Page Start Address for Page Addressing Mode
-		i2c_master_write_byte(cmd, 0xB0 | (page + cur_page), true);
+	cmd = i2c_cmd_link_create();
+	i2c_master_start(cmd);
+	i2c_master_write_byte(cmd, (dev._address << 1) | I2C_MASTER_WRITE, true);
 
-		i2c_master_stop(cmd);
-		i2c_master_cmd_begin(I2C_NUM_0, cmd, 10/portTICK_PERIOD_MS);
-		i2c_cmd_link_delete(cmd);
+	i2c_master_write_byte(cmd, OLED_CONTROL_BYTE_CMD_STREAM, true);
+	// Set Lower Column Start Address for Page Addressing Mode
+	//i2c_master_write_byte(cmd, 0x00, true);
+	i2c_master_write_byte(cmd, (0x00 + startLow), true);
+	// Set Higher Column Start Address for Page Addressing Mode
+	//i2c_master_write_byte(cmd, 0x10, true);
+	i2c_master_write_byte(cmd, (0x10 + startHigh), true);
+	// Set Page Start Address for Page Addressing Mode
+	i2c_master_write_byte(cmd, 0xB0 | page, true);
 
-		cmd = i2c_cmd_link_create();
-		i2c_master_start(cmd);
-		i2c_master_write_byte(cmd, (dev._address << 1) | I2C_MASTER_WRITE, true);
+	i2c_master_stop(cmd);
+	i2c_master_cmd_begin(I2C_NUM_0, cmd, 10/portTICK_PERIOD_MS);
+	i2c_cmd_link_delete(cmd);
 
-		i2c_master_write_byte(cmd, OLED_CONTROL_BYTE_DATA_STREAM, true);
-		i2c_master_write(cmd, &images[index], width, true);
+	cmd = i2c_cmd_link_create();
+	i2c_master_start(cmd);
+	i2c_master_write_byte(cmd, (dev._address << 1) | I2C_MASTER_WRITE, true);
 
-		i2c_master_stop(cmd);
-		i2c_master_cmd_begin(I2C_NUM_0, cmd, 10/portTICK_PERIOD_MS);
-		i2c_cmd_link_delete(cmd);
-	}
+	i2c_master_write_byte(cmd, OLED_CONTROL_BYTE_DATA_STREAM, true);
+	i2c_master_write(cmd, images, width, true);
+
+	i2c_master_stop(cmd);
+	i2c_master_cmd_begin(I2C_NUM_0, cmd, 10/portTICK_PERIOD_MS);
+	i2c_cmd_link_delete(cmd);
 }
 
 
