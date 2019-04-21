@@ -6,7 +6,7 @@
 #include "driver/i2c.h"
 #include "esp_log.h"
 
-#include "ssd1366.h"
+#include "ssd1306.h"
 #include "font8x8_basic.h"
 
 #define tag "SSD1306"

@@ -2,7 +2,7 @@
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "ssd1366.h"
+#include "ssd1306.h"
 
 // You have to set this config value with menuconfig
 // CONFIG_MODEL
