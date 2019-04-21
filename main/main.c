@@ -48,15 +48,17 @@ void app_main(void)
     
 	// Display Count Down
     uint8_t image[24];
+	int top = 2;
+    if (CONFIG_MODEL == SSD1306_128x32) top = 1;
     memset(image, 0, sizeof(image));
-	ssd1306_display_image(dev, 2, (6*8-1), image, sizeof(image));
-	ssd1306_display_image(dev, 3, (6*8-1), image, sizeof(image));
-	ssd1306_display_image(dev, 4, (6*8-1), image, sizeof(image));
+	ssd1306_display_image(dev, top, (6*8-1), image, sizeof(image));
+	ssd1306_display_image(dev, top+1, (6*8-1), image, sizeof(image));
+	ssd1306_display_image(dev, top+2, (6*8-1), image, sizeof(image));
 	for(int font=0x39;font>0x30;font--) {
     	memset(image, 0, sizeof(image));
-		ssd1306_display_image(dev, 3, (7*8-1), image, 8);
+		ssd1306_display_image(dev, top+1, (7*8-1), image, 8);
 		memcpy(image, font8x8_basic_tr[font], 8);
-		ssd1306_display_image(dev, 3, (7*8-1), image, 8);
+		ssd1306_display_image(dev, top+1, (7*8-1), image, 8);
 		vTaskDelay(1000 / portTICK_PERIOD_MS);
 	}
 	
