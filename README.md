@@ -5,6 +5,9 @@ Sample code for driving OLED display with SSD1306 driver via ESP-IDF's I2C maste
 I used this repository as a reference.   
 https://github.com/yanbe/ssd1306-esp-idf-i2c   
 
+I used this font file.   
+https://github.com/dhepper/font8x8   
+
 You have to set this config value with menuconfig.   
 CONFIG_MODEL   
 CONFIG_SDA_GPIO   
