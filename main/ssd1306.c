@@ -93,43 +93,17 @@ void ssd1306_init(SSD1306_t * dev, int width, int height, int I2CAddress) {
 }
 
 void ssd1306_display_text(SSD1306_t dev, int page, char * text, int text_len, bool invert) {
-	i2c_cmd_handle_t cmd;
-
 	if (page >= dev._pages) return;
 	int _text_len = text_len;
 	if (_text_len > 16) _text_len = 16;
 
-	cmd = i2c_cmd_link_create();
-	i2c_master_start(cmd);
-	i2c_master_write_byte(cmd, (dev._address << 1) | I2C_MASTER_WRITE, true);
-
-	i2c_master_write_byte(cmd, OLED_CONTROL_BYTE_CMD_STREAM, true);
-	// Set Lower Column Start Address for Page Addressing Mode
-	i2c_master_write_byte(cmd, 0x00, true);
-	// Set Higher Column Start Address for Page Addressing Mode
-	i2c_master_write_byte(cmd, 0x10, true);
-	// Set Page Start Address for Page Addressing Mode
-	i2c_master_write_byte(cmd, 0xB0 | page, true);
-
-	i2c_master_stop(cmd);
-	i2c_master_cmd_begin(I2C_NUM_0, cmd, 10/portTICK_PERIOD_MS);
-	i2c_cmd_link_delete(cmd);
-
-	uint8_t wk[8];
+    uint8_t seg = 0;
+	uint8_t image[8];
 	for (uint8_t i = 0; i < _text_len; i++) {
-		cmd = i2c_cmd_link_create();
-		i2c_master_start(cmd);
-		i2c_master_write_byte(cmd, (dev._address << 1) | I2C_MASTER_WRITE, true);
-
-		i2c_master_write_byte(cmd, OLED_CONTROL_BYTE_DATA_STREAM, true);
-		memcpy(wk, font8x8_basic_tr[(uint8_t)text[i]], 8);
-        if (invert) ssd1306_invert(wk, 8);
-		//i2c_master_write(cmd, font8x8_basic_tr[(uint8_t)text[i]], 8, true);
-		i2c_master_write(cmd, wk, 8, true);
-
-		i2c_master_stop(cmd);
-		i2c_master_cmd_begin(I2C_NUM_0, cmd, 10/portTICK_PERIOD_MS);
-		i2c_cmd_link_delete(cmd);
+		memcpy(image, font8x8_basic_tr[(uint8_t)text[i]], 8);
+        if (invert) ssd1306_invert(image, 8);
+		ssd1306_display_image(dev, page, seg, image, 8);
+		seg = seg + 8;
 	}
 }
 
@@ -139,8 +113,8 @@ void ssd1306_display_image(SSD1306_t dev, int page, int seg, uint8_t * images, i
 	if (page >= dev._pages) return;
 	if (seg >= dev._width) return;
 
-	uint8_t startLow = seg & 0x0F;
-	uint8_t startHigh = (seg >> 4) & 0x0F;
+	uint8_t columLow = seg & 0x0F;
+	uint8_t columHigh = (seg >> 4) & 0x0F;
 
 	cmd = i2c_cmd_link_create();
 	i2c_master_start(cmd);
@@ -149,10 +123,10 @@ void ssd1306_display_image(SSD1306_t dev, int page, int seg, uint8_t * images, i
 	i2c_master_write_byte(cmd, OLED_CONTROL_BYTE_CMD_STREAM, true);
 	// Set Lower Column Start Address for Page Addressing Mode
 	//i2c_master_write_byte(cmd, 0x00, true);
-	i2c_master_write_byte(cmd, (0x00 + startLow), true);
+	i2c_master_write_byte(cmd, (0x00 + columLow), true);
 	// Set Higher Column Start Address for Page Addressing Mode
 	//i2c_master_write_byte(cmd, 0x10, true);
-	i2c_master_write_byte(cmd, (0x10 + startHigh), true);
+	i2c_master_write_byte(cmd, (0x10 + columHigh), true);
 	// Set Page Start Address for Page Addressing Mode
 	i2c_master_write_byte(cmd, 0xB0 | page, true);
 
