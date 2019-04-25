@@ -79,20 +79,29 @@ typedef enum {
 } ssd1306_scroll_type_t;
 
 typedef struct {
+	uint8_t _segs[128];
+} PAGE_t;
+
+typedef struct {
 	int _address;
 	int _width;
 	int _height;
 	int _pages;
+	PAGE_t _page[8];
 } SSD1306_t;
 
 void i2c_master_init(int sda, int scl, int reset);
 void ssd1306_init(SSD1306_t * dev, int width, int height, int I2CAddress);
-void ssd1306_display_text(SSD1306_t dev, int page, char * text, int text_len, bool invert);
-void ssd1306_display_image(SSD1306_t dev, int page, int seg, uint8_t * images, int width);
-void ssd1306_clear_screen(SSD1306_t dev, bool invert);
-void ssd1306_clear_line(SSD1306_t dev, int page, bool invert);
+void ssd1306_display_text(SSD1306_t * dev, int page, char * text, int text_len, bool invert);
+void ssd1306_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int width);
+void ssd1306_clear_screen(SSD1306_t * dev, bool invert);
+void ssd1306_clear_line(SSD1306_t * dev, int page, bool invert);
 void ssd1306_contrast(SSD1306_t dev, int contrast);
+void ssd1306_page_up(SSD1306_t * dev);
+void ssd1306_page_down(SSD1306_t * dev);
 void ssd1306_scroll(SSD1306_t dev, ssd1306_scroll_type_t scroll);
 void ssd1306_invert(uint8_t *buf, size_t blen);
+void ssd1306_fadeout(SSD1306_t * dev);
+void ssd1306_dump(SSD1306_t dev);
 #endif /* MAIN_SSD1366_H_ */
 
