@@ -1,5 +1,13 @@
 menu "SSD1306 Configuration"
 
+    config INTERFACE
+        int "SSD1306 Interface"
+        range 1 2
+        default 1
+        help
+            1 : i2c Interface
+            2 : SPI interface
+
     config MODEL
         int "SSD1306 Model"
         range 1 2
@@ -38,7 +46,29 @@ menu "SSD1306 Configuration"
             GPIO number (IOxx) to RESET.
 
 			When it is -1, RESET isn't performed.
-            Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to I2C.
+            Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to Reset.
+
+            GPIOs 35-39 are input-only so cannot be used as outputs.
+
+    config CS_GPIO
+        int "CS GPIO number"
+        range 0 34
+        default 15
+        help
+            GPIO number (IOxx) to SPI CS.
+
+            Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to CS.
+
+            GPIOs 35-39 are input-only so cannot be used as outputs.
+
+    config DC_GPIO
+        int "DC GPIO number"
+        range 0 34
+        default 33
+        help
+            GPIO number (IOxx) to SPI DC.
+
+            Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to DC.
 
             GPIOs 35-39 are input-only so cannot be used as outputs.
 

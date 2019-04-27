@@ -1,6 +1,8 @@
 #ifndef MAIN_SSD1366_H_
 #define MAIN_SSD1366_H_
 
+#include "driver/spi_master.h"
+
 // Following definitions are bollowed from 
 // http://robotcantalk.blogspot.com/2015/03/interfacing-arduino-with-ssd1306-driven.html
 
@@ -65,6 +67,10 @@ Usage:
 #define OLED_CMD_ACTIVE_SCROLL          0x2F
 #define OLED_CMD_VERTICAL		        0xA3
 
+#define	SPIAddress 0xFF 
+#define I2C_INTERFACE 1
+#define SPI_INTERFACE 2
+
 typedef enum {
 	SSD1306_128x64 = 1,	// 128x64 panel
 	SSD1306_128x32 = 2	// 128x32 panel
@@ -87,21 +93,50 @@ typedef struct {
 	int _width;
 	int _height;
 	int _pages;
+	int _dc;
+	spi_device_handle_t _SPIHandle;
 	PAGE_t _page[8];
 } SSD1306_t;
 
-void i2c_master_init(int sda, int scl, int reset);
-void ssd1306_init(SSD1306_t * dev, int width, int height, int I2CAddress);
 void ssd1306_display_text(SSD1306_t * dev, int page, char * text, int text_len, bool invert);
 void ssd1306_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int width);
 void ssd1306_clear_screen(SSD1306_t * dev, bool invert);
 void ssd1306_clear_line(SSD1306_t * dev, int page, bool invert);
-void ssd1306_contrast(SSD1306_t dev, int contrast);
+void ssd1306_contrast(SSD1306_t * dev, int contrast);
 void ssd1306_page_up(SSD1306_t * dev);
 void ssd1306_page_down(SSD1306_t * dev);
-void ssd1306_scroll(SSD1306_t dev, ssd1306_scroll_type_t scroll);
+void ssd1306_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll);
 void ssd1306_invert(uint8_t *buf, size_t blen);
 void ssd1306_fadeout(SSD1306_t * dev);
 void ssd1306_dump(SSD1306_t dev);
+
+void i2c_master_init(int sda, int scl, int reset);
+void i2c_init(SSD1306_t * dev, int width, int height, int I2CAddress);
+void i2c_display_text(SSD1306_t * dev, int page, char * text, int text_len, bool invert);
+void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int width);
+//void i2c_clear_screen(SSD1306_t * dev, bool invert);
+//void i2c_clear_line(SSD1306_t * dev, int page, bool invert);
+void i2c_contrast(SSD1306_t * dev, int contrast);
+//void i2c_page_up(SSD1306_t * dev);
+//void i2c_page_down(SSD1306_t * dev);
+void i2c_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll);
+//void i2c_invert(uint8_t *buf, size_t blen);
+//void i2c_fadeout(SSD1306_t * dev);
+
+void spi_master_init(SSD1306_t * dev, int GPIO_CS, int GPIO_DC, int GPIO_RESET);
+bool spi_master_write_byte(int DCpin, spi_device_handle_t SPIHandle, int WriteMode, const uint8_t* Data, size_t DataLength );
+bool spi_master_write_command(SSD1306_t * dev, uint8_t Command );
+bool spi_master_write_data(SSD1306_t * dev, const uint8_t* Data, size_t DataLength );
+void spi_init(SSD1306_t * dev, int width, int height);
+void spi_display_text(SSD1306_t * dev, int page, char * text, int text_len, bool invert);
+void spi_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int width);
+//void spi_clear_screen(SSD1306_t * dev, bool invert);
+//void spi_clear_line(SSD1306_t * dev, int page, bool invert);
+void spi_contrast(SSD1306_t * dev, int contrast);
+//void spi_page_up(SSD1306_t * dev);
+//void spi_page_down(SSD1306_t * dev);
+void spi_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll);
+//void spi_invert(uint8_t *buf, size_t blen);
+//void spi_fadeout(SSD1306_t * dev);
 #endif /* MAIN_SSD1366_H_ */
 
