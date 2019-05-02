@@ -78,6 +78,8 @@ DC GPIO not used.
 ![128x64_spi](https://user-images.githubusercontent.com/6020549/56844607-ee88ee80-68ed-11e9-9b20-ab5e7e0d2a99.JPG)
 ![config-128x64_spi](https://user-images.githubusercontent.com/6020549/56844609-f34da280-68ed-11e9-995e-4aedae207eac.jpg)
 
+MOSI is GPIO13.   
+SCLK is GPIO14.   
 SSD1306 Model not used.   
 SCL GPIO not used.   
 SDA GPIO not used.   

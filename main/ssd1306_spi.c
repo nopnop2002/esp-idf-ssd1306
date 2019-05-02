@@ -64,6 +64,7 @@ void spi_master_init(SSD1306_t * dev, int GPIO_CS, int GPIO_DC, int GPIO_RESET)
 #endif
 
     if ( GPIO_RESET >= 0 ) {
+    	gpio_set_direction( GPIO_RESET, GPIO_MODE_OUTPUT );
 		gpio_set_level( GPIO_RESET, 0 );
         vTaskDelay( pdMS_TO_TICKS( 100 ) );
         gpio_set_level( GPIO_RESET, 1 );
