@@ -62,6 +62,18 @@ DC GPIO not used.
 
 ---
 
+# 128x64 ESP-WROOM-32
+
+![ESP32-OLED-1](https://user-images.githubusercontent.com/6020549/57063316-cd653b00-6cfd-11e9-8430-1e3eadfba0bd.JPG)
+![ESP32-OLED-2](https://user-images.githubusercontent.com/6020549/57063327-d229ef00-6cfd-11e9-98ab-8448e14d81e2.JPG)
+![config-128x64_esp32](https://user-images.githubusercontent.com/6020549/57063338-dc4bed80-6cfd-11e9-90b5-7b3e7ed74c00.jpg)
+
+RESET GPIO not used.   
+CS GPIO not used.   
+DC GPIO not used.   
+
+---
+
 # 128x64 SPI
 
 ![128x64_spi](https://user-images.githubusercontent.com/6020549/56844607-ee88ee80-68ed-11e9-9b20-ab5e7e0d2a99.JPG)
