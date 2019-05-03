@@ -12,14 +12,12 @@
 
 #define tag "SSD1306"
 
-static const spi_host_device_t SPIHost = 1;
 static const int GPIO_MOSI = 13;
 static const int GPIO_SCLK = 14;
 
 static const int SPI_Command_Mode = 0;
 static const int SPI_Data_Mode = 1;
 static const int SPI_Frequency = 1000000;
-//static const int SPIAddress = 0xFF;
 
 void spi_master_init(SSD1306_t * dev, int GPIO_CS, int GPIO_DC, int GPIO_RESET)
 {
@@ -31,6 +29,13 @@ void spi_master_init(SSD1306_t * dev, int GPIO_CS, int GPIO_DC, int GPIO_RESET)
     gpio_set_direction( GPIO_DC, GPIO_MODE_OUTPUT );
     gpio_set_level( GPIO_DC, 0 );
 
+    if ( GPIO_RESET >= 0 ) {
+    	gpio_set_direction( GPIO_RESET, GPIO_MODE_OUTPUT );
+		gpio_set_level( GPIO_RESET, 0 );
+        vTaskDelay( pdMS_TO_TICKS( 100 ) );
+        gpio_set_level( GPIO_RESET, 1 );
+	}
+
     spi_bus_config_t spi_bus_config = {
         .sclk_io_num = GPIO_SCLK,
         .mosi_io_num = GPIO_MOSI,
@@ -39,7 +44,7 @@ void spi_master_init(SSD1306_t * dev, int GPIO_CS, int GPIO_DC, int GPIO_RESET)
         .quadhd_io_num = -1
     };
 
-    ret = spi_bus_initialize( SPIHost, &spi_bus_config, 1 );
+    ret = spi_bus_initialize( HSPI_HOST, &spi_bus_config, 1 );
 	ESP_LOGI(tag, "spi_bus_initialize=%d",ret);
 	assert(ret==ESP_OK);
 
@@ -63,15 +68,8 @@ void spi_master_init(SSD1306_t * dev, int GPIO_CS, int GPIO_DC, int GPIO_RESET)
     };
 #endif
 
-    if ( GPIO_RESET >= 0 ) {
-    	gpio_set_direction( GPIO_RESET, GPIO_MODE_OUTPUT );
-		gpio_set_level( GPIO_RESET, 0 );
-        vTaskDelay( pdMS_TO_TICKS( 100 ) );
-        gpio_set_level( GPIO_RESET, 1 );
-	}
-
 	spi_device_handle_t handle;
-	ret = spi_bus_add_device( SPIHost, &devcfg, &handle);
+	ret = spi_bus_add_device( HSPI_HOST, &devcfg, &handle);
 	ESP_LOGI(tag, "spi_bus_add_device=%d",ret);
 	assert(ret==ESP_OK);
 	dev->_dc = GPIO_DC;
