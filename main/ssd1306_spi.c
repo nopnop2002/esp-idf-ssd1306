@@ -77,17 +77,14 @@ void spi_master_init(SSD1306_t * dev, int GPIO_CS, int GPIO_DC, int GPIO_RESET)
 }
 
 
-bool spi_master_write_byte(int DCPin, spi_device_handle_t SPIHandle, int WriteMode, const uint8_t* Data, size_t DataLength )
+bool spi_master_write_byte(spi_device_handle_t SPIHandle, const uint8_t* Data, size_t DataLength )
 {
     spi_transaction_t SPITransaction;
 
     if ( DataLength > 0 ) {
         memset( &SPITransaction, 0, sizeof( spi_transaction_t ) );
-
         SPITransaction.length = DataLength * 8;
         SPITransaction.tx_buffer = Data;
-
-        gpio_set_level( DCPin, WriteMode );
         spi_device_transmit( SPIHandle, &SPITransaction );
     }
 
@@ -98,12 +95,14 @@ bool spi_master_write_command(SSD1306_t * dev, uint8_t Command )
 {
     static uint8_t CommandByte = 0;
     CommandByte = Command;
-    return spi_master_write_byte( dev->_dc, dev->_SPIHandle, SPI_Command_Mode, &CommandByte, 1 );
+	gpio_set_level( dev->_dc, SPI_Command_Mode );
+    return spi_master_write_byte( dev->_SPIHandle, &CommandByte, 1 );
 }
 
 bool spi_master_write_data(SSD1306_t * dev, const uint8_t* Data, size_t DataLength )
 {
-    return spi_master_write_byte( dev->_dc, dev->_SPIHandle, SPI_Data_Mode, Data, DataLength );
+	gpio_set_level( dev->_dc, SPI_Data_Mode );
+    return spi_master_write_byte( dev->_SPIHandle, Data, DataLength );
 }
 
 

@@ -124,7 +124,7 @@ void i2c_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll);
 //void i2c_fadeout(SSD1306_t * dev);
 
 void spi_master_init(SSD1306_t * dev, int GPIO_CS, int GPIO_DC, int GPIO_RESET);
-bool spi_master_write_byte(int DCpin, spi_device_handle_t SPIHandle, int WriteMode, const uint8_t* Data, size_t DataLength );
+bool spi_master_write_byte(spi_device_handle_t SPIHandle, const uint8_t* Data, size_t DataLength );
 bool spi_master_write_command(SSD1306_t * dev, uint8_t Command );
 bool spi_master_write_data(SSD1306_t * dev, const uint8_t* Data, size_t DataLength );
 void spi_init(SSD1306_t * dev, int width, int height);
