@@ -1,5 +1,5 @@
-#ifndef MAIN_SSD1366_H_
-#define MAIN_SSD1366_H_
+#ifndef MAIN_SSD1306_H_
+#define MAIN_SSD1306_H_
 
 #include "driver/spi_master.h"
 
@@ -138,5 +138,5 @@ void spi_contrast(SSD1306_t * dev, int contrast);
 void spi_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll);
 //void spi_invert(uint8_t *buf, size_t blen);
 //void spi_fadeout(SSD1306_t * dev);
-#endif /* MAIN_SSD1366_H_ */
+#endif /* MAIN_SSD1306_H_ */
 
