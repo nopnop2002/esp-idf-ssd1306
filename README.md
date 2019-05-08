@@ -1,5 +1,5 @@
 # esp-idf-ssd1306
-Sample code for driving OLED display with SSD1306 driver using ESP-IDF.   
+Example code for driving OLED display with SSD1306 driver using ESP-IDF.   
 
 
 I used this repository as a reference.   
