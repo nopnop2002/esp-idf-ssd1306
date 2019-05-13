@@ -25,12 +25,12 @@ void i2c_master_init(int sda, int scl, int reset)
 	i2c_driver_install(I2C_NUM_0, I2C_MODE_MASTER, 0, 0, 0);
 
 	if (reset >= 0) {
-    	gpio_pad_select_gpio(reset);
-    	/* Set the GPIO as a push/pull output */
-    	gpio_set_direction(reset, GPIO_MODE_OUTPUT);
-        gpio_set_level(reset, 0);
-        vTaskDelay(50 / portTICK_PERIOD_MS);
-        gpio_set_level(reset, 1);
+		gpio_pad_select_gpio(reset);
+		/* Set the GPIO as a push/pull output */
+		gpio_set_direction(reset, GPIO_MODE_OUTPUT);
+		gpio_set_level(reset, 0);
+		vTaskDelay(50 / portTICK_PERIOD_MS);
+		gpio_set_level(reset, 1);
 	}
 
 }
@@ -97,11 +97,11 @@ void i2c_display_text(SSD1306_t * dev, int page, char * text, int text_len, bool
 	int _text_len = text_len;
 	if (_text_len > 16) _text_len = 16;
 
-    uint8_t seg = 0;
+	uint8_t seg = 0;
 	uint8_t image[8];
 	for (uint8_t i = 0; i < _text_len; i++) {
 		memcpy(image, font8x8_basic_tr[(uint8_t)text[i]], 8);
-        if (invert) ssd1306_invert(image, 8);
+		if (invert) ssd1306_invert(image, 8);
 		i2c_display_image(dev, page, seg, image, 8);
 		for(int j=0;j<8;j++) 
 			dev->_page[page]._segs[seg+j] = image[j];
@@ -147,26 +147,6 @@ void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int
 	i2c_master_cmd_begin(I2C_NUM_0, cmd, 10/portTICK_PERIOD_MS);
 	i2c_cmd_link_delete(cmd);
 }
-
-#if 0
-void ssd1306_clear_screen(SSD1306_t * dev, bool invert) {
-	char zero[128];
-	memset(zero, 0, sizeof(zero));
-	for (int page = 0; page < dev->_pages; page++) {
-		ssd1306_display_text(dev, page, zero, 128, invert);
-	}
-}
-#endif
-
-
-#if 0
-void ssd1306_clear_line(SSD1306_t * dev, int page, bool invert) {
-	char zero[128];
-	memset(zero, 0, sizeof(zero));
-	ssd1306_display_text(dev, page, zero, 128, invert);
-}
-#endif
-
 
 void i2c_contrast(SSD1306_t * dev, int contrast) {
 	i2c_cmd_handle_t cmd;
@@ -293,37 +273,5 @@ void i2c_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll) {
 	i2c_cmd_link_delete(cmd);
 }
 
-#if 0
-void ssd1306_invert(uint8_t *buf, size_t blen) {
-	uint8_t wk;
-	for(int i=0; i<blen; i++){
-		wk = buf[i];
-		buf[i] = ~wk;
-	}
-}
-#endif
 
-#if 0
-void ssd1306_fadeout(SSD1306_t * dev) {
-	uint8_t image[1];
-    for(int page=0; page<dev->_pages; page++) {
-        image[0] = 0xFF;
-        for(int line=0; line<8; line++) {
-            image[0] = image[0] << 1;
-            for(int seg=0; seg<128; seg++) {
-                ssd1306_display_image(dev, page, seg, image, 1);
-            }
-        }
-    }
-}
-#endif
-
-#if 0
-void ssd1306_dump(SSD1306_t dev) {
-	printf("_address=%x\n",dev._address);
-	printf("_width=%x\n",dev._width);
-	printf("_height=%x\n",dev._height);
-	printf("_pages=%x\n",dev._pages);
-}
-#endif
 

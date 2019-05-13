@@ -23,49 +23,49 @@ void spi_master_init(SSD1306_t * dev, int GPIO_CS, int GPIO_DC, int GPIO_RESET)
 {
 	esp_err_t ret;
 
-    gpio_set_direction( GPIO_CS, GPIO_MODE_OUTPUT );
-    gpio_set_level( GPIO_CS, 0 );
+	gpio_set_direction( GPIO_CS, GPIO_MODE_OUTPUT );
+	gpio_set_level( GPIO_CS, 0 );
 
-    gpio_set_direction( GPIO_DC, GPIO_MODE_OUTPUT );
-    gpio_set_level( GPIO_DC, 0 );
+	gpio_set_direction( GPIO_DC, GPIO_MODE_OUTPUT );
+	gpio_set_level( GPIO_DC, 0 );
 
-    if ( GPIO_RESET >= 0 ) {
-    	gpio_set_direction( GPIO_RESET, GPIO_MODE_OUTPUT );
+	if ( GPIO_RESET >= 0 ) {
+		gpio_set_direction( GPIO_RESET, GPIO_MODE_OUTPUT );
 		gpio_set_level( GPIO_RESET, 0 );
-        vTaskDelay( pdMS_TO_TICKS( 100 ) );
-        gpio_set_level( GPIO_RESET, 1 );
+		vTaskDelay( pdMS_TO_TICKS( 100 ) );
+		gpio_set_level( GPIO_RESET, 1 );
 	}
 
-    spi_bus_config_t spi_bus_config = {
-        .sclk_io_num = GPIO_SCLK,
-        .mosi_io_num = GPIO_MOSI,
-        .miso_io_num = -1,
-        .quadwp_io_num = -1,
-        .quadhd_io_num = -1
-    };
+	spi_bus_config_t spi_bus_config = {
+		.sclk_io_num = GPIO_SCLK,
+		.mosi_io_num = GPIO_MOSI,
+		.miso_io_num = -1,
+		.quadwp_io_num = -1,
+		.quadhd_io_num = -1
+	};
 
-    ret = spi_bus_initialize( HSPI_HOST, &spi_bus_config, 1 );
+	ret = spi_bus_initialize( HSPI_HOST, &spi_bus_config, 1 );
 	ESP_LOGI(tag, "spi_bus_initialize=%d",ret);
 	assert(ret==ESP_OK);
 
-    spi_device_interface_config_t devcfg;
-    memset( &devcfg, 0, sizeof( spi_device_interface_config_t ) );
-    devcfg.clock_speed_hz = SPI_Frequency;
-    devcfg.spics_io_num = GPIO_CS;
-    devcfg.queue_size = 1;
+	spi_device_interface_config_t devcfg;
+	memset( &devcfg, 0, sizeof( spi_device_interface_config_t ) );
+	devcfg.clock_speed_hz = SPI_Frequency;
+	devcfg.spics_io_num = GPIO_CS;
+	devcfg.queue_size = 1;
 
 #if 0
-    spi_device_interface_config_t devcfg={
-        .command_bits=0,
-        .address_bits=0,
-        .dummy_bits=0,
-        .clock_speed_hz=5000000,
-        .duty_cycle_pos=128,        //50% duty cycle
-        .mode=0,
-        .spics_io_num=GPIO_CS,
-        .cs_ena_posttrans=3,        //Keep the CS low 3 cycles after transaction, to stop slave from missing the last bit when CS has less propagation delay than CLK
-        .queue_size=3
-    };
+	spi_device_interface_config_t devcfg={
+		.command_bits=0,
+		.address_bits=0,
+		.dummy_bits=0,
+		.clock_speed_hz=5000000,
+		.duty_cycle_pos=128,		//50% duty cycle
+		.mode=0,
+		.spics_io_num=GPIO_CS,
+		.cs_ena_posttrans=3,		//Keep the CS low 3 cycles after transaction, to stop slave from missing the last bit when CS has less propagation delay than CLK
+		.queue_size=3
+	};
 #endif
 
 	spi_device_handle_t handle;
@@ -79,30 +79,30 @@ void spi_master_init(SSD1306_t * dev, int GPIO_CS, int GPIO_DC, int GPIO_RESET)
 
 bool spi_master_write_byte(spi_device_handle_t SPIHandle, const uint8_t* Data, size_t DataLength )
 {
-    spi_transaction_t SPITransaction;
+	spi_transaction_t SPITransaction;
 
-    if ( DataLength > 0 ) {
-        memset( &SPITransaction, 0, sizeof( spi_transaction_t ) );
-        SPITransaction.length = DataLength * 8;
-        SPITransaction.tx_buffer = Data;
-        spi_device_transmit( SPIHandle, &SPITransaction );
-    }
+	if ( DataLength > 0 ) {
+		memset( &SPITransaction, 0, sizeof( spi_transaction_t ) );
+		SPITransaction.length = DataLength * 8;
+		SPITransaction.tx_buffer = Data;
+		spi_device_transmit( SPIHandle, &SPITransaction );
+	}
 
-    return true;
+	return true;
 }
 
 bool spi_master_write_command(SSD1306_t * dev, uint8_t Command )
 {
-    static uint8_t CommandByte = 0;
-    CommandByte = Command;
+	static uint8_t CommandByte = 0;
+	CommandByte = Command;
 	gpio_set_level( dev->_dc, SPI_Command_Mode );
-    return spi_master_write_byte( dev->_SPIHandle, &CommandByte, 1 );
+	return spi_master_write_byte( dev->_SPIHandle, &CommandByte, 1 );
 }
 
 bool spi_master_write_data(SSD1306_t * dev, const uint8_t* Data, size_t DataLength )
 {
 	gpio_set_level( dev->_dc, SPI_Data_Mode );
-    return spi_master_write_byte( dev->_SPIHandle, Data, DataLength );
+	return spi_master_write_byte( dev->_SPIHandle, Data, DataLength );
 }
 
 
@@ -154,11 +154,11 @@ void spi_display_text(SSD1306_t * dev, int page, char * text, int text_len, bool
 	int _text_len = text_len;
 	if (_text_len > 16) _text_len = 16;
 
-    uint8_t seg = 0;
+	uint8_t seg = 0;
 	uint8_t image[8];
 	for (uint8_t i = 0; i < _text_len; i++) {
 		memcpy(image, font8x8_basic_tr[(uint8_t)text[i]], 8);
-        if (invert) ssd1306_invert(image, 8);
+		if (invert) ssd1306_invert(image, 8);
 		spi_display_image(dev, page, seg, image, 8);
 		for(int j=0;j<8;j++) 
 			dev->_page[page]._segs[seg+j] = image[j];
