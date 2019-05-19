@@ -22,9 +22,7 @@ menu "SSD1306 Configuration"
         default 22
         help
             GPIO number (IOxx) to I2C SCL.
-
             Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to I2C.
-
             GPIOs 35-39 are input-only so cannot be used as outputs.
 
     config SDA_GPIO
@@ -33,9 +31,7 @@ menu "SSD1306 Configuration"
         default 21
         help
             GPIO number (IOxx) to I2C SDA.
-
             Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to I2C.
-
             GPIOs 35-39 are input-only so cannot be used as outputs.
 
     config RESET_GPIO
@@ -44,10 +40,8 @@ menu "SSD1306 Configuration"
         default -1
         help
             GPIO number (IOxx) to RESET.
-
-			When it is -1, RESET isn't performed.
+            When it is -1, RESET isn't performed.
             Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to Reset.
-
             GPIOs 35-39 are input-only so cannot be used as outputs.
 
     config CS_GPIO
@@ -56,9 +50,7 @@ menu "SSD1306 Configuration"
         default 15
         help
             GPIO number (IOxx) to SPI CS.
-
             Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to CS.
-
             GPIOs 35-39 are input-only so cannot be used as outputs.
 
     config DC_GPIO
@@ -67,9 +59,7 @@ menu "SSD1306 Configuration"
         default 33
         help
             GPIO number (IOxx) to SPI DC.
-
             Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to DC.
-
             GPIOs 35-39 are input-only so cannot be used as outputs.
 
 endmenu
