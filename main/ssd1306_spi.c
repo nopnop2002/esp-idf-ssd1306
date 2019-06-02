@@ -23,13 +23,16 @@ void spi_master_init(SSD1306_t * dev, int GPIO_CS, int GPIO_DC, int GPIO_RESET)
 {
 	esp_err_t ret;
 
+	gpio_pad_select_gpio( GPIO_CS );
 	gpio_set_direction( GPIO_CS, GPIO_MODE_OUTPUT );
 	gpio_set_level( GPIO_CS, 0 );
 
+	gpio_pad_select_gpio( GPIO_DC );
 	gpio_set_direction( GPIO_DC, GPIO_MODE_OUTPUT );
 	gpio_set_level( GPIO_DC, 0 );
 
 	if ( GPIO_RESET >= 0 ) {
+		gpio_pad_select_gpio( GPIO_RESET );
 		gpio_set_direction( GPIO_RESET, GPIO_MODE_OUTPUT );
 		gpio_set_level( GPIO_RESET, 0 );
 		vTaskDelay( pdMS_TO_TICKS( 100 ) );
@@ -53,20 +56,6 @@ void spi_master_init(SSD1306_t * dev, int GPIO_CS, int GPIO_DC, int GPIO_RESET)
 	devcfg.clock_speed_hz = SPI_Frequency;
 	devcfg.spics_io_num = GPIO_CS;
 	devcfg.queue_size = 1;
-
-#if 0
-	spi_device_interface_config_t devcfg={
-		.command_bits=0,
-		.address_bits=0,
-		.dummy_bits=0,
-		.clock_speed_hz=5000000,
-		.duty_cycle_pos=128,		//50% duty cycle
-		.mode=0,
-		.spics_io_num=GPIO_CS,
-		.cs_ena_posttrans=3,		//Keep the CS low 3 cycles after transaction, to stop slave from missing the last bit when CS has less propagation delay than CLK
-		.queue_size=3
-	};
-#endif
 
 	spi_device_handle_t handle;
 	ret = spi_bus_add_device( HSPI_HOST, &devcfg, &handle);
@@ -158,7 +147,7 @@ void spi_display_text(SSD1306_t * dev, int page, char * text, int text_len, bool
 	uint8_t image[8];
 	for (uint8_t i = 0; i < _text_len; i++) {
 		memcpy(image, font8x8_basic_tr[(uint8_t)text[i]], 8);
-		if (invert) ssd1306_invert(image, 8);
+        if (invert) ssd1306_invert(image, 8);
 		spi_display_image(dev, page, seg, image, 8);
 		for(int j=0;j<8;j++) 
 			dev->_page[page]._segs[seg+j] = image[j];

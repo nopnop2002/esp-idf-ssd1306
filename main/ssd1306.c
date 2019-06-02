@@ -138,8 +138,8 @@ void ssd1306_fadeout(SSD1306_t * dev)
 
 	uint8_t image[1];
 	for(int page=0; page<dev->_pages; page++) {
-		image[0] = 0xFF;
-		for(int line=0; line<8; line++) {
+        	image[0] = 0xFF;
+        	for(int line=0; line<8; line++) {
 			image[0] = image[0] << 1;
 			for(int seg=0; seg<128; seg++) {
 				(*func)(dev, page, seg, image, 1);

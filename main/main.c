@@ -34,12 +34,12 @@ void app_main(void)
 
 	ESP_LOGI(tag, "CONFIG_INTERFACE=%d",CONFIG_INTERFACE);
 	if (CONFIG_INTERFACE == I2C_INTERFACE) {
-		ESP_LOGI(tag, "INTERFACE = i2c");
-		ESP_LOGI(tag, "CONFIG_SDA_GPIO=%d",CONFIG_SDA_GPIO);
-		ESP_LOGI(tag, "CONFIG_SCL_GPIO=%d",CONFIG_SCL_GPIO);
-		ESP_LOGI(tag, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
-		ESP_LOGI(tag, "CONFIG_MODEL=%d",CONFIG_MODEL);
-		i2c_master_init(CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
+    	ESP_LOGI(tag, "INTERFACE = i2c");
+    	ESP_LOGI(tag, "CONFIG_SDA_GPIO=%d",CONFIG_SDA_GPIO);
+    	ESP_LOGI(tag, "CONFIG_SCL_GPIO=%d",CONFIG_SCL_GPIO);
+    	ESP_LOGI(tag, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
+    	ESP_LOGI(tag, "CONFIG_MODEL=%d",CONFIG_MODEL);
+	i2c_master_init(CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
 		if (CONFIG_MODEL == SSD1306_128x64) i2c_init(&dev, 128, 64, 0x3C);
 		if (CONFIG_MODEL == SSD1306_128x32) i2c_init(&dev, 128, 32, 0x3C);
 	} else {
@@ -55,7 +55,7 @@ void app_main(void)
 	ssd1306_contrast(&dev, 0xff);
 	if (CONFIG_MODEL == SSD1306_128x64) {
 		top = 2;
-		center = 3;
+    		center = 3;
 		bottom = 8;
 		ssd1306_display_text(&dev, 0, "SSD1306 128x64", 14, false);
 		ssd1306_display_text(&dev, 1, "ABCDEFGHIJKLMNOP", 16, false);
@@ -82,7 +82,7 @@ void app_main(void)
 		ssd1306_display_text(&dev, 3, "Hello World!!", 13, true);
 	}
 	vTaskDelay(3000 / portTICK_PERIOD_MS);
-	
+    
 	// Display Count Down
 	uint8_t image[24];
 	memset(image, 0, sizeof(image));
