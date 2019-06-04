@@ -31,22 +31,18 @@ make flash
 # 128x32 i2c
 
 ![128x32](https://user-images.githubusercontent.com/6020549/56449097-6d12e880-6350-11e9-8edd-7a8fc5eaeedc.JPG)
-![config-128x32_i2c](https://user-images.githubusercontent.com/6020549/56844597-c5685e00-68ed-11e9-9969-0f7b39434a21.jpg)
+![config-128x32_i2c](https://user-images.githubusercontent.com/6020549/58878909-5c0b1480-870f-11e9-90db-20d3d103415b.jpg)
 
-RESET GPIO not used.   
-CS GPIO not used.   
-DC GPIO not used.   
+RESET GPIO is not use.   
 
 ---
 
 # 128x64 i2c
 
 ![128x64](https://user-images.githubusercontent.com/6020549/56449101-7dc35e80-6350-11e9-8579-32fff38369c0.JPG)
-![config-128x64_i2c](https://user-images.githubusercontent.com/6020549/56844601-d1542000-68ed-11e9-9331-8b478cf53c8c.jpg)
+![config-128x64_i2c](https://user-images.githubusercontent.com/6020549/58878927-69c09a00-870f-11e9-9dee-72e5647a0004.jpg)
 
-RESET GPIO not used.   
-CS GPIO not used.   
-DC GPIO not used.   
+RESET GPIO is not use.   
 
 ---
 
@@ -55,33 +51,27 @@ DC GPIO not used.
 ![ESP32-TTGO-1](https://user-images.githubusercontent.com/6020549/56449111-9764a600-6350-11e9-9902-e2ad1c4aefb0.JPG)
 ![ESP32-TTGO-2](https://user-images.githubusercontent.com/6020549/56449116-9a5f9680-6350-11e9-86ec-e06648118add.JPG)
 ![128x64_Reset](https://user-images.githubusercontent.com/6020549/56449118-9e8bb400-6350-11e9-9b90-1eb1f9fa8e99.JPG)
-![config-128x64_TTGO](https://user-images.githubusercontent.com/6020549/56844603-d5803d80-68ed-11e9-9de5-fb475630ca1d.jpg)
+![config-128x64_TTGO](https://user-images.githubusercontent.com/6020549/58879031-a4c2cd80-870f-11e9-941b-05c6a14e3e9f.jpg)
 
-CS GPIO not used.   
-DC GPIO not used.   
+RESET GPIO is use.   
 
 ---
 
 # 128x64 ESP-WROOM-32
 
 ![ESP32-OLED-2](https://user-images.githubusercontent.com/6020549/57063327-d229ef00-6cfd-11e9-98ab-8448e14d81e2.JPG)
-![config-128x64_esp32](https://user-images.githubusercontent.com/6020549/57063338-dc4bed80-6cfd-11e9-90b5-7b3e7ed74c00.jpg)
+![config-ESP-WROOM-32](https://user-images.githubusercontent.com/6020549/58879064-b4421680-870f-11e9-94c6-c3008fb56203.jpg)
 
-RESET GPIO not used.   
-CS GPIO not used.   
-DC GPIO not used.   
+RESET GPIO is not use.   
 
 ---
 
 # 128x64 SPI
 
 ![128x64_spi](https://user-images.githubusercontent.com/6020549/56844607-ee88ee80-68ed-11e9-9b20-ab5e7e0d2a99.JPG)
-![config-128x64_spi](https://user-images.githubusercontent.com/6020549/56844609-f34da280-68ed-11e9-995e-4aedae207eac.jpg)
+![config-128x64_spi](https://user-images.githubusercontent.com/6020549/58879091-cae86d80-870f-11e9-82da-6e757fbe2f20.jpg)
 
 MOSI is GPIO13.   
 SCLK is GPIO14.   
-SSD1306 Model not used.   
-SCL GPIO not used.   
-SDA GPIO not used.   
 
 

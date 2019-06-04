@@ -68,13 +68,6 @@ Usage:
 #define OLED_CMD_VERTICAL		        0xA3
 
 #define	SPIAddress 0xFF 
-#define I2C_INTERFACE 1
-#define SPI_INTERFACE 2
-
-typedef enum {
-	SSD1306_128x64 = 1,	// 128x64 panel
-	SSD1306_128x32 = 2	// 128x32 panel
-} ssd1306_panel_type_t;
 
 typedef enum {
 	SCROLL_RIGHT = 1,

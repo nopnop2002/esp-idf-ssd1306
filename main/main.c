@@ -32,55 +32,62 @@ void app_main(void)
 	int center, top, bottom;
 	char lineChar[16];
 
-	ESP_LOGI(tag, "CONFIG_INTERFACE=%d",CONFIG_INTERFACE);
-	if (CONFIG_INTERFACE == I2C_INTERFACE) {
-		ESP_LOGI(tag, "INTERFACE=i2c");
-		ESP_LOGI(tag, "CONFIG_SDA_GPIO=%d",CONFIG_SDA_GPIO);
-		ESP_LOGI(tag, "CONFIG_SCL_GPIO=%d",CONFIG_SCL_GPIO);
-		ESP_LOGI(tag, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
-		ESP_LOGI(tag, "CONFIG_MODEL=%d",CONFIG_MODEL);
-		i2c_master_init(CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
-		if (CONFIG_MODEL == SSD1306_128x64) i2c_init(&dev, 128, 64, 0x3C);
-		if (CONFIG_MODEL == SSD1306_128x32) i2c_init(&dev, 128, 32, 0x3C);
-	} else {
-		ESP_LOGI(tag, "INTERFACE=SPI");
-		ESP_LOGI(tag, "CONFIG_CS_GPIO=%d",CONFIG_CS_GPIO);
-		ESP_LOGI(tag, "CONFIG_DC_GPIO=%d",CONFIG_DC_GPIO);
-		ESP_LOGI(tag, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
-		spi_master_init(&dev, CONFIG_CS_GPIO, CONFIG_DC_GPIO, CONFIG_RESET_GPIO);
-		spi_init(&dev, 128, 64);
-	}
+#if CONFIG_I2C_INTERFACE
+	ESP_LOGI(tag, "INTERFACE is i2c");
+	ESP_LOGI(tag, "CONFIG_SDA_GPIO=%d",CONFIG_SDA_GPIO);
+	ESP_LOGI(tag, "CONFIG_SCL_GPIO=%d",CONFIG_SCL_GPIO);
+	ESP_LOGI(tag, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
+	i2c_master_init(CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
+#if CONFIG_SSD1306_128x64
+	ESP_LOGI(tag, "Panel is 128x64");
+	i2c_init(&dev, 128, 64, 0x3C);
+#endif // CONFIG_SSD1306_128x64
+#if CONFIG_SSD1306_128x32
+	ESP_LOGI(tag, "Panel is 128x32");
+	i2c_init(&dev, 128, 32, 0x3C);
+#endif // CONFIG_SSD1306_128x32
+#endif // CONFIG_I2C_INTERFACE
+
+#if CONFIG_SPI_INTERFACE
+	ESP_LOGI(tag, "INTERFACE is SPI");
+	ESP_LOGI(tag, "CONFIG_CS_GPIO=%d",CONFIG_CS_GPIO);
+	ESP_LOGI(tag, "CONFIG_DC_GPIO=%d",CONFIG_DC_GPIO);
+	ESP_LOGI(tag, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
+	spi_master_init(&dev, CONFIG_CS_GPIO, CONFIG_DC_GPIO, CONFIG_RESET_GPIO);
+	spi_init(&dev, 128, 64);
+#endif // CONFIG_SPI_INTERFACE
 
 	ssd1306_clear_screen(&dev, false);
 	ssd1306_contrast(&dev, 0xff);
-	if (CONFIG_MODEL == SSD1306_128x64) {
-		top = 2;
-    		center = 3;
-		bottom = 8;
-		ssd1306_display_text(&dev, 0, "SSD1306 128x64", 14, false);
-		ssd1306_display_text(&dev, 1, "ABCDEFGHIJKLMNOP", 16, false);
-		ssd1306_display_text(&dev, 2, "abcdefghijklmnop",16, false);
-		ssd1306_display_text(&dev, 3, "Hello World!!", 13, false);
-		ssd1306_clear_line(&dev, 4, true);
-		ssd1306_clear_line(&dev, 5, true);
-		ssd1306_clear_line(&dev, 6, true);
-		ssd1306_clear_line(&dev, 7, true);
-		ssd1306_display_text(&dev, 4, "SSD1306 128x64", 14, true);
-		ssd1306_display_text(&dev, 5, "ABCDEFGHIJKLMNOP", 16, true);
-		ssd1306_display_text(&dev, 6, "abcdefghijklmnop",16, true);
-		ssd1306_display_text(&dev, 7, "Hello World!!", 13, true);
-	}
-	if (CONFIG_MODEL == SSD1306_128x32) {
-		top = 1;
-		center = 1;
-		bottom = 4;
-		ssd1306_display_text(&dev, 0, "SSD1306 128x32", 14, false);
-		ssd1306_display_text(&dev, 1, "Hello World!!", 13, false);
-		ssd1306_clear_line(&dev, 2, true);
-		ssd1306_clear_line(&dev, 3, true);
-		ssd1306_display_text(&dev, 2, "SSD1306 128x32", 14, true);
-		ssd1306_display_text(&dev, 3, "Hello World!!", 13, true);
-	}
+#if CONFIG_SSD1306_128x64 || CONFIG_SPI_INTERFACE
+	top = 2;
+    	center = 3;
+	bottom = 8;
+	ssd1306_display_text(&dev, 0, "SSD1306 128x64", 14, false);
+	ssd1306_display_text(&dev, 1, "ABCDEFGHIJKLMNOP", 16, false);
+	ssd1306_display_text(&dev, 2, "abcdefghijklmnop",16, false);
+	ssd1306_display_text(&dev, 3, "Hello World!!", 13, false);
+	ssd1306_clear_line(&dev, 4, true);
+	ssd1306_clear_line(&dev, 5, true);
+	ssd1306_clear_line(&dev, 6, true);
+	ssd1306_clear_line(&dev, 7, true);
+	ssd1306_display_text(&dev, 4, "SSD1306 128x64", 14, true);
+	ssd1306_display_text(&dev, 5, "ABCDEFGHIJKLMNOP", 16, true);
+	ssd1306_display_text(&dev, 6, "abcdefghijklmnop",16, true);
+	ssd1306_display_text(&dev, 7, "Hello World!!", 13, true);
+#endif // CONFIG_SSD1306_128x64
+
+#if CONFIG_SSD1306_128x32
+	top = 1;
+	center = 1;
+	bottom = 4;
+	ssd1306_display_text(&dev, 0, "SSD1306 128x32", 14, false);
+	ssd1306_display_text(&dev, 1, "Hello World!!", 13, false);
+	ssd1306_clear_line(&dev, 2, true);
+	ssd1306_clear_line(&dev, 3, true);
+	ssd1306_display_text(&dev, 2, "SSD1306 128x32", 14, true);
+	ssd1306_display_text(&dev, 3, "Hello World!!", 13, true);
+#endif // CONFIG_SSD1306_128x32
 	vTaskDelay(3000 / portTICK_PERIOD_MS);
     
 	// Display Count Down
