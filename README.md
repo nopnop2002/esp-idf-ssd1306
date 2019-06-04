@@ -10,7 +10,7 @@ https://github.com/dhepper/font8x8
 
 You have to set this config value with menuconfig.   
 CONFIG_INTERFACEL   
-CONFIG_MODEL   
+CONFIG_PANEL   
 CONFIG_SDA_GPIO   
 CONFIG_SCL_GPIO   
 CONFIG_RESET_GPIO   
