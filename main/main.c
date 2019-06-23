@@ -104,61 +104,65 @@ void app_main(void)
 		vTaskDelay(1000 / portTICK_PERIOD_MS);
 	}
 	
-	// Page Up
+	// Scroll Up
 	ssd1306_clear_screen(&dev, false);
 	ssd1306_contrast(&dev, 0xff);
-	for (int line=0;line<bottom;line++) {
+	ssd1306_display_text(&dev, 0, "---Scroll  UP---", 16, true);
+	ssd1306_software_scroll(&dev, 7, 1);
+	for (int line=0;line<bottom+10;line++) {
 		lineChar[0] = 0x01;
 		sprintf(&lineChar[1], " Line %02d", line);
-		ssd1306_display_text(&dev, line, lineChar, strlen(lineChar), false);
+		ssd1306_scroll_text(&dev, lineChar, strlen(lineChar), false);
+		vTaskDelay(500 / portTICK_PERIOD_MS);
 	}
-	vTaskDelay(2000 / portTICK_PERIOD_MS);
-	for(int line=bottom;line<bottom+10;line++) {
-		ssd1306_page_up(&dev);
-		lineChar[0] = 0x01;
-		sprintf(&lineChar[1], " Line %02d", line);
-		ssd1306_display_text(&dev, bottom-1, lineChar, strlen(lineChar), false);
-		vTaskDelay(1000 / portTICK_PERIOD_MS);
-	}
-	vTaskDelay(1000 / portTICK_PERIOD_MS);
+	vTaskDelay(3000 / portTICK_PERIOD_MS);
 	
+	// Scroll Down
+	ssd1306_clear_screen(&dev, false);
+	ssd1306_contrast(&dev, 0xff);
+	ssd1306_display_text(&dev, 0, "--Scroll  DOWN--", 16, true);
+	ssd1306_software_scroll(&dev, 1, 7);
+	for (int line=0;line<bottom+10;line++) {
+		lineChar[0] = 0x02;
+		sprintf(&lineChar[1], " Line %02d", line);
+		ssd1306_scroll_text(&dev, lineChar, strlen(lineChar), false);
+		vTaskDelay(500 / portTICK_PERIOD_MS);
+	}
+	vTaskDelay(3000 / portTICK_PERIOD_MS);
+
 	// Page Down
 	ssd1306_clear_screen(&dev, false);
 	ssd1306_contrast(&dev, 0xff);
-	for (int line=0;line<bottom;line++) {
+	ssd1306_display_text(&dev, 0, "---Page  DOWN---", 16, true);
+	ssd1306_software_scroll(&dev, 1, 7);
+	for (int line=0;line<bottom+10;line++) {
+		if ( (line % 7) == 0) ssd1306_scroll_clear(&dev);
 		lineChar[0] = 0x02;
 		sprintf(&lineChar[1], " Line %02d", line);
-		ssd1306_display_text(&dev, bottom-line-1, lineChar, strlen(lineChar), false);
+		ssd1306_scroll_text(&dev, lineChar, strlen(lineChar), false);
+		vTaskDelay(500 / portTICK_PERIOD_MS);
 	}
-	vTaskDelay(2000 / portTICK_PERIOD_MS);
-	for(int line=bottom;line<bottom+10;line++) {
-		ssd1306_page_down(&dev);
-		lineChar[0] = 0x02;
-		sprintf(&lineChar[1], " Line %02d", line);
-		ssd1306_display_text(&dev, 0, lineChar, strlen(lineChar), false);
-		vTaskDelay(1000 / portTICK_PERIOD_MS);
-	}
-	vTaskDelay(1000 / portTICK_PERIOD_MS);
+	vTaskDelay(3000 / portTICK_PERIOD_MS);
 
 	// Horizontal Scroll
 	ssd1306_clear_screen(&dev, false);
 	ssd1306_contrast(&dev, 0xff);
 	ssd1306_display_text(&dev, center, "Horizontal", 10, false);
-	ssd1306_scroll(&dev, SCROLL_RIGHT);
+	ssd1306_hardware_scroll(&dev, SCROLL_RIGHT);
 	vTaskDelay(5000 / portTICK_PERIOD_MS);
-	ssd1306_scroll(&dev, SCROLL_LEFT);
+	ssd1306_hardware_scroll(&dev, SCROLL_LEFT);
 	vTaskDelay(5000 / portTICK_PERIOD_MS);
-	ssd1306_scroll(&dev, SCROLL_STOP);
+	ssd1306_hardware_scroll(&dev, SCROLL_STOP);
 	
 	// Vertical Scroll
 	ssd1306_clear_screen(&dev, false);
 	ssd1306_contrast(&dev, 0xff);
 	ssd1306_display_text(&dev, center, "Vertical", 8, false);
-	ssd1306_scroll(&dev, SCROLL_DOWN);
+	ssd1306_hardware_scroll(&dev, SCROLL_DOWN);
 	vTaskDelay(5000 / portTICK_PERIOD_MS);
-	ssd1306_scroll(&dev, SCROLL_UP);
+	ssd1306_hardware_scroll(&dev, SCROLL_UP);
 	vTaskDelay(5000 / portTICK_PERIOD_MS);
-	ssd1306_scroll(&dev, SCROLL_STOP);
+	ssd1306_hardware_scroll(&dev, SCROLL_STOP);
 	
 	// Invert
 	ssd1306_clear_screen(&dev, true);

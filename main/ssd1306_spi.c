@@ -149,8 +149,10 @@ void spi_display_text(SSD1306_t * dev, int page, char * text, int text_len, bool
 		memcpy(image, font8x8_basic_tr[(uint8_t)text[i]], 8);
 		if (invert) ssd1306_invert(image, 8);
 		spi_display_image(dev, page, seg, image, 8);
+#if 0
 		for(int j=0;j<8;j++) 
 			dev->_page[page]._segs[seg+j] = image[j];
+#endif
 		seg = seg + 8;
 	}
 }
@@ -185,7 +187,7 @@ void spi_contrast(SSD1306_t * dev, int contrast) {
 	spi_master_write_command(dev, _contrast);
 }
 
-void spi_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll)
+void spi_hardware_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll)
 {
 
 	if (scroll == SCROLL_RIGHT) {
