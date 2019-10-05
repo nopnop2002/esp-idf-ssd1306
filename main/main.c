@@ -30,7 +30,7 @@ void app_main(void)
 {
 	SSD1306_t dev;
 	int center, top, bottom;
-	char lineChar[16];
+	char lineChar[20];
 
 #if CONFIG_I2C_INTERFACE
 	ESP_LOGI(tag, "INTERFACE is i2c");
