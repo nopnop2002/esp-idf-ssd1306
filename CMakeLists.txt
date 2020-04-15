@@ -1,6 +1,11 @@
-# The following lines of boilerplate have to be in your project's CMakeLists
-# in this exact order for cmake to work correctly
-cmake_minimum_required(VERSION 3.5)
+set(srcs "ssd1306.c")
 
-include($ENV{IDF_PATH}/tools/cmake/project.cmake)
-project(ssd1306)
+if(CONFIG_I2C_INTERFACE)
+    list(APPEND srcs "ssd1306_i2c.c")
+elseif(CONFIG_SPI_INTERFACE)
+    list(APPEND srcs "ssd1306_spi.c")
+endif()
+
+idf_component_register(SRCS "${srcs}"
+                       INCLUDE_DIRS "include"
+                       REQUIRES )
