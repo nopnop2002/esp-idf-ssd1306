@@ -68,7 +68,7 @@ RESET GPIO is not use.
 ![128x64_spi](https://user-images.githubusercontent.com/6020549/56844607-ee88ee80-68ed-11e9-9b20-ab5e7e0d2a99.JPG)
 ![config-128x64_spi](https://user-images.githubusercontent.com/6020549/58879091-cae86d80-870f-11e9-82da-6e757fbe2f20.jpg)
 
-MOSI is GPIO13.   
-SCLK is GPIO14.   
+MOSI(D0) is GPIO13.   
+SCLK(D1) is GPIO14.   
 
 
