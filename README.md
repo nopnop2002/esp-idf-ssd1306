@@ -71,6 +71,8 @@ You have to set this config value with menuconfig.
 ---
 
 # Generic 128x64 SPI
+D0 is SCLK.    
+D1 is MOSI.    
 
 ![128x64_spi](https://user-images.githubusercontent.com/6020549/56844607-ee88ee80-68ed-11e9-9b20-ab5e7e0d2a99.JPG)
 ![config-128x64_spi](https://user-images.githubusercontent.com/6020549/101276076-cd88bf00-37ed-11eb-9183-c8b9f4ee4974.jpg)
