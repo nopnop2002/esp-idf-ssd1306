@@ -11,7 +11,7 @@
 
 #define tag "SSD1306"
 
-void i2c_master_init(int sda, int scl, int reset)
+void i2c_master_init(int16_t sda, int16_t scl, int16_t reset)
 {
 	i2c_config_t i2c_config = {
 		.mode = I2C_MODE_MASTER,

@@ -12,14 +12,22 @@
 
 #define tag "SSD1306"
 
-static const int GPIO_MOSI = 13;
-static const int GPIO_SCLK = 14;
+//static const int GPIO_MOSI = 23;
+//static const int GPIO_SCLK = 18;
+
+#ifdef CONFIG_IDF_TARGET_ESP32
+#define LCD_HOST    HSPI_HOST
+#define DMA_CHAN    2
+#elif defined CONFIG_IDF_TARGET_ESP32S2
+#define LCD_HOST    SPI2_HOST
+#define DMA_CHAN    LCD_HOST
+#endif
 
 static const int SPI_Command_Mode = 0;
 static const int SPI_Data_Mode = 1;
 static const int SPI_Frequency = 1000000;
 
-void spi_master_init(SSD1306_t * dev, int GPIO_CS, int GPIO_DC, int GPIO_RESET)
+void spi_master_init(SSD1306_t * dev, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int16_t GPIO_CS, int16_t GPIO_DC, int16_t GPIO_RESET)
 {
 	esp_err_t ret;
 
@@ -47,7 +55,7 @@ void spi_master_init(SSD1306_t * dev, int GPIO_CS, int GPIO_DC, int GPIO_RESET)
 		.quadhd_io_num = -1
 	};
 
-	ret = spi_bus_initialize( HSPI_HOST, &spi_bus_config, 1 );
+	ret = spi_bus_initialize( LCD_HOST, &spi_bus_config, DMA_CHAN );
 	ESP_LOGI(tag, "spi_bus_initialize=%d",ret);
 	assert(ret==ESP_OK);
 
@@ -58,7 +66,7 @@ void spi_master_init(SSD1306_t * dev, int GPIO_CS, int GPIO_DC, int GPIO_RESET)
 	devcfg.queue_size = 1;
 
 	spi_device_handle_t handle;
-	ret = spi_bus_add_device( HSPI_HOST, &devcfg, &handle);
+	ret = spi_bus_add_device( LCD_HOST, &devcfg, &handle);
 	ESP_LOGI(tag, "spi_bus_add_device=%d",ret);
 	assert(ret==ESP_OK);
 	dev->_dc = GPIO_DC;
