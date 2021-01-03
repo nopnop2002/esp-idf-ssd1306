@@ -37,15 +37,7 @@ void app_main(void)
 	ESP_LOGI(tag, "CONFIG_SDA_GPIO=%d",CONFIG_SDA_GPIO);
 	ESP_LOGI(tag, "CONFIG_SCL_GPIO=%d",CONFIG_SCL_GPIO);
 	ESP_LOGI(tag, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
-	i2c_master_init(CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
-#if CONFIG_SSD1306_128x64
-	ESP_LOGI(tag, "Panel is 128x64");
-	i2c_init(&dev, 128, 64, 0x3C);
-#endif // CONFIG_SSD1306_128x64
-#if CONFIG_SSD1306_128x32
-	ESP_LOGI(tag, "Panel is 128x32");
-	i2c_init(&dev, 128, 32, 0x3C);
-#endif // CONFIG_SSD1306_128x32
+	i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
 #endif // CONFIG_I2C_INTERFACE
 
 #if CONFIG_SPI_INTERFACE
@@ -56,14 +48,23 @@ void app_main(void)
 	ESP_LOGI(tag, "CONFIG_DC_GPIO=%d",CONFIG_DC_GPIO);
 	ESP_LOGI(tag, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
 	spi_master_init(&dev, CONFIG_MOSI_GPIO, CONFIG_SCLK_GPIO, CONFIG_CS_GPIO, CONFIG_DC_GPIO, CONFIG_RESET_GPIO);
-	spi_init(&dev, 128, 64);
 #endif // CONFIG_SPI_INTERFACE
+
+#if CONFIG_SSD1306_128x64
+	ESP_LOGI(tag, "Panel is 128x64");
+	ssd1306_init(&dev, 128, 64);
+#endif // CONFIG_SSD1306_128x64
+#if CONFIG_SSD1306_128x32
+	ESP_LOGI(tag, "Panel is 128x32");
+	ssd1306_init(&dev, 128, 32);
+#endif // CONFIG_SSD1306_128x32
 
 	ssd1306_clear_screen(&dev, false);
 	ssd1306_contrast(&dev, 0xff);
-#if CONFIG_SSD1306_128x64 || CONFIG_SPI_INTERFACE
+
+#if CONFIG_SSD1306_128x64
 	top = 2;
-    	center = 3;
+	center = 3;
 	bottom = 8;
 	ssd1306_display_text(&dev, 0, "SSD1306 128x64", 14, false);
 	ssd1306_display_text(&dev, 1, "ABCDEFGHIJKLMNOP", 16, false);
@@ -91,7 +92,7 @@ void app_main(void)
 	ssd1306_display_text(&dev, 3, "Hello World!!", 13, true);
 #endif // CONFIG_SSD1306_128x32
 	vTaskDelay(3000 / portTICK_PERIOD_MS);
-    
+	
 	// Display Count Down
 	uint8_t image[24];
 	memset(image, 0, sizeof(image));
@@ -110,7 +111,8 @@ void app_main(void)
 	ssd1306_clear_screen(&dev, false);
 	ssd1306_contrast(&dev, 0xff);
 	ssd1306_display_text(&dev, 0, "---Scroll  UP---", 16, true);
-	ssd1306_software_scroll(&dev, 7, 1);
+	//ssd1306_software_scroll(&dev, 7, 1);
+	ssd1306_software_scroll(&dev, (dev._pages - 1), 1);
 	for (int line=0;line<bottom+10;line++) {
 		lineChar[0] = 0x01;
 		sprintf(&lineChar[1], " Line %02d", line);
@@ -123,7 +125,8 @@ void app_main(void)
 	ssd1306_clear_screen(&dev, false);
 	ssd1306_contrast(&dev, 0xff);
 	ssd1306_display_text(&dev, 0, "--Scroll  DOWN--", 16, true);
-	ssd1306_software_scroll(&dev, 1, 7);
+	//ssd1306_software_scroll(&dev, 1, 7);
+	ssd1306_software_scroll(&dev, 1, (dev._pages - 1) );
 	for (int line=0;line<bottom+10;line++) {
 		lineChar[0] = 0x02;
 		sprintf(&lineChar[1], " Line %02d", line);
@@ -135,10 +138,11 @@ void app_main(void)
 	// Page Down
 	ssd1306_clear_screen(&dev, false);
 	ssd1306_contrast(&dev, 0xff);
-	ssd1306_display_text(&dev, 0, "---Page  DOWN---", 16, true);
-	ssd1306_software_scroll(&dev, 1, 7);
+	ssd1306_display_text(&dev, 0, "---Page	DOWN---", 16, true);
+	ssd1306_software_scroll(&dev, 1, (dev._pages-1) );
 	for (int line=0;line<bottom+10;line++) {
-		if ( (line % 7) == 0) ssd1306_scroll_clear(&dev);
+		//if ( (line % 7) == 0) ssd1306_scroll_clear(&dev);
+		if ( (line % (dev._pages-1)) == 0) ssd1306_scroll_clear(&dev);
 		lineChar[0] = 0x02;
 		sprintf(&lineChar[1], " Line %02d", line);
 		ssd1306_scroll_text(&dev, lineChar, strlen(lineChar), false);
@@ -183,4 +187,7 @@ void app_main(void)
 		vTaskDelay(40);
 	}
 #endif
+
+	// Restart module
+	esp_restart();
 }

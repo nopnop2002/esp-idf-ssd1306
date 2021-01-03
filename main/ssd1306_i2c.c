@@ -7,11 +7,10 @@
 #include "esp_log.h"
 
 #include "ssd1306.h"
-#include "font8x8_basic.h"
 
 #define tag "SSD1306"
 
-void i2c_master_init(int16_t sda, int16_t scl, int16_t reset)
+void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 {
 	i2c_config_t i2c_config = {
 		.mode = I2C_MODE_MASTER,
@@ -31,12 +30,11 @@ void i2c_master_init(int16_t sda, int16_t scl, int16_t reset)
 		vTaskDelay(50 / portTICK_PERIOD_MS);
 		gpio_set_level(reset, 1);
 	}
-
+	dev->_address = I2CAddress;
 }
 
-void i2c_init(SSD1306_t * dev, int width, int height, int I2CAddress) {
+void i2c_init(SSD1306_t * dev, int width, int height) {
 	esp_err_t espRc;
-	dev->_address = I2CAddress;
 	dev->_width = width;
 	dev->_height = height;
 	dev->_pages = 8;
@@ -47,8 +45,8 @@ void i2c_init(SSD1306_t * dev, int width, int height, int I2CAddress) {
 	i2c_master_start(cmd);
 	i2c_master_write_byte(cmd, (dev->_address << 1) | I2C_MASTER_WRITE, true);
 	i2c_master_write_byte(cmd, OLED_CONTROL_BYTE_CMD_STREAM, true);
-	i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_OFF, true);			// AE
-	i2c_master_write_byte(cmd, OLED_CMD_SET_MUX_RATIO, true);		// A8
+	i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_OFF, true);				// AE
+	i2c_master_write_byte(cmd, OLED_CMD_SET_MUX_RATIO, true);			// A8
 	if (dev->_height == 64) i2c_master_write_byte(cmd, 0x3F, true);
 	if (dev->_height == 32) i2c_master_write_byte(cmd, 0x1F, true);
 	i2c_master_write_byte(cmd, OLED_CMD_SET_DISPLAY_OFFSET, true);		// D3
@@ -56,15 +54,15 @@ void i2c_init(SSD1306_t * dev, int width, int height, int I2CAddress) {
 	i2c_master_write_byte(cmd, OLED_CONTROL_BYTE_DATA_STREAM, true);	// 40
 	i2c_master_write_byte(cmd, OLED_CMD_SET_SEGMENT_REMAP, true);		// A1
 	i2c_master_write_byte(cmd, OLED_CMD_SET_COM_SCAN_MODE, true);		// C8
-	i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_NORMAL, true);		// A6
+	i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_NORMAL, true);			// A6
 	i2c_master_write_byte(cmd, OLED_CMD_SET_DISPLAY_CLK_DIV, true);		// D5
 	i2c_master_write_byte(cmd, 0x80, true);
-	i2c_master_write_byte(cmd, OLED_CMD_SET_COM_PIN_MAP, true);		// DA
+	i2c_master_write_byte(cmd, OLED_CMD_SET_COM_PIN_MAP, true);			// DA
 	if (dev->_height == 64) i2c_master_write_byte(cmd, 0x12, true);
 	if (dev->_height == 32) i2c_master_write_byte(cmd, 0x02, true);
-	i2c_master_write_byte(cmd, OLED_CMD_SET_CONTRAST, true);		// 81
+	i2c_master_write_byte(cmd, OLED_CMD_SET_CONTRAST, true);			// 81
 	i2c_master_write_byte(cmd, 0xFF, true);
-	i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_RAM, true);			// A4
+	i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_RAM, true);				// A4
 	i2c_master_write_byte(cmd, OLED_CMD_SET_VCOMH_DESELCT, true);		// DB
 	i2c_master_write_byte(cmd, 0x40, true);
 	i2c_master_write_byte(cmd, OLED_CMD_SET_MEMORY_ADDR_MODE, true);	// 20
@@ -74,11 +72,11 @@ void i2c_init(SSD1306_t * dev, int width, int height, int I2CAddress) {
 	i2c_master_write_byte(cmd, 0x00, true);
 	// Set Higher Column Start Address for Page Addressing Mode
 	i2c_master_write_byte(cmd, 0x10, true);
-	i2c_master_write_byte(cmd, OLED_CMD_SET_CHARGE_PUMP, true);		// 8D
+	i2c_master_write_byte(cmd, OLED_CMD_SET_CHARGE_PUMP, true);			// 8D
 	i2c_master_write_byte(cmd, 0x14, true);
-	i2c_master_write_byte(cmd, OLED_CMD_DEACTIVE_SCROLL, true);		// 2E
-	i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_NORMAL, true);		// A6
-	i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_ON, true);			// AF
+	i2c_master_write_byte(cmd, OLED_CMD_DEACTIVE_SCROLL, true);			// 2E
+	i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_NORMAL, true);			// A6
+	i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_ON, true);				// AF
 
 	i2c_master_stop(cmd);
 
@@ -91,24 +89,6 @@ void i2c_init(SSD1306_t * dev, int width, int height, int I2CAddress) {
 	i2c_cmd_link_delete(cmd);
 }
 
-void i2c_display_text(SSD1306_t * dev, int page, char * text, int text_len, bool invert) {
-	if (page >= dev->_pages) return;
-	int _text_len = text_len;
-	if (_text_len > 16) _text_len = 16;
-
-	uint8_t seg = 0;
-	uint8_t image[8];
-	for (uint8_t i = 0; i < _text_len; i++) {
-		memcpy(image, font8x8_basic_tr[(uint8_t)text[i]], 8);
-		if (invert) ssd1306_invert(image, 8);
-		i2c_display_image(dev, page, seg, image, 8);
-#if 0
-		for(int j=0;j<8;j++) 
-			dev->_page[page]._segs[seg+j] = image[j];
-#endif
-		seg = seg + 8;
-	}
-}
 
 void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int width) {
 	i2c_cmd_handle_t cmd;

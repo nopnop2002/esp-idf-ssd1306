@@ -10,12 +10,32 @@
 
 #define tag "SSD1306"
 
-void ssd1306_display_text(SSD1306_t * dev, int page, char * text, int text_len, bool invert)
+void ssd1306_init(SSD1306_t * dev, int width, int height)
 {
 	if (dev->_address == SPIAddress) {
-		spi_display_text(dev, page, text, text_len, invert);
+		spi_init(dev, width, height);
 	} else {
-		i2c_display_text(dev, page, text, text_len, invert);
+		i2c_init(dev, width, height);
+	}
+}
+
+void ssd1306_display_text(SSD1306_t * dev, int page, char * text, int text_len, bool invert)
+{
+	if (page >= dev->_pages) return;
+	int _text_len = text_len;
+	if (_text_len > 16) _text_len = 16;
+
+	uint8_t seg = 0;
+	uint8_t image[8];
+	for (uint8_t i = 0; i < _text_len; i++) {
+		memcpy(image, font8x8_basic_tr[(uint8_t)text[i]], 8);
+		if (invert) ssd1306_invert(image, 8);
+		if (dev->_address == SPIAddress) {
+			spi_display_image(dev, page, seg, image, 8);
+		} else {
+			i2c_display_image(dev, page, seg, image, 8);
+		}
+		seg = seg + 8;
 	}
 }
 
@@ -30,33 +50,18 @@ void ssd1306_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images,
 
 void ssd1306_clear_screen(SSD1306_t * dev, bool invert)
 {
-	void (*func)(SSD1306_t * dev, int page, char * text, int text_len, bool invert);
-	if (dev->_address == SPIAddress) {
-		func = spi_display_text;
-	} else {
-		func = i2c_display_text;
-	}
-
-	char zero[128];
-	memset(zero, 0, sizeof(zero));
-	for (int page = 0; page < dev->_pages; page++) {
-		(*func) (dev, page, zero, 128, invert);
-	}
-	
+    char space[16];
+    memset(space, 0x20, sizeof(space));
+    for (int page = 0; page < dev->_pages; page++) {
+        ssd1306_display_text(dev, page, space, sizeof(space), invert);
+    }
 }
 
 void ssd1306_clear_line(SSD1306_t * dev, int page, bool invert)
 {
-	void (*func)(SSD1306_t * dev, int page, char * text, int text_len, bool invert);
-	if (dev->_address == SPIAddress) {
-		func = spi_display_text;
-	} else {
-		func = i2c_display_text;
-	}
-
-	char zero[128];
-	memset(zero, 0, sizeof(zero));
-	(*func)(dev, page, zero, 128, invert);
+    char space[16];
+    memset(space, 0x20, sizeof(space));
+    ssd1306_display_text(dev, page, space, sizeof(space), invert);
 }
 
 void ssd1306_contrast(SSD1306_t * dev, int contrast)
@@ -178,8 +183,8 @@ void ssd1306_fadeout(SSD1306_t * dev)
 
 	uint8_t image[1];
 	for(int page=0; page<dev->_pages; page++) {
-        	image[0] = 0xFF;
-        	for(int line=0; line<8; line++) {
+			image[0] = 0xFF;
+			for(int line=0; line<8; line++) {
 			image[0] = image[0] << 1;
 			for(int seg=0; seg<128; seg++) {
 				(*func)(dev, page, seg, image, 1);

@@ -67,6 +67,7 @@ Usage:
 #define OLED_CMD_ACTIVE_SCROLL          0x2F
 #define OLED_CMD_VERTICAL		        0xA3
 
+#define	I2CAddress 0x3C 
 #define	SPIAddress 0xFF 
 
 typedef enum {
@@ -97,6 +98,7 @@ typedef struct {
 	PAGE_t _page[8];
 } SSD1306_t;
 
+void ssd1306_init(SSD1306_t * dev, int width, int height);
 void ssd1306_display_text(SSD1306_t * dev, int page, char * text, int text_len, bool invert);
 void ssd1306_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int width);
 void ssd1306_clear_screen(SSD1306_t * dev, bool invert);
@@ -110,9 +112,8 @@ void ssd1306_invert(uint8_t *buf, size_t blen);
 void ssd1306_fadeout(SSD1306_t * dev);
 void ssd1306_dump(SSD1306_t dev);
 
-void i2c_master_init(int16_t sda, int16_t scl, int16_t reset);
-void i2c_init(SSD1306_t * dev, int width, int height, int I2CAddress);
-void i2c_display_text(SSD1306_t * dev, int page, char * text, int text_len, bool invert);
+void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset);
+void i2c_init(SSD1306_t * dev, int width, int height);
 void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int width);
 void i2c_contrast(SSD1306_t * dev, int contrast);
 void i2c_hardware_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll);
@@ -122,9 +123,9 @@ bool spi_master_write_byte(spi_device_handle_t SPIHandle, const uint8_t* Data, s
 bool spi_master_write_command(SSD1306_t * dev, uint8_t Command );
 bool spi_master_write_data(SSD1306_t * dev, const uint8_t* Data, size_t DataLength );
 void spi_init(SSD1306_t * dev, int width, int height);
-void spi_display_text(SSD1306_t * dev, int page, char * text, int text_len, bool invert);
 void spi_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int width);
 void spi_contrast(SSD1306_t * dev, int contrast);
 void spi_hardware_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll);
+
 #endif /* MAIN_SSD1306_H_ */
 

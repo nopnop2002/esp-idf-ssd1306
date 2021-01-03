@@ -17,7 +17,6 @@ menu "SSD1306 Configuration"
 
 
 	choice PANEL
-		depends on I2C_INTERFACE
 		prompt "Panel Type"
 		default SSD1306_128x64
 		help
