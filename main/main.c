@@ -138,7 +138,7 @@ void app_main(void)
 	// Page Down
 	ssd1306_clear_screen(&dev, false);
 	ssd1306_contrast(&dev, 0xff);
-	ssd1306_display_text(&dev, 0, "---Page	DOWN---", 16, true);
+	ssd1306_display_text(&dev, 0, "---Page  DOWN---", 16, true);
 	ssd1306_software_scroll(&dev, 1, (dev._pages-1) );
 	for (int line=0;line<bottom+10;line++) {
 		//if ( (line % 7) == 0) ssd1306_scroll_clear(&dev);
