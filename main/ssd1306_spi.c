@@ -11,9 +11,6 @@
 
 #define tag "SSD1306"
 
-//static const int GPIO_MOSI = 23;
-//static const int GPIO_SCLK = 18;
-
 #ifdef CONFIG_IDF_TARGET_ESP32
 #define LCD_HOST    HSPI_HOST
 #define DMA_CHAN    2
@@ -154,10 +151,8 @@ void spi_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int
 	uint8_t columHigh = (seg >> 4) & 0x0F;
 
 	// Set Lower Column Start Address for Page Addressing Mode
-	//i2c_master_write_byte(cmd, 0x00, true);
 	spi_master_write_command(dev, (0x00 + columLow));
 	// Set Higher Column Start Address for Page Addressing Mode
-	//spi_master_write_command(dev, 0x10, 1);
 	spi_master_write_command(dev, (0x10 + columHigh));
 	// Set Page Start Address for Page Addressing Mode
 	spi_master_write_command(dev, 0xB0 | page);

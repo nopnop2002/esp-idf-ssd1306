@@ -6,7 +6,7 @@
 // Following definitions are bollowed from 
 // http://robotcantalk.blogspot.com/2015/03/interfacing-arduino-with-ssd1306-driven.html
 
-/* Control byte
+/* Control byte for i2c
 Co : bit 8 : Continuation Bit 
  * 1 = no-continuation (only one byte to follow) 
  * 0 = the controller should expect a stream of bytes. 

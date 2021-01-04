@@ -34,7 +34,6 @@ void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 }
 
 void i2c_init(SSD1306_t * dev, int width, int height) {
-	esp_err_t espRc;
 	dev->_width = width;
 	dev->_height = height;
 	dev->_pages = 8;
@@ -80,7 +79,7 @@ void i2c_init(SSD1306_t * dev, int width, int height) {
 
 	i2c_master_stop(cmd);
 
-	espRc = i2c_master_cmd_begin(I2C_NUM_0, cmd, 10/portTICK_PERIOD_MS);
+	esp_err_t espRc = i2c_master_cmd_begin(I2C_NUM_0, cmd, 10/portTICK_PERIOD_MS);
 	if (espRc == ESP_OK) {
 		ESP_LOGI(tag, "OLED configured successfully");
 	} else {
@@ -105,10 +104,8 @@ void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int
 
 	i2c_master_write_byte(cmd, OLED_CONTROL_BYTE_CMD_STREAM, true);
 	// Set Lower Column Start Address for Page Addressing Mode
-	//i2c_master_write_byte(cmd, 0x00, true);
 	i2c_master_write_byte(cmd, (0x00 + columLow), true);
 	// Set Higher Column Start Address for Page Addressing Mode
-	//i2c_master_write_byte(cmd, 0x10, true);
 	i2c_master_write_byte(cmd, (0x10 + columHigh), true);
 	// Set Page Start Address for Page Addressing Mode
 	i2c_master_write_byte(cmd, 0xB0 | page, true);
