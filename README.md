@@ -77,3 +77,7 @@ D1 is MOSI.
 ![128x64_spi](https://user-images.githubusercontent.com/6020549/56844607-ee88ee80-68ed-11e9-9b20-ab5e7e0d2a99.JPG)
 ![config-128x64_spi](https://user-images.githubusercontent.com/6020549/103490209-9396f100-4e5d-11eb-9da0-0762e6f70da4.jpg)
 
+# Generic 128x32 SPI
+
+![128x32_spi](https://user-images.githubusercontent.com/6020549/106338743-ef775d00-62d7-11eb-8e0c-42c09e6045b9.JPG)
+![config-128x32_spi](https://user-images.githubusercontent.com/6020549/106338858-3bc29d00-62d8-11eb-8d3b-8f9fed719c56.jpg)
