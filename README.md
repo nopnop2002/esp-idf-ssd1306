@@ -27,7 +27,7 @@ idf.py flash
 You have to set this config value with menuconfig.   
 - CONFIG_INTERFACE   
 - CONFIG_PANEL   
-- CONFIG_OFFSETXL   
+- CONFIG_OFFSETX   
 - CONFIG_SDA_GPIO   
 - CONFIG_SCL_GPIO   
 - CONFIG_RESET_GPIO   
@@ -103,5 +103,6 @@ Left:1.3 inch SH1106
 Right:0.96 inch SSD1306   
 
 ![SH1106_spi](https://user-images.githubusercontent.com/6020549/106343561-58b39c00-62e9-11eb-8ce7-913bf15cb803.JPG)
-![config-128x32_spi](https://user-images.githubusercontent.com/6020549/106342629-0c665d00-62e5-11eb-8f91-436a9bbc6e63.jpg)
+![config-sh1106_spi](https://user-images.githubusercontent.com/6020549/106361787-cfd94680-6362-11eb-8989-47362971c93c.jpg)
+
 
