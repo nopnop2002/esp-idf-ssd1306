@@ -1,5 +1,5 @@
 # esp-idf-ssd1306
-SSD1306 driver for esp-idf
+SSD1306/SH1106 driver for esp-idf
 
 I used [this](https://github.com/yanbe/ssd1306-esp-idf-i2c) repository as a reference.   
 I used [this](https://github.com/dhepper/font8x8) font file.   
@@ -56,7 +56,10 @@ You have to set this config value with menuconfig.
 ---
 
 # Generic SH1106 128x64 i2c
-__Hardware scroll Not support__
+__Hardware scroll Not support__   
+Left:1.3 inch SH1106   
+Right:0.96 inch SSD1303   
+
 ![SH1106_i2c](https://user-images.githubusercontent.com/6020549/106342871-09b83780-62e6-11eb-999c-912f0e0c9f0f.JPG)
 ![config-sh1106_i2c](https://user-images.githubusercontent.com/6020549/106342655-2738d180-62e5-11eb-8be8-90466bbbba63.jpg)
 
@@ -79,8 +82,6 @@ __Hardware scroll Not support__
 ---
 
 # Generic SSD1306 128x32 SPI
-D0 is SCLK.    
-D1 is MOSI.    
 
 ![128x32_spi](https://user-images.githubusercontent.com/6020549/106338743-ef775d00-62d7-11eb-8e0c-42c09e6045b9.JPG)
 ![config-128x32_spi](https://user-images.githubusercontent.com/6020549/106342629-0c665d00-62e5-11eb-8f91-436a9bbc6e63.jpg)
@@ -97,9 +98,9 @@ D1 is MOSI.
 ---
 
 # Generic SH1106 128x64 SPI
-D0 is SCLK.    
-D1 is MOSI.    
-__Hardware scroll Not support__
+__Hardware scroll Not support__   
+Left:1.3 inch SH1106   
+Right:0.96 inch SSD1303   
 
 ![SH1106_spi](https://user-images.githubusercontent.com/6020549/106343561-58b39c00-62e9-11eb-8ce7-913bf15cb803.JPG)
 ![config-128x32_spi](https://user-images.githubusercontent.com/6020549/106342629-0c665d00-62e5-11eb-8f91-436a9bbc6e63.jpg)
