@@ -53,7 +53,7 @@ void i2c_init(SSD1306_t * dev, int width, int height) {
 	i2c_master_write_byte(cmd, OLED_CONTROL_BYTE_DATA_STREAM, true);	// 40
 	i2c_master_write_byte(cmd, OLED_CMD_SET_SEGMENT_REMAP, true);		// A1
 	i2c_master_write_byte(cmd, OLED_CMD_SET_COM_SCAN_MODE, true);		// C8
-	i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_NORMAL, true);			// A6
+	//i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_NORMAL, true);			// A6
 	i2c_master_write_byte(cmd, OLED_CMD_SET_DISPLAY_CLK_DIV, true);		// D5
 	i2c_master_write_byte(cmd, 0x80, true);
 	i2c_master_write_byte(cmd, OLED_CMD_SET_COM_PIN_MAP, true);			// DA
@@ -95,8 +95,9 @@ void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int
 	if (page >= dev->_pages) return;
 	if (seg >= dev->_width) return;
 
-	uint8_t columLow = seg & 0x0F;
-	uint8_t columHigh = (seg >> 4) & 0x0F;
+	int _seg = seg + CONFIG_OFFSETX;
+	uint8_t columLow = _seg & 0x0F;
+	uint8_t columHigh = (_seg >> 4) & 0x0F;
 
 	cmd = i2c_cmd_link_create();
 	i2c_master_start(cmd);

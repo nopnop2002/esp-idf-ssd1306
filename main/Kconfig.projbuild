@@ -31,6 +31,13 @@ menu "SSD1306 Configuration"
 				Panel is 128x64.
 	endchoice
 
+	config OFFSETX
+		int "GRAM X OFFSET"
+		range 0 99
+		default 0
+		help
+			When your TFT have offset(X), set it.
+
 	config SCL_GPIO
 		depends on I2C_INTERFACE
 		int "SCL GPIO number"

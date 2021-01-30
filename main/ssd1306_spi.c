@@ -116,7 +116,7 @@ void spi_init(SSD1306_t * dev, int width, int height)
 	spi_master_write_command(dev, OLED_CONTROL_BYTE_DATA_STREAM);	// 40
 	spi_master_write_command(dev, OLED_CMD_SET_SEGMENT_REMAP);		// A1
 	spi_master_write_command(dev, OLED_CMD_SET_COM_SCAN_MODE);		// C8
-	spi_master_write_command(dev, OLED_CMD_DISPLAY_NORMAL);			// A6
+	//spi_master_write_command(dev, OLED_CMD_DISPLAY_NORMAL);			// A6
 	spi_master_write_command(dev, OLED_CMD_SET_DISPLAY_CLK_DIV);	// D5
 	spi_master_write_command(dev, 0x80);
 	spi_master_write_command(dev, OLED_CMD_SET_COM_PIN_MAP);		// DA
@@ -147,8 +147,9 @@ void spi_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int
 	if (page >= dev->_pages) return;
 	if (seg >= dev->_width) return;
 
-	uint8_t columLow = seg & 0x0F;
-	uint8_t columHigh = (seg >> 4) & 0x0F;
+	int _seg = seg + CONFIG_OFFSETX;
+	uint8_t columLow = _seg & 0x0F;
+	uint8_t columHigh = (_seg >> 4) & 0x0F;
 
 	// Set Lower Column Start Address for Page Addressing Mode
 	spi_master_write_command(dev, (0x00 + columLow));
