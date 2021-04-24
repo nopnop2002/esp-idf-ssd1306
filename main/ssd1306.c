@@ -177,16 +177,13 @@ void ssd1306_invert(uint8_t *buf, size_t blen)
 // Flip upside down
 void ssd1306_flip(uint8_t *buf, size_t blen)
 {
-	uint8_t wk[8];
 	for(int i=0; i<blen; i++){
-		wk[i] = buf[i];
-	}
-	for(int i=0; i<blen; i++){
-		buf[i] = ssd1306_rotate(wk[i]);
+		buf[i] = ssd1306_rotate(buf[i]);
 	}
 }
 
 // Rotate 8-bit data
+// 0x12-->0x48
 uint8_t ssd1306_rotate(uint8_t ch1) {
 	uint8_t ch2 = 0;
 	for (int j=0;j<8;j++) {
