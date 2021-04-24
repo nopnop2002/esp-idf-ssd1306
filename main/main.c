@@ -50,6 +50,11 @@ void app_main(void)
 	spi_master_init(&dev, CONFIG_MOSI_GPIO, CONFIG_SCLK_GPIO, CONFIG_CS_GPIO, CONFIG_DC_GPIO, CONFIG_RESET_GPIO);
 #endif // CONFIG_SPI_INTERFACE
 
+#if CONFIG_FLIP
+	dev._flip = true;
+	ESP_LOGW(tag, "Flip upside down");
+#endif
+
 #if CONFIG_SSD1306_128x64
 	ESP_LOGI(tag, "Panel is 128x64");
 	ssd1306_init(&dev, 128, 64);
@@ -103,6 +108,7 @@ void app_main(void)
 		memset(image, 0, sizeof(image));
 		ssd1306_display_image(&dev, top+1, (7*8-1), image, 8);
 		memcpy(image, font8x8_basic_tr[font], 8);
+		if (dev._flip) ssd1306_flip(image, 8);
 		ssd1306_display_image(&dev, top+1, (7*8-1), image, 8);
 		vTaskDelay(1000 / portTICK_PERIOD_MS);
 	}
@@ -138,7 +144,7 @@ void app_main(void)
 	// Page Down
 	ssd1306_clear_screen(&dev, false);
 	ssd1306_contrast(&dev, 0xff);
-	ssd1306_display_text(&dev, 0, "---Page  DOWN---", 16, true);
+	ssd1306_display_text(&dev, 0, "---Page	DOWN---", 16, true);
 	ssd1306_software_scroll(&dev, 1, (dev._pages-1) );
 	for (int line=0;line<bottom+10;line++) {
 		//if ( (line % 7) == 0) ssd1306_scroll_clear(&dev);

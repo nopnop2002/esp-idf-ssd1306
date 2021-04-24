@@ -44,7 +44,8 @@ Usage:
 
 // Hardware Config (pg.31)
 #define OLED_CMD_SET_DISPLAY_START_LINE 0x40
-#define OLED_CMD_SET_SEGMENT_REMAP      0xA1    
+#define OLED_CMD_SET_SEGMENT_REMAP_0    0xA0    
+#define OLED_CMD_SET_SEGMENT_REMAP_1    0xA1    
 #define OLED_CMD_SET_MUX_RATIO          0xA8    // follow with 0x3F = 64 MUX
 #define OLED_CMD_SET_COM_SCAN_MODE      0xC8    
 #define OLED_CMD_SET_DISPLAY_OFFSET     0xD3    // follow with 0x00
@@ -96,6 +97,7 @@ typedef struct {
 	int _scEnd;
 	int	_scDirection;
 	PAGE_t _page[8];
+	bool _flip;
 } SSD1306_t;
 
 void ssd1306_init(SSD1306_t * dev, int width, int height);
@@ -109,6 +111,8 @@ void ssd1306_scroll_text(SSD1306_t * dev, char * text, int text_len, bool invert
 void ssd1306_scroll_clear(SSD1306_t * dev);
 void ssd1306_hardware_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll);
 void ssd1306_invert(uint8_t *buf, size_t blen);
+void ssd1306_flip(uint8_t *buf, size_t blen);
+uint8_t ssd1306_rotate(uint8_t ch1);
 void ssd1306_fadeout(SSD1306_t * dev);
 void ssd1306_dump(SSD1306_t dev);
 

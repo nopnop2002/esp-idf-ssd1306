@@ -28,6 +28,7 @@ You have to set this config value with menuconfig.
 - CONFIG_INTERFACE   
 - CONFIG_PANEL   
 - CONFIG_OFFSETX   
+- CONFIG_FLIP   
 - CONFIG_SDA_GPIO   
 - CONFIG_SCL_GPIO   
 - CONFIG_RESET_GPIO   
@@ -44,14 +45,14 @@ You have to set this config value with menuconfig.
 # Generic SSD1306 128x32 i2c
 
 ![128x32](https://user-images.githubusercontent.com/6020549/56449097-6d12e880-6350-11e9-8edd-7a8fc5eaeedc.JPG)
-![config-128x32_i2c](https://user-images.githubusercontent.com/6020549/106342620-04a6b880-62e5-11eb-927d-f933c783d1a1.jpg)
+![config-128x32_i2c](https://user-images.githubusercontent.com/6020549/115942099-79a01d80-a4e3-11eb-9274-8746920fca78.jpg)
 
 ---
 
 # Generic SSD1306 128x64 i2c
 
 ![128x64](https://user-images.githubusercontent.com/6020549/56449101-7dc35e80-6350-11e9-8579-32fff38369c0.JPG)
-![config-128x64_i2c](https://user-images.githubusercontent.com/6020549/106342623-08d2d600-62e5-11eb-888c-a8784e6c2f3f.jpg)
+![config-128x64_spi](https://user-images.githubusercontent.com/6020549/115942108-87ee3980-a4e3-11eb-9d6a-4d5073443814.jpg)
 
 ---
 
@@ -84,7 +85,7 @@ Right:0.96 inch SSD1306
 # Generic SSD1306 128x32 SPI
 
 ![128x32_spi](https://user-images.githubusercontent.com/6020549/106338743-ef775d00-62d7-11eb-8e0c-42c09e6045b9.JPG)
-![config-128x32_spi](https://user-images.githubusercontent.com/6020549/106342629-0c665d00-62e5-11eb-8f91-436a9bbc6e63.jpg)
+![config-128x32_spi](https://user-images.githubusercontent.com/6020549/115942121-9c323680-a4e3-11eb-861b-665286ae5c21.jpg)
 
 ---
 
@@ -93,7 +94,7 @@ D0 is SCLK.
 D1 is MOSI.    
 
 ![128x64_spi](https://user-images.githubusercontent.com/6020549/56844607-ee88ee80-68ed-11e9-9b20-ab5e7e0d2a99.JPG)
-![config-128x64_spi](https://user-images.githubusercontent.com/6020549/106342634-125c3e00-62e5-11eb-83aa-45fdf5420d4c.jpg)
+![config-128x64_spi](https://user-images.githubusercontent.com/6020549/115942134-a6543500-a4e3-11eb-91c0-250e4fdd47af.jpg)
 
 ---
 
@@ -105,4 +106,11 @@ Right:0.96 inch SSD1306
 ![SH1106_spi](https://user-images.githubusercontent.com/6020549/106343561-58b39c00-62e9-11eb-8ce7-913bf15cb803.JPG)
 ![config-sh1106_spi](https://user-images.githubusercontent.com/6020549/106361787-cfd94680-6362-11eb-8989-47362971c93c.jpg)
 
+---
+
+# Flip upside down
+
+![config_flip](https://user-images.githubusercontent.com/6020549/115942179-e3b8c280-a4e3-11eb-9b08-8eb830c9f7f4.jpg)
+
+![ssd1306_flip](https://user-images.githubusercontent.com/6020549/115942191-f0d5b180-a4e3-11eb-879e-e7be89eb3e50.JPG)
 

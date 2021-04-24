@@ -15,7 +15,6 @@ menu "SSD1306 Configuration"
 				SPI Interface.
 	endchoice
 
-
 	choice PANEL
 		prompt "Panel Type"
 		default SSD1306_128x64
@@ -37,6 +36,12 @@ menu "SSD1306 Configuration"
 		default 0
 		help
 			When your TFT have offset(X), set it.
+
+	config FLIP
+		bool "Flip upside down"
+		default false
+		help
+			Flip upside down.
 
 	config SCL_GPIO
 		depends on I2C_INTERFACE

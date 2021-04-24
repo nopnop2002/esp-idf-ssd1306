@@ -30,6 +30,7 @@ void ssd1306_display_text(SSD1306_t * dev, int page, char * text, int text_len, 
 	for (uint8_t i = 0; i < _text_len; i++) {
 		memcpy(image, font8x8_basic_tr[(uint8_t)text[i]], 8);
 		if (invert) ssd1306_invert(image, 8);
+		if (dev->_flip) ssd1306_flip(image, 8);
 		if (dev->_address == SPIAddress) {
 			spi_display_image(dev, page, seg, image, 8);
 		} else {
@@ -129,6 +130,7 @@ void ssd1306_scroll_text(SSD1306_t * dev, char * text, int text_len, bool invert
 	for (uint8_t i = 0; i < _text_len; i++) {
 		memcpy(image, font8x8_basic_tr[(uint8_t)text[i]], 8);
 		if (invert) ssd1306_invert(image, 8);
+		if (dev->_flip) ssd1306_flip(image, 8);
 		(*func)(dev, srcIndex, seg, image, 8);
 		for(int j=0;j<8;j++) dev->_page[srcIndex]._segs[seg+j] = image[j];
 		seg = seg + 8;
@@ -172,6 +174,29 @@ void ssd1306_invert(uint8_t *buf, size_t blen)
 	}
 }
 
+// Flip upside down
+void ssd1306_flip(uint8_t *buf, size_t blen)
+{
+	uint8_t wk[8];
+	for(int i=0; i<blen; i++){
+		wk[i] = buf[i];
+	}
+	for(int i=0; i<blen; i++){
+		buf[i] = ssd1306_rotate(wk[i]);
+	}
+}
+
+// Rotate 8-bit data
+uint8_t ssd1306_rotate(uint8_t ch1) {
+	uint8_t ch2 = 0;
+	for (int j=0;j<8;j++) {
+		ch2 = (ch2 << 1) + (ch1 & 0x01);
+		ch1 = ch1 >> 1;
+	}
+	return ch2;
+}
+
+
 void ssd1306_fadeout(SSD1306_t * dev)
 {
 	void (*func)(SSD1306_t * dev, int page, int seg, uint8_t * images, int width);
@@ -183,9 +208,13 @@ void ssd1306_fadeout(SSD1306_t * dev)
 
 	uint8_t image[1];
 	for(int page=0; page<dev->_pages; page++) {
-			image[0] = 0xFF;
-			for(int line=0; line<8; line++) {
-			image[0] = image[0] << 1;
+		image[0] = 0xFF;
+		for(int line=0; line<8; line++) {
+			if (dev->_flip) {
+				image[0] = image[0] >> 1;
+			} else {
+				image[0] = image[0] << 1;
+			}
 			for(int seg=0; seg<128; seg++) {
 				(*func)(dev, page, seg, image, 1);
 			}

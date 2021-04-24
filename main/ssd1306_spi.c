@@ -12,11 +12,11 @@
 #define tag "SSD1306"
 
 #ifdef CONFIG_IDF_TARGET_ESP32
-#define LCD_HOST    HSPI_HOST
-#define DMA_CHAN    2
+#define LCD_HOST	HSPI_HOST
+#define DMA_CHAN	2
 #elif defined CONFIG_IDF_TARGET_ESP32S2
-#define LCD_HOST    SPI2_HOST
-#define DMA_CHAN    LCD_HOST
+#define LCD_HOST	SPI2_HOST
+#define DMA_CHAN	LCD_HOST
 #endif
 
 static const int SPI_Command_Mode = 0;
@@ -68,6 +68,7 @@ void spi_master_init(SSD1306_t * dev, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int1
 	dev->_dc = GPIO_DC;
 	dev->_SPIHandle = handle;
 	dev->_address = SPIAddress;
+	dev->_flip = false;
 }
 
 
@@ -114,9 +115,13 @@ void spi_init(SSD1306_t * dev, int width, int height)
 	spi_master_write_command(dev, OLED_CMD_SET_DISPLAY_OFFSET);		// D3
 	spi_master_write_command(dev, 0x00);
 	spi_master_write_command(dev, OLED_CONTROL_BYTE_DATA_STREAM);	// 40
-	spi_master_write_command(dev, OLED_CMD_SET_SEGMENT_REMAP);		// A1
+	if (dev->_flip) {
+		spi_master_write_command(dev, OLED_CMD_SET_SEGMENT_REMAP_0);	// A0
+	} else {
+		spi_master_write_command(dev, OLED_CMD_SET_SEGMENT_REMAP_1);	// A1
+	}
+	//spi_master_write_command(dev, OLED_CMD_SET_SEGMENT_REMAP);		// A1
 	spi_master_write_command(dev, OLED_CMD_SET_COM_SCAN_MODE);		// C8
-	//spi_master_write_command(dev, OLED_CMD_DISPLAY_NORMAL);			// A6
 	spi_master_write_command(dev, OLED_CMD_SET_DISPLAY_CLK_DIV);	// D5
 	spi_master_write_command(dev, 0x80);
 	spi_master_write_command(dev, OLED_CMD_SET_COM_PIN_MAP);		// DA
@@ -151,12 +156,17 @@ void spi_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int
 	uint8_t columLow = _seg & 0x0F;
 	uint8_t columHigh = (_seg >> 4) & 0x0F;
 
+	int _page = page;
+	if (dev->_flip) {
+		_page = (dev->_pages - page) - 1;
+	}
+
 	// Set Lower Column Start Address for Page Addressing Mode
 	spi_master_write_command(dev, (0x00 + columLow));
 	// Set Higher Column Start Address for Page Addressing Mode
 	spi_master_write_command(dev, (0x10 + columHigh));
 	// Set Page Start Address for Page Addressing Mode
-	spi_master_write_command(dev, 0xB0 | page);
+	spi_master_write_command(dev, 0xB0 | _page);
 
 	spi_master_write_data(dev, images, width);
 
