@@ -63,7 +63,7 @@ You have to set this config value with menuconfig.
 # Generic SSD1306 128x64 i2c
 
 ![128x64](https://user-images.githubusercontent.com/6020549/56449101-7dc35e80-6350-11e9-8579-32fff38369c0.JPG)
-![config-128x64_spi](https://user-images.githubusercontent.com/6020549/115942108-87ee3980-a4e3-11eb-9d6a-4d5073443814.jpg)
+![config-128x64_i2c](https://user-images.githubusercontent.com/6020549/127076697-385ecafa-ccb7-4511-a862-70a6143930dd.jpg)
 
 ---
 
