@@ -24,6 +24,17 @@ idf.py menuconfig
 idf.py flash
 ```
 
+# Installation for ESP32-C3
+
+```
+git clone https://github.com/nopnop2002/esp-idf-ssd1306
+cd esp-idf-ssd1306/
+idf.py set-target esp32c3
+idf.py menuconfig
+idf.py flash
+```
+
+# Configuration   
 You have to set this config value with menuconfig.   
 - CONFIG_INTERFACE   
 - CONFIG_PANEL   
@@ -94,7 +105,7 @@ D0 is SCLK.
 D1 is MOSI.    
 
 ![128x64_spi](https://user-images.githubusercontent.com/6020549/56844607-ee88ee80-68ed-11e9-9b20-ab5e7e0d2a99.JPG)
-![config-128x64_spi](https://user-images.githubusercontent.com/6020549/115942134-a6543500-a4e3-11eb-91c0-250e4fdd47af.jpg)
+![config-128x64_spi](https://user-images.githubusercontent.com/6020549/127076276-275715c7-afb4-4922-bb93-bd66f232606b.jpg)
 
 ---
 

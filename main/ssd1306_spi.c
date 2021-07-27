@@ -13,10 +13,10 @@
 
 #ifdef CONFIG_IDF_TARGET_ESP32
 #define LCD_HOST	HSPI_HOST
-#define DMA_CHAN	2
 #elif defined CONFIG_IDF_TARGET_ESP32S2
 #define LCD_HOST	SPI2_HOST
-#define DMA_CHAN	LCD_HOST
+#elif defined CONFIG_IDF_TARGET_ESP32C3
+#define LCD_HOST    SPI2_HOST
 #endif
 
 static const int SPI_Command_Mode = 0;
@@ -44,14 +44,16 @@ void spi_master_init(SSD1306_t * dev, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int1
 	}
 
 	spi_bus_config_t spi_bus_config = {
-		.sclk_io_num = GPIO_SCLK,
 		.mosi_io_num = GPIO_MOSI,
 		.miso_io_num = -1,
+		.sclk_io_num = GPIO_SCLK,
 		.quadwp_io_num = -1,
-		.quadhd_io_num = -1
+		.quadhd_io_num = -1,
+		.max_transfer_sz = 0,
+		.flags = 0
 	};
 
-	ret = spi_bus_initialize( LCD_HOST, &spi_bus_config, DMA_CHAN );
+	ret = spi_bus_initialize( LCD_HOST, &spi_bus_config, SPI_DMA_CH_AUTO );
 	ESP_LOGI(tag, "spi_bus_initialize=%d",ret);
 	assert(ret==ESP_OK);
 

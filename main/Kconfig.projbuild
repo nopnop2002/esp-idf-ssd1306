@@ -49,6 +49,7 @@ menu "SSD1306 Configuration"
 		range 0 46
 		default 22 if IDF_TARGET_ESP32
 		default 12 if IDF_TARGET_ESP32S2
+		default 9  if IDF_TARGET_ESP32C3
 		help
 			GPIO number (IOxx) to I2C SCL.
 			Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to I2C.
@@ -60,11 +61,11 @@ menu "SSD1306 Configuration"
 		range 0 46
 		default 21 if IDF_TARGET_ESP32
 		default 11 if IDF_TARGET_ESP32S2
+		default 10 if IDF_TARGET_ESP32C3
 		help
 			GPIO number (IOxx) to I2C SDA.
 			Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to I2C.
 			GPIOs 35-39 are input-only so cannot be used as outputs.
-
 
 	config RESET_GPIO
 		int "RESET GPIO number"
@@ -82,6 +83,7 @@ menu "SSD1306 Configuration"
 		range 0 46
 		default 23 if IDF_TARGET_ESP32
 		default 35 if IDF_TARGET_ESP32S2
+		default 19 if IDF_TARGET_ESP32C3
 		help
 			GPIO number (IOxx) to SPI MOSI.
 			Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to DC.
@@ -94,6 +96,7 @@ menu "SSD1306 Configuration"
 		range 0 46
 		default 18 if IDF_TARGET_ESP32
 		default 36 if IDF_TARGET_ESP32S2
+		default 18 if IDF_TARGET_ESP32C3
 		help
 			GPIO number (IOxx) to SPI SCLK.
 			Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to DC.
@@ -106,6 +109,7 @@ menu "SSD1306 Configuration"
 		range 0 34
 		default 5 if IDF_TARGET_ESP32
 		default 34 if IDF_TARGET_ESP32S2
+		default 10 if IDF_TARGET_ESP32C3
 		help
 			GPIO number (IOxx) to SPI CS.
 			Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to CS.
