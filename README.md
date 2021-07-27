@@ -96,7 +96,7 @@ Right:0.96 inch SSD1306
 # Generic SSD1306 128x32 SPI
 
 ![128x32_spi](https://user-images.githubusercontent.com/6020549/106338743-ef775d00-62d7-11eb-8e0c-42c09e6045b9.JPG)
-![config-128x32_spi](https://user-images.githubusercontent.com/6020549/115942121-9c323680-a4e3-11eb-861b-665286ae5c21.jpg)
+![config-128x32_spi](https://user-images.githubusercontent.com/6020549/127077082-7b60e635-e410-4324-b807-c368d03f5b5f.jpg)
 
 ---
 
