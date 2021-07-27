@@ -73,7 +73,7 @@ Left:1.3 inch SH1106
 Right:0.96 inch SSD1306   
 
 ![SH1106_i2c](https://user-images.githubusercontent.com/6020549/106342871-09b83780-62e6-11eb-999c-912f0e0c9f0f.JPG)
-![config-sh1106_i2c](https://user-images.githubusercontent.com/6020549/106342655-2738d180-62e5-11eb-8be8-90466bbbba63.jpg)
+![config-sh1106_i2c](https://user-images.githubusercontent.com/6020549/127077379-ad688621-999e-475e-b1fe-c093d7599783.jpg)
 
 ---
 
@@ -115,7 +115,7 @@ Left:1.3 inch SH1106
 Right:0.96 inch SSD1306   
 
 ![SH1106_spi](https://user-images.githubusercontent.com/6020549/106343561-58b39c00-62e9-11eb-8ce7-913bf15cb803.JPG)
-![config-sh1106_spi](https://user-images.githubusercontent.com/6020549/106361787-cfd94680-6362-11eb-8989-47362971c93c.jpg)
+![config-sh1106_spi](https://user-images.githubusercontent.com/6020549/127077395-d1a9b34c-6000-4aa6-a2e4-13fdbfac6fbb.jpg)
 
 ---
 
