@@ -78,6 +78,8 @@ Right:0.96 inch SSD1306
 ---
 
 # 128x64 TTGO
+Unlike other ESP32 development boards, the RTC_CLOCK crystal on this board uses a 26MHz one.   
+You need to change the frequency to 26MHz using menuconfig.   
 
 ![ESP32-TTGO-1](https://user-images.githubusercontent.com/6020549/56449111-9764a600-6350-11e9-9902-e2ad1c4aefb0.JPG)
 ![ESP32-TTGO-2](https://user-images.githubusercontent.com/6020549/56449116-9a5f9680-6350-11e9-86ec-e06648118add.JPG)
