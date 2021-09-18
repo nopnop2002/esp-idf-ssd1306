@@ -24,7 +24,8 @@ void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 	i2c_driver_install(I2C_NUM_0, I2C_MODE_MASTER, 0, 0, 0);
 
 	if (reset >= 0) {
-		gpio_pad_select_gpio(reset);
+		//gpio_pad_select_gpio(reset);
+		gpio_reset_pin(reset);
 		gpio_set_direction(reset, GPIO_MODE_OUTPUT);
 		gpio_set_level(reset, 0);
 		vTaskDelay(50 / portTICK_PERIOD_MS);

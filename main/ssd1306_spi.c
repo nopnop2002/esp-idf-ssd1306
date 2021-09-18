@@ -27,16 +27,19 @@ void spi_master_init(SSD1306_t * dev, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int1
 {
 	esp_err_t ret;
 
-	gpio_pad_select_gpio( GPIO_CS );
+	//gpio_pad_select_gpio( GPIO_CS );
+	gpio_reset_pin( GPIO_CS );
 	gpio_set_direction( GPIO_CS, GPIO_MODE_OUTPUT );
 	gpio_set_level( GPIO_CS, 0 );
 
-	gpio_pad_select_gpio( GPIO_DC );
+	//gpio_pad_select_gpio( GPIO_DC );
+	gpio_reset_pin( GPIO_DC );
 	gpio_set_direction( GPIO_DC, GPIO_MODE_OUTPUT );
 	gpio_set_level( GPIO_DC, 0 );
 
 	if ( GPIO_RESET >= 0 ) {
-		gpio_pad_select_gpio( GPIO_RESET );
+		//gpio_pad_select_gpio( GPIO_RESET );
+		gpio_reset_pin( GPIO_RESET );
 		gpio_set_direction( GPIO_RESET, GPIO_MODE_OUTPUT );
 		gpio_set_level( GPIO_RESET, 0 );
 		vTaskDelay( pdMS_TO_TICKS( 100 ) );
