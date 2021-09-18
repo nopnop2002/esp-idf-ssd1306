@@ -38,6 +38,12 @@ idf.py menuconfig
 idf.py flash
 ```
 
+__Note__   
+For some reason GPIO06, GPIO08, GPIO09, GPIO19 cannot be used for SPI clock pins on my board.   
+I looked at the ESP32-C3 datasheet, but I don't understand why.   
+This may be a problem only for my board.   
+If you find a solution, please let me know.   
+
 # Configuration   
 You have to set this config value with menuconfig.   
 - CONFIG_INTERFACE   
