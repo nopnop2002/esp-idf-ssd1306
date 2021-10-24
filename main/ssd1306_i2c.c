@@ -10,6 +10,9 @@
 
 #define tag "SSD1306"
 
+#define I2C_NUM I2C_NUM_0
+//#define I2C_NUM I2C_NUM_1
+
 void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 {
 	i2c_config_t i2c_config = {
@@ -20,8 +23,8 @@ void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 		.scl_pullup_en = GPIO_PULLUP_ENABLE,
 		.master.clk_speed = 1000000
 	};
-	i2c_param_config(I2C_NUM_0, &i2c_config);
-	i2c_driver_install(I2C_NUM_0, I2C_MODE_MASTER, 0, 0, 0);
+	ESP_ERROR_CHECK(i2c_param_config(I2C_NUM, &i2c_config));
+	ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM, I2C_MODE_MASTER, 0, 0, 0));
 
 	if (reset >= 0) {
 		//gpio_pad_select_gpio(reset);
@@ -85,7 +88,7 @@ void i2c_init(SSD1306_t * dev, int width, int height) {
 
 	i2c_master_stop(cmd);
 
-	esp_err_t espRc = i2c_master_cmd_begin(I2C_NUM_0, cmd, 10/portTICK_PERIOD_MS);
+	esp_err_t espRc = i2c_master_cmd_begin(I2C_NUM, cmd, 10/portTICK_PERIOD_MS);
 	if (espRc == ESP_OK) {
 		ESP_LOGI(tag, "OLED configured successfully");
 	} else {
@@ -123,7 +126,7 @@ void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int
 	i2c_master_write_byte(cmd, 0xB0 | _page, true);
 
 	i2c_master_stop(cmd);
-	i2c_master_cmd_begin(I2C_NUM_0, cmd, 10/portTICK_PERIOD_MS);
+	i2c_master_cmd_begin(I2C_NUM, cmd, 10/portTICK_PERIOD_MS);
 	i2c_cmd_link_delete(cmd);
 
 	cmd = i2c_cmd_link_create();
@@ -134,7 +137,7 @@ void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int
 	i2c_master_write(cmd, images, width, true);
 
 	i2c_master_stop(cmd);
-	i2c_master_cmd_begin(I2C_NUM_0, cmd, 10/portTICK_PERIOD_MS);
+	i2c_master_cmd_begin(I2C_NUM, cmd, 10/portTICK_PERIOD_MS);
 	i2c_cmd_link_delete(cmd);
 }
 
@@ -151,7 +154,7 @@ void i2c_contrast(SSD1306_t * dev, int contrast) {
 	i2c_master_write_byte(cmd, OLED_CMD_SET_CONTRAST, true);			// 81
 	i2c_master_write_byte(cmd, _contrast, true);
 	i2c_master_stop(cmd);
-	i2c_master_cmd_begin(I2C_NUM_0, cmd, 10/portTICK_PERIOD_MS);
+	i2c_master_cmd_begin(I2C_NUM, cmd, 10/portTICK_PERIOD_MS);
 	i2c_cmd_link_delete(cmd);
 }
 
@@ -230,7 +233,7 @@ void i2c_hardware_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll) {
 	}
 
 	i2c_master_stop(cmd);
-	espRc = i2c_master_cmd_begin(I2C_NUM_0, cmd, 10/portTICK_PERIOD_MS);
+	espRc = i2c_master_cmd_begin(I2C_NUM, cmd, 10/portTICK_PERIOD_MS);
 	if (espRc == ESP_OK) {
 		ESP_LOGD(tag, "Scroll command succeeded");
 	} else {
