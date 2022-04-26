@@ -4,5 +4,12 @@
 ![ImageDemo-2](https://user-images.githubusercontent.com/6020549/165235310-88430dc3-5bed-4190-99e4-fe268c449218.JPG)
 
 
-I borrowed the BIT MAP data from [here](https://www.mischianti.org/2021/07/14/ssd1306-oled-display-draw-images-splash-and-animations-2/).
+I borrowed the BIT MAP data from [here](https://www.mischianti.org/2021/07/14/ssd1306-oled-display-draw-images-splash-and-animations-2/).   
 
+I made the BIT MAP data from [here](https://iitestudent.blogspot.com/2013/01/displaying-bitmap-on-graphic-lcd.html).   
+
+
+# How to make your original BIT MAP data   
+- Prepare your image file.   
+- Convert image file to BMP data using [this](https://www.mischianti.org/2021/07/14/ssd1306-oled-display-draw-images-splash-and-animations-2/) page.   
+- Paste the BMP data into your code.   
