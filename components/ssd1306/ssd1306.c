@@ -374,10 +374,11 @@ void ssd1306_rotate(SSD1306_t * dev, ssd1306_scroll_type_t scroll, int start, in
 
 }
 
-void ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int width, int height)
+void ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int width, int height, bool invert)
 {
 	uint8_t wk0;
 	uint8_t wk1;
+	uint8_t wk2;
 	uint8_t page = (ypos / 8);
 	uint8_t _seg = xpos;
 	uint8_t dstBits = (ypos % 8);
@@ -387,9 +388,14 @@ void ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int 
 		for (int index=0;index<width;index++) {
 			for (int srcBits=7; srcBits>=0; srcBits--) {
 				wk0 = dev->_page[page]._segs[_seg];
-				wk1 = ssd1306_copy_bit(bitmap[index+offset], srcBits, wk0, dstBits);
-				ESP_LOGD(TAG, "index=%d offset=%d page=%d _seg=%d, wk1=%02x", index, offset, page, _seg, wk1);
-				dev->_page[page]._segs[_seg] = wk1;
+
+				wk1 = bitmap[index+offset];
+				if (invert) wk1 = ~wk1;
+
+				//wk2 = ssd1306_copy_bit(bitmap[index+offset], srcBits, wk0, dstBits);
+				wk2 = ssd1306_copy_bit(wk1, srcBits, wk0, dstBits);
+				ESP_LOGD(TAG, "index=%d offset=%d page=%d _seg=%d, wk2=%02x", index, offset, page, _seg, wk2);
+				dev->_page[page]._segs[_seg] = wk2;
 				_seg++;
 			}
 		}
