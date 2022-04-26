@@ -141,6 +141,7 @@ ssd1306_display_text_x3(SSD1306_t * dev, int page, char * text, int text_len, bo
 			} else {
 				i2c_display_image(dev, page+yy, seg, image, 24);
 			}
+			memcpy(&dev->_page[page+yy]._segs[seg], image, 24);
 		}
 		seg = seg + 24;
 	}
