@@ -115,7 +115,7 @@ void ssd1306_software_scroll(SSD1306_t * dev, int start, int end);
 void ssd1306_scroll_text(SSD1306_t * dev, char * text, int text_len, bool invert);
 void ssd1306_scroll_clear(SSD1306_t * dev);
 void ssd1306_hardware_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll);
-void ssd1306_rotate(SSD1306_t * dev, ssd1306_scroll_type_t scroll, int start, int end, uint8_t delay);
+void ssd1306_wrap_arround(SSD1306_t * dev, ssd1306_scroll_type_t scroll, int start, int end, uint8_t delay);
 void ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int width, int height, bool invert);
 void ssd1306_invert(uint8_t *buf, size_t blen);
 void ssd1306_flip(uint8_t *buf, size_t blen);

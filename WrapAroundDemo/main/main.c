@@ -88,17 +88,17 @@ void app_main(void)
 	vTaskDelay(3000 / portTICK_PERIOD_MS);
 	while(1) {
 		for(int i=0;i<128;i++) {
-			ssd1306_rotate(&dev, SCROLL_RIGHT, 1, 2, 0);
+			ssd1306_wrap_arround(&dev, SCROLL_RIGHT, 1, 2, 0);
 			if (pages == 7) {
-				ssd1306_rotate(&dev, SCROLL_RIGHT, 5, 6, 0);
+				ssd1306_wrap_arround(&dev, SCROLL_RIGHT, 5, 6, 0);
 			}
 		}
 		vTaskDelay(2000 / portTICK_PERIOD_MS);
 
 		for(int i=0;i<128;i++) {
-			ssd1306_rotate(&dev, SCROLL_LEFT, 1, 2, 0);
+			ssd1306_wrap_arround(&dev, SCROLL_LEFT, 1, 2, 0);
 			if (pages == 7) {
-				ssd1306_rotate(&dev, SCROLL_LEFT, 5, 6, 0);
+				ssd1306_wrap_arround(&dev, SCROLL_LEFT, 5, 6, 0);
 			}
 		}
 		vTaskDelay(2000 / portTICK_PERIOD_MS);
@@ -106,27 +106,27 @@ void app_main(void)
 		int height = ssd1306_get_height(&dev);
 		ESP_LOGD(TAG, "height=%d", height);
 		for(int i=0;i<height;i++) {
-			ssd1306_rotate(&dev, SCROLL_UP, 0, 31, 0);
-			ssd1306_rotate(&dev, SCROLL_UP, 96, 127, 0);
+			ssd1306_wrap_arround(&dev, SCROLL_UP, 0, 31, 0);
+			ssd1306_wrap_arround(&dev, SCROLL_UP, 96, 127, 0);
 		}
 		vTaskDelay(2000 / portTICK_PERIOD_MS);
 
 		ESP_LOGD(TAG, "height=%d", height);
 		for(int i=0;i<height;i++) {
-			ssd1306_rotate(&dev, SCROLL_DOWN, 0, 31, 0);
-			ssd1306_rotate(&dev, SCROLL_DOWN, 96, 127, 0);
+			ssd1306_wrap_arround(&dev, SCROLL_DOWN, 0, 31, 0);
+			ssd1306_wrap_arround(&dev, SCROLL_DOWN, 96, 127, 0);
 		}
 		vTaskDelay(2000 / portTICK_PERIOD_MS);
 
 		for(int i=0;i<128;i++) {
-			ssd1306_rotate(&dev, SCROLL_RIGHT, 0, pages, 0);
-			ssd1306_rotate(&dev, SCROLL_DOWN, 0, 127, 0);
+			ssd1306_wrap_arround(&dev, SCROLL_RIGHT, 0, pages, 0);
+			ssd1306_wrap_arround(&dev, SCROLL_DOWN, 0, 127, 0);
 		}
 		vTaskDelay(2000 / portTICK_PERIOD_MS);
 
 		for(int i=0;i<128;i++) {
-			ssd1306_rotate(&dev, SCROLL_LEFT, 0, pages, 0);
-			ssd1306_rotate(&dev, SCROLL_UP, 0, 127, 0);
+			ssd1306_wrap_arround(&dev, SCROLL_LEFT, 0, pages, 0);
+			ssd1306_wrap_arround(&dev, SCROLL_UP, 0, 127, 0);
 		}
 		vTaskDelay(2000 / portTICK_PERIOD_MS);
 	} // end while

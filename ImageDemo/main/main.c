@@ -193,7 +193,7 @@ void app_main(void)
 		vTaskDelay(3000 / portTICK_PERIOD_MS);
 
 		for(int i=0;i<128;i++) {
-			ssd1306_rotate(&dev, SCROLL_RIGHT, 2, 3, 0);
+			ssd1306_wrap_arround(&dev, SCROLL_RIGHT, 2, 3, 0);
 		}
 		vTaskDelay(2000 / portTICK_PERIOD_MS);
 
@@ -203,7 +203,7 @@ void app_main(void)
 		vTaskDelay(2000 / portTICK_PERIOD_MS);
 
 		for(int i=0;i<64;i++) {
-			ssd1306_rotate(&dev, SCROLL_UP, 0, 127, 0);
+			ssd1306_wrap_arround(&dev, SCROLL_UP, 0, 127, 0);
 		}
 		vTaskDelay(2000 / portTICK_PERIOD_MS);
 #endif
