@@ -730,8 +730,19 @@ void app_main(void)
 	ssd1306_contrast(&dev, 0xff);
 	ssd1306_clear_screen(&dev, false);
 	int count = 9;
+	uint8_t segs[128];
 	while(1) {
+		TickType_t startTick = xTaskGetTickCount();
 		int index = 0;
+		// 1Ticks required
+		for (int page=0;page<8;page++) {
+			for (int seg=0;seg<128;seg++) {
+				segs[seg] =  ssd1306_rotate_byte(monkeyAnimation[count][seg*8+page]);
+			}
+			ssd1306_display_image(&dev, page, 0, segs, 128);
+		}
+#if 0
+		// 26Ticks required
 		for (int seg=0;seg<128;seg++) {
 			for (int page=0;page<8;page++) {
 				uint8_t wk[1];
@@ -740,6 +751,9 @@ void app_main(void)
 				ssd1306_display_image(&dev, page, seg, wk, 1);
 			}
 		}
+#endif
+		TickType_t endTick = xTaskGetTickCount();
+		ESP_LOGD(TAG, "diffTick=%d", endTick - startTick);
 		count--;
 		if (count<0) count = 9;
 		vTaskDelay(4);
