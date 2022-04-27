@@ -258,7 +258,7 @@ void app_main(void)
 		xpos = xpos - bitmapWidth/2; 
 		int ypos = 16;
 		ESP_LOGD(TAG, "width=%d xpos=%d", width, xpos);
-		ssd1306_bitmaps(&dev, xpos, ypos, batman, 4, 12, false);
+		ssd1306_bitmaps(&dev, xpos, ypos, batman, 32, 13, false);
 		vTaskDelay(3000 / portTICK_PERIOD_MS);
 
 		for(int i=0;i<128;i++) {
@@ -268,7 +268,7 @@ void app_main(void)
 
 #if CONFIG_SSD1306_128x64
 		ssd1306_clear_screen(&dev, false);
-		ssd1306_bitmaps(&dev, 0, 0, logoMischianti, 16, 64, false);
+		ssd1306_bitmaps(&dev, 0, 0, logoMischianti, 128, 64, false);
 		vTaskDelay(2000 / portTICK_PERIOD_MS);
 
 		for(int i=0;i<64;i++) {
@@ -277,7 +277,7 @@ void app_main(void)
 		vTaskDelay(2000 / portTICK_PERIOD_MS);
 
 		ssd1306_clear_screen(&dev, false);
-		ssd1306_bitmaps(&dev, 0, 0, fleischer, 16, 64, false);
+		ssd1306_bitmaps(&dev, 0, 0, fleischer, 128, 64, false);
 		vTaskDelay(2000 / portTICK_PERIOD_MS);
 #endif
 	}

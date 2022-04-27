@@ -377,6 +377,11 @@ void ssd1306_wrap_arround(SSD1306_t * dev, ssd1306_scroll_type_t scroll, int sta
 
 void ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int width, int height, bool invert)
 {
+	if ( (width % 8) != 0) {
+		ESP_LOGE(TAG, "width must be a multiple of 8");
+		return;
+	}
+	int _width = width / 8;
 	uint8_t wk0;
 	uint8_t wk1;
 	uint8_t wk2;
@@ -386,7 +391,7 @@ void ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int 
 	ESP_LOGI(TAG, "ypos=%d page=%d dstBits=%d", ypos, page, dstBits);
 	int offset = 0;
 	for(int _height=0;_height<height;_height++) {
-		for (int index=0;index<width;index++) {
+		for (int index=0;index<_width;index++) {
 			for (int srcBits=7; srcBits>=0; srcBits--) {
 				wk0 = dev->_page[page]._segs[_seg];
 
@@ -401,7 +406,7 @@ void ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int 
 			}
 		}
 		vTaskDelay(1);
-		offset = offset + width;
+		offset = offset + _width;
 		dstBits++;
 		_seg = xpos;
 		if (dstBits == 8) {
@@ -411,10 +416,10 @@ void ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int 
 	}
 
 #if 0
-	for (int _seg=ypos;_seg<ypos+width*8;_seg++) {
+	for (int _seg=ypos;_seg<ypos+width;_seg++) {
 		ssd1306_dump_page(dev, page-1, _seg);
 	}
-	for (int _seg=ypos;_seg<ypos+width*8;_seg++) {
+	for (int _seg=ypos;_seg<ypos+width;_seg++) {
 		ssd1306_dump_page(dev, page, _seg);
 	}
 #endif
