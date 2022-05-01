@@ -58,6 +58,24 @@ void ssd1306_show_buffer(SSD1306_t * dev)
 	}
 }
 
+void ssd1306_set_buffer(SSD1306_t * dev, uint8_t * buffer)
+{
+	int index = 0;
+	for (int page=0; page<dev->_pages;page++) {
+		memcpy(&dev->_page[page]._segs, &buffer[index], 128);
+		index = index + 128;
+	}
+}
+
+void ssd1306_get_buffer(SSD1306_t * dev, uint8_t * buffer)
+{
+	int index = 0;
+	for (int page=0; page<dev->_pages;page++) {
+		memcpy(&buffer[index], &dev->_page[page]._segs, 128);
+		index = index + 128;
+	}
+}
+
 void ssd1306_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int width)
 {
 	if (dev->_address == SPIAddress) {
@@ -111,12 +129,12 @@ ssd1306_display_text_x3(SSD1306_t * dev, int page, char * text, int text_len, bo
 		out_column_t out_columns[8];
 		memset(out_columns, 0, sizeof(out_columns));
 
-		for (uint8_t xx = 0; xx < 8; xx++) {  // for each column (x-direction)
+		for (uint8_t xx = 0; xx < 8; xx++) { // for each column (x-direction)
 
 			uint32_t in_bitmask = 0b1;
 			uint32_t out_bitmask = 0b111;
 
-			for (uint8_t yy = 0; yy < 8; yy++) {  // for pixel (y-direction)
+			for (uint8_t yy = 0; yy < 8; yy++) { // for pixel (y-direction)
 				if (in_columns[xx] & in_bitmask) {
 					out_columns[xx].u32 |= out_bitmask;
 				}
@@ -126,10 +144,10 @@ ssd1306_display_text_x3(SSD1306_t * dev, int page, char * text, int text_len, bo
 		}
 
 		// render character in 8 column high pieces, making them 3x as wide
-		for (uint8_t yy = 0; yy < 3; yy++)  {  // for each group of 8 pixels high (y-direction)
+		for (uint8_t yy = 0; yy < 3; yy++)	{ // for each group of 8 pixels high (y-direction)
 
 			uint8_t image[24];
-			for (uint8_t xx = 0; xx < 8; xx++) {  // for each column (x-direction)
+			for (uint8_t xx = 0; xx < 8; xx++) { // for each column (x-direction)
 				image[xx*3+0] = 
 				image[xx*3+1] = 
 				image[xx*3+2] = out_columns[xx].u8[yy];
@@ -388,7 +406,7 @@ void ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int 
 	uint8_t page = (ypos / 8);
 	uint8_t _seg = xpos;
 	uint8_t dstBits = (ypos % 8);
-	ESP_LOGI(TAG, "ypos=%d page=%d dstBits=%d", ypos, page, dstBits);
+	ESP_LOGD(TAG, "ypos=%d page=%d dstBits=%d", ypos, page, dstBits);
 	int offset = 0;
 	for(int _height=0;_height<height;_height++) {
 		for (int index=0;index<_width;index++) {
@@ -424,6 +442,69 @@ void ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int 
 	}
 #endif
 	ssd1306_show_buffer(dev);
+}
+
+
+// Set pixel to internal buffer. Not show it.
+void _ssd1306_pixel(SSD1306_t * dev, int xpos, int ypos, bool invert)
+{
+	uint8_t _page = (ypos / 8);
+	uint8_t _bits = (ypos % 8);
+	uint8_t _seg = xpos;
+	uint8_t wk0 = dev->_page[_page]._segs[_seg];
+	uint8_t wk1 = 1<< _bits;
+	ESP_LOGD(TAG, "ypos=%d _page=%d _bits=%d wk0=0x%02x wk1=0x%02x", ypos, _page, _bits, wk0, wk1);
+	if (invert) {
+		wk0 = wk0 & ~wk1;
+	} else {
+		wk0 = wk0 | wk1;
+	}
+	ESP_LOGD(TAG, "wk0=0x%02x wk1=0x%02x", wk0, wk1);
+	dev->_page[_page]._segs[_seg] = wk0;
+}
+
+// Set line to internal buffer. Not show it.
+void _ssd1306_line(SSD1306_t * dev, int x1, int y1, int x2, int y2,  bool invert)
+{
+	int i;
+	int dx,dy;
+	int sx,sy;
+	int E;
+
+	/* distance between two points */
+	dx = ( x2 > x1 ) ? x2 - x1 : x1 - x2;
+	dy = ( y2 > y1 ) ? y2 - y1 : y1 - y2;
+
+	/* direction of two point */
+	sx = ( x2 > x1 ) ? 1 : -1;
+	sy = ( y2 > y1 ) ? 1 : -1;
+
+	/* inclination < 1 */
+	if ( dx > dy ) {
+		E = -dx;
+		for ( i = 0 ; i <= dx ; i++ ) {
+			_ssd1306_pixel(dev, x1, y1, invert);
+			x1 += sx;
+			E += 2 * dy;
+			if ( E >= 0 ) {
+			y1 += sy;
+			E -= 2 * dx;
+		}
+	}
+
+	/* inclination >= 1 */
+	} else {
+		E = -dy;
+		for ( i = 0 ; i <= dy ; i++ ) {
+			_ssd1306_pixel(dev, x1, y1, invert);
+			y1 += sy;
+			E += 2 * dx;
+			if ( E >= 0 ) {
+				x1 += sx;
+				E -= 2 * dy;
+			}
+		}
+	}
 }
 
 void ssd1306_invert(uint8_t *buf, size_t blen)
