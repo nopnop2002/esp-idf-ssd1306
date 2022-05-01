@@ -15,10 +15,10 @@ You will need an analog source to run this demo.
 Connect the analog source to the following GPIO.   
 These are all channel 0 of ADC1.   
 
-- Analog input gpio for ESP32 is GPIO36.   
-- Analog input gpio for ESP32S2 is GPIO01.   
-- Analog input gpio for ESP32S3 is GPIO01.   
-- Analog input gpio for ESP32C3 is GPIO00.   
+- Analog input gpio for ESP32 is GPIO36. 12Bits width.   
+- Analog input gpio for ESP32S2 is GPIO01. 13Bits width.   
+- Analog input gpio for ESP32S3 is GPIO01. 12Bits width.   
+- Analog input gpio for ESP32C3 is GPIO00. 12Bits width.   
 
 Schematic I used:
 ```

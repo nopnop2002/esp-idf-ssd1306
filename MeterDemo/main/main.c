@@ -143,9 +143,7 @@ void app_main(void)
 {
 	adc_calibration_init();
 	// ADC1 config
-	//ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_DEFAULT));
-	//ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_10));
-	ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_12));
+	ESP_ERROR_CHECK(adc1_config_width(ADC_WIDTH_BIT_DEFAULT));
 	ESP_ERROR_CHECK(adc1_config_channel_atten(ADC1_CHANNEL_0, ADC_EXAMPLE_ATTEN));
 
 	SSD1306_t dev;
@@ -209,8 +207,13 @@ void app_main(void)
 
 	while(1) {
 		//ssd1306_clear_screen(&dev, false);
-		int sample = adc1_get_raw(ADC1_CHANNEL_0); // 12 bits sampling
-		sample = sample / 4; // 12 bits -> 10 bits. Because the original code is for ATMEGA328.
+		int sample = adc1_get_raw(ADC1_CHANNEL_0);
+		if (ADC_WIDTH_BIT_DEFAULT == 3) {
+			sample = sample / 4; // 12 bits -> 10 bits. Because the original code is for ATMEGA328.
+		}
+		if (ADC_WIDTH_BIT_DEFAULT == 4) {
+			sample = sample / 8; // 13 bits -> 10 bits. Because the original code is for ATMEGA328.
+		}
 		ESP_LOGD(TAG, "sample=%d", sample);
 		float MeterValue = sample * 120.079 / 1023;
 		MeterValue = MeterValue - 60.039;
@@ -225,7 +228,7 @@ void app_main(void)
 
 		// Display the entire image
 		ssd1306_show_buffer(&dev);
-		vTaskDelay(100 / portTICK_PERIOD_MS);
+		vTaskDelay(1);
 
 		// Erase needle
 		_ssd1306_line(&dev, a1, a2, hMeter, vMeter, true);
