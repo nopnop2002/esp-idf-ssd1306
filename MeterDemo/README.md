@@ -8,3 +8,24 @@ I borrowed the BIT MAP data from [here](https://forum.arduino.cc/t/analog-vu-met
 
 This sample shows how to quickly redraw a BITMAP image.   
 High-speed drawing is possible by converting BITMAP data to Page and Segment.   
+You can use ssd1306_bitmaps function as converter.   
+
+
+You will need an analog source to run this demo.   
+Connect the analog source to the following GPIO.   
+These are all channel 0 of ADC1.   
+
+- Analog input gpio for ESP32 is GPIO36.   
+- Analog input gpio for ESP32S2 is GPIO01.   
+- Analog input gpio for ESP32S3 is GPIO01.   
+- Analog input gpio for ESP32C3 is GPIO00.   
+
+Schematic I used:
+```
+ESP32 3V3 ----------- CDS ---+---+
+                             |   |
+ESP32 Analog input ----------+   |
+                                 |
+ESP32 GND ------ Register -------+
+```
+
