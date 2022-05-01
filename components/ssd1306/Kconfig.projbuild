@@ -54,7 +54,7 @@ menu "SSD1306 Configuration"
 		depends on I2C_INTERFACE
 		int "SCL GPIO number"
 		range 0 GPIO_RANGE_MAX
-		default 22 if IIDF_TARGET_ESP32
+		default 22 if IDF_TARGET_ESP32
 		default 12 if IDF_TARGET_ESP32S2
 		default 12 if IDF_TARGET_ESP32S3
 		default  9 if IDF_TARGET_ESP32C3
