@@ -723,8 +723,8 @@ void app_main(void)
 	ssd1306_init(&dev, 128, 64);
 #endif // CONFIG_SSD1306_128x64
 #if CONFIG_SSD1306_128x32
-	ESP_LOGI(TAG, "Panel is 128x32");
-	ssd1306_init(&dev, 128, 32);
+	ESP_LOGE(TAG, "Panel is 128x32. This demo cannot be run.");
+	while(1) { vTaskDelay(1); }
 #endif // CONFIG_SSD1306_128x32
 
 	ssd1306_contrast(&dev, 0xff);
@@ -733,7 +733,6 @@ void app_main(void)
 	uint8_t segs[128];
 	while(1) {
 		TickType_t startTick = xTaskGetTickCount();
-		int index = 0;
 		// 1Ticks required
 		for (int page=0;page<8;page++) {
 			for (int seg=0;seg<128;seg++) {
@@ -742,6 +741,7 @@ void app_main(void)
 			ssd1306_display_image(&dev, page, 0, segs, 128);
 		}
 #if 0
+		int index = 0;
 		// 26Ticks required
 		for (int seg=0;seg<128;seg++) {
 			for (int page=0;page<8;page++) {
