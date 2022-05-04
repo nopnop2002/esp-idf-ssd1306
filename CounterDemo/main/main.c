@@ -272,6 +272,8 @@ void app_main(void)
 #endif
 	}
 
+	// I don't use this anymore
+	free(buffer);
 
 	int digit1 = 0;
 	int digit2 = 0;
@@ -324,12 +326,13 @@ void app_main(void)
 			for (int page=0;page<8;page++) {
 				ssd1306_display_image(&dev, page, 64, &segmentImage[segmentImageIndex3+page*32], 32);
 			}
-		}	
-		// Update digit4
-		int segmentImageIndex4 = digit4 * 256;
-		for (int page=0;page<8;page++) {
-			ssd1306_display_image(&dev, page, 96, &segmentImage[segmentImageIndex4+page*32], 32);
+		} else {	
+			// Update digit4
+			int segmentImageIndex4 = digit4 * 256;
+			for (int page=0;page<8;page++) {
+				ssd1306_display_image(&dev, page, 96, &segmentImage[segmentImageIndex4+page*32], 32);
+			}
 		}
 		vTaskDelay(8);
-	}
+	} // end while
 }
