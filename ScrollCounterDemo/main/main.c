@@ -316,8 +316,10 @@ void app_main(void)
 					// Show internal buffer
 					ssd1306_show_buffer(&dev);
 					// Avoid WatchDog alerts
-					vTaskDelay(1);
+					//vTaskDelay(1);
 				} // end _height
+				// Avoid WatchDog alerts
+				vTaskDelay(1);
 			} // end digit
 		} // end imageIndex
 	} // end while
