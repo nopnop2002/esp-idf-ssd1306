@@ -4,6 +4,10 @@
 
 I borrowed the BIT MAP data from [here](https://forum.arduino.cc/t/analog-vu-meter-i2c-oled-sh1106-oledmeter-animation/388374).   
 
+__Wire cables should be as short as possible.__   
+
+I used a 10 cm wire cable.   
+However, it is sometimes affected by noise.   
 
 
 This sample shows how to quickly redraw a BITMAP image.   
