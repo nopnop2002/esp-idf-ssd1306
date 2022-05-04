@@ -262,7 +262,10 @@ void ssd1306_hardware_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll)
 	}
 }
 
-void ssd1306_wrap_arround(SSD1306_t * dev, ssd1306_scroll_type_t scroll, int start, int end, uint8_t delay)
+// delay = 0 : display with no wait
+// delay > 0 : display with wait
+// delay < 0 : no display
+void ssd1306_wrap_arround(SSD1306_t * dev, ssd1306_scroll_type_t scroll, int start, int end, int8_t delay)
 {
 	if (scroll == SCROLL_RIGHT) {
 		int _start = start; // 0 to 7
@@ -382,13 +385,15 @@ void ssd1306_wrap_arround(SSD1306_t * dev, ssd1306_scroll_type_t scroll, int sta
 
 	}
 
-	for (int page=0;page<dev->_pages;page++) {
-		if (dev->_address == SPIAddress) {
-			spi_display_image(dev, page, 0, dev->_page[page]._segs, 128);
-		} else {
-			i2c_display_image(dev, page, 0, dev->_page[page]._segs, 128);
+	if (delay >= 0) {
+		for (int page=0;page<dev->_pages;page++) {
+			if (dev->_address == SPIAddress) {
+				spi_display_image(dev, page, 0, dev->_page[page]._segs, 128);
+			} else {
+				i2c_display_image(dev, page, 0, dev->_page[page]._segs, 128);
+			}
+			if (delay) vTaskDelay(delay);
 		}
-		if (delay) vTaskDelay(delay);
 	}
 
 }
@@ -528,10 +533,19 @@ uint8_t ssd1306_copy_bit(uint8_t src, int srcBits, uint8_t dst, int dstBits)
 {
 	ESP_LOGD(TAG, "src=%02x srcBits=%d dst=%02x dstBits=%d", src, srcBits, dst, dstBits);
 	uint8_t smask = 0x01 << srcBits;
+	uint8_t dmask = 0x01 << dstBits;
 	uint8_t _src = src & smask;
+#if 0
 	if (_src != 0) _src = 1;
 	uint8_t _wk = _src << dstBits;
 	uint8_t _dst = dst | _wk;
+#endif
+	uint8_t _dst;
+	if (_src != 0) {
+		_dst = dst | dmask; // set bit
+	} else {
+		_dst = dst & ~(dmask); // clear bit
+	}
 	return _dst;
 }
 
