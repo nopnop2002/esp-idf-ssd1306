@@ -9,7 +9,7 @@
 
 #include "ssd1306.h"
 
-#define tag "SSD1306"
+#define TAG "SSD1306"
 
 #ifdef CONFIG_IDF_TARGET_ESP32
 #define LCD_HOST HSPI_HOST
@@ -23,7 +23,7 @@
 
 static const int SPI_Command_Mode = 0;
 static const int SPI_Data_Mode = 1;
-static const int SPI_Frequency = 1000000;
+static const int SPI_Frequency = 1000000; // 1MHz
 
 void spi_master_init(SSD1306_t * dev, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int16_t GPIO_CS, int16_t GPIO_DC, int16_t GPIO_RESET)
 {
@@ -59,7 +59,7 @@ void spi_master_init(SSD1306_t * dev, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int1
 	};
 
 	ret = spi_bus_initialize( LCD_HOST, &spi_bus_config, SPI_DMA_CH_AUTO );
-	ESP_LOGI(tag, "spi_bus_initialize=%d",ret);
+	ESP_LOGI(TAG, "spi_bus_initialize=%d",ret);
 	assert(ret==ESP_OK);
 
 	spi_device_interface_config_t devcfg;
@@ -70,7 +70,7 @@ void spi_master_init(SSD1306_t * dev, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int1
 
 	spi_device_handle_t handle;
 	ret = spi_bus_add_device( LCD_HOST, &devcfg, &handle);
-	ESP_LOGI(tag, "spi_bus_add_device=%d",ret);
+	ESP_LOGI(TAG, "spi_bus_add_device=%d",ret);
 	assert(ret==ESP_OK);
 	dev->_dc = GPIO_DC;
 	dev->_SPIHandle = handle;

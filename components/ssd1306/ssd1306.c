@@ -168,7 +168,7 @@ ssd1306_display_text_x3(SSD1306_t * dev, int page, char * text, int text_len, bo
 void ssd1306_clear_screen(SSD1306_t * dev, bool invert)
 {
 	char space[16];
-	memset(space, 0x20, sizeof(space));
+	memset(space, 0x00, sizeof(space));
 	for (int page = 0; page < dev->_pages; page++) {
 		ssd1306_display_text(dev, page, space, sizeof(space), invert);
 	}
@@ -177,7 +177,7 @@ void ssd1306_clear_screen(SSD1306_t * dev, bool invert)
 void ssd1306_clear_line(SSD1306_t * dev, int page, bool invert)
 {
 	char space[16];
-	memset(space, 0x20, sizeof(space));
+	memset(space, 0x00, sizeof(space));
 	ssd1306_display_text(dev, page, space, sizeof(space), invert);
 }
 
