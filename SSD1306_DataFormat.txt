@@ -1,0 +1,63 @@
+# BMP DATA (16x8)
+```
+Bit10 Bit11 Bit12 Bit13 Bit14 Bit15 Bit16 Bit17 - Bit18 Bit19 Bit1A Bit1B Bit1C Bit1D Bit1E Bit1F
+Bit20 Bit21 Bit22 Bit23 Bit24 Bit25 Bit26 Bit27 - Bit28 Bit29 Bit2A Bit2B Bit2C Bit2D Bit2E Bit2F
+Bit30 Bit31 Bit32 Bit33 Bit34 Bit35 Bit36 Bit37 - Bit38 Bit39 Bit3A Bit3B Bit3C Bit3D Bit3E Bit3F
+Bit40 Bit41 Bit42 Bit43 Bit44 Bit45 Bit46 Bit47 - Bit48 Bit49 Bit4A Bit4B Bit4C Bit4D Bit4E Bit4F
+Bit50 Bit51 Bit52 Bit53 Bit54 Bit55 Bit56 Bit57 - Bit58 Bit59 Bit5A Bit5B Bit5C Bit5D Bit5E Bit5F
+Bit60 Bit61 Bit62 Bit63 Bit64 Bit65 Bit66 Bit67 - Bit68 Bit69 Bit6A Bit6B Bit6C Bit6D Bit6E Bit6F
+Bit70 Bit71 Bit72 Bit73 Bit74 Bit75 Bit76 Bit77 - Bit78 Bit79 Bit7A Bit7B Bit7C Bit7D Bit7E Bit7F
+
+```
+
+```
+1 0 0 0 0 0 0 0 - 0 0 0 0 0 0 0 1
+0 1 0 0 0 0 0 0 - 0 0 0 0 0 0 1 0
+0 0 1 0 0 0 0 0 - 0 0 0 0 0 1 0 0
+0 0 0 1 0 0 0 0 - 0 0 0 0 1 0 0 0
+0 0 0 0 1 0 0 0 - 0 0 0 1 0 0 0 0
+0 0 0 0 0 1 0 0 - 0 0 1 0 0 0 0 0
+0 0 0 0 0 0 1 0 - 0 1 0 0 0 0 0 0
+0 0 0 0 0 0 0 1 - 1 0 0 0 0 0 0 0
+```
+
+
+# SSD1306 Frame(8x16) 
+```
+Bit10 Bit20 Bit30 Bit40 Bit50 Bit60 Bit70
+Bit11 Bit21 Bit31 Bit41 Bit51 Bit61 Bit71
+Bit12 Bit22 Bit32 Bit42 Bit52 Bit62 Bit72
+Bit13 Bit23 Bit33 Bit43 Bit53 Bit63 Bit73
+Bit14 Bit24 Bit34 Bit44 Bit54 Bit64 Bit74
+Bit15 Bit25 Bit35 Bit45 Bit55 Bit65 Bit75
+Bit16 Bit26 Bit36 Bit46 Bit56 Bit66 Bit76
+Bit17 Bit27 Bit37 Bit47 Bit57 Bit67 Bit77
+Bit18 Bit28 Bit38 Bit48 Bit58 Bit68 Bit78
+Bit19 Bit29 Bit39 Bit49 Bit59 Bit69 Bit79
+Bit1A Bit2A Bit3A Bit4A Bit5A Bit6A Bit7A
+Bit1B Bit2B Bit3B Bit4B Bit5B Bit6B Bit7B
+Bit1C Bit2C Bit3C Bit4C Bit5C Bit6C Bit7C
+Bit1D Bit2D Bit3D Bit4D Bit5D Bit6D Bit7D
+Bit1E Bit2E Bit3E Bit4E Bit5E Bit6E Bit7E
+Bit1F Bit2F Bit3F Bit4F Bit5F Bit6F Bit7F
+```
+
+```
+1 0 0 0 0 0 0 0
+0 1 0 0 0 0 0 0
+0 0 1 0 0 0 0 0
+0 0 0 1 0 0 0 0
+0 0 0 0 1 0 0 0
+0 0 0 0 0 1 0 0
+0 0 0 0 0 0 1 0
+0 0 0 0 0 0 0 1
+0 0 0 0 0 0 0 1
+0 0 0 0 0 0 1 0
+0 0 0 0 0 1 0 0
+0 0 0 0 1 0 0 0
+0 0 0 1 0 0 0 0
+0 0 1 0 0 0 0 0
+0 1 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+```
+
