@@ -9,12 +9,13 @@ __Wire cables should be as short as possible.__
 I used a 10 cm wire cable.   
 However, it is sometimes affected by noise.   
 
-
+# Convert from BITMAP data to Page and Segment   
 This sample shows how to quickly redraw a BITMAP image.   
 High-speed drawing is possible by converting BITMAP data to Page and Segment.   
 You can use ssd1306_bitmaps function as converter.   
 
 
+# Analog source   
 You will need an analog source to run this demo.   
 Connect the analog source to the following GPIO.   
 These are all channel 0 of ADC1.   
