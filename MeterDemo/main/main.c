@@ -220,7 +220,7 @@ void app_main(void)
 		int a1 = (hMeter + (sin(MeterValue / 502.64 * 6.283) * rMeter)); 
 		int a2 = (vMeter - (cos(MeterValue / 502.64 * 6.283) * rMeter)); 
 
-		// Set background image
+		// Set background image. There is no needle.
 		ssd1306_set_buffer(&dev, buffer);
 
 		// Set needle
@@ -231,6 +231,6 @@ void app_main(void)
 		vTaskDelay(1);
 
 		// Erase needle
-		_ssd1306_line(&dev, a1, a2, hMeter, vMeter, true);
+		//_ssd1306_line(&dev, a1, a2, hMeter, vMeter, true);
 	}
 }
