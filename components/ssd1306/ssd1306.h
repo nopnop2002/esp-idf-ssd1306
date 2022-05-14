@@ -66,10 +66,10 @@ Usage:
 #define OLED_CMD_CONTINUOUS_SCROLL      0x29
 #define OLED_CMD_DEACTIVE_SCROLL        0x2E
 #define OLED_CMD_ACTIVE_SCROLL          0x2F
-#define OLED_CMD_VERTICAL		        0xA3
+#define OLED_CMD_VERTICAL               0xA3
 
-#define	I2CAddress 0x3C 
-#define	SPIAddress 0xFF 
+#define	I2CAddress 0x3C
+#define	SPIAddress 0xFF
 
 typedef enum {
 	SCROLL_RIGHT = 1,
@@ -95,7 +95,7 @@ typedef struct {
 	bool _scEnable;
 	int _scStart;
 	int _scEnd;
-	int	_scDirection;
+	int _scDirection;
 	PAGE_t _page[8];
 	bool _flip;
 } SSD1306_t;
