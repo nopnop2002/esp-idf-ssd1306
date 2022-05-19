@@ -308,7 +308,12 @@ void app_main(void)
 					// Update buffer
 					for (int seg=0;seg<32;seg++) {
 						int bufferIndex = 7*128+seg+startSeg;
-						buffer[bufferIndex] = ssd1306_copy_bit(src[page*32+seg], srcBits, buffer[bufferIndex], 7);
+						uint8_t swk = src[page*32+seg];
+						uint8_t dwk = buffer[bufferIndex];
+						if (dev._flip) swk = ssd1306_rotate_byte(swk);
+						if (dev._flip) dwk = ssd1306_rotate_byte(dwk);
+						//buffer[bufferIndex] = ssd1306_copy_bit(src[page*32+seg], srcBits, buffer[bufferIndex], 7);
+						buffer[bufferIndex] = ssd1306_copy_bit(swk, srcBits, dwk, 7);
 						ESP_LOGD(TAG, "src[%d]=%02x buffer[bufferIndex]=%02x", page*32+seg, src[page*32+seg], buffer[bufferIndex]);
 					}
 					// Set internal buffer
