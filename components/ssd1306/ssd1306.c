@@ -313,6 +313,8 @@ void ssd1306_wrap_arround(SSD1306_t * dev, ssd1306_scroll_type_t scroll, int sta
 			for (int seg=_start;seg<=_end;seg++) {
 				wk0 = dev->_page[page]._segs[seg];
 				wk1 = dev->_page[page+1]._segs[seg];
+				if (dev->_flip) wk0 = ssd1306_rotate_byte(wk0);
+				if (dev->_flip) wk1 = ssd1306_rotate_byte(wk1);
 				if (seg == 0) {
 					ESP_LOGD(TAG, "b page=%d wk0=%02x wk1=%02x", page, wk0, wk1);
 				}
@@ -323,6 +325,7 @@ void ssd1306_wrap_arround(SSD1306_t * dev, ssd1306_scroll_type_t scroll, int sta
 				if (seg == 0) {
 					ESP_LOGD(TAG, "a page=%d wk0=%02x wk1=%02x wk2=%02x", page, wk0, wk1, wk2);
 				}
+				if (dev->_flip) wk2 = ssd1306_rotate_byte(wk2);
 				dev->_page[page]._segs[seg] = wk2;
 			}
 		}
@@ -332,10 +335,13 @@ void ssd1306_wrap_arround(SSD1306_t * dev, ssd1306_scroll_type_t scroll, int sta
 		for (int seg=_start;seg<=_end;seg++) {
 			wk0 = dev->_page[pages]._segs[seg];
 			wk1 = save[seg];
+			if (dev->_flip) wk0 = ssd1306_rotate_byte(wk0);
+			if (dev->_flip) wk1 = ssd1306_rotate_byte(wk1);
 			wk0 = wk0 >> 1;
 			wk1 = wk1 & 0x01;
 			wk1 = wk1 << 7;
 			wk2 = wk0 | wk1;
+			if (dev->_flip) wk2 = ssd1306_rotate_byte(wk2);
 			dev->_page[pages]._segs[seg] = wk2;
 		}
 
@@ -358,6 +364,8 @@ void ssd1306_wrap_arround(SSD1306_t * dev, ssd1306_scroll_type_t scroll, int sta
 			for (int seg=_start;seg<=_end;seg++) {
 				wk0 = dev->_page[page]._segs[seg];
 				wk1 = dev->_page[page-1]._segs[seg];
+				if (dev->_flip) wk0 = ssd1306_rotate_byte(wk0);
+				if (dev->_flip) wk1 = ssd1306_rotate_byte(wk1);
 				if (seg == 0) {
 					ESP_LOGD(TAG, "b page=%d wk0=%02x wk1=%02x", page, wk0, wk1);
 				}
@@ -368,6 +376,7 @@ void ssd1306_wrap_arround(SSD1306_t * dev, ssd1306_scroll_type_t scroll, int sta
 				if (seg == 0) {
 					ESP_LOGD(TAG, "a page=%d wk0=%02x wk1=%02x wk2=%02x", page, wk0, wk1, wk2);
 				}
+				if (dev->_flip) wk2 = ssd1306_rotate_byte(wk2);
 				dev->_page[page]._segs[seg] = wk2;
 			}
 		}
@@ -376,10 +385,13 @@ void ssd1306_wrap_arround(SSD1306_t * dev, ssd1306_scroll_type_t scroll, int sta
 		for (int seg=_start;seg<=_end;seg++) {
 			wk0 = dev->_page[0]._segs[seg];
 			wk1 = save[seg];
+			if (dev->_flip) wk0 = ssd1306_rotate_byte(wk0);
+			if (dev->_flip) wk1 = ssd1306_rotate_byte(wk1);
 			wk0 = wk0 << 1;
 			wk1 = wk1 & 0x80;
 			wk1 = wk1 >> 7;
 			wk2 = wk0 | wk1;
+			if (dev->_flip) wk2 = ssd1306_rotate_byte(wk2);
 			dev->_page[0]._segs[seg] = wk2;
 		}
 
@@ -417,12 +429,15 @@ void ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int 
 		for (int index=0;index<_width;index++) {
 			for (int srcBits=7; srcBits>=0; srcBits--) {
 				wk0 = dev->_page[page]._segs[_seg];
+				if (dev->_flip) wk0 = ssd1306_rotate_byte(wk0);
 
 				wk1 = bitmap[index+offset];
 				if (invert) wk1 = ~wk1;
 
 				//wk2 = ssd1306_copy_bit(bitmap[index+offset], srcBits, wk0, dstBits);
 				wk2 = ssd1306_copy_bit(wk1, srcBits, wk0, dstBits);
+				if (dev->_flip) wk2 = ssd1306_rotate_byte(wk2);
+
 				ESP_LOGD(TAG, "index=%d offset=%d page=%d _seg=%d, wk2=%02x", index, offset, page, _seg, wk2);
 				dev->_page[page]._segs[_seg] = wk2;
 				_seg++;
@@ -457,13 +472,14 @@ void _ssd1306_pixel(SSD1306_t * dev, int xpos, int ypos, bool invert)
 	uint8_t _bits = (ypos % 8);
 	uint8_t _seg = xpos;
 	uint8_t wk0 = dev->_page[_page]._segs[_seg];
-	uint8_t wk1 = 1<< _bits;
+	uint8_t wk1 = 1 << _bits;
 	ESP_LOGD(TAG, "ypos=%d _page=%d _bits=%d wk0=0x%02x wk1=0x%02x", ypos, _page, _bits, wk0, wk1);
 	if (invert) {
 		wk0 = wk0 & ~wk1;
 	} else {
 		wk0 = wk0 | wk1;
 	}
+	if (dev->_flip) wk0 = ssd1306_rotate_byte(wk0);
 	ESP_LOGD(TAG, "wk0=0x%02x wk1=0x%02x", wk0, wk1);
 	dev->_page[_page]._segs[_seg] = wk0;
 }
