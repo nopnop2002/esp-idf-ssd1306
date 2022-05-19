@@ -6,6 +6,8 @@ I borrowed the BIT MAP data from [here](https://www.mischianti.org/2021/07/14/ss
 
 __Wire cables should be as short as possible.__   
 
+__Flip upside down cannot be enabled.__   
+
 I used a 10 cm wire cable.   
 However, it is sometimes affected by noise.   
 

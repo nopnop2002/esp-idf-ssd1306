@@ -713,9 +713,11 @@ void app_main(void)
 	spi_master_init(&dev, CONFIG_MOSI_GPIO, CONFIG_SCLK_GPIO, CONFIG_CS_GPIO, CONFIG_DC_GPIO, CONFIG_RESET_GPIO);
 #endif // CONFIG_SPI_INTERFACE
 
+#if 0
 #if CONFIG_FLIP
 	dev._flip = true;
 	ESP_LOGW(TAG, "Flip upside down");
+#endif
 #endif
 
 #if CONFIG_SSD1306_128x64
