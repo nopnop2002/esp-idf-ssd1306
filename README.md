@@ -8,7 +8,7 @@ I used [this](https://github.com/dhepper/font8x8) font file.
 esp-idf v4.4 or later.   
 This is because this version supports ESP32-C3.   
 
-# Installation for
+# Installation   
 
 ```
 git clone https://github.com/nopnop2002/esp-idf-ssd1306
