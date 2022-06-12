@@ -80,7 +80,7 @@ You need to change the RTC CLOCK frequency to 26MHz using menuconfig.
 # 128x64 ESP-WROOM-32
 
 ![ESP32-OLED-2](https://user-images.githubusercontent.com/6020549/57063327-d229ef00-6cfd-11e9-98ab-8448e14d81e2.JPG)
-![config-ESP-WROOM-32](https://user-images.githubusercontent.com/6020549/106342643-1c7e3c80-62e5-11eb-9764-6d820513733d.jpg)
+![config-ESP-WROOM-32](https://user-images.githubusercontent.com/6020549/173222738-35269c7f-a184-4623-8faf-27f98bd958cb.jpg)
 
 ---
 
