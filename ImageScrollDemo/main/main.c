@@ -226,7 +226,7 @@ uint8_t segmentDisplay[NUM_IMAGES][BITMAPS] = {
 }
 };
 
-//					H  E  L  L	O  SP  W  O  R	L  D
+//                  H  E  L  L  O  SP  W  O  R  L  D
 int imageTable[] = {0, 1, 2, 2, 3, -1, 4, 3, 5, 2, 6};
 
 
