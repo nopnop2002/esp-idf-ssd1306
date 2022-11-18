@@ -9,7 +9,6 @@
 #include "esp_log.h"
 
 #include "ssd1306.h"
-#include "font8x8_basic.h"
 
 /*
  You have to set this config value with menuconfig
@@ -208,12 +207,12 @@ void app_main(void)
 	while(1) {
 		//ssd1306_clear_screen(&dev, false);
 		int sample = adc1_get_raw(ADC1_CHANNEL_0);
-		if (ADC_WIDTH_BIT_DEFAULT == 3) {
-			sample = sample / 4; // 12 bits -> 10 bits. Because the original code is for ATMEGA328.
-		}
-		if (ADC_WIDTH_BIT_DEFAULT == 4) {
-			sample = sample / 8; // 13 bits -> 10 bits. Because the original code is for ATMEGA328.
-		}
+#ifndef CONFIG_IDF_TARGET_ESP32S2
+		sample = sample / 4; // 12 bits -> 10 bits. Because the original code is for ATMEGA328.
+#else
+		// ESP32S2 only support 13 bit width
+		sample = sample / 8; // 13 bits -> 10 bits. Because the original code is for ATMEGA328.
+#endif
 		ESP_LOGD(TAG, "sample=%d", sample);
 		float MeterValue = sample * 120.079 / 1023;
 		MeterValue = MeterValue - 60.039;
