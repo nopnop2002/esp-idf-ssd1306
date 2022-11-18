@@ -6,7 +6,6 @@
 #include "esp_log.h"
 
 #include "ssd1306.h"
-#include "font8x8_basic.h"
 
 /*
  You have to set this config value with menuconfig

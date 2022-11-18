@@ -6,7 +6,6 @@
 #include "esp_log.h"
 
 #include "ssd1306.h"
-#include "font8x8_basic.h"
 
 /*
  You have to set this config value with menuconfig
@@ -235,7 +234,7 @@ void app_main(void)
 		ESP_LOGE(TAG, "malloc failed");
 		while(1) { vTaskDelay(1); }
 	}
-	uint8_t *segmentImage = (uint8_t *)malloc(IMAGES*8*32); // 10 image 8 page 32pixel
+	uint8_t *segmentImage = (uint8_t *)malloc(IMAGES*8*32); // 10 image 8 page 32 pixel
 	if (segmentImage == NULL) {
 		ESP_LOGE(TAG, "malloc failed");
 		while(1) { vTaskDelay(1); }
