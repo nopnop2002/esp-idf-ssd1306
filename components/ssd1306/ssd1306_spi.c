@@ -11,14 +11,12 @@
 
 #define TAG "SSD1306"
 
-#ifdef CONFIG_IDF_TARGET_ESP32
-#define LCD_HOST HSPI_HOST
-#elif CONFIG_IDF_TARGET_ESP32S2
-#define LCD_HOST SPI2_HOST
-#elif CONFIG_IDF_TARGET_ESP32S3
-#define LCD_HOST SPI2_HOST
-#elif CONFIG_IDF_TARGET_ESP32C3
-#define LCD_HOST SPI2_HOST
+#if CONFIG_SPI2_HOST
+#define HOST_ID SPI2_HOST
+#elif CONFIG_SPI3_HOST
+#define HOST_ID SPI3_HOST
+#else
+#define HOST_ID SPI2_HOST // If i2c is selected
 #endif
 
 static const int SPI_Command_Mode = 0;
@@ -58,7 +56,8 @@ void spi_master_init(SSD1306_t * dev, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int1
 		.flags = 0
 	};
 
-	ret = spi_bus_initialize( LCD_HOST, &spi_bus_config, SPI_DMA_CH_AUTO );
+	ESP_LOGI(TAG, "SPI HOST_ID=%d", HOST_ID);
+	ret = spi_bus_initialize( HOST_ID, &spi_bus_config, SPI_DMA_CH_AUTO );
 	ESP_LOGI(TAG, "spi_bus_initialize=%d",ret);
 	assert(ret==ESP_OK);
 
@@ -69,7 +68,7 @@ void spi_master_init(SSD1306_t * dev, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int1
 	devcfg.queue_size = 1;
 
 	spi_device_handle_t handle;
-	ret = spi_bus_add_device( LCD_HOST, &devcfg, &handle);
+	ret = spi_bus_add_device( HOST_ID, &devcfg, &handle);
 	ESP_LOGI(TAG, "spi_bus_add_device=%d",ret);
 	assert(ret==ESP_OK);
 	dev->_dc = GPIO_DC;
