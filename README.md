@@ -5,8 +5,7 @@ I used [this](https://github.com/yanbe/ssd1306-esp-idf-i2c) repository as a refe
 I used [this](https://github.com/dhepper/font8x8) font file.   
 
 # Software requirements
-esp-idf v4.4 or later.   
-This is because this version supports ESP32-C3.   
+esp-idf v4.4/v5.0.   
 
 # Installation   
 
