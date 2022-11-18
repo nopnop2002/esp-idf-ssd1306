@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <inttypes.h>
 #include <stdlib.h>
 #include <string.h>
 #include "freertos/FreeRTOS.h"
@@ -6,7 +7,6 @@
 #include "esp_log.h"
 
 #include "ssd1306.h"
-#include "font8x8_basic.h"
 
 /*
  You have to set this config value with menuconfig
@@ -755,7 +755,7 @@ void app_main(void)
 		}
 #endif
 		TickType_t endTick = xTaskGetTickCount();
-		ESP_LOGD(TAG, "diffTick=%d", endTick - startTick);
+		ESP_LOGD(TAG, "diffTick=%"PRIu32, endTick - startTick);
 		count--;
 		if (count<0) count = 9;
 		vTaskDelay(4);
