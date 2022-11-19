@@ -69,7 +69,7 @@ You need to change the RTC CLOCK frequency to 26MHz using menuconfig.
 ![ESP32-TTGO-1](https://user-images.githubusercontent.com/6020549/56449111-9764a600-6350-11e9-9902-e2ad1c4aefb0.JPG)
 ![ESP32-TTGO-2](https://user-images.githubusercontent.com/6020549/56449116-9a5f9680-6350-11e9-86ec-e06648118add.JPG)
 ![128x64_Reset](https://user-images.githubusercontent.com/6020549/56449118-9e8bb400-6350-11e9-9b90-1eb1f9fa8e99.JPG)
-![config-128x64_TTGO](https://user-images.githubusercontent.com/6020549/106342639-18521f00-62e5-11eb-8afa-126cd781eb0e.jpg)
+![config-128x64_TTGO](https://user-images.githubusercontent.com/6020549/202875582-493856ce-5f24-4965-a17f-4419120b113d.jpg)
 
 
 # 128x64 ESP-WROOM-32
