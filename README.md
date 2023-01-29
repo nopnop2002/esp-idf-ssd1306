@@ -5,14 +5,18 @@ I used [this](https://github.com/yanbe/ssd1306-esp-idf-i2c) repository as a refe
 I used [this](https://github.com/dhepper/font8x8) font file.   
 
 # Software requirements
-esp-idf v4.4/v5.0.   
+esp-idf v4.4/v5.0/v5.1.   
+
+__Note for esp32c2.__   
+ESP-IDF V5.0 ESP32C2 i2c driver has a bug.   
+ESP-IDF V5.1 is required when using ESP32C2.   
 
 # Installation   
 
 ```
 git clone https://github.com/nopnop2002/esp-idf-ssd1306
 cd esp-idf-ssd1306/TextDemo/
-idf.py set-target {esp32/esp32s2/esp32s3/esp32c3}
+idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3}
 idf.py menuconfig
 idf.py flash
 ```
