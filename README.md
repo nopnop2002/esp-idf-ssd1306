@@ -7,7 +7,7 @@ I used [this](https://github.com/dhepper/font8x8) font file.
 # Software requirements
 esp-idf v4.4/v5.0/v5.1.   
 
-__Note for esp32c2.__   
+__Note for ESP32C2.__   
 ESP-IDF V5.0 ESP32C2 i2c driver has a bug.   
 ESP-IDF V5.1 is required when using ESP32C2.   
 
