@@ -1,0 +1,28 @@
+curl https://www.iconspng.com/uploads/cute-cat-2/cute-cat-2.png
+
+convert cute-cat-2.png -monochrome cute-cat-mono.png
+
+convert cute-cat-mono.png -resize 64x64! cute-cat-mono-mini.png
+cp cute-cat-mono-mini.png cute-cat-000.png
+
+convert cute-cat-000.png -background black -rotate +45 cute-cat-xxx.png
+convert cute-cat-xxx.png -crop 64x64+0+0 cute-cat-045.png
+
+convert cute-cat-000.png -background black -rotate +90 cute-cat-xxx.png
+cp cute-cat-xxx.png cute-cat-090.png
+
+convert cute-cat-000.png -background black -rotate +135 cute-cat-xxx.png
+convert cute-cat-xxx.png -crop 64x64+0+0 cute-cat-135.png
+
+convert cute-cat-000.png -background black -rotate +180 cute-cat-xxx.png
+cp cute-cat-xxx.png cute-cat-180.png
+
+convert cute-cat-000.png -background black -rotate +225 cute-cat-xxx.png
+convert cute-cat-xxx.png -crop 64x64+0+0 cute-cat-225.png
+
+convert cute-cat-000.png -background black -rotate +270 cute-cat-xxx.png
+cp cute-cat-xxx.png cute-cat-270.png
+
+convert cute-cat-000.png -background black -rotate +315 cute-cat-xxx.png
+convert cute-cat-xxx.png -crop 64x64+0+0 cute-cat-315.png
+
