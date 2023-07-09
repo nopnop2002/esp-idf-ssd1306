@@ -5,7 +5,7 @@ I used [this](https://github.com/yanbe/ssd1306-esp-idf-i2c) repository as a refe
 I used [this](https://github.com/dhepper/font8x8) font file.   
 
 # Software requirements
-esp-idf v4.4/v5.0/v5.1.   
+ESP-IDF V4.4/V5.x.   
 
 __Note for ESP32C2.__   
 ESP-IDF V5.0 ESP32C2 i2c driver has a bug.   
