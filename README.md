@@ -11,12 +11,15 @@ __Note for ESP32C2.__
 ESP-IDF V5.0 ESP32C2 i2c driver has a bug.   
 ESP-IDF V5.1 is required when using i2c of ESP32C2.   
 
+__Note for ESP32C6.__   
+ESP-IDF V5.1 is required when using ESP32C6.   
+
 # Installation   
 
 ```
 git clone https://github.com/nopnop2002/esp-idf-ssd1306
 cd esp-idf-ssd1306/TextDemo/
-idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3}
+idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3/esp32c6}
 idf.py menuconfig
 idf.py flash
 ```
