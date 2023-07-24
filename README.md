@@ -107,7 +107,7 @@ Right:0.96 inch SSD1306
 ---
 
 # I2C Port selection   
-![config-i2c-port](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/2acc08b1-cd79-4cc1-9153-4f0e5b56acfd)
+![config-i2c-port](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/7a7de5ec-ef20-42ac-ba70-73ba74a762a7)
 
 The ESP32 series has two I2C Ports.   
 You can use these two ports freely.   
