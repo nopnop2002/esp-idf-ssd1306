@@ -66,8 +66,8 @@ void app_main(void)
 
 	ssd1306_clear_screen(&dev, false);
 	ssd1306_contrast(&dev, 0xff);
-  ssd1306_display_text_x3(&dev, 0, "Hello", 5, false);
-  vTaskDelay(3000 / portTICK_PERIOD_MS);
+	ssd1306_display_text_x3(&dev, 0, "Hello", 5, false);
+	vTaskDelay(3000 / portTICK_PERIOD_MS);
 
 #if CONFIG_SSD1306_128x64
 	top = 2;

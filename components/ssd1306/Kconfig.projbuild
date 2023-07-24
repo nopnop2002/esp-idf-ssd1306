@@ -145,6 +145,23 @@ menu "SSD1306 Configuration"
 			Some GPIOs are used for other purposes (flash connections, etc.) and cannot be used to RESET.
 			GPIOs 35-39 are input-only so cannot be used as outputs.
 
+	choice I2C_PORT
+		depends on I2C_INTERFACE
+		prompt "I2C port that controls this bus"
+		default I2C_PORT_0
+		help
+			Select I2C port that controls this bus.
+		config I2C_PORT_0
+			bool "I2C_PORT_0"
+			help
+				Use I2C_PORT_0.
+		config I2C_PORT_1
+			depends on IDF_TARGET_ESP32 || IDF_TARGET_ESP32S2 || IDF_TARGET_ESP32S3
+			bool "I2C_PORT_1"
+			help
+				Use I2C_PORT_1.
+	endchoice
+
 	choice SPI_HOST
 		depends on SPI_INTERFACE
 		prompt "SPI peripheral that controls this bus"
