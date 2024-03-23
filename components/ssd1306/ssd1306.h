@@ -68,8 +68,8 @@ Usage:
 #define OLED_CMD_ACTIVE_SCROLL          0x2F
 #define OLED_CMD_VERTICAL               0xA3
 
-#define I2CAddress 0x3C
-#define SPIAddress 0xFF
+#define I2C_ADDRESS 0x3C
+#define SPI_ADDRESS 0xFF
 
 typedef enum {
 	SCROLL_RIGHT = 1,

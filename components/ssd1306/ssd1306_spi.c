@@ -2,7 +2,6 @@
 
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
 #include "esp_log.h"
@@ -19,26 +18,23 @@
 #define HOST_ID SPI2_HOST // If i2c is selected
 #endif
 
-static const int SPI_Command_Mode = 0;
-static const int SPI_Data_Mode = 1;
-static const int SPI_Frequency = 1000000; // 1MHz
+#define SPI_COMMAND_MODE 0
+#define SPI_DATA_MODE 1
+#define SPI_FREQUENCY 1000000; // 1MHz
 
 void spi_master_init(SSD1306_t * dev, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int16_t GPIO_CS, int16_t GPIO_DC, int16_t GPIO_RESET)
 {
 	esp_err_t ret;
 
-	//gpio_pad_select_gpio( GPIO_CS );
 	gpio_reset_pin( GPIO_CS );
 	gpio_set_direction( GPIO_CS, GPIO_MODE_OUTPUT );
 	gpio_set_level( GPIO_CS, 0 );
 
-	//gpio_pad_select_gpio( GPIO_DC );
 	gpio_reset_pin( GPIO_DC );
 	gpio_set_direction( GPIO_DC, GPIO_MODE_OUTPUT );
 	gpio_set_level( GPIO_DC, 0 );
 
 	if ( GPIO_RESET >= 0 ) {
-		//gpio_pad_select_gpio( GPIO_RESET );
 		gpio_reset_pin( GPIO_RESET );
 		gpio_set_direction( GPIO_RESET, GPIO_MODE_OUTPUT );
 		gpio_set_level( GPIO_RESET, 0 );
@@ -63,7 +59,7 @@ void spi_master_init(SSD1306_t * dev, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int1
 
 	spi_device_interface_config_t devcfg;
 	memset( &devcfg, 0, sizeof( spi_device_interface_config_t ) );
-	devcfg.clock_speed_hz = SPI_Frequency;
+	devcfg.clock_speed_hz = SPI_FREQUENCY;
 	devcfg.spics_io_num = GPIO_CS;
 	devcfg.queue_size = 1;
 
@@ -73,7 +69,7 @@ void spi_master_init(SSD1306_t * dev, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int1
 	assert(ret==ESP_OK);
 	dev->_dc = GPIO_DC;
 	dev->_SPIHandle = handle;
-	dev->_address = SPIAddress;
+	dev->_address = SPI_ADDRESS;
 	dev->_flip = false;
 }
 
@@ -96,13 +92,13 @@ bool spi_master_write_command(SSD1306_t * dev, uint8_t Command )
 {
 	static uint8_t CommandByte = 0;
 	CommandByte = Command;
-	gpio_set_level( dev->_dc, SPI_Command_Mode );
+	gpio_set_level( dev->_dc, SPI_COMMAND_MODE );
 	return spi_master_write_byte( dev->_SPIHandle, &CommandByte, 1 );
 }
 
 bool spi_master_write_data(SSD1306_t * dev, const uint8_t* Data, size_t DataLength )
 {
-	gpio_set_level( dev->_dc, SPI_Data_Mode );
+	gpio_set_level( dev->_dc, SPI_DATA_MODE );
 	return spi_master_write_byte( dev->_SPIHandle, Data, DataLength );
 }
 
