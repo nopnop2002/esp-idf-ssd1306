@@ -113,7 +113,7 @@ Right:0.96 inch SSD1306
 # I2C Port selection   
 ![config-i2c-port](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/7a7de5ec-ef20-42ac-ba70-73ba74a762a7)
 
-The ESP32 series has two I2C Ports.   
+The ESP32 XTENSA series has two I2C Ports.   
 You can use these two ports freely.   
 If you use this module at the same time as another I2C device using I2C port 0, you must change it to I2C port 1.   
 
@@ -122,7 +122,7 @@ If you use this module at the same time as another I2C device using I2C port 0, 
 # SPI BUS selection   
 ![config-spi-bus](https://user-images.githubusercontent.com/6020549/202815807-6c2df14f-f38e-4032-94fb-da1723607279.jpg)
 
-The ESP32 series has three SPI BUSs.   
+The ESP32 XTENSA series has three SPI BUSs.   
 SPI1_HOST is used for communication with Flash memory.   
 You can use SPI2_HOST and SPI3_HOST freely.   
 When you use SDSPI(SD Card via SPI), SDSPI uses SPI2_HOST BUS.   
