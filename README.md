@@ -11,8 +11,8 @@ __Note for ESP32C2.__
 ESP-IDF V5.0 ESP32C2 i2c driver has a bug.   
 ESP-IDF V5.1 is required when using i2c of ESP32C2.   
 
-__Note for ESP32C6.__   
-ESP-IDF V5.1 is required when using ESP32C6.   
+__Note for ESP32C6 and ESP32H2.__   
+ESP-IDF V5.1 is required when using ESP32C6 and ESP32H2.   
 
 __Note for ESP-IDF V5.2.__   
 A new i2c driver is now available in ESP-IDF V5.2.   
