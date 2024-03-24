@@ -136,7 +136,7 @@ void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int
 	i2c_master_stop(cmd);
 	esp_err_t res = i2c_master_cmd_begin(I2C_NUM, cmd, I2C_TICKS_TO_WAIT);
 	if (res != ESP_OK) {
-		ESP_LOGE(TAG, "Scroll command failed. code: 0x%.2X", res);
+		ESP_LOGE(TAG, "Image command failed. code: 0x%.2X", res);
 	}
 	i2c_cmd_link_delete(cmd);
 
@@ -149,7 +149,7 @@ void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int
 
 	res = i2c_master_cmd_begin(I2C_NUM, cmd, I2C_TICKS_TO_WAIT);
 	if (res != ESP_OK) {
-		ESP_LOGE(TAG, "Scroll command failed. code: 0x%.2X", res);
+		ESP_LOGE(TAG, "Image command failed. code: 0x%.2X", res);
 	}
 	i2c_cmd_link_delete(cmd);
 }
@@ -169,7 +169,7 @@ void i2c_contrast(SSD1306_t * dev, int contrast) {
 
 	esp_err_t res = i2c_master_cmd_begin(I2C_NUM, cmd, I2C_TICKS_TO_WAIT);
 	if (res != ESP_OK) {
-		ESP_LOGE(TAG, "Scroll command failed. code: 0x%.2X", res);
+		ESP_LOGE(TAG, "Contrast command failed. code: 0x%.2X", res);
 	}
 	i2c_cmd_link_delete(cmd);
 }
