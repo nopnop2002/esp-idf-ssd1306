@@ -23,7 +23,7 @@ Under ESP-IDF V5.2 this project uses a new i2c driver.
 ```
 git clone https://github.com/nopnop2002/esp-idf-ssd1306
 cd esp-idf-ssd1306/TextDemo/
-idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3/esp32c6}
+idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3/esp32c6/esp32h2}
 idf.py menuconfig
 idf.py flash
 ```
