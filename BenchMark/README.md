@@ -37,10 +37,6 @@ __Wire cables should be as short as possible.__
 |ESP32C6@160|37.1|38.2||
 |ESP32H2@96|34.6|36.4||
 
-__Note:__   
-Please note that this benchmark results from ESP-IDF V5.2.   
-Your results may vary if you use other versions.   
-
 ESP32C6 gave the fastest results when the CPU frequency was 160MHz (120MHz or 96MHz for some SoCs).   
 ESP32C3 is the next fastest.   
 There are only a few differences between ESP32C6 and ESP32C3.   
@@ -70,11 +66,6 @@ __Wire cables should be as short as possible.__
 |ESP32C6@160|98.2|164.9|268.0|331.9|369.6|399.8||
 |ESP32H2@96|86.6|139.1|202.8|235.5|256.1|267.9||
 
-__Note:__   
-Please note that this benchmark results from ESP-IDF V5.2.   
-Your results may vary if you use other versions.   
-
-
 ESP32C6 gave the fastest results when the CPU frequency was 160MHz (120MHz or 96MHz for some SoCs).   
 ESP32C3 is the next fastest.   
 There are only a few differences between ESP32C6 and ESP32C3.   
@@ -96,3 +87,8 @@ ESP32S2 gave the fastest results when the CPU frequency was 240MHz.
 ![spi_240MHz-6MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/79b63037-b755-4ea2-9d8f-7ba5036ceb46)
 ![spi_240MHz-8MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/081e4d15-14db-4256-91d2-19f48595648b)
 ![spi_240MHz-10MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/a324bfed-63c1-42e9-a005-2cca71e9057d)
+
+__Note:__   
+Please note that this benchmark results from ESP-IDF V5.2.   
+Your results may vary if you use other versions.   
+
