@@ -23,7 +23,7 @@ The maximum i2c clock frequency of SSD1306 is 400KHz.
 The i2c clock frequency used by this project is 400KHz.   
 The measurement result is [FPS].   
 __Wire cables should be as short as possible.__   
-
+For any SoCs, the New Driver achieved faster results than the Legacy Driver.   
 |SoC@CPU Freq|Legacy Driver|New Driver||
 |:-:|:-:|:-:|:-:|
 |ESP32@160|34.0|35.2||
