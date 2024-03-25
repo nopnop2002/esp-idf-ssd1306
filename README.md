@@ -129,6 +129,7 @@ According to the SSD1306 datasheet, the minimum SPI clock cycle time is 100ns.
 Therefore, the maximum SPI clock frequency is 10MHz.   
 The SPI clock frequency used by this project is 1MHz.   
 Higher SPI clock frequencies can be specified using ```spi_clock_speed()```.   
+When using 10MHz, you need to be careful about the length of the wire cable.   
 ```
     //int speed = 1000000; // 1MHz
     //int speed = 2000000; // 2MHz
