@@ -38,10 +38,13 @@ The measurement result is [FPS].
 
 __Wire cables should be as short as possible.__   
 
-ESP32S2@240 gave the fastest results when the Legacy and New i2c driver.   
-
+ESP32C6 gave the fastest results when the CPU frequency was 160MHz (120MHz or 96MHz for some SoCs).   
+ESP32C3 is the next fastest.   
 ![i2c_160MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/cb641422-3a06-4da4-8776-edd3fe965fc6)
-![i2c_240MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/1e6f558f-2ee2-4177-800a-fd1b8e80aad1)
+
+ESP32S2 gave the fastest results when the CPU frequency was 240MHz.   
+![i2c_240MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/ebd5e195-0bd1-4791-9293-57dbf50fd13a)
+
 ![i2c_legacy](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/44a55206-1622-4a1e-b898-4b673bc465c3)
 ![i2c_new](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/dad01f46-3497-4312-8d77-9fd1b3d3b782)
 
