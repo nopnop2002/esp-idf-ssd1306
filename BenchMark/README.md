@@ -81,12 +81,12 @@ There are only a few differences between ESP32C6 and ESP32C3.
 ESP32S2 gave the fastest results when the CPU frequency was 240MHz.   
 ![spi_240MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/f8687aa9-039a-464c-8a75-c51667a0fb0f)
 
-![spi_240MHz-1MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/837b5522-678e-474d-b2fa-194a0f4b9b7a)
-![spi_240MHz-2MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/16f3bffa-23d8-4fc2-9994-3ceb6450f56e)
-![spi_240MHz-4MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/1b8ed3cf-2403-4bdb-8eb8-054f15248d85)
-![spi_240MHz-6MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/79b63037-b755-4ea2-9d8f-7ba5036ceb46)
-![spi_240MHz-8MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/081e4d15-14db-4256-91d2-19f48595648b)
-![spi_240MHz-10MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/a324bfed-63c1-42e9-a005-2cca71e9057d)
+![spi_240MHz-1MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/5bf5100a-2c92-4016-afc6-b1b3549c9509)
+![spi_240MHz-2MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/03423564-b576-400e-821f-e80c0ae19fda)
+![spi_240MHz-4MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/dc011894-c387-47de-b6d5-64ffa3d08582)
+![spi_240MHz-6MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/95a45a4a-dc8d-4257-ac24-27211b990c46)
+![spi_240MHz-8MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/129eb963-8d27-41c6-9c42-22330d1abdc2)
+![spi_240MHz-10MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/abfcd92a-90b6-4bb8-8c97-941b5fc4e331)
 
 __Note:__   
 Please note that this benchmark results from ESP-IDF V5.2.   
