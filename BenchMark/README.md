@@ -22,6 +22,7 @@ idf.py flash
 The maximum i2c clock frequency of SSD1306 is 400KHz.   
 The i2c clock frequency used by this project is 400KHz.   
 The measurement result is [FPS].   
+__Wire cables should be as short as possible.__   
 
 |SoC@CPU Freq|Legacy Driver|New Driver||
 |:-:|:-:|:-:|:-:|
@@ -36,7 +37,9 @@ The measurement result is [FPS].
 |ESP32C6@160|37.1|38.2||
 |ESP32H2@96|34.6|36.4||
 
-__Wire cables should be as short as possible.__   
+__Note:__   
+Please note that this benchmark results from ESP-IDF V5.2.   
+Your results may vary if you use other versions.   
 
 ESP32C6 gave the fastest results when the CPU frequency was 160MHz (120MHz or 96MHz for some SoCs).   
 ESP32C3 is the next fastest.   
@@ -53,7 +56,7 @@ ESP32S2 gave the fastest results when the CPU frequency was 240MHz.
 The maximum SPI clock frequency of SSD1306 is 10MHz.   
 Measurements were made by changing the SPI clock frequency.   
 The measurement result is [FPS].   
-
+__Wire cables should be as short as possible.__   
 |SoC@CPU Freq|1MHz|2MHz|4MHz|6MHz|8MHz|10MHz||
 |:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 |ESP32@160|90.3|143.8|224.6|272.0|297.0|316.3||
@@ -67,7 +70,10 @@ The measurement result is [FPS].
 |ESP32C6@160|98.2|164.9|268.0|331.9|369.6|399.8||
 |ESP32H2@96|86.6|139.1|202.8|235.5|256.1|267.9||
 
-__Wire cables should be as short as possible.__   
+__Note:__   
+Please note that this benchmark results from ESP-IDF V5.2.   
+Your results may vary if you use other versions.   
+
 
 ESP32C6 gave the fastest results when the CPU frequency was 160MHz (120MHz or 96MHz for some SoCs).   
 ESP32C3 is the next fastest.   
