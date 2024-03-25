@@ -110,6 +110,11 @@ Right:0.96 inch SSD1306
 
 ---
 
+# I2C Clock speed   
+According to the SSD1306 datasheet, the minimum i2c clock cycle time is 2.5us.   
+Therefore, the maximum i2c clock frequency is 400KHz.   
+The i2c clock frequency used by this project is 400KHz.   
+
 # I2C Port selection   
 ![config-i2c-port](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/7a7de5ec-ef20-42ac-ba70-73ba74a762a7)
 
@@ -118,6 +123,22 @@ You can use these two ports freely.
 If you use this module at the same time as another I2C device using I2C port 0, you must change it to I2C port 1.   
 
 ---
+
+# SPI Clock speed   
+According to the SSD1306 datasheet, the minimum SPI clock cycle time is 100ns.   
+Therefore, the maximum SPI clock frequency is 10MHz.   
+The SPI clock frequency used by this project is 1MHz.   
+Higher SPI clock frequencies can be specified using ```spi_clock_speed()```.   
+```
+    //int speed = 1000000; // 1MHz
+    //int speed = 2000000; // 2MHz
+    //int speed = 4000000; // 4MHz
+    //int speed = 6000000; // 6MHz
+    //int speed = 8000000; // 8MHz
+    int speed = 10000000; // 10MHz
+    spi_clock_speed(speed);
+    spi_master_init(&dev, CONFIG_MOSI_GPIO, CONFIG_SCLK_GPIO, CONFIG_CS_GPIO, CONFIG_DC_GPIO, CONFIG_RESET_GPIO);
+```
 
 # SPI BUS selection   
 ![config-spi-bus](https://user-images.githubusercontent.com/6020549/202815807-6c2df14f-f38e-4032-94fb-da1723607279.jpg)

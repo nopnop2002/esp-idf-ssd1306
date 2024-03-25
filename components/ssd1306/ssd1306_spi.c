@@ -20,7 +20,14 @@
 
 #define SPI_COMMAND_MODE 0
 #define SPI_DATA_MODE 1
-#define SPI_FREQUENCY 1000000; // 1MHz
+#define SPI_DEFAULT_FREQUENCY 1000000; // 1MHz
+
+int clock_speed_hz = SPI_DEFAULT_FREQUENCY;
+
+void spi_clock_speed(int speed) {
+	ESP_LOGI(TAG, "SPI clock speed=%d MHz", speed/1000000);
+	clock_speed_hz = speed;
+}
 
 void spi_master_init(SSD1306_t * dev, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int16_t GPIO_CS, int16_t GPIO_DC, int16_t GPIO_RESET)
 {
@@ -59,7 +66,8 @@ void spi_master_init(SSD1306_t * dev, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int1
 
 	spi_device_interface_config_t devcfg;
 	memset( &devcfg, 0, sizeof( spi_device_interface_config_t ) );
-	devcfg.clock_speed_hz = SPI_FREQUENCY;
+	//devcfg.clock_speed_hz = SPI_DEFAULT_FREQUENCY;
+	devcfg.clock_speed_hz = clock_speed_hz;
 	devcfg.spics_io_num = GPIO_CS;
 	devcfg.queue_size = 1;
 
