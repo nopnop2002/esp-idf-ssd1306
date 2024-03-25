@@ -6,7 +6,7 @@ We measured the performance of new i2c drivers, legacy i2c drivers, and SPI driv
 # Software requirements
 ESP-IDF V4.4/V5.x.   
 
-__Note for new i2c driver___   
+__Note for new i2c driver__   
 ESP-IDF V5.2 is required when using the new i2c driver.   
 
 # Installation
@@ -16,6 +16,7 @@ cd esp-idf-ssd1306/BenchMark/
 idf.py set-target {esp32/esp32s2/esp32s3/esp32c2/esp32c3/esp32c6/esp32h2}
 idf.py menuconfig
 idf.py flash
+```
 
 # i2c interface benchmark
 The maximum i2c clock frequency of SSD1306 is 400KHz.   
