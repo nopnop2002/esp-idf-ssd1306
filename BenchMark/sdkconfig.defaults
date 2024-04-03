@@ -1,8 +1,5 @@
 #
-# Disable WatchDog
+# Disable Task Watchdog Timer
 #
-CONFIG_ESP_INT_WDT=n
-CONFIG_INT_WDT=n
-CONFIG_TASK_WDT=n
 CONFIG_ESP_TASK_WDT_EN=n
 
