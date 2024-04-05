@@ -37,9 +37,8 @@ For any SoCs, the New Driver achieved faster results than the Legacy Driver.
 |ESP32C6@160|37.1|38.2||
 |ESP32H2@96|34.6|36.4||
 
-ESP32S2 gave the fastest results.   
-ESP32S3 is the next fastest.   
-The difference between ESP32S2 and ESP32S3 is very small.   
+ESP32C6 gave the fastest results when the CPU frequency was 160MHz (120MHz or 96MHz for some SoCs).   
+The difference between ESP32C6 and ESP32C3 is very small.   
 ![i2c_160MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/cb641422-3a06-4da4-8776-edd3fe965fc6)
 
 ESP32S2 gave the fastest results when the CPU frequency was 240MHz.   
