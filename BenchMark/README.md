@@ -68,7 +68,7 @@ __Wire cables should be as short as possible.__
 
 ESP32C6 gave the fastest results when the CPU frequency was 160MHz (120MHz or 96MHz for some SoCs).   
 ESP32C3 is the next fastest.   
-There are only a few differences between ESP32C6 and ESP32C3.   
+The difference between ESP32C6 and ESP32C3 is very small.   
 ![spi_160MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/18c415f7-24e6-4580-9f19-4a35668ad259)
 
 ![spi_160MHz-1MHz](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/7bd69c24-886f-4507-8c1e-b0b826bcd302)
