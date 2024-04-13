@@ -30,6 +30,8 @@ USB ports D- and D+ are connected to GPIO19/20.
 Since it uses the chip's USB-OTG function, it will not be recognized as a USB device even if you simply connect it to the host with a USB cable.   
 To write firmware, press ButtonRST while pressing Button0, then release ButtonRST and then Button0.   
 Now the device will enter DFU mode, the USB device (/dev/ttyACM0) will appear, and you can upload the firmware.   
+Once the firmware upload is complete, press ButtonRST again.   
+The firmware will now start.   
 If you press ButtonRST without pressing Button0, the USB device will disappear.   
 In other words, USB can be used for writing, but not for STDOUT.   
 On ESP32-S2, GPIO43/44 are U0TXD/U0RXD, but this GPIO is not present on the pin header.
