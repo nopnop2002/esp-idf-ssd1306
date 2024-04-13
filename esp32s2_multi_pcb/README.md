@@ -36,6 +36,7 @@ There is no external flash anywhere on the board.
 
 # Enable PSRAM   
 In order to use PSRAM, you need to enable PSRAM by following the steps below.   
+Please note that this procedure is for ESP-IDF V5.2 and may change in the future.   
 ![psram-1](https://github.com/nopnop2002/esp-idf-net-logging/assets/6020549/9feae820-609d-4955-94d0-2d7e4e5887ab)
 ![psram-2](https://github.com/nopnop2002/esp-idf-net-logging/assets/6020549/3b6c8c0a-380f-492e-b72a-74d408c73fb0)
 ![psram-3](https://github.com/nopnop2002/esp-idf-net-logging/assets/6020549/a72b8638-8de1-4c9e-b8e1-98562e2b515e)
