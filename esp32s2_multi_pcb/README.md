@@ -6,6 +6,10 @@ Therefore, I designed a PCB that can be equipped with an SPI interface and 1.3 i
 I use ESP32S2 for SoC.   
 Although this product is very small, it is equipped with 2MB of PSRAM.   
 
+![esp32s2-pcb-1](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/c7c7a839-b397-4d8b-b8b5-fc1f75a73ad3)
+![esp32s2-pcb-2](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/546f0fe8-c565-4b58-8edf-6f9a644f0f5f)
+![esp32s2-pcb-3](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/75cec085-c336-453c-b10e-0d3ba5e59ede)
+![esp32s2-pcb-4](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/8ebc94ee-1ff9-4591-a0a5-3057ea397bf2)
 
 You can download the Garba file from [here](https://www.pcbway.com/project/shareproject/esp32s2_ssd1306_multi_pcb_2d6e5b26.html).   
 You can order by yourself on Elecrow/FusionPCB/PCBWay using ESP32S2+SSD1306_PCBWay Community.zip.   
