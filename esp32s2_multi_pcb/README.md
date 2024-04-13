@@ -11,7 +11,7 @@ Although this product is very small, it is equipped with 2MB of PSRAM.
 ![esp32s2-pcb-3](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/75cec085-c336-453c-b10e-0d3ba5e59ede)
 ![esp32s2-pcb-4](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/8ebc94ee-1ff9-4591-a0a5-3057ea397bf2)
 
-You can download the Garba file from [here](https://www.pcbway.com/project/shareproject/esp32s2_ssd1306_multi_pcb_2d6e5b26.html).   
+You can download the Garbers file from [here](https://www.pcbway.com/project/shareproject/esp32s2_ssd1306_multi_pcb_2d6e5b26.html).   
 You can use the zip file to order it yourself from PCB manufacturing vendors such as Elecrow/FusionPCB/PCBWay.   
 I ordered it on 3/31 and it arrived on 4/9.   
 You can repeat my order from [here](https://www.pcbway.com/project/shareproject/esp32s2_ssd1306_multi_pcb_2d6e5b26.html).
