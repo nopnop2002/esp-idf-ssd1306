@@ -16,6 +16,12 @@ You can use the zip file to order it yourself from PCB manufacturing vendors suc
 I ordered it on 3/31 and it arrived on 4/9.   
 You can repeat my order from [here](https://www.pcbway.com/project/shareproject/esp32s2_ssd1306_multi_pcb_2d6e5b26.html).
 
+# Configuration   
+- for SPI   
+![config-spi](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/3a3e85de-dfc9-4888-bf2f-3e211e0a7bac)
+
+- for I2C   
+![config-i2c](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/ab8a9f3b-e4d7-41e7-a658-3173f847f711)
 
 # About ESP32S2 Mini
 A Type-C USB connector is mounted on the board, but a USB-TTL conversion chip is not mounted.   
