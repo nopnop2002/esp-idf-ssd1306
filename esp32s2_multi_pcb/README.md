@@ -26,7 +26,7 @@ To write firmware, press ButtonRST while pressing Button0, then release ButtonRS
 Now the device will enter DFU mode, the USB device (/dev/ttyACM0) will appear, and you can upload the firmware.   
 If you press ButtonRST without pressing Button0, the USB device will disappear.   
 In other words, USB can be used for writing, but not for STDOUT.   
-In ESP32-S2, GPIO43/44 are U0TXD/U0RXD, but this GPIO does not appear on the pin.   
+On ESP32-S2, GPIO43/44 are U0TXD/U0RXD, but this GPIO is not present on the pin header.
 
 This board has 4MB of FLASH and ___2MB of PSRAM___.   
 It's strange that it is recognized as having an external flash.   
