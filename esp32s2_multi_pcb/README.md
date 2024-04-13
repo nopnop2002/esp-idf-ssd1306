@@ -3,7 +3,7 @@ Several products of ESP32 equipped with SSD1306 are available.
 However, I have never seen a product equipped with an SSD1306 with an SPI interface.   
 Also, I have never seen a product equipped with a 1.3 inch SSD1306 product.   
 Therefore, I designed a PCB that can be equipped with an SPI interface and 1.3 inch products.   
-I use ESP32S2 for SoC.   
+I use ESP32S2-Mini Development board.   
 Although this product is very small, it is equipped with 2MB of PSRAM.   
 
 ![esp32s2-pcb-1](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/c7c7a839-b397-4d8b-b8b5-fc1f75a73ad3)
@@ -12,8 +12,8 @@ Although this product is very small, it is equipped with 2MB of PSRAM.
 ![esp32s2-pcb-4](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/8ebc94ee-1ff9-4591-a0a5-3057ea397bf2)
 
 You can download the Garba file from [here](https://www.pcbway.com/project/shareproject/esp32s2_ssd1306_multi_pcb_2d6e5b26.html).   
-You can order by yourself on Elecrow/FusionPCB/PCBWay using ESP32S2+SSD1306_PCBWay Community.zip.   
-I ordered it on 3/31 and it arrived on 4/9.
+You can order by yourself on Elecrow/FusionPCB/PCBWay using zip file.   
+I ordered it on 3/31 and it arrived on 4/9.   
 You can repeat my order from [here](https://www.pcbway.com/project/shareproject/esp32s2_ssd1306_multi_pcb_2d6e5b26.html).
 
 
