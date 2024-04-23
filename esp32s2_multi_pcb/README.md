@@ -26,6 +26,7 @@ for I2C interface
 # Why ESP32S2 Mini?
 Cheap!!   
 Only $1.49 excluding shipping.   
+I bought two and it cost $4.27 including shipping.   
 
 # About ESP32S2 Mini
 A Type-C USB connector is mounted on the board, but a USB-TTL conversion chip is not mounted.   
