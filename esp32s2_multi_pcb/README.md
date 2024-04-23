@@ -40,7 +40,7 @@ If you press ButtonRST without pressing Button0, the USB device will disappear.
 In other words, USB can be used for writing, but not for STDOUT.   
 On ESP32-S2, GPIO43/44 are U0TXD/U0RXD, but this GPIO is not present on the pin header.
 
-My board has 4MB of FLASH and ___2MB of PSRAM___.   
+This board has 4MB of FLASH and ___2MB of PSRAM___.   
 It's strange that it is recognized as having an external flash.   
 There is no external flash anywhere on the board.   
 
