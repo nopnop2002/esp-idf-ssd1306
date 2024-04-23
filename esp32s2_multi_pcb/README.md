@@ -23,6 +23,10 @@ for SPI interface
 for I2C interface   
 ![config-i2c](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/ab8a9f3b-e4d7-41e7-a658-3173f847f711)
 
+# Why ESP32-S2 Mini?
+cheap!!   
+Only $1.49.   
+
 # About ESP32S2 Mini
 A Type-C USB connector is mounted on the board, but a USB-TTL conversion chip is not mounted.   
 The circuit diagram is available [here](https://www.wemos.cc/en/latest/_static/files/sch_s2_mini_v1.0.0.pdf).   
