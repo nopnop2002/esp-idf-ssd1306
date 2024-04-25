@@ -49,6 +49,8 @@ There is no external flash anywhere on the board.
 ![esp32s2-mini](https://github.com/nopnop2002/esp-idf-net-logging/assets/6020549/f36327cf-7e7b-4f1f-aa20-1eb16a0650ea)
 
 # Enable PSRAM   
+ESP32S2's RAM is very small.   
+You can avoid running out of memory by enabling PSRAM.   
 In order to use PSRAM, you need to enable PSRAM by following the steps below.   
 Please note that this procedure is for ESP-IDF V5.2 and may change in the future.   
 ![psram-1](https://github.com/nopnop2002/esp-idf-net-logging/assets/6020549/9feae820-609d-4955-94d0-2d7e4e5887ab)
