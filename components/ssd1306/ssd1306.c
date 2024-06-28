@@ -528,6 +528,27 @@ void _ssd1306_line(SSD1306_t * dev, int x1, int y1, int x2, int y2,  bool invert
 	}
 }
 
+// Draw circle
+void _ssd1306_circle(SSD1306_t * dev, int x0, int y0, int r, bool invert)
+{
+	int x;
+	int y;
+	int err;
+	int old_err;
+
+	x=0;
+	y=-r;
+	err=2-2*r;
+	do{
+		_ssd1306_pixel(dev, x0-x, y0+y, invert); 
+		_ssd1306_pixel(dev, x0-y, y0-x, invert); 
+		_ssd1306_pixel(dev, x0+x, y0-y, invert); 
+		_ssd1306_pixel(dev, x0+y, y0+x, invert); 
+		if ((old_err=err)<=x)	err+=++x*2+1;
+		if (old_err>y || err>x) err+=++y*2+1;	 
+	} while(y<0);
+}
+
 void ssd1306_invert(uint8_t *buf, size_t blen)
 {
 	uint8_t wk;

@@ -126,6 +126,7 @@ void ssd1306_wrap_arround(SSD1306_t * dev, ssd1306_scroll_type_t scroll, int sta
 void ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int width, int height, bool invert);
 void _ssd1306_pixel(SSD1306_t * dev, int xpos, int ypos, bool invert);
 void _ssd1306_line(SSD1306_t * dev, int x1, int y1, int x2, int y2,  bool invert);
+void _ssd1306_circle(SSD1306_t * dev, int x0, int y0, int r, bool invert);
 void ssd1306_invert(uint8_t *buf, size_t blen);
 void ssd1306_flip(uint8_t *buf, size_t blen);
 uint8_t ssd1306_copy_bit(uint8_t src, int srcBits, uint8_t dst, int dstBits);
