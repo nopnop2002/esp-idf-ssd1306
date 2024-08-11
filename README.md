@@ -72,12 +72,13 @@ Right:0.96 inch SSD1306
 
 # 128x64 TTGO
 Unlike other ESP32 development boards, the RTC_CLOCK crystal on this board uses a 26MHz one.   
-You need to change the RTC CLOCK frequency to 26MHz using menuconfig.   
+You need to change the Main XTAL frequency to 26MHz using menuconfig.   
 
 ![ESP32-TTGO-1](https://user-images.githubusercontent.com/6020549/56449111-9764a600-6350-11e9-9902-e2ad1c4aefb0.JPG)
 ![ESP32-TTGO-2](https://user-images.githubusercontent.com/6020549/56449116-9a5f9680-6350-11e9-86ec-e06648118add.JPG)
 ![128x64_Reset](https://user-images.githubusercontent.com/6020549/56449118-9e8bb400-6350-11e9-9b90-1eb1f9fa8e99.JPG)
 ![config-128x64_TTGO](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/f234b8e0-ef4e-49db-ad78-bbc705649a18)
+![config-128x64_TTGO-2](https://github.com/user-attachments/assets/8744f2bc-704a-4385-9a97-4df612a2ef4e)
 
 # 128x64 ESP-WROOM-32
 
