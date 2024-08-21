@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <inttypes.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
-//#include "esp_random.h"
 #include "esp_log.h"
 
 #include "ssd1306.h"
@@ -32,32 +30,32 @@ void usb_hid_task(void *pvParameters);
  CONFIG_RESET_GPIO
 */
 
-#define tag "SSD1306"
+#define TAG "SSD1306"
 
 void app_main(void)
 {
 	SSD1306_t dev;
 
 #if CONFIG_I2C_INTERFACE
-	ESP_LOGI(tag, "INTERFACE is i2c");
-	ESP_LOGI(tag, "CONFIG_SDA_GPIO=%d",CONFIG_SDA_GPIO);
-	ESP_LOGI(tag, "CONFIG_SCL_GPIO=%d",CONFIG_SCL_GPIO);
-	ESP_LOGI(tag, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
+	ESP_LOGI(TAG, "INTERFACE is i2c");
+	ESP_LOGI(TAG, "CONFIG_SDA_GPIO=%d",CONFIG_SDA_GPIO);
+	ESP_LOGI(TAG, "CONFIG_SCL_GPIO=%d",CONFIG_SCL_GPIO);
+	ESP_LOGI(TAG, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
 	i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
 #endif // CONFIG_I2C_INTERFACE
 
 #if CONFIG_SPI_INTERFACE
-	ESP_LOGI(tag, "INTERFACE is SPI");
-	ESP_LOGI(tag, "CONFIG_MOSI_GPIO=%d",CONFIG_MOSI_GPIO);
-	ESP_LOGI(tag, "CONFIG_SCLK_GPIO=%d",CONFIG_SCLK_GPIO);
-	ESP_LOGI(tag, "CONFIG_CS_GPIO=%d",CONFIG_CS_GPIO);
-	ESP_LOGI(tag, "CONFIG_DC_GPIO=%d",CONFIG_DC_GPIO);
-	ESP_LOGI(tag, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
+	ESP_LOGI(TAG, "INTERFACE is SPI");
+	ESP_LOGI(TAG, "CONFIG_MOSI_GPIO=%d",CONFIG_MOSI_GPIO);
+	ESP_LOGI(TAG, "CONFIG_SCLK_GPIO=%d",CONFIG_SCLK_GPIO);
+	ESP_LOGI(TAG, "CONFIG_CS_GPIO=%d",CONFIG_CS_GPIO);
+	ESP_LOGI(TAG, "CONFIG_DC_GPIO=%d",CONFIG_DC_GPIO);
+	ESP_LOGI(TAG, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
 	spi_master_init(&dev, CONFIG_MOSI_GPIO, CONFIG_SCLK_GPIO, CONFIG_CS_GPIO, CONFIG_DC_GPIO, CONFIG_RESET_GPIO);
 #endif // CONFIG_SPI_INTERFACE
 
 #if CONFIG_SSD1306_128x64
-	ESP_LOGI(tag, "Panel is 128x64");
+	ESP_LOGI(TAG, "Panel is 128x64");
 	ssd1306_init(&dev, 128, 64);
 	int xmax = 127;
 	int ymax = 63;
@@ -65,7 +63,7 @@ void app_main(void)
 	int y_current = 31;
 #endif // CONFIG_SSD1306_128x64
 #if CONFIG_SSD1306_128x32
-	ESP_LOGI(tag, "Panel is 128x32");
+	ESP_LOGI(TAG, "Panel is 128x32");
 	ssd1306_init(&dev, 128, 32);
 	int xmax = 127;
 	int ymax = 31;
@@ -80,15 +78,16 @@ void app_main(void)
 	// Start tasks
 	xTaskCreate(&usb_hid_task, "usb_hid_task", 1024*2, NULL, 9, NULL);
 
-	int radius = 4;
-	ESP_LOGD(tag, "x_current=%d", x_current);
-	ESP_LOGD(tag, "y_current=%d", y_current);
-	int x_previus = x_current;
-	int y_previus = y_current;
 	bool draw = false;
 	ssd1306_clear_screen(&dev, draw); // background is black
 	ssd1306_contrast(&dev, 0xff);
 
+	// Draw a circle in the center
+	int radius = 4;
+	ESP_LOGD(TAG, "x_current=%d", x_current);
+	ESP_LOGD(TAG, "y_current=%d", y_current);
+	int x_previus = x_current;
+	int y_previus = y_current;
 	_ssd1306_circle(&dev, x_current, y_current, radius, draw);
 	ssd1306_show_buffer(&dev);
 
@@ -98,11 +97,11 @@ void app_main(void)
 		x_previus = x_current;
 		y_previus = y_current;
 		BaseType_t received = xQueueReceive(app_event_hid, &hidEvent, portMAX_DELAY);
-		ESP_LOGI(tag, "xQueueReceive received=%d hidEvent.hid_event_type=%d", received, hidEvent.hid_event_type);
+		ESP_LOGI(TAG, "xQueueReceive received=%d hidEvent.hid_event_type=%d", received, hidEvent.hid_event_type);
 		if (hidEvent.hid_event_type == APP_EVENT_MOUSE) {
-			ESP_LOGI(tag, "mouse_event.x_displacement=%d mouse_event.y_displacement=%d",
+			ESP_LOGI(TAG, "mouse_event.x_displacement=%d mouse_event.y_displacement=%d",
 				hidEvent.mouse_event.x_displacement, hidEvent.mouse_event.y_displacement);
-			ESP_LOGI(tag, "mouse_event.button1=%d mouse_event.button2=%d mouse_event.button3=%d",
+			ESP_LOGI(TAG, "mouse_event.button1=%d mouse_event.button2=%d mouse_event.button3=%d",
 				hidEvent.mouse_event.button1, hidEvent.mouse_event.button2, hidEvent.mouse_event.button3);
 			int x_temp = x_current + hidEvent.mouse_event.x_displacement;
 			if ((x_temp+radius) < xmax && (x_temp-radius) > 0) x_current = x_temp;

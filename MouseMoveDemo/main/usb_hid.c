@@ -426,7 +426,7 @@ void hid_host_interface_callback(hid_host_device_handle_t hid_device_handle,
         ESP_ERROR_CHECK(hid_host_device_close(hid_device_handle));
         break;
     case HID_HOST_INTERFACE_EVENT_TRANSFER_ERROR:
-        ESP_LOGI(TAG, "HID Device, protocol '%s' TRANSFER_ERROR",
+        ESP_LOGE(TAG, "HID Device, protocol '%s' TRANSFER_ERROR",
                  hid_proto_name_str[dev_params.proto]);
         break;
     default:
