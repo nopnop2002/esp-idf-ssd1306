@@ -17,14 +17,17 @@ I used [this](https://github.com/espressif/esp-idf/tree/master/examples/peripher
  Button 3 is not used in this project.   
 
 # USB wiring   
+To stabilize the power supply, I placed a 100uF electrolytic capacitor between 5V and GND.   
 ```
-ESP32-S2/S3 BOARD          USB CONNECTOR
-                           +--+
-    [  5V   ]    --------> | || VCC
-    [GPIO 19]    --------> | || D-
-    [GPIO 20]    --------> | || D+
-    [  GND  ]    --------> | || GND
-                           +--+
+ESP32-S2/S3 BOARD           USB CONNECTOR
+                            +--+
+    [  5V   ]  +--------->  | || VCC
+    [GPIO 19]  |--------->  | || D-
+    [GPIO 20]  |--------->  | || D+
+    [  GND  ]  |--------+>  | || GND
+               |        |   +--+
+               +---||---+
+                  100uF
 ```
 
 # How to Use   
