@@ -34,9 +34,7 @@ When it works correctly, a log like this will be displayed.
 I (796) usb_hid: hid_host_device_callback
 I (796) usb_hid: HID Device, protocol 'KEYBOARD' CONNECTED
 I (806) usb_hid: hid_host_device_callback
-I (806) usb_events: event_flags=0x0
 I (816) usb_hid: HID Device, protocol 'NONE' CONNECTED
-I (816) usb_events: event_flags=0x0
 ```
 
 
