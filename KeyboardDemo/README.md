@@ -11,19 +11,23 @@ I used [this](https://github.com/espressif/esp-idf/tree/master/examples/peripher
 
 - USB Connector   
  I used this:   
- ![usb-conector](https://github.com/user-attachments/assets/a8fb5313-54f6-422a-98de-5f4aff8c94b7)
+ ![usb-conector-2](https://github.com/user-attachments/assets/7551058f-2647-4618-b143-3e4a77df5fc2)
 
 - USB keyboard   
 
 # USB wiring   
+I put a 100uF electrolytic capacitor between 5V and GND.
 ```
-ESP32-S2/S3 BOARD          USB CONNECTOR
-                           +--+
-    [  5V   ]    --------> | || VCC
-    [GPIO 19]    --------> | || D-
-    [GPIO 20]    --------> | || D+
-    [  GND  ]    --------> | || GND
-                           +--+
+ESP32-S2/S3 BOARD           USB CONNECTOR
+                            +--+
+    [  5V   ]  +--------->  | || VCC
+    [GPIO 19]  |--------->  | || D-
+    [GPIO 20]  |--------->  | || D+
+    [  GND  ]  |--------+>  | || GND
+               |        |   +--+
+               +---||---+
+                  100uF
+
 ```
 
 # USB hot socket
