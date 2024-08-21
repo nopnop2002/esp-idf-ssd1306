@@ -12,7 +12,7 @@ The circle moves when you move the mouse.
  ![usb-conector](https://github.com/user-attachments/assets/a8fb5313-54f6-422a-98de-5f4aff8c94b7)
 
 - USB mouse   
- 2-button or 3-button usb mouse
+ 2-button or 3-button usb mouse.   
  Button 3 is not used in this project.   
 
 The circle moves when you move the mouse.
