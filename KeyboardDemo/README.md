@@ -2,6 +2,8 @@
 Demo that displays input from the keyboard.   
 I used [this](https://components.espressif.com/components/espressif/usb_host_hid/) component.   
 
+![usb-keyboard-1](https://github.com/user-attachments/assets/92ecc30b-6ed1-47ce-9eb4-a06596c06ce7)
+
 # Hardware requirements
 
 - ESP32S2/S3   
@@ -13,6 +15,5 @@ I used [this](https://components.espressif.com/components/espressif/usb_host_hid
 
 - USB keyboard   
 
-![usb-keyboard-1](https://github.com/user-attachments/assets/92ecc30b-6ed1-47ce-9eb4-a06596c06ce7)
 
 
