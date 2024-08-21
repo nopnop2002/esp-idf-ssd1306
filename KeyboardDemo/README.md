@@ -15,5 +15,15 @@ I used [this](https://components.espressif.com/components/espressif/usb_host_hid
 
 - USB keyboard   
 
+# USB wiring   
+```
+ESP32-S2/S3 BOARD          USB CONNECTOR
+                           +--+
+    [  5V   ]    --------> | || VCC
+    [GPIO 19]    --------> | || D-
+    [GPIO 20]    --------> | || D+
+    [  GND  ]    --------> | || GND
+                           +--+
+```
 
 
