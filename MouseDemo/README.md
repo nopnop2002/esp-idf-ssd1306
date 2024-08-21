@@ -38,4 +38,16 @@ Invert with left mouse click.
 Right click the mouse to go back.   
 ![usb-mouse-1](https://github.com/user-attachments/assets/b8d152c5-2aed-450b-9f18-721f051c0b23)
 
+# USB hot socket
+There are times when it works correctly and times when it doesn't.   
+It works more stably if you connect before starting the firmware.   
+When it works correctly, a log like this will be displayed.   
+```
+I (1166) usb_hid: hid_host_device_callback
+I (1166) usb_hid: HID Device, protocol 'MOUSE' CONNECTED
+```
+
+
+# Using USB-HUB
+I tried it, but it doesn't work properly via USB-HUB.
 
