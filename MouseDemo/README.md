@@ -4,9 +4,10 @@ The circle moves when you move the mouse.
 
 # Hardware requirements
 
-- ESP32S2/S3
+- ESP32S2/S3   
+ These have USB-HOST functionality.
 
-- USB Connector
+- USB Connector   
  I used this:
  ![usb-conector](https://github.com/user-attachments/assets/a8fb5313-54f6-422a-98de-5f4aff8c94b7)
 
