@@ -2,7 +2,7 @@
 Demo that displays input from the keyboard.   
 I used [this](https://components.espressif.com/components/espressif/usb_host_hid/) component.   
 
-![usb-keyboard-1](https://github.com/user-attachments/assets/92ecc30b-6ed1-47ce-9eb4-a06596c06ce7)
+![usb-keyboard-1](https://github.com/user-attachments/assets/cb108559-4a5a-4df7-9be8-47f9f4c492f3)
 
 # Hardware requirements
 
