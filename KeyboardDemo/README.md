@@ -1,6 +1,6 @@
 # KeyboardDemo for SSD1306
 Demo that displays input from the keyboard.   
-I used [this](https://components.espressif.com/components/espressif/usb_host_hid/) component.   
+I used [this](https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/hid) as a reference.   
 
 ![usb-keyboard-1](https://github.com/user-attachments/assets/cb108559-4a5a-4df7-9be8-47f9f4c492f3)
 
