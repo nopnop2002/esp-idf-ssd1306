@@ -26,7 +26,7 @@ ESP32-S2/S3 BOARD          USB CONNECTOR
                            +--+
 ```
 
-# USB live connection
+# USB hot socket
 There are times when it works correctly and times when it doesn't.   
 It works more stably if you connect before starting the firmware.   
 When it works correctly, a log like this will be displayed.   
