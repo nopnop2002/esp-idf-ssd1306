@@ -1,7 +1,7 @@
 # MouseMoveDemo for SSD1306
 Demo of moving a circle using the mouse.   
 The circle moves when you move the mouse.   
-I used [this](https://components.espressif.com/components/espressif/usb_host_hid/) component.   
+I used [this](https://github.com/espressif/esp-idf/tree/master/examples/peripherals/usb/host/hid) as a reference.   
 
 # Hardware requirements
 
