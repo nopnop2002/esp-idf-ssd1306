@@ -27,7 +27,6 @@ ESP32-S2/S3 BOARD           USB CONNECTOR
                |        |   +--+
                +---||---+
                   100uF
-
 ```
 
 # USB hot socket
