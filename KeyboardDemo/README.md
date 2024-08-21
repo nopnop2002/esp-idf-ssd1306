@@ -16,7 +16,7 @@ I used [this](https://github.com/espressif/esp-idf/tree/master/examples/peripher
 - USB keyboard   
 
 # USB wiring   
-I put a 100uF electrolytic capacitor between 5V and GND.
+To stabilize the power supply, I placed a 100uF electrolytic capacitor between 5V and GND.   
 ```
 ESP32-S2/S3 BOARD           USB CONNECTOR
                             +--+
