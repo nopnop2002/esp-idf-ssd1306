@@ -16,6 +16,8 @@ I used [this](https://components.espressif.com/components/espressif/usb_host_hid
  2-button or 3-button usb mouse.   
  Button 3 is not used in this project.   
 
+---
+
 The circle moves when you move the mouse.
 ![usb-mouse-3](https://github.com/user-attachments/assets/020e0f71-aff5-4e12-8fad-1dc724336f2e)
 
