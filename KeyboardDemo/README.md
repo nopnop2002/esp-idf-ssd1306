@@ -47,6 +47,7 @@ I tried it, but it doesn't work properly via USB-HUB.
 For some reason, the following error may occur in rare cases.   
 This error occurs inside the usb_host_hid component.   
 It is unclear whether it is a component bug or an effect of electrical noise.   
+Some kind of stabilization circuitry may be required.   
 It may come back to life if you unplugging the keyboard and plugging it again.   
 If you know the cause, please let us know.   
 ```
