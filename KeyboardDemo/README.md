@@ -43,7 +43,7 @@ I (816) usb_hid: HID Device, protocol 'NONE' CONNECTED
 # Using USB-HUB
 I tried it, but it doesn't work properly via USB-HUB.
 
-# Transfer failed
+# Transfer failed error
 For some reason, the following error may occur in rare cases.   
 This error occurs inside the usb_host_hid component.   
 There is a possibility that this is a component bug, but the cause is unknown.   
