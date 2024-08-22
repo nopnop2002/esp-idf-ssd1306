@@ -5,7 +5,8 @@ I used [this](https://github.com/yanbe/ssd1306-esp-idf-i2c) repository as a refe
 I used [this](https://github.com/dhepper/font8x8) font file.   
 
 # Software requirements
-ESP-IDF V4.4/V5.x.   
+ESP-IDF V5.0 or later.   
+ESP-IDF V4.4 release branch reached EOL in July 2024.   
 
 __Note for ESP32C2.__   
 ESP-IDF V5.0 ESP32C2 i2c driver has a bug.   
