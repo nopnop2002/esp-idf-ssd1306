@@ -65,3 +65,8 @@ E (12287696) hid-host: Transfer failed, status 1
 E (12287696) usb_hid: HID Device, protocol 'MOUSE' TRANSFER_ERROR
 E (15953516) USBH: Device 1 gone
 ```
+
+# Keyboard with mouse function
+I have a keyboard with mouse functionality, but the keyboard with mouse functionality does not work as a mouse.   
+See [here](https://github.com/espressif/esp-idf/issues/12667).
+
