@@ -50,7 +50,15 @@ I (1166) usb_hid: hid_host_device_callback
 I (1166) usb_hid: HID Device, protocol 'MOUSE' CONNECTED
 ```
 
-
 # Using USB-HUB
 I tried it, but it doesn't work properly via USB-HUB.
 
+
+# Transfer failed
+For some reason, the following errors may occur.   
+The cause is unknown, but it may be resolved by unplugging the mouse.
+```
+E (12287696) hid-host: Transfer failed, status 1
+E (12287696) usb_hid: HID Device, protocol 'MOUSE' TRANSFER_ERROR
+E (15953516) USBH: Device 1 gone
+```
