@@ -16,7 +16,6 @@
 #include "esp_err.h"
 #include "esp_log.h"
 #include "usb/usb_host.h"
-//#include "errno.h"
 #include "driver/gpio.h"
 
 #include "usb/hid_host.h"
