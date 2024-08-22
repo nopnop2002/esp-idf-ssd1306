@@ -86,16 +86,14 @@ void app_main(void)
 	int radius = 4;
 	ESP_LOGD(TAG, "x_current=%d", x_current);
 	ESP_LOGD(TAG, "y_current=%d", y_current);
-	int x_previus = x_current;
-	int y_previus = y_current;
 	_ssd1306_circle(&dev, x_current, y_current, radius, draw);
 	ssd1306_show_buffer(&dev);
 
 	// Wait event
 	HID_EVENT_t hidEvent;
 	while (1) {
-		x_previus = x_current;
-		y_previus = y_current;
+		int x_previus = x_current;
+		int y_previus = y_current;
 		BaseType_t received = xQueueReceive(app_event_hid, &hidEvent, portMAX_DELAY);
 		ESP_LOGI(TAG, "xQueueReceive received=%d hidEvent.hid_event_type=%d", received, hidEvent.hid_event_type);
 		if (hidEvent.hid_event_type == APP_EVENT_MOUSE) {
@@ -104,9 +102,9 @@ void app_main(void)
 			ESP_LOGI(TAG, "mouse_event.button1=%d mouse_event.button2=%d mouse_event.button3=%d",
 				hidEvent.mouse_event.button1, hidEvent.mouse_event.button2, hidEvent.mouse_event.button3);
 			int x_temp = x_current + hidEvent.mouse_event.x_displacement;
-			if ((x_temp+radius) < xmax && (x_temp-radius) > 0) x_current = x_temp;
+			if ((x_temp+radius) <= xmax && (x_temp-radius) >= 0) x_current = x_temp;
 			int y_temp = y_current + hidEvent.mouse_event.y_displacement;
-			if ((y_temp+radius) < ymax && (y_temp-radius) > 0) y_current = y_temp;
+			if ((y_temp+radius) <= ymax && (y_temp-radius) >= 0) y_current = y_temp;
 			_ssd1306_circle(&dev, x_previus, y_previus, radius, !draw);
 			_ssd1306_circle(&dev, x_current, y_current, radius, draw);
 			ssd1306_show_buffer(&dev);
