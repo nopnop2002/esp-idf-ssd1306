@@ -49,7 +49,7 @@ This error occurs inside the usb_host_hid component.
 It is unclear whether it is a component bug or an effect of electrical noise.   
 Some kind of stabilization circuitry may be required.   
 It may come back to life if you unplugging the keyboard and plugging it again.   
-If you know the cause, please let us know.   
+I would like to hear the opinion of someone who is familiar with USB electrical circuits.   
 ```
 E (12287696) hid-host: Transfer failed, status 1
 E (12287696) usb_hid: HID Device, protocol 'MOUSE' TRANSFER_ERROR
