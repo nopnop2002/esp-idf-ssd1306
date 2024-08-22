@@ -21,7 +21,6 @@ https://thenounproject.com/icon/mouse-6617048/
 
 - USB mouse   
  2-button or 3-button usb mouse.   
- Button 3 is not used in this project.   
 
 # USB wiring   
 To stabilize the power supply, I placed a 100uF electrolytic capacitor between 5V and GND.   
