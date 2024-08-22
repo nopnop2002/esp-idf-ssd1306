@@ -345,12 +345,12 @@ void app_main(void)
 	while(1) { vTaskDelay(1); }
 #endif // CONFIG_SSD1306_128x32
 
-    // Allocate memory
-    uint8_t *buffer = (uint8_t *)malloc(IMAGES*8*128); // 8 page 128 pixel
-    if (buffer == NULL) {
-        ESP_LOGE(TAG, "malloc failed");
-        while(1) { vTaskDelay(1); }
-    }
+	// Allocate memory
+	uint8_t *buffer = (uint8_t *)malloc(IMAGES*8*128); // 8 page 128 pixel
+	if (buffer == NULL) {
+		ESP_LOGE(TAG, "malloc failed");
+		while(1) { vTaskDelay(1); }
+	}
 
 	// Convert from segmentDisplay to segmentImage
 	int index = 0;
@@ -362,24 +362,24 @@ void app_main(void)
 		index = index + 1024;
 	}
 
-    // Create queue
-    app_event_hid = xQueueCreate(10, sizeof(HID_EVENT_t));
-    configASSERT( app_event_hid );
+	// Create queue
+	app_event_hid = xQueueCreate(10, sizeof(HID_EVENT_t));
+	configASSERT( app_event_hid );
 
-    // Start tasks
-    xTaskCreate(&usb_hid_task, "usb_hid_task", 1024*2, NULL, 9, NULL);
+	// Start tasks
+	xTaskCreate(&usb_hid_task, "usb_hid_task", 1024*2, NULL, 9, NULL);
 
 	ssd1306_set_buffer(&dev, &buffer[0]);
 	ssd1306_show_buffer(&dev);
 
-    // Wait event
-    HID_EVENT_t hidEvent;
+	// Wait event
+	HID_EVENT_t hidEvent;
 	while(1) {
-        BaseType_t received = xQueueReceive(app_event_hid, &hidEvent, portMAX_DELAY);
-        ESP_LOGI(TAG, "xQueueReceive received=%d hidEvent.hid_event_type=%d", received, hidEvent.hid_event_type);
-        if (hidEvent.hid_event_type == APP_EVENT_MOUSE) {
-            ESP_LOGI(TAG, "mouse_event.button1=%d mouse_event.button2=%d mouse_event.button3=%d",
-                hidEvent.mouse_event.button1, hidEvent.mouse_event.button2, hidEvent.mouse_event.button3);
+		BaseType_t received = xQueueReceive(app_event_hid, &hidEvent, portMAX_DELAY);
+		ESP_LOGI(TAG, "xQueueReceive received=%d hidEvent.hid_event_type=%d", received, hidEvent.hid_event_type);
+		if (hidEvent.hid_event_type == APP_EVENT_MOUSE) {
+			ESP_LOGI(TAG, "mouse_event.button1=%d mouse_event.button2=%d mouse_event.button3=%d",
+				hidEvent.mouse_event.button1, hidEvent.mouse_event.button2, hidEvent.mouse_event.button3);
 			if (hidEvent.mouse_event.button1 == 0 && hidEvent.mouse_event.button2 == 0 && hidEvent.mouse_event.button3 == 0) {
 				ssd1306_set_buffer(&dev, &buffer[0]);
 				ssd1306_show_buffer(&dev);
