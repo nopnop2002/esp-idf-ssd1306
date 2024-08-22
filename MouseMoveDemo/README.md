@@ -57,7 +57,7 @@ I tried it, but it doesn't work properly via USB-HUB.
 For some reason, the following errors may occur.   
 This error occurs inside the usb_host_hid component.   
 There is a possibility that this is a component bug, but the cause is unknown.   
-It may be resolved by unplugging the mouse.
+It may come back to life if you unplugging the mouse and plugging it again.   
 ```
 E (12287696) hid-host: Transfer failed, status 1
 E (12287696) usb_hid: HID Device, protocol 'MOUSE' TRANSFER_ERROR
