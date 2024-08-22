@@ -45,7 +45,7 @@ I tried it, but it doesn't work properly via USB-HUB.
 
 # Transfer failed
 For some reason, the following errors may occur.   
-This error occurs inside the usb_host_hid library.   
+This error occurs inside the usb_host_hid component.   
 The cause is unknown, but it may be resolved by unplugging the keyboard.
 ```
 E (12287696) hid-host: Transfer failed, status 1
