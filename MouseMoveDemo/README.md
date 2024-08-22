@@ -10,7 +10,7 @@ I used [this](https://github.com/espressif/esp-idf/tree/master/examples/peripher
 
 - USB Connector   
  I used this:   
- ![usb-conector](https://github.com/user-attachments/assets/a8fb5313-54f6-422a-98de-5f4aff8c94b7)
+ ![usb-conector-2](https://github.com/user-attachments/assets/7551058f-2647-4618-b143-3e4a77df5fc2)
 
 - USB mouse   
  2-button or 3-button usb mouse.   
