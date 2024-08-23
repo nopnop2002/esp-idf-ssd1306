@@ -549,6 +549,13 @@ void _ssd1306_circle(SSD1306_t * dev, int x0, int y0, int r, bool invert)
 	} while(y<0);
 }
 
+// Draw cursor
+void _ssd1306_cursor(SSD1306_t * dev, int x0, int y0, int r, bool invert)
+{
+	_ssd1306_line(dev, x0-r, y0, x0+r, y0, invert);
+	_ssd1306_line(dev, x0, y0-r, x0, y0+r, invert);
+}
+
 void ssd1306_invert(uint8_t *buf, size_t blen)
 {
 	uint8_t wk;
