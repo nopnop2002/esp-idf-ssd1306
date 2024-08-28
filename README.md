@@ -64,7 +64,8 @@ You have to set this config value with menuconfig.
 ![config-128x64_i2c](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/794645f9-9f95-4760-8a55-9befceb9349e)
 
 # Generic SH1106 128x64 i2c
-__Hardware scroll Not support__   
+Many sellers sell SH1106 as SSD1306.   
+__SH1106 does not support hardware scrolling.__   
 Left:1.3 inch SH1106   
 Right:0.96 inch SSD1306   
 
@@ -103,7 +104,8 @@ D1 is MOSI.
 
 
 # Generic SH1106 128x64 SPI
-__Hardware scroll Not support__   
+Many sellers sell SH1106 as SSD1306.   
+__SH1106 does not support hardware scrolling.__   
 Left:1.3 inch SH1106   
 Right:0.96 inch SSD1306   
 
