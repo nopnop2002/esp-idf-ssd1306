@@ -52,6 +52,6 @@ It may come back to life if you unplugging the keyboard and plugging it again.
 I would like to hear the opinion of someone who is familiar with USB electrical circuits.   
 ```
 E (12287696) hid-host: Transfer failed, status 1
-E (12287696) usb_hid: HID Device, protocol 'MOUSE' TRANSFER_ERROR
+E (12287696) usb_hid: HID Device, protocol 'KEYBOARD' TRANSFER_ERROR
 E (15953516) USBH: Device 1 gone
 ```
