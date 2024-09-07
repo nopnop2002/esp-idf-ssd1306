@@ -122,12 +122,12 @@ The i2c clock frequency used by this project is 400KHz.
 # I2C Port selection   
 ![config-i2c-port](https://github.com/user-attachments/assets/477bdf29-7492-4256-bc9e-e3ff363cddcc)
 
-The ESP32 XTENSA series has two I2C Ports.   
+XTENSA's ESP32 has two i2c port: I2C_NUM_0/1.   
 You can use these two ports freely.   
 If you use this module at the same time as another I2C device using I2C port 0, you must change it to I2C port 1.   
 
 # Force legacy i2c driver
-xtensa's ESP32 has two i2c buses: I2C_NUM_0/1.   
+XTENSA's ESP32 has two i2c port: I2C_NUM_0/1.   
 I2C_NUM_0/1 are initialized independently, but legacy i2c drivers and new i2c drivers cannot be mixed.   
 If I2C_NUM_0 is initialized with the legacy i2c driver, I2C_NUM_1 must also be initialized with the legacy i2c driver.   
 If you use the SSD1306 at the same time as an I2C device that uses a legacy I2C driver, you must initialize the SSD1306 with the legacy I2C driver.   
