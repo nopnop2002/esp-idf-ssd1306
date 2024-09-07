@@ -158,6 +158,13 @@ menu "SSD1306 Configuration"
 				Use I2C_PORT_1.
 	endchoice
 
+	config LEGACY_DRIVER
+		depends on I2C_INTERFACE
+		bool "Force legacy i2c driver"
+		default false
+		help
+			Force legacy i2c driver.
+
 	choice SPI_HOST
 		depends on SPI_INTERFACE
 		prompt "SPI peripheral that controls this bus"
