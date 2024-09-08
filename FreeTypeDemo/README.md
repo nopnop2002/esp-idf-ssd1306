@@ -17,7 +17,7 @@ You can find Monospaced fonts [here](https://en.wikipedia.org/wiki/List_of_monos
 - Copy font file to fonts directory.
 
 - Select font.   
-  load_font("/fonts/consola.ttf");
+  ```load_font("/fonts/consola.ttf");```
 
 - Specify the display position and threshold.   
   The converted bitmap is monochrome data with gradations from 0 to 255.   
@@ -25,7 +25,7 @@ You can find Monospaced fonts [here](https://en.wikipedia.org/wiki/List_of_monos
   Unfortunately, SSD1306 cannot express gradations.   
   The lower the threshold, the small value will display. As a result, the text becomes thicker.   
   The higher the threshold, the small value will not display. As a result, the text becomes thinner.   
-  render_text(&dev, 0, 16, 128, "FreeType");
+  ```render_text(&dev, 0, 16, 128, "FreeType");```
 
 
 # Bitmap gradation representation
