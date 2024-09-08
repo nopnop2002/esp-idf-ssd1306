@@ -16,9 +16,9 @@ You can find Monospaced fonts [here](https://en.wikipedia.org/wiki/List_of_monos
 
 - Copy font file to fonts directory.
 
-- Select font
+- Select font   
   load_font("/fonts/consola.ttf");
 
-- Specify the display position and threshold
+- Specify the display position and threshold   
   render_text(&dev, 0, 16, 128, "FreeType");
 
