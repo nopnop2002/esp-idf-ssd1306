@@ -14,6 +14,12 @@ I2C_NUM_0 --+-- I2C SSD1306
             +---Any I2C Device
 ```
 
+In the XTENSA series, you can use I2C_NUM_1 instead of I2C_NUM_0.
+```
+I2C_NUM_1 --+-- I2C SSD1306
+            +---Any I2C Device
+```
+
 - Legacy driver
 
 We only need to run this code once.   
