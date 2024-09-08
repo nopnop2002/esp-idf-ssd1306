@@ -10,7 +10,7 @@ You can find Monospaced fonts [here](https://en.wikipedia.org/wiki/List_of_monos
 
 ![FreeTypeDemo](https://github.com/user-attachments/assets/13892a84-8ed8-48b9-8e1e-8e1f7235f8cb)
 
-# How to use true type font.
+# How to use True Type font.
 
 - Download Monospaced fonts from internet.
 
