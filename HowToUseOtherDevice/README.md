@@ -82,57 +82,15 @@ SSD1306 ans other device can use different frequencies.
 ## Case 2
 Use multiple i2c devices on two i2c bus.   
 SCL and SDA each use separate GPIOs.   
+Install the i2c master driver for each of I2C_NUM_0 and I2C_NUM_1.   
 ```
 I2C_NUM_0 ----- I2C SSD1306
 I2C_NUM_1 ----- Any I2C Device
 ```
 
-This is the only way to use different I2C device library at the same time using the new i2c driver.   
+This is possible with either the new i2c driver or the legacy i2c driver.   
+This is the only way to use new i2c driver.   
 ESP32C series has only one i2c bus.   
 This is not available on the ESP32C series.   
 Can only be used with XTENSA series.   
 
-Execute the following for SSD1306.
-```
-    i2c_master_bus_config_t i2c_mst_config = {
-        .clk_source = I2C_CLK_SRC_DEFAULT,
-        .glitch_ignore_cnt = 7,
-        .i2c_port = I2C_NUM_0,
-        .scl_io_num = scl_NUM_0,
-        .sda_io_num = sda_NUM_0,
-        .flags.enable_internal_pullup = true,
-    };
-    i2c_master_bus_handle_t bus_handle;
-    ESP_ERROR_CHECK(i2c_new_master_bus(&i2c_mst_config, &bus_handle));
-
-    i2c_device_config_t dev_cfg = {
-        .dev_addr_length = I2C_ADDR_BIT_LEN_7,
-        .device_address = I2C_ADDRESS_NUM_0,
-        .scl_speed_hz = I2C_MASTER_FREQ_HZ_NUM_0,
-    };
-    i2c_master_dev_handle_t dev_handle;
-    ESP_ERROR_CHECK(i2c_master_bus_add_device(bus_handle, &dev_cfg, &dev_handle));
-```
-
-
-Execute the following for other i2c device.
-```
-    i2c_master_bus_config_t i2c_mst_config = {
-        .clk_source = I2C_CLK_SRC_DEFAULT,
-        .glitch_ignore_cnt = 7,
-        .i2c_port = I2C_NUM_1,
-        .scl_io_num = scl_NUM_1,
-        .sda_io_num = sda_NUM_1,
-        .flags.enable_internal_pullup = true,
-    };
-    i2c_master_bus_handle_t bus_handle;
-    ESP_ERROR_CHECK(i2c_new_master_bus(&i2c_mst_config, &bus_handle));
-
-    i2c_device_config_t dev_cfg = {
-        .dev_addr_length = I2C_ADDR_BIT_LEN_7,
-        .device_address = I2C_ADDRESS_NUM_1,
-        .scl_speed_hz = I2C_MASTER_FREQ_HZ_NUM_1,
-    };
-    i2c_master_dev_handle_t dev_handle;
-    ESP_ERROR_CHECK(i2c_master_bus_add_device(bus_handle, &dev_cfg, &dev_handle));
-```
