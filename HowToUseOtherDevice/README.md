@@ -101,7 +101,7 @@ I2C_NUM_0 ----- I2C SSD1306 using legacy i2c driver
 I2C_NUM_1 ----- Any I2C Device using legacy i2c driver
 ```
 
-This is the only way to use the new i2c driver with SSD1306.
+If SSD1306 use new i2c drivers, other i2c devices must also use legacy drivers.
 ```
 I2C_NUM_0 ----- I2C SSD1306 using new i2c driver
 I2C_NUM_1 ----- Any I2C Device using new i2c driver
