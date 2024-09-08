@@ -1,4 +1,4 @@
-# How to use other i2c devive at same time
+# How to use other i2c device at same time
 I received a question about using an SSD1306 and other i2c devices at the same time.   
 A new i2c driver is now available in ESP-IDF V5.2.   
 This complicated the use of other i2c devices at the same time as the SSD1306.   
