@@ -52,3 +52,5 @@ ________
 \+ indicates that the value is greater than 64 and less than 128.   
 . indicates that the value is greater than 32 and less than 64.   
 _ indicates a value less than 32.
+
+Setting the threshold to 128 will only show # pixels.
