@@ -3,6 +3,7 @@ If you want to use SSD1306 and other i2c devices at the same time, please follow
 
 ## Case 1
 Use multiple i2c devices on one i2c bus.   
+SCL and SDA are shared by all devices.   
 ```
 I2C_NUM_0 --+-- I2C SSD1306
             +---Any I2C Device
@@ -78,6 +79,7 @@ SSD1306 ans other device can use different frequencies.
 
 ## Case 2
 Use multiple i2c devices on two i2c bus.   
+SCL and SDA each use separate GPIOs.   
 ```
 I2C_NUM_0 ----- I2C SSD1306
 I2C_NUM_1 ----- Any I2C Device
