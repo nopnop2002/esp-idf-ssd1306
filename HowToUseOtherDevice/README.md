@@ -96,6 +96,11 @@ I2C_NUM_1 ----- Any I2C Device using legacy I2C driver
 ```
 
 This is the only way to use new i2c driver.   
+```
+I2C_NUM_0 ----- I2C SSD1306 using new I2C driver
+I2C_NUM_1 ----- Any I2C Device using new I2C driver
+```
+
 ESP32C series has only one i2c bus.   
 This is not available on the ESP32C series.   
 Can only be used with XTENSA series.   
