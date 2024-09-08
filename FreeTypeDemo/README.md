@@ -23,9 +23,7 @@ You can find Monospaced fonts [here](https://en.wikipedia.org/wiki/List_of_monos
   The converted bitmap is monochrome data with gradations from 0 to 255.   
   The lower the value, the lighter the black, and the higher the value, the darker the black.   
   Unfortunately, SSD1306 cannot express gradations.   
-  The lower the threshold, the small value will appear.
-  As a result, the text becomes thicker.   
-  The higher the threshold, the small value will not appear.
-  As a result, the text becomes thinner.   
+  The lower the threshold, the small value will display. As a result, the text becomes thicker.   
+  The higher the threshold, the small value will not display. As a result, the text becomes thinner.   
   render_text(&dev, 0, 16, 128, "FreeType");
 
