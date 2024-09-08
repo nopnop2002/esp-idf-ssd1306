@@ -27,3 +27,28 @@ You can find Monospaced fonts [here](https://en.wikipedia.org/wiki/List_of_monos
   The higher the threshold, the small value will not display. As a result, the text becomes thinner.   
   render_text(&dev, 0, 16, 128, "FreeType");
 
+
+# Bitmap gradation representation
+```
+________
+________
+________
+___####_
+__##.+##
+_+#___.#
+_##____#
+_#######
+_##.....
+_+#_____
+__##+.+#
+___####+
+________
+________
+________
+________
+```
+
+# indicates a value greater than 128.   
++ indicates that the value is greater than 64 and less than 128.   
+. indicates that the value is greater than 32 and less than 64.   
+_ indicates a value less than 32.
