@@ -41,6 +41,13 @@ Under ESP-IDF V5.2 or later, this project uses the new I2C driver, but there is 
     ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM, I2C_MODE_MASTER, 0, 0, 0));
 ```
 
+This project allows you to use a mode that does not install i2c drivers.   
+If you use this mode, you must install the i2c driver before this.   
+```
+i2c_master_init(&dev2, I2C_DRIVER_NOT_INSTALL, I2C_DRIVER_NOT_INSTALL, CONFIG_RESET_GPIO);
+```
+
+
 - New i2c driver
 
 We need to run this code on the first i2c device.   
