@@ -36,7 +36,7 @@ void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 		ESP_ERROR_CHECK(i2c_param_config(I2C_NUM, &i2c_config));
 		ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM, I2C_MODE_MASTER, 0, 0, 0));
 	} else {
-		ESP_LOGW(TAG, "Will not install i2c driver");
+		ESP_LOGW(TAG, "Will not install i2c master driver");
 	}
 
 	if (reset >= 0) {
