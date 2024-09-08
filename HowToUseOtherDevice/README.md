@@ -78,7 +78,7 @@ We need to run this code on the first i2c device.
 ```
 
 We need to run this code on the second device.   
-SSD1306 ans other device can use different frequencies.   
+SSD1306 and other device can use different frequencies.   
 
 ```
     // We need to load bus_handle from somewhere.
