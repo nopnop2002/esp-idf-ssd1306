@@ -72,6 +72,8 @@ SSD1306 ans other device can use different frequencies.
     ESP_ERROR_CHECK(i2c_master_bus_add_device(bus_handle, &dev_cfg, &dev_handle));
 ```
 
+**This library does not have the function to record bus_handle somewhere or retrieve bus_handle from somewhere.**
+
 ---
 
 ## Case 2
