@@ -46,8 +46,8 @@ This project uses the following functions to install the i2c driver.
 i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
 ```
 
-This project allows you to use a mode that does not install i2c drivers.   
-If you use this mode, you must install the i2c driver before this.   
+This project allows you to use an initialization function that does not install the i2c driver.   
+The i2c driver must be installed before using this initialization function.   
 ```
 i2c_master_init(&dev, I2C_DRIVER_NOT_INSTALL, I2C_DRIVER_NOT_INSTALL, CONFIG_RESET_GPIO);
 ```
@@ -56,8 +56,6 @@ i2c_master_init(&dev, I2C_DRIVER_NOT_INSTALL, I2C_DRIVER_NOT_INSTALL, CONFIG_RES
 - New i2c driver
 
 We need to run this code on the first i2c device.   
-**We need to record bus_handle somewhere.**   
-But In different libraries, there is no place to record bus_handle.   
 ```
     i2c_master_bus_config_t i2c_mst_config = {
         .clk_source = I2C_CLK_SRC_DEFAULT,
@@ -77,12 +75,9 @@ But In different libraries, there is no place to record bus_handle.
     };
     i2c_master_dev_handle_t dev_handle;
     ESP_ERROR_CHECK(i2c_master_bus_add_device(bus_handle, &dev_cfg, &dev_handle));
-
-    // We need to record bus_handle somewhere.
 ```
 
 We need to run this code on the second device.   
-**We need to load bus_handle from somewhere.**   
 SSD1306 ans other device can use different frequencies.   
 
 ```
@@ -97,7 +92,32 @@ SSD1306 ans other device can use different frequencies.
     ESP_ERROR_CHECK(i2c_master_bus_add_device(bus_handle, &dev_cfg, &dev_handle));
 ```
 
-**This library does not have the function to record bus_handle somewhere or retrieve bus_handle from somewhere.**
+This project uses the following functions to install the i2c driver.
+```
+i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
+```
+
+This project allows you to use an initialization function that does not install the i2c driver.   
+```
+i2c_device_add(&dev, bus_handle, CONFIG_RESET_GPIO);
+```
+
+The i2c driver must be installed before using this initialization function.   
+```
+    i2c_master_bus_config_t i2c_mst_config = {
+        .clk_source = I2C_CLK_SRC_DEFAULT,
+        .glitch_ignore_cnt = 7,
+        .i2c_port = I2C_NUM_0,
+        .scl_io_num = CONFIG_SCL_GPIO,
+        .sda_io_num = CONFIG_SDA_GPIO,
+        .flags.enable_internal_pullup = true,
+    };
+    i2c_master_bus_handle_t bus_handle;
+    ESP_ERROR_CHECK(i2c_new_master_bus(&i2c_mst_config, &bus_handle));
+
+    i2c_device_add(&dev, bus_handle, CONFIG_RESET_GPIO);
+```
+
 
 ---
 
