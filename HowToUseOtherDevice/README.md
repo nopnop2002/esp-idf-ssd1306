@@ -88,17 +88,23 @@ I2C_NUM_0 ----- I2C SSD1306
 I2C_NUM_1 ----- Any I2C Device
 ```
 
-This is possible with both the new I2C driver or the legacy I2C driver, but **both buses must use the same driver.**   
+This is possible with both the new i2c driver or the legacy i2c driver, but **both buses must use the same driver.**   
 This is not acceptable.   
 ```
-I2C_NUM_0 ----- I2C SSD1306 using new I2C driver
-I2C_NUM_1 ----- Any I2C Device using legacy I2C driver
+I2C_NUM_0 ----- I2C SSD1306 using new i2c driver
+I2C_NUM_1 ----- Any I2C Device using legacy i2c driver
 ```
 
-This is the only way to use new i2c driver.   
+If other i2c devices use legacy i2c drivers, SSD1306 must also use legacy drivers.
 ```
-I2C_NUM_0 ----- I2C SSD1306 using new I2C driver
-I2C_NUM_1 ----- Any I2C Device using new I2C driver
+I2C_NUM_0 ----- I2C SSD1306 using legacy i2c driver
+I2C_NUM_1 ----- Any I2C Device using legacy i2c driver
+```
+
+This is the only way to use the new i2c driver with SSD1306.
+```
+I2C_NUM_0 ----- I2C SSD1306 using new i2c driver
+I2C_NUM_1 ----- Any I2C Device using new i2c driver
 ```
 
 ESP32C series has only one i2c bus.   
