@@ -2,6 +2,9 @@
 #define MAIN_SSD1306_H_
 
 #include "driver/spi_master.h"
+#if (ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 2, 0))
+#include "driver/i2c_master.h"
+#endif
 
 // Following definitions are bollowed from 
 // http://robotcantalk.blogspot.com/2015/03/interfacing-arduino-with-ssd1306-driven.html
@@ -142,6 +145,7 @@ void ssd1306_dump_page(SSD1306_t * dev, int page, int seg);
 void spi_clock_speed(int speed);
 #endif
 void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset);
+void i2c_device_add(SSD1306_t * dev, i2c_master_bus_handle_t bus_handle, int16_t reset);
 void i2c_init(SSD1306_t * dev, int width, int height);
 void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int width);
 void i2c_contrast(SSD1306_t * dev, int contrast);

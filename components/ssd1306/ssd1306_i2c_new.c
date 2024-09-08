@@ -19,7 +19,7 @@
 #endif
 
 #define I2C_MASTER_FREQ_HZ 400000 // I2C clock of SSD1306 can run at 400 kHz max.
-#define I2C_TICKS_TO_WAIT 100     // Maximum ticks to wait before issuing a timeout.
+#define I2C_TICKS_TO_WAIT 100	  // Maximum ticks to wait before issuing a timeout.
 
 i2c_master_dev_handle_t dev_handle;
 
@@ -57,6 +57,42 @@ void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 	dev->_flip = false;
 }
 
+void i2c_device_add(SSD1306_t * dev, i2c_master_bus_handle_t bus_handle, int16_t reset)
+{
+	ESP_LOGI(TAG, "New i2c driver is used");
+#if 0
+	i2c_master_bus_config_t i2c_mst_config = {
+		.clk_source = I2C_CLK_SRC_DEFAULT,
+		.glitch_ignore_cnt = 7,
+		.i2c_port = I2C_NUM,
+		.scl_io_num = scl,
+		.sda_io_num = sda,
+		.flags.enable_internal_pullup = true,
+	};
+	i2c_master_bus_handle_t bus_handle;
+	ESP_ERROR_CHECK(i2c_new_master_bus(&i2c_mst_config, &bus_handle));
+#endif
+
+	i2c_device_config_t dev_cfg = {
+		.dev_addr_length = I2C_ADDR_BIT_LEN_7,
+		.device_address = I2C_ADDRESS,
+		.scl_speed_hz = I2C_MASTER_FREQ_HZ,
+	};
+	//i2c_master_dev_handle_t dev_handle;
+	ESP_ERROR_CHECK(i2c_master_bus_add_device(bus_handle, &dev_cfg, &dev_handle));
+
+	if (reset >= 0) {
+		//gpio_pad_select_gpio(reset);
+		gpio_reset_pin(reset);
+		gpio_set_direction(reset, GPIO_MODE_OUTPUT);
+		gpio_set_level(reset, 0);
+		vTaskDelay(50 / portTICK_PERIOD_MS);
+		gpio_set_level(reset, 1);
+	}
+	dev->_address = I2C_ADDRESS;
+	dev->_flip = false;
+}
+
 void i2c_init(SSD1306_t * dev, int width, int height) {
 	dev->_width = width;
 	dev->_height = height;
@@ -66,11 +102,11 @@ void i2c_init(SSD1306_t * dev, int width, int height) {
 	uint8_t out_buf[27];
 	int out_index = 0;
 	out_buf[out_index++] = OLED_CONTROL_BYTE_CMD_STREAM;
-	out_buf[out_index++] = OLED_CMD_DISPLAY_OFF;	            // AE
-	out_buf[out_index++] = OLED_CMD_SET_MUX_RATIO;           // A8
+	out_buf[out_index++] = OLED_CMD_DISPLAY_OFF;				// AE
+	out_buf[out_index++] = OLED_CMD_SET_MUX_RATIO;			 // A8
 	if (dev->_height == 64) out_buf[out_index++] = 0x3F;
 	if (dev->_height == 32) out_buf[out_index++] = 0x1F;
-	out_buf[out_index++] = OLED_CMD_SET_DISPLAY_OFFSET;      // D3
+	out_buf[out_index++] = OLED_CMD_SET_DISPLAY_OFFSET;		 // D3
 	out_buf[out_index++] = 0x00;
 	//out_buf[out_index++] = OLED_CONTROL_BYTE_DATA_STREAM;	// 40
 	out_buf[out_index++] = OLED_CMD_SET_DISPLAY_START_LINE;	// 40
@@ -174,8 +210,8 @@ void i2c_contrast(SSD1306_t * dev, int contrast) {
 
 
 void i2c_hardware_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll) {
-    uint8_t out_buf[11];
-    int out_index = 0;
+	uint8_t out_buf[11];
+	int out_index = 0;
 	out_buf[out_index++] = OLED_CONTROL_BYTE_CMD_STREAM; // 00
 
 	if (scroll == SCROLL_RIGHT) {
