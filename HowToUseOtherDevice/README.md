@@ -20,6 +20,8 @@ We only need to run this code once.
 There is no need to memorize any data.   
 SSD1306 and other device use the same frequency.   
 Please note that the maximum i2c clock frequency of SSD1306 is 400KHz.   
+Under ESP-IDF V5.2 or later, this project uses the new I2C driver, but there is an option to force the use of the legacy I2C driver.
+
 ```
      i2c_config_t i2c_config = {
         .mode = I2C_MODE_MASTER,
@@ -32,9 +34,6 @@ Please note that the maximum i2c clock frequency of SSD1306 is 400KHz.
     ESP_ERROR_CHECK(i2c_param_config(I2C_NUM, &i2c_config));
     ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM, I2C_MODE_MASTER, 0, 0, 0));
 ```
-
-Under ESP-IDF V5.2 or later, this project uses the new I2C driver, but there is an option to force the use of the legacy I2C driver.
-
 
 - New i2c driver
 
