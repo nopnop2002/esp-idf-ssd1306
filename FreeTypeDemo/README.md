@@ -22,6 +22,7 @@ You can find Monospaced fonts [here](https://en.wikipedia.org/wiki/List_of_monos
 - Specify the display position and threshold.   
   The converted bitmap is monochrome data with gradations from 0 to 255.   
   The lower the value, the lighter the black, and the higher the value, the darker the black.   
+  Unfortunately, SSD1306 cannot express gradations.   
   The lower the threshold, the thicker the text.   
   The larger the threshold, the thinner the text.   
   render_text(&dev, 0, 16, 128, "FreeType");
