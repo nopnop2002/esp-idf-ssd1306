@@ -121,7 +121,7 @@ Execute the following for other i2c device.
         .clk_source = I2C_CLK_SRC_DEFAULT,
         .glitch_ignore_cnt = 7,
         .i2c_port = I2C_NUM_1,
-        .scl_io_num = scl_NUM_11,
+        .scl_io_num = scl_NUM_1,
         .sda_io_num = sda_NUM_1,
         .flags.enable_internal_pullup = true,
     };
@@ -131,7 +131,7 @@ Execute the following for other i2c device.
     i2c_device_config_t dev_cfg = {
         .dev_addr_length = I2C_ADDR_BIT_LEN_7,
         .device_address = I2C_ADDRESS_NUM_1,
-        .scl_speed_hz = I2C_MASTER_FREQ_HZ__NUM_1,
+        .scl_speed_hz = I2C_MASTER_FREQ_HZ_NUM_1,
     };
     i2c_master_dev_handle_t dev_handle;
     ESP_ERROR_CHECK(i2c_master_bus_add_device(bus_handle, &dev_cfg, &dev_handle));
