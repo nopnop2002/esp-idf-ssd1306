@@ -38,6 +38,8 @@ void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 		i2c_master_bus_handle_t bus_handle;
 		ESP_ERROR_CHECK(i2c_new_master_bus(&i2c_mst_config, &bus_handle));
 
+	} else {
+		ESP_LOGW(TAG, "Will not install i2c driver");
 		i2c_device_config_t dev_cfg = {
 			.dev_addr_length = I2C_ADDR_BIT_LEN_7,
 			.device_address = I2C_ADDRESS,
@@ -45,8 +47,6 @@ void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 		};
 		//i2c_master_dev_handle_t dev_handle;
 		ESP_ERROR_CHECK(i2c_master_bus_add_device(bus_handle, &dev_cfg, &dev_handle));
-	} else {
-		ESP_LOGW(TAG, "Will not install i2c driver");
 	}
 
 	if (reset >= 0) {
