@@ -10,9 +10,10 @@ I2C_NUM_0 --+-- I2C SSD1306
 
 - Legacy driver
 
-We only need to run this code once.
-There is no need to memorize any data.
-DS3231 and SSD1306 use the same frequency.
+We only need to run this code once.   
+There is no need to memorize any data.   
+SSD1306 and other device use the same frequency.   
+Please note that the maximum i2c clock frequency of SSD1306 is 400KHz.   
 ```
         i2c_config_t i2c_config = {
             .mode = I2C_MODE_MASTER,
@@ -29,9 +30,9 @@ DS3231 and SSD1306 use the same frequency.
 
 - New i2c driver
 
-We need to run this code on the first device.   
-**We need to record bus_handle somewhere.**
-But In different libraries, there is no place to record bus_handle.
+We need to run this code on the first i2c device.   
+**We need to record bus_handle somewhere.**   
+But In different libraries, there is no place to record bus_handle.   
 ```
     i2c_master_bus_config_t i2c_mst_config = {
         .clk_source = I2C_CLK_SRC_DEFAULT,
@@ -55,9 +56,9 @@ But In different libraries, there is no place to record bus_handle.
     // We need to record bus_handle somewhere.
 ```
 
-We need to run this code on the second device.
-**We need to load bus_handle from somewhere.**
-DS3231 and SSD1306 can use different frequencies.
+We need to run this code on the second device.   
+**We need to load bus_handle from somewhere.**   
+SSD1306 ans other device can use different frequencies.   
 
 ```
     // We need to load bus_handle from somewhere.
@@ -75,14 +76,14 @@ DS3231 and SSD1306 can use different frequencies.
 
 ## Case 2
 Use multiple i2c devices on two i2c bus.   
-
-This is the only way to use different I2C libraries at the same time using the new i2c driver.
-ESP32C series has only one i2c bus.
-This is not available on the ESP32C series.
-Can only be used with XTENSA.
-
 ```
 I2C_NUM_0 ----- I2C SSD1306
 I2C_NUM_1 ----- Any I2C Device
 ```
+
+This is the only way to use different I2C device library at the same time using the new i2c driver.   
+ESP32C series has only one i2c bus.   
+This is not available on the ESP32C series.   
+Can only be used with XTENSA series.   
+
 
