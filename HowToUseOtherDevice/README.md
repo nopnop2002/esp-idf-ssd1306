@@ -1,4 +1,6 @@
 # How to use other i2c devive at same time
+I received a question about using an SSD1306 and other i2c devices at the same time.   
+Therefore, I will record the survey results here.   
 If you want to use SSD1306 and other i2c devices at the same time, please follow the guide below.   
 
 ## Case 1
