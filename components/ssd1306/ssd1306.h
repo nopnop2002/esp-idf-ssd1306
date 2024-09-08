@@ -71,6 +71,8 @@ Usage:
 #define I2C_ADDRESS 0x3C
 #define SPI_ADDRESS 0xFF
 
+#define I2C_DRIVER_NOT_INSTALL -1
+
 typedef enum {
 	SCROLL_RIGHT = 1,
 	SCROLL_LEFT = 2,

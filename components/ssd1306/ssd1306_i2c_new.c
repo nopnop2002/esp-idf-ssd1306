@@ -26,37 +26,28 @@ i2c_master_dev_handle_t dev_handle;
 void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 {
 	ESP_LOGI(TAG, "New i2c driver is used");
-	i2c_master_bus_config_t i2c_mst_config = {
-		.clk_source = I2C_CLK_SRC_DEFAULT,
-		.glitch_ignore_cnt = 7,
-		.i2c_port = I2C_NUM,
-		.scl_io_num = scl,
-		.sda_io_num = sda,
-		.flags.enable_internal_pullup = true,
-	};
-	i2c_master_bus_handle_t bus_handle;
-	ESP_ERROR_CHECK(i2c_new_master_bus(&i2c_mst_config, &bus_handle));
+	if (sda != I2C_DRIVER_NOT_INSTALL && scl != I2C_DRIVER_NOT_INSTALL) {
+		i2c_master_bus_config_t i2c_mst_config = {
+			.clk_source = I2C_CLK_SRC_DEFAULT,
+			.glitch_ignore_cnt = 7,
+			.i2c_port = I2C_NUM,
+			.scl_io_num = scl,
+			.sda_io_num = sda,
+			.flags.enable_internal_pullup = true,
+		};
+		i2c_master_bus_handle_t bus_handle;
+		ESP_ERROR_CHECK(i2c_new_master_bus(&i2c_mst_config, &bus_handle));
 
-	i2c_device_config_t dev_cfg = {
-		.dev_addr_length = I2C_ADDR_BIT_LEN_7,
-		.device_address = I2C_ADDRESS,
-		.scl_speed_hz = I2C_MASTER_FREQ_HZ,
-	};
-	//i2c_master_dev_handle_t dev_handle;
-	ESP_ERROR_CHECK(i2c_master_bus_add_device(bus_handle, &dev_cfg, &dev_handle));
-
-#if 0
-	i2c_config_t i2c_config = {
-		.mode = I2C_MODE_MASTER,
-		.sda_io_num = sda,
-		.scl_io_num = scl,
-		.sda_pullup_en = GPIO_PULLUP_ENABLE,
-		.scl_pullup_en = GPIO_PULLUP_ENABLE,
-		.master.clk_speed = I2C_MASTER_FREQ_HZ
-	};
-	ESP_ERROR_CHECK(i2c_param_config(I2C_NUM, &i2c_config));
-	ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM, I2C_MODE_MASTER, 0, 0, 0));
-#endif
+		i2c_device_config_t dev_cfg = {
+			.dev_addr_length = I2C_ADDR_BIT_LEN_7,
+			.device_address = I2C_ADDRESS,
+			.scl_speed_hz = I2C_MASTER_FREQ_HZ,
+		};
+		//i2c_master_dev_handle_t dev_handle;
+		ESP_ERROR_CHECK(i2c_master_bus_add_device(bus_handle, &dev_cfg, &dev_handle));
+	} else {
+		ESP_LOGW(TAG, "Will not install i2c driver");
+	}
 
 	if (reset >= 0) {
 		//gpio_pad_select_gpio(reset);

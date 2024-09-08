@@ -24,16 +24,20 @@
 void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 {
 	ESP_LOGI(TAG, "Legacy i2c driver is used");
-	i2c_config_t i2c_config = {
-		.mode = I2C_MODE_MASTER,
-		.sda_io_num = sda,
-		.scl_io_num = scl,
-		.sda_pullup_en = GPIO_PULLUP_ENABLE,
-		.scl_pullup_en = GPIO_PULLUP_ENABLE,
-		.master.clk_speed = I2C_MASTER_FREQ_HZ
-	};
-	ESP_ERROR_CHECK(i2c_param_config(I2C_NUM, &i2c_config));
-	ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM, I2C_MODE_MASTER, 0, 0, 0));
+	if (sda != I2C_DRIVER_NOT_INSTALL && scl != I2C_DRIVER_NOT_INSTALL) {
+		i2c_config_t i2c_config = {
+			.mode = I2C_MODE_MASTER,
+			.sda_io_num = sda,
+			.scl_io_num = scl,
+			.sda_pullup_en = GPIO_PULLUP_ENABLE,
+			.scl_pullup_en = GPIO_PULLUP_ENABLE,
+			.master.clk_speed = I2C_MASTER_FREQ_HZ
+		};
+		ESP_ERROR_CHECK(i2c_param_config(I2C_NUM, &i2c_config));
+		ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM, I2C_MODE_MASTER, 0, 0, 0));
+	} else {
+		ESP_LOGW(TAG, "Will not install i2c driver");
+	}
 
 	if (reset >= 0) {
 		//gpio_pad_select_gpio(reset);
