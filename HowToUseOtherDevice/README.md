@@ -29,16 +29,16 @@ Please note that the maximum i2c clock frequency of SSD1306 is 400KHz.
 Under ESP-IDF V5.2 or later, this project uses the new I2C driver, but there is an option to force the use of the legacy I2C driver.
 
 ```
-     i2c_config_t i2c_config = {
+    i2c_config_t i2c_config = {
         .mode = I2C_MODE_MASTER,
-        .sda_io_num = sda,
-        .scl_io_num = scl,
+        .sda_io_num = CONFIG_SDA_GPIO,
+        .scl_io_num = CONFIG_SCL_GPIO,
         .sda_pullup_en = GPIO_PULLUP_ENABLE,
         .scl_pullup_en = GPIO_PULLUP_ENABLE,
         .master.clk_speed = I2C_MASTER_FREQ_HZ
     };
-    ESP_ERROR_CHECK(i2c_param_config(I2C_NUM, &i2c_config));
-    ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM, I2C_MODE_MASTER, 0, 0, 0));
+    ESP_ERROR_CHECK(i2c_param_config(I2C_NUM_0, &i2c_config));
+    ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM_0, I2C_MODE_MASTER, 0, 0, 0));
 ```
 
 This project uses the following functions to install the i2c driver.
@@ -47,11 +47,25 @@ i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
 ```
 
 This project allows you to use an initialization function that does not install the i2c driver.   
-The i2c driver must be installed before using this initialization function.   
 ```
 i2c_master_init(&dev, I2C_DRIVER_NOT_INSTALL, I2C_DRIVER_NOT_INSTALL, CONFIG_RESET_GPIO);
 ```
 
+The i2c driver must be installed before using this initialization function.   
+```
+    i2c_config_t i2c_config = {
+        .mode = I2C_MODE_MASTER,
+        .sda_io_num = CONFIG_SDA_GPIO,
+        .scl_io_num = CONFIG_SCL_GPIO,
+        .sda_pullup_en = GPIO_PULLUP_ENABLE,
+        .scl_pullup_en = GPIO_PULLUP_ENABLE,
+        .master.clk_speed = I2C_MASTER_FREQ_HZ
+    };
+    ESP_ERROR_CHECK(i2c_param_config(I2C_NUM_0, &i2c_config));
+    ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM_0, I2C_MODE_MASTER, 0, 0, 0));
+
+    i2c_master_init(&dev, I2C_DRIVER_NOT_INSTALL, I2C_DRIVER_NOT_INSTALL, CONFIG_RESET_GPIO);
+```
 
 - New i2c driver
 
