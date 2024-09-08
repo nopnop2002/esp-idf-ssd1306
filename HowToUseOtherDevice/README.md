@@ -18,16 +18,16 @@ There is no need to memorize any data.
 SSD1306 and other device use the same frequency.   
 Please note that the maximum i2c clock frequency of SSD1306 is 400KHz.   
 ```
-        i2c_config_t i2c_config = {
-            .mode = I2C_MODE_MASTER,
-            .sda_io_num = sda,
-            .scl_io_num = scl,
-            .sda_pullup_en = GPIO_PULLUP_ENABLE,
-            .scl_pullup_en = GPIO_PULLUP_ENABLE,
-            .master.clk_speed = I2C_MASTER_FREQ_HZ
-        };
-        ESP_ERROR_CHECK(i2c_param_config(I2C_NUM, &i2c_config));
-        ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM, I2C_MODE_MASTER, 0, 0, 0));
+     i2c_config_t i2c_config = {
+        .mode = I2C_MODE_MASTER,
+        .sda_io_num = sda,
+        .scl_io_num = scl,
+        .sda_pullup_en = GPIO_PULLUP_ENABLE,
+        .scl_pullup_en = GPIO_PULLUP_ENABLE,
+        .master.clk_speed = I2C_MASTER_FREQ_HZ
+    };
+    ESP_ERROR_CHECK(i2c_param_config(I2C_NUM, &i2c_config));
+    ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM, I2C_MODE_MASTER, 0, 0, 0));
 ```
 
 
