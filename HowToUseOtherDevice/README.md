@@ -105,6 +105,7 @@ SSD1306 ans other device can use different frequencies.
 Use multiple i2c devices on two i2c bus.   
 SCL and SDA each use separate GPIOs.   
 Install the i2c master driver for each of I2C_NUM_0 and I2C_NUM_1.   
+The frequencies of I2C_NUM_0 and I2C_NUM_1 can be set completely independently.   
 ```
 I2C_NUM_0 ----- I2C SSD1306
 I2C_NUM_1 ----- Any I2C Device
