@@ -53,6 +53,7 @@ i2c_device_add(&dev, i2c_num, CONFIG_RESET_GPIO);
 
 The i2c driver must be installed before using this initialization function.   
 ```
+    // install i2c master driver
     i2c_config_t i2c_config = {
         .mode = I2C_MODE_MASTER,
         .sda_io_num = CONFIG_SDA_GPIO,
@@ -64,6 +65,7 @@ The i2c driver must be installed before using this initialization function.
     ESP_ERROR_CHECK(i2c_param_config(I2C_NUM_0, &i2c_config));
     ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM_0, I2C_MODE_MASTER, 0, 0, 0));
 
+    // add new device to i2c bus
     i2c_device_add(&dev, I2C_NUM_0, CONFIG_RESET_GPIO);
 ```
 
@@ -118,6 +120,7 @@ i2c_bus_add(&dev, bus_handle, i2c_num, CONFIG_RESET_GPIO);
 
 The i2c driver must be installed before using this initialization function.   
 ```
+    // install i2c master driver
     i2c_master_bus_config_t i2c_mst_config = {
         .clk_source = I2C_CLK_SRC_DEFAULT,
         .glitch_ignore_cnt = 7,
@@ -129,6 +132,7 @@ The i2c driver must be installed before using this initialization function.
     i2c_master_bus_handle_t bus_handle;
     ESP_ERROR_CHECK(i2c_new_master_bus(&i2c_mst_config, &bus_handle));
 
+    // add new device to i2c bus
     i2c_bus_add(&dev, bus_handle, I2C_NUM_0, CONFIG_RESET_GPIO);
 ```
 
