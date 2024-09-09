@@ -25,7 +25,6 @@ I2C_NUM_1 --+-- I2C SSD1306
 
 
 #### Legacy driver
-
 SSD1306 and other device use the same frequency.   
 __Please note that the maximum i2c clock frequency of SSD1306 is 400KHz.__   
 ```
@@ -78,7 +77,6 @@ The i2c driver must be installed before using this initialization function.
 ```
 
 #### New i2c driver
-
 SSD1306 and other devices use different frequencies.   
 ```
 I2C_NUM_1 --+-- I2C SSD1306 using 400KHz
