@@ -245,3 +245,8 @@ Install the spi master driver for each of SPI2_HOST and SPI3_HOST.
 SPI2_HOST ----- SPI SSD1306
 SPI3_HOST ----- Any SPI Device
 ```
+
+ESP32C series has only one spi bus.
+This is not available on the ESP32C series.
+Can only be used with XTENSA series.
+
