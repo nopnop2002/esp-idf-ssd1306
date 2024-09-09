@@ -48,7 +48,7 @@ i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
 
 This project allows you to use an initialization function that does not install the i2c driver.   
 ```
-i2c_master_init(&dev, I2C_DRIVER_NOT_INSTALL, I2C_DRIVER_NOT_INSTALL, CONFIG_RESET_GPIO);
+i2c_device_add(&dev, i2c_num, CONFIG_RESET_GPIO);
 ```
 
 The i2c driver must be installed before using this initialization function.   
@@ -64,7 +64,7 @@ The i2c driver must be installed before using this initialization function.
     ESP_ERROR_CHECK(i2c_param_config(I2C_NUM_0, &i2c_config));
     ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM_0, I2C_MODE_MASTER, 0, 0, 0));
 
-    i2c_master_init(&dev, I2C_DRIVER_NOT_INSTALL, I2C_DRIVER_NOT_INSTALL, CONFIG_RESET_GPIO);
+    i2c_device_add(&dev, I2C_NUM_0, CONFIG_RESET_GPIO);
 ```
 
 - New i2c driver
@@ -113,7 +113,7 @@ i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
 
 This project allows you to use an initialization function that does not install the i2c driver.   
 ```
-i2c_device_add(&dev, bus_handle, CONFIG_RESET_GPIO);
+i2c_bus_add(&dev, bus_handle, i2c_num, CONFIG_RESET_GPIO);
 ```
 
 The i2c driver must be installed before using this initialization function.   
@@ -129,7 +129,7 @@ The i2c driver must be installed before using this initialization function.
     i2c_master_bus_handle_t bus_handle;
     ESP_ERROR_CHECK(i2c_new_master_bus(&i2c_mst_config, &bus_handle));
 
-    i2c_device_add(&dev, bus_handle, CONFIG_RESET_GPIO);
+    i2c_bus_add(&dev, bus_handle, I2C_NUM_0, CONFIG_RESET_GPIO);
 ```
 
 
