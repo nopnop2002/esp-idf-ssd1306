@@ -52,32 +52,32 @@ void app_main(void)
 #if CONFIG_LEGACY_DRIVER
 	ESP_LOGI(tag, "I2C_LEGACY_DRIVER");
 	// install i2c master driver
-    i2c_config_t i2c_config = {
-        .mode = I2C_MODE_MASTER,
-        .sda_io_num = CONFIG_SDA_GPIO,
-        .scl_io_num = CONFIG_SCL_GPIO,
-        .sda_pullup_en = GPIO_PULLUP_ENABLE,
-        .scl_pullup_en = GPIO_PULLUP_ENABLE,
-        .master.clk_speed = 400000
-    };
-    ESP_ERROR_CHECK(i2c_param_config(i2c_num, &i2c_config));
-    ESP_ERROR_CHECK(i2c_driver_install(i2c_num, I2C_MODE_MASTER, 0, 0, 0));
+	i2c_config_t i2c_config = {
+		.mode = I2C_MODE_MASTER,
+		.sda_io_num = CONFIG_SDA_GPIO,
+		.scl_io_num = CONFIG_SCL_GPIO,
+		.sda_pullup_en = GPIO_PULLUP_ENABLE,
+		.scl_pullup_en = GPIO_PULLUP_ENABLE,
+		.master.clk_speed = 400000
+	};
+	ESP_ERROR_CHECK(i2c_param_config(i2c_num, &i2c_config));
+	ESP_ERROR_CHECK(i2c_driver_install(i2c_num, I2C_MODE_MASTER, 0, 0, 0));
 
 	// add new device to i2c bus
 	i2c_device_add(&dev, i2c_num, CONFIG_RESET_GPIO);
 #else
 	ESP_LOGI(tag, "I2C_NEW_DRIVER");
 	// install i2c master driver
-    i2c_master_bus_config_t i2c_mst_config = {
-        .clk_source = I2C_CLK_SRC_DEFAULT,
-        .glitch_ignore_cnt = 7,
-        .i2c_port = i2c_num,
-        .scl_io_num = CONFIG_SCL_GPIO,
-        .sda_io_num = CONFIG_SDA_GPIO,
-        .flags.enable_internal_pullup = true,
-    };
-    i2c_master_bus_handle_t bus_handle;
-    ESP_ERROR_CHECK(i2c_new_master_bus(&i2c_mst_config, &bus_handle));
+	i2c_master_bus_config_t i2c_mst_config = {
+		.clk_source = I2C_CLK_SRC_DEFAULT,
+		.glitch_ignore_cnt = 7,
+		.i2c_port = i2c_num,
+		.scl_io_num = CONFIG_SCL_GPIO,
+		.sda_io_num = CONFIG_SDA_GPIO,
+		.flags.enable_internal_pullup = true,
+	};
+	i2c_master_bus_handle_t bus_handle;
+	ESP_ERROR_CHECK(i2c_new_master_bus(&i2c_mst_config, &bus_handle));
 
 	// add new device to i2c bus
 	i2c_bus_add(&dev, bus_handle, i2c_num, CONFIG_RESET_GPIO);
@@ -93,15 +93,16 @@ void app_main(void)
 	ESP_LOGI(tag, "CONFIG_DC_GPIO=%d",CONFIG_DC_GPIO);
 	ESP_LOGI(tag, "CONFIG_RESET_GPIO=%d",CONFIG_RESET_GPIO);
 
-    spi_bus_config_t spi_bus_config = {
-        .mosi_io_num = CONFIG_MOSI_GPIO,
-        .miso_io_num = -1,
-        .sclk_io_num = CONFIG_SCLK_GPIO,
-        .quadwp_io_num = -1,
-        .quadhd_io_num = -1,
-        .max_transfer_sz = 0,
-        .flags = 0
-    };
+	// install spi master driver
+	spi_bus_config_t spi_bus_config = {
+		.mosi_io_num = CONFIG_MOSI_GPIO,
+		.miso_io_num = -1,
+		.sclk_io_num = CONFIG_SCLK_GPIO,
+		.quadwp_io_num = -1,
+		.quadhd_io_num = -1,
+		.max_transfer_sz = 0,
+		.flags = 0
+	};
 
 #if CONFIG_SPI2_HOST
 	spi_host_device_t host_id = SPI2_HOST;
@@ -109,11 +110,12 @@ void app_main(void)
 	spi_host_device_t host_id = SPI3_HOST;
 #endif
 
-    ESP_LOGI(tag, "SPI HOST_ID=%d", host_id);
-    esp_err_t ret = spi_bus_initialize( host_id, &spi_bus_config, SPI_DMA_CH_AUTO );
-    ESP_LOGI(tag, "spi_bus_initialize=%d",ret);
-    assert(ret==ESP_OK);
+	ESP_LOGI(tag, "SPI HOST_ID=%d", host_id);
+	esp_err_t ret = spi_bus_initialize( host_id, &spi_bus_config, SPI_DMA_CH_AUTO );
+	ESP_LOGI(tag, "spi_bus_initialize=%d",ret);
+	assert(ret==ESP_OK);
 
+	// add new device to spi bus
 	spi_device_add(&dev, CONFIG_CS_GPIO, CONFIG_DC_GPIO, CONFIG_RESET_GPIO);
 #endif // CONFIG_SPI_INTERFACE
 
