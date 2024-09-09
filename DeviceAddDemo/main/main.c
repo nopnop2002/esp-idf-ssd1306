@@ -49,7 +49,7 @@ void app_main(void)
 	i2c_port_t i2c_num = I2C_NUM_1;
 #endif
 
-#if CONFIG_LEGACY_DRIVER
+#ifdef LEGACY_DRIVER
 	ESP_LOGI(tag, "I2C_LEGACY_DRIVER");
 	// install i2c master driver
 	i2c_config_t i2c_config = {
@@ -65,7 +65,9 @@ void app_main(void)
 
 	// add new device to i2c bus
 	i2c_device_add(&dev, i2c_num, CONFIG_RESET_GPIO);
-#else
+#endif
+
+#ifdef NEW_DRIVER
 	ESP_LOGI(tag, "I2C_NEW_DRIVER");
 	// install i2c master driver
 	i2c_master_bus_config_t i2c_mst_config = {
