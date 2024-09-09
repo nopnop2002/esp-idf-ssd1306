@@ -22,12 +22,17 @@ I2C_NUM_1 --+-- I2C SSD1306
             +---Any I2C Device
 ```
 
+SSD1306 and other device use the same frequency.   
+__Please note that the maximum i2c clock frequency of SSD1306 is 400KHz.__   
+```
+I2C_NUM_1 --+-- I2C SSD1306 using 400KHz
+            +---Any I2C Device using 400KHz
+```
+
+
 - Legacy driver
 
 We only need to run this code once.   
-i2c_config is used only once.   
-SSD1306 and other device use the same frequency.   
-__Please note that the maximum i2c clock frequency of SSD1306 is 400KHz.__   
 Under ESP-IDF V5.2 or later, this project uses the new I2C driver, but there is an option to force the use of the legacy I2C driver.
 
 ```
@@ -187,6 +192,12 @@ In the XTENSA series, you can use SPI2_HOST bus instead of SPI3_HOST bus.
 ```
 SPI3_HOST --+-- SPI SSD1306
             +---Any SPI Device
+```
+
+SSD1306 and other devices use different frequencies.
+```
+SPI2_HOST --+-- SPI SSD1306 using 1MHz
+            +---Any I2C Device using 2MHz
 ```
 
 We only need to run this code once.   
