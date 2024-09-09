@@ -25,16 +25,15 @@ I2C_NUM_1 --+-- I2C SSD1306
 
 
 - Legacy driver
-
-We only need to run this code once.   
-Under ESP-IDF V5.2 or later, this project uses the new I2C driver, but there is an option to force the use of the legacy I2C driver.
-
 SSD1306 and other device use the same frequency.   
 __Please note that the maximum i2c clock frequency of SSD1306 is 400KHz.__   
 ```
 I2C_NUM_1 --+-- I2C SSD1306 using 400KHz
             +---Any I2C Device using 400KHz
 ```
+
+We only need to run this code once.   
+Under ESP-IDF V5.2 or later, this project uses the new I2C driver, but there is an option to force the use of the legacy I2C driver.
 
 ```
     i2c_config_t i2c_config = {
