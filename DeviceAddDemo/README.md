@@ -7,6 +7,8 @@ This complicated the use of other i2c devices at the same time as the i2c's SSD1
 I will record the results of my investigation and publish sample code.   
 If you want to use SSD1306 and other i2c/spi devices at the same time, please follow the guide below.   
 
+If any of the information below is incorrect, please let us know through an issue.
+
 # Using i2c interface
 
 ### Use multiple i2c devices on one i2c bus.   
