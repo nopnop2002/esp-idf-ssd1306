@@ -4,7 +4,7 @@ I received a question about using an SSD1306 and other i2c/spi devices at the sa
 A new i2c driver is now available in ESP-IDF V5.2.   
 This complicated the use of other i2c devices at the same time as the i2c's SSD1306.
 
-I will record the survey results here.   
+I will record the results of my investigation and publish sample code.   
 If you want to use SSD1306 and other i2c/spi devices at the same time, please follow the guide below.   
 
 # Using i2c interface
