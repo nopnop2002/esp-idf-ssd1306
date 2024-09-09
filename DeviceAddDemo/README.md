@@ -80,7 +80,7 @@ The i2c driver must be installed before using this initialization function.
 SSD1306 and other devices use different frequencies.   
 ```
 I2C_NUM_1 --+-- I2C SSD1306 using 400KHz
-            +---Any I2C Device using 800KHz
+            +---Any I2C Device using 100KHz
 ```
 
 We need to run this code on the first i2c device.   
@@ -106,8 +106,6 @@ We need to run this code on the first i2c device.
 ```
 
 We need to run this code on the second device.   
-SSD1306 and other device can use different frequencies.   
-
 ```
     i2c_device_config_t dev_cfg = {
         .dev_addr_length = I2C_ADDR_BIT_LEN_7,
