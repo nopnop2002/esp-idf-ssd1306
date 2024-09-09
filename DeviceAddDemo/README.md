@@ -9,8 +9,7 @@ If you want to use SSD1306 and other i2c/spi devices at the same time, please fo
 
 # Using i2c interface
 
-### Case 1
-Use multiple i2c devices on one i2c bus.   
+### Use multiple i2c devices on one i2c bus.   
 SCL and SDA are shared by all devices.   
 ```
 I2C_NUM_0 --+-- I2C SSD1306
@@ -100,8 +99,6 @@ We need to run this code on the second device.
 SSD1306 and other device can use different frequencies.   
 
 ```
-    // We need to load bus_handle from somewhere.
-
     i2c_device_config_t dev_cfg = {
         .dev_addr_length = I2C_ADDR_BIT_LEN_7,
         .device_address = I2C_ADDRESS2,
@@ -142,8 +139,7 @@ The i2c driver must be installed before using this initialization function.
 
 ---
 
-### Case 2
-Use multiple i2c devices on two i2c bus.   
+### Use multiple i2c devices on two i2c bus.   
 SCL and SDA each use separate GPIOs.   
 Install the i2c master driver for each of I2C_NUM_0 and I2C_NUM_1.   
 The frequencies of I2C_NUM_0 and I2C_NUM_1 can be set completely independently.   
@@ -180,8 +176,7 @@ Can only be used with XTENSA series.
 
 # Using spi interface
 
-### Case 1
-Use multiple spi devices on one spi bus.   
+### Use multiple spi devices on one spi bus.   
 MOSI and SCLK are shared by all devices.   
 ```
 SPI2_HOST --+-- SPI SSD1306
@@ -243,8 +238,7 @@ The spi driver must be installed before using this initialization function.
     spi_device_add(&dev, CONFIG_CS_GPIO, CONFIG_DC_GPIO, CONFIG_RESET_GPIO);
 ```
 
-### Case 2
-Use multiple spi devices on two spi bus.   
+### Use multiple spi devices on two spi bus.   
 MOSI and SCLK each use separate GPIOs.   
 Install the spi master driver for each of SPI2_HOST and SPI3_HOST.   
 ```
