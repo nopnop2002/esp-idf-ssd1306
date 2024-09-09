@@ -74,7 +74,7 @@ We need to run this code on the first i2c device.
     i2c_master_bus_config_t i2c_mst_config = {
         .clk_source = I2C_CLK_SRC_DEFAULT,
         .glitch_ignore_cnt = 7,
-        .i2c_port = I2C_NUM,
+        .i2c_port = I2C_NUM_0,
         .scl_io_num = scl,
         .sda_io_num = sda,
         .flags.enable_internal_pullup = true,
