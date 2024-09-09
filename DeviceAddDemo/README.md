@@ -25,7 +25,7 @@ I2C_NUM_1 --+-- I2C SSD1306
 
 
 #### Legacy driver
-Under ESP-IDF V5.2 or later, this project uses the new I2C driver, but there is an option to force the use of the legacy I2C driver.
+Under ESP-IDF V5.2 or later, this project uses the new I2C driver, but there is an option to force the use of the legacy I2C driver.   
 SSD1306 and other device use the same frequency.   
 __Please note that the maximum i2c clock frequency of SSD1306 is 400KHz.__   
 ```
