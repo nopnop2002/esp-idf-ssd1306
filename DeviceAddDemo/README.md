@@ -74,7 +74,7 @@ The i2c driver must be installed before using this initialization function.
     ESP_ERROR_CHECK(i2c_param_config(I2C_NUM_0, &i2c_config));
     ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM_0, I2C_MODE_MASTER, 0, 0, 0));
 
-    // add new device to i2c bus
+    // add SSD1306 to i2c bus
     i2c_device_add(&dev, I2C_NUM_0, CONFIG_RESET_GPIO);
 ```
 
@@ -142,7 +142,7 @@ The i2c driver must be installed before using this initialization function.
     i2c_master_bus_handle_t bus_handle;
     ESP_ERROR_CHECK(i2c_new_master_bus(&i2c_mst_config, &bus_handle));
 
-    // add new device to i2c bus
+    // add SSD1306 to i2c bus
     i2c_bus_add(&dev, bus_handle, I2C_NUM_0, CONFIG_RESET_GPIO);
 ```
 
@@ -250,7 +250,7 @@ The spi driver must be installed before using this initialization function.
     ESP_LOGI(tag, "spi_bus_initialize=%d",ret);
     assert(ret==ESP_OK);
 
-    // add new device to spi bus
+    // add SSD1306 to spi bus
     spi_device_add(&dev, CONFIG_CS_GPIO, CONFIG_DC_GPIO, CONFIG_RESET_GPIO);
 ```
 
