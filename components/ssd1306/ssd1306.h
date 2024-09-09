@@ -4,6 +4,8 @@
 #include "driver/spi_master.h"
 #if (ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 2, 0))
 #include "driver/i2c_master.h"
+#else
+#include "driver/i2c.h"
 #endif
 
 // Following definitions are bollowed from 
@@ -74,8 +76,6 @@ Usage:
 #define I2C_ADDRESS 0x3C
 #define SPI_ADDRESS 0xFF
 
-#define I2C_DRIVER_NOT_INSTALL -1
-
 typedef enum {
 	SCROLL_RIGHT = 1,
 	SCROLL_LEFT = 2,
@@ -96,13 +96,14 @@ typedef struct {
 	int _height;
 	int _pages;
 	int _dc;
-	spi_device_handle_t _SPIHandle;
 	bool _scEnable;
 	int _scStart;
 	int _scEnd;
 	int _scDirection;
 	PAGE_t _page[8];
 	bool _flip;
+	i2c_port_t _i2c_num;
+	spi_device_handle_t _SPIHandle;
 } SSD1306_t;
 
 #ifdef __cplusplus
@@ -141,17 +142,17 @@ void ssd1306_fadeout(SSD1306_t * dev);
 void ssd1306_dump(SSD1306_t dev);
 void ssd1306_dump_page(SSD1306_t * dev, int page, int seg);
 
-#if CONFIG_SPI_INTERFACE
-void spi_clock_speed(int speed);
-#endif
 void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset);
-void i2c_device_add(SSD1306_t * dev, i2c_master_bus_handle_t bus_handle, int16_t reset);
+void i2c_device_add(SSD1306_t * dev, i2c_port_t i2c_num, int16_t reset);
+void i2c_bus_add(SSD1306_t * dev, i2c_master_bus_handle_t bus_handle, i2c_port_t i2c_num, int16_t reset);
 void i2c_init(SSD1306_t * dev, int width, int height);
 void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int width);
 void i2c_contrast(SSD1306_t * dev, int contrast);
 void i2c_hardware_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll);
 
-void spi_master_init(SSD1306_t * dev, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int16_t GPIO_CS, int16_t GPIO_DC, int16_t GPIO_RESET);
+void spi_clock_speed(int speed);
+void spi_master_init(SSD1306_t * dev, int16_t mosi, int16_t sclk, int16_t cs, int16_t dc, int16_t reset);
+void spi_device_add(SSD1306_t * dev, int16_t cs, int16_t dc, int16_t reset);
 bool spi_master_write_byte(spi_device_handle_t SPIHandle, const uint8_t* Data, size_t DataLength );
 bool spi_master_write_command(SSD1306_t * dev, uint8_t Command );
 bool spi_master_write_data(SSD1306_t * dev, const uint8_t* Data, size_t DataLength );

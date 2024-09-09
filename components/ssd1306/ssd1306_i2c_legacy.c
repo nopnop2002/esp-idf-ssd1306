@@ -19,25 +19,21 @@
 #endif
 
 #define I2C_MASTER_FREQ_HZ 400000 // I2C clock of SSD1306 can run at 400 kHz max.
-#define I2C_TICKS_TO_WAIT 100     // Maximum ticks to wait before issuing a timeout.
+#define I2C_TICKS_TO_WAIT 100	  // Maximum ticks to wait before issuing a timeout.
 
 void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 {
 	ESP_LOGI(TAG, "Legacy i2c driver is used");
-	if (sda != I2C_DRIVER_NOT_INSTALL && scl != I2C_DRIVER_NOT_INSTALL) {
-		i2c_config_t i2c_config = {
-			.mode = I2C_MODE_MASTER,
-			.sda_io_num = sda,
-			.scl_io_num = scl,
-			.sda_pullup_en = GPIO_PULLUP_ENABLE,
-			.scl_pullup_en = GPIO_PULLUP_ENABLE,
-			.master.clk_speed = I2C_MASTER_FREQ_HZ
-		};
-		ESP_ERROR_CHECK(i2c_param_config(I2C_NUM, &i2c_config));
-		ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM, I2C_MODE_MASTER, 0, 0, 0));
-	} else {
-		ESP_LOGW(TAG, "Will not install i2c master driver");
-	}
+	i2c_config_t i2c_config = {
+		.mode = I2C_MODE_MASTER,
+		.sda_io_num = sda,
+		.scl_io_num = scl,
+		.sda_pullup_en = GPIO_PULLUP_ENABLE,
+		.scl_pullup_en = GPIO_PULLUP_ENABLE,
+		.master.clk_speed = I2C_MASTER_FREQ_HZ
+	};
+	ESP_ERROR_CHECK(i2c_param_config(I2C_NUM, &i2c_config));
+	ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM, I2C_MODE_MASTER, 0, 0, 0));
 
 	if (reset >= 0) {
 		//gpio_pad_select_gpio(reset);
@@ -47,8 +43,41 @@ void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 		vTaskDelay(50 / portTICK_PERIOD_MS);
 		gpio_set_level(reset, 1);
 	}
+
 	dev->_address = I2C_ADDRESS;
 	dev->_flip = false;
+	dev->_i2c_num = I2C_NUM;
+}
+
+void i2c_device_add(SSD1306_t * dev, i2c_port_t i2c_num, int16_t reset)
+{
+	ESP_LOGI(TAG, "Legacy i2c driver is used");
+	ESP_LOGW(TAG, "Will not install i2c master driver");
+#if 0
+	i2c_config_t i2c_config = {
+		.mode = I2C_MODE_MASTER,
+		.sda_io_num = sda,
+		.scl_io_num = scl,
+		.sda_pullup_en = GPIO_PULLUP_ENABLE,
+		.scl_pullup_en = GPIO_PULLUP_ENABLE,
+		.master.clk_speed = I2C_MASTER_FREQ_HZ
+	};
+	ESP_ERROR_CHECK(i2c_param_config(I2C_NUM, &i2c_config));
+	ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM, I2C_MODE_MASTER, 0, 0, 0));
+#endif
+
+	if (reset >= 0) {
+		//gpio_pad_select_gpio(reset);
+		gpio_reset_pin(reset);
+		gpio_set_direction(reset, GPIO_MODE_OUTPUT);
+		gpio_set_level(reset, 0);
+		vTaskDelay(50 / portTICK_PERIOD_MS);
+		gpio_set_level(reset, 1);
+	}
+
+	dev->_address = I2C_ADDRESS;
+	dev->_flip = false;
+	dev->_i2c_num = i2c_num;
 }
 
 void i2c_init(SSD1306_t * dev, int width, int height) {
@@ -62,11 +91,11 @@ void i2c_init(SSD1306_t * dev, int width, int height) {
 	i2c_master_start(cmd);
 	i2c_master_write_byte(cmd, (dev->_address << 1) | I2C_MASTER_WRITE, true);
 	i2c_master_write_byte(cmd, OLED_CONTROL_BYTE_CMD_STREAM, true);
-	i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_OFF, true);	            // AE
-	i2c_master_write_byte(cmd, OLED_CMD_SET_MUX_RATIO, true);           // A8
+	i2c_master_write_byte(cmd, OLED_CMD_DISPLAY_OFF, true);				// AE
+	i2c_master_write_byte(cmd, OLED_CMD_SET_MUX_RATIO, true);			// A8
 	if (dev->_height == 64) i2c_master_write_byte(cmd, 0x3F, true);
 	if (dev->_height == 32) i2c_master_write_byte(cmd, 0x1F, true);
-	i2c_master_write_byte(cmd, OLED_CMD_SET_DISPLAY_OFFSET, true);      // D3
+	i2c_master_write_byte(cmd, OLED_CMD_SET_DISPLAY_OFFSET, true);		// D3
 	i2c_master_write_byte(cmd, 0x00, true);
 	//i2c_master_write_byte(cmd, OLED_CONTROL_BYTE_DATA_STREAM, true);	// 40
 	i2c_master_write_byte(cmd, OLED_CMD_SET_DISPLAY_START_LINE, true);	// 40
@@ -102,7 +131,7 @@ void i2c_init(SSD1306_t * dev, int width, int height) {
 
 	i2c_master_stop(cmd);
 
-	esp_err_t res = i2c_master_cmd_begin(I2C_NUM, cmd, I2C_TICKS_TO_WAIT);
+	esp_err_t res = i2c_master_cmd_begin(dev->_i2c_num, cmd, I2C_TICKS_TO_WAIT);
 	if (res == ESP_OK) {
 		ESP_LOGI(TAG, "OLED configured successfully");
 	} else {
@@ -138,7 +167,7 @@ void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int
 	i2c_master_write_byte(cmd, 0xB0 | _page, true);
 
 	i2c_master_stop(cmd);
-	esp_err_t res = i2c_master_cmd_begin(I2C_NUM, cmd, I2C_TICKS_TO_WAIT);
+	esp_err_t res = i2c_master_cmd_begin(dev->_i2c_num, cmd, I2C_TICKS_TO_WAIT);
 	if (res != ESP_OK) {
 		ESP_LOGE(TAG, "Image command failed. code: 0x%.2X", res);
 	}
@@ -151,7 +180,7 @@ void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int
 	i2c_master_write(cmd, images, width, true);
 	i2c_master_stop(cmd);
 
-	res = i2c_master_cmd_begin(I2C_NUM, cmd, I2C_TICKS_TO_WAIT);
+	res = i2c_master_cmd_begin(dev->_i2c_num, cmd, I2C_TICKS_TO_WAIT);
 	if (res != ESP_OK) {
 		ESP_LOGE(TAG, "Image command failed. code: 0x%.2X", res);
 	}
@@ -171,7 +200,7 @@ void i2c_contrast(SSD1306_t * dev, int contrast) {
 	i2c_master_write_byte(cmd, _contrast, true);
 	i2c_master_stop(cmd);
 
-	esp_err_t res = i2c_master_cmd_begin(I2C_NUM, cmd, I2C_TICKS_TO_WAIT);
+	esp_err_t res = i2c_master_cmd_begin(dev->_i2c_num, cmd, I2C_TICKS_TO_WAIT);
 	if (res != ESP_OK) {
 		ESP_LOGE(TAG, "Contrast command failed. code: 0x%.2X", res);
 	}
@@ -252,7 +281,7 @@ void i2c_hardware_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll) {
 
 	i2c_master_stop(cmd);
 
-	esp_err_t res = i2c_master_cmd_begin(I2C_NUM, cmd, I2C_TICKS_TO_WAIT);
+	esp_err_t res = i2c_master_cmd_begin(dev->_i2c_num, cmd, I2C_TICKS_TO_WAIT);
 	if (res != ESP_OK) {
 		ESP_LOGE(TAG, "Scroll command failed. code: 0x%.2X", res);
 	}

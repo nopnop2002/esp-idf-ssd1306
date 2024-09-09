@@ -29,30 +29,30 @@ void spi_clock_speed(int speed) {
 	clock_speed_hz = speed;
 }
 
-void spi_master_init(SSD1306_t * dev, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int16_t GPIO_CS, int16_t GPIO_DC, int16_t GPIO_RESET)
+void spi_master_init(SSD1306_t * dev, int16_t mosi, int16_t sclk, int16_t cs, int16_t dc, int16_t reset)
 {
 	esp_err_t ret;
 
-	gpio_reset_pin( GPIO_CS );
-	gpio_set_direction( GPIO_CS, GPIO_MODE_OUTPUT );
-	gpio_set_level( GPIO_CS, 0 );
+	gpio_reset_pin( cs );
+	gpio_set_direction( cs, GPIO_MODE_OUTPUT );
+	gpio_set_level( cs, 0 );
 
-	gpio_reset_pin( GPIO_DC );
-	gpio_set_direction( GPIO_DC, GPIO_MODE_OUTPUT );
-	gpio_set_level( GPIO_DC, 0 );
+	gpio_reset_pin( dc );
+	gpio_set_direction( dc, GPIO_MODE_OUTPUT );
+	gpio_set_level( dc, 0 );
 
-	if ( GPIO_RESET >= 0 ) {
-		gpio_reset_pin( GPIO_RESET );
-		gpio_set_direction( GPIO_RESET, GPIO_MODE_OUTPUT );
-		gpio_set_level( GPIO_RESET, 0 );
+	if ( reset >= 0 ) {
+		gpio_reset_pin( reset );
+		gpio_set_direction( reset, GPIO_MODE_OUTPUT );
+		gpio_set_level( reset, 0 );
 		vTaskDelay( pdMS_TO_TICKS( 100 ) );
-		gpio_set_level( GPIO_RESET, 1 );
+		gpio_set_level( reset, 1 );
 	}
 
 	spi_bus_config_t spi_bus_config = {
-		.mosi_io_num = GPIO_MOSI,
+		.mosi_io_num = mosi,
 		.miso_io_num = -1,
-		.sclk_io_num = GPIO_SCLK,
+		.sclk_io_num = sclk,
 		.quadwp_io_num = -1,
 		.quadhd_io_num = -1,
 		.max_transfer_sz = 0,
@@ -68,17 +68,74 @@ void spi_master_init(SSD1306_t * dev, int16_t GPIO_MOSI, int16_t GPIO_SCLK, int1
 	memset( &devcfg, 0, sizeof( spi_device_interface_config_t ) );
 	//devcfg.clock_speed_hz = SPI_DEFAULT_FREQUENCY;
 	devcfg.clock_speed_hz = clock_speed_hz;
-	devcfg.spics_io_num = GPIO_CS;
+	devcfg.spics_io_num = cs;
 	devcfg.queue_size = 1;
 
 	spi_device_handle_t handle;
 	ret = spi_bus_add_device( HOST_ID, &devcfg, &handle);
 	ESP_LOGI(TAG, "spi_bus_add_device=%d",ret);
 	assert(ret==ESP_OK);
-	dev->_dc = GPIO_DC;
-	dev->_SPIHandle = handle;
+
+	dev->_dc = dc;
 	dev->_address = SPI_ADDRESS;
 	dev->_flip = false;
+	dev->_SPIHandle = handle;
+}
+
+void spi_device_add(SSD1306_t * dev, int16_t cs, int16_t dc, int16_t reset)
+{
+	ESP_LOGW(TAG, "Will not install spi master driver");
+	esp_err_t ret;
+
+	gpio_reset_pin( cs );
+	gpio_set_direction( cs, GPIO_MODE_OUTPUT );
+	gpio_set_level( cs, 0 );
+
+	gpio_reset_pin( dc );
+	gpio_set_direction( dc, GPIO_MODE_OUTPUT );
+	gpio_set_level( dc, 0 );
+
+	if ( reset >= 0 ) {
+		gpio_reset_pin( reset );
+		gpio_set_direction( reset, GPIO_MODE_OUTPUT );
+		gpio_set_level( reset, 0 );
+		vTaskDelay( pdMS_TO_TICKS( 100 ) );
+		gpio_set_level( reset, 1 );
+	}
+
+#if 0
+	spi_bus_config_t spi_bus_config = {
+		.mosi_io_num = mosi,
+		.miso_io_num = -1,
+		.sclk_io_num = sclk,
+		.quadwp_io_num = -1,
+		.quadhd_io_num = -1,
+		.max_transfer_sz = 0,
+		.flags = 0
+	};
+
+	ESP_LOGI(TAG, "SPI HOST_ID=%d", HOST_ID);
+	ret = spi_bus_initialize( HOST_ID, &spi_bus_config, SPI_DMA_CH_AUTO );
+	ESP_LOGI(TAG, "spi_bus_initialize=%d",ret);
+	assert(ret==ESP_OK);
+#endif
+
+	spi_device_interface_config_t devcfg;
+	memset( &devcfg, 0, sizeof( spi_device_interface_config_t ) );
+	//devcfg.clock_speed_hz = SPI_DEFAULT_FREQUENCY;
+	devcfg.clock_speed_hz = clock_speed_hz;
+	devcfg.spics_io_num = cs;
+	devcfg.queue_size = 1;
+
+	spi_device_handle_t handle;
+	ret = spi_bus_add_device( HOST_ID, &devcfg, &handle);
+	ESP_LOGI(TAG, "spi_bus_add_device=%d",ret);
+	assert(ret==ESP_OK);
+
+	dev->_dc = dc;
+	dev->_address = SPI_ADDRESS;
+	dev->_flip = false;
+	dev->_SPIHandle = handle;
 }
 
 
