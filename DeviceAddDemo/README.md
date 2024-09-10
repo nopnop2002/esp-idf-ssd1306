@@ -50,12 +50,14 @@ We only need to run this code once.
     ESP_ERROR_CHECK(i2c_driver_install(I2C_NUM_0, I2C_MODE_MASTER, 0, 0, 0));
 ```
 
-This project uses the following functions to install the i2c driver.
+This project uses the following functions to install the i2c driver.   
+This function determines which i2c port to use inside the function.   
 ```
 i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
 ```
 
 This project allows you to use an initialization function that does not install the i2c driver.   
+This function specifies the i2c port to use as the function argument.   
 ```
 i2c_device_add(&dev, i2c_num, CONFIG_RESET_GPIO);
 ```
@@ -119,11 +121,13 @@ We need to run this code on the second device.
 ```
 
 This project uses the following functions to install the i2c driver.
+This function determines which i2c port to use inside the function.   
 ```
 i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
 ```
 
 This project allows you to use an initialization function that does not install the i2c driver.   
+This function specifies the i2c port to use as the function argument.   
 ```
 i2c_bus_add(&dev, bus_handle, i2c_num, CONFIG_RESET_GPIO);
 ```
