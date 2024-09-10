@@ -62,8 +62,41 @@ cc -o bdf2c bdf2c.c
 ```
 ssd1306_clear_screen(&dev, false);
 ssd1306_contrast(&dev, 0xff);
-show_bdf_font_text(&dev, __ncenR12_bitmap__, "Hello World", 0, 0); // You can change font file
+show_bdf_font_text(&dev, __ncenR12_bitmap__, "Hello World", 0, 0);
 show_bdf_font_code(&dev, __battery_bitmap__, 48, 100, 0);
 show_bdf_font_code(&dev, __battery_bitmap__, 49, 110, 0);
 show_bdf_font_code(&dev, __battery_bitmap__, 50, 120, 0);
+```
+
+
+# Font display position
+The font's display position starts from the upper left corner of this image.   
+Therefore, there will be some white space above the font.   
+```
+________,________,________,
+________,________,________,
+________,________,________,
+________,________,________,
+________,________,________,
+________,________,________,
+________,________,________,
+________,________,________,
+_____X__,________,________,
+_____X__,________,________,
+____XXX_,________,________,
+____XXX_,________,________,
+___X_XX_,________,________,
+___X__XX,________,________,
+___X__XX,________,________,
+__XXXXXX,X_______,________,
+__X____X,X_______,________,
+_X_____X,X_______,________,
+_X______,XX______,________,
+XXXX__XX,XXX_____,________,
+________,________,________,
+________,________,________,
+________,________,________,
+________,________,________,
+________,________,________,
+________,________,________,
 ```
