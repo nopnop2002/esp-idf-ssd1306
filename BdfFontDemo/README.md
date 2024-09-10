@@ -21,6 +21,8 @@ This project is a demo that displays BDF format fonts.
  I used [this](https://github.com/pixelmatix/bdf2c) repository.   
  Thank you Pixelmatix for releasing useful software.   
 ```
+cd esp-idf-ssd1306/BdfFontDemo
+
 cc -o bdf2c bdf2c.c
 
 ./bdf2c -n ncenR12 -b < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/bdf/ncenR12.bdf > main/ncenR12.h
