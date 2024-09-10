@@ -56,7 +56,7 @@ ________
 _ indicates a value less than 32.
 
 Setting the threshold to 128 will only show # pixels.   
-The first and second fonts in the photo use the same font file, but are displayed with different thresholds.   
+The first and second fonts in the photo use the same font file (consola.ttf), but are displayed with different thresholds.   
 ```
 ________
 ________
