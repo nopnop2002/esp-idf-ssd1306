@@ -1,6 +1,8 @@
 # FreeTypeDemo for SSD1306
 
-FreeType components are published in the ESP Component Registry.   
+FreeType components are available from the ESP Component Registry.   
+https://components.espressif.com/components/espressif/freetype/   
+
 The github page is [here](https://github.com/espressif/idf-extra-components/tree/master/freetype).   
 This component can convert a True Type Font to a bitmap image.   
 
