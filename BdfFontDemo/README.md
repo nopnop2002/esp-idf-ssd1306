@@ -126,7 +126,7 @@ C6
 ENDCHAR
 ```
 
-Fonts that take bounding box (BBX) into consideration are as follows.   
+Fonts that take bounding box (BBX) into consideration change as follows.   
 ```
 STARTCHAR d
 ENCODING 100
