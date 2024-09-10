@@ -104,10 +104,15 @@ ________,________,________,
 ```
 
 # Font bounding box
-Fonts are stored as follows.   
-Each character has a bounding box (BBX).   
+BDF font file has a font bounding box (FONTBOUNDINGBOX).   
+This shows that the origin of the font is X=-3, Y=-6.   
+```
+FONTBOUNDINGBOX 21 26 -3 -6
+```
+
+Each character has a character bounding box (BBX).   
 This BBX value indicates that it should be moved one pixel to the right when displayed.   
-By providing a bounding box (BBX), this can omit the leftmost blank space.   
+By providing a character bounding box (BBX), this can omit the leftmost blank space.   
 ```
 STARTCHAR d
 ENCODING 100
@@ -130,7 +135,7 @@ C6
 ENDCHAR
 ```
 
-Fonts that take bounding box (BBX) into consideration change as follows.   
+Fonts that take character bounding box (BBX) into consideration change as follows.   
 ```
 STARTCHAR d
 ENCODING 100
@@ -153,8 +158,8 @@ BITMAP
 ENDCHAR
 ```
 
-
-This image takes into account the bounding box (BBX) of each character.   
+Both the font bounding box (FONTBOUNDINGBOX) and the character bounding box (BBX) determine the display position.   
+This image takes into account the font bounding box (FONTBOUNDINGBOX) and character bounding box (BBX) of each character.   
 ```
 ________,________,________,
 ________,________,________,
