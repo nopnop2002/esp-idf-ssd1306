@@ -103,7 +103,7 @@ ________,________,________,
 ________,________,________,
 ```
 
-# Font bounding box
+# Font bounding box and character bounding box
 BDF font file has a font bounding box (FONTBOUNDINGBOX).   
 This shows that the origin of the font is X=-3, Y=-6.   
 ```
