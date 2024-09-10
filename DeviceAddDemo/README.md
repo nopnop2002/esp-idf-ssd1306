@@ -36,7 +36,7 @@ I2C_NUM_1 --+-- I2C SSD1306 using 400KHz
 ```
 
 We only need to run this code once.   
-
+No other code is required to use i2c.   
 ```
     i2c_config_t i2c_config = {
         .mode = I2C_MODE_MASTER,
