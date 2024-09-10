@@ -17,6 +17,7 @@ This project is a demo that displays BDF format fonts.
 
 - Convert BDF font files to header files.   
  I used [this](https://github.com/pixelmatix/bdf2c) repository.   
+ Thank you Pixelmatix for releasing useful software.   
 ```
 cc -o bdf2c bdf2c.c
 
@@ -44,7 +45,7 @@ cc -o bdf2c bdf2c.c
 ./bdf2c -B < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/pbm/Scroll-o-Sprites.bdf | more
 ```
 
-- Add header files.
+- Add header files to main.c.
 ```
 #include "ssd1306.h"
 #include "ncenR12.h"
