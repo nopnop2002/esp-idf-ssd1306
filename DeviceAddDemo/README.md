@@ -51,7 +51,7 @@ No other code is required to use i2c.
 ```
 
 This project uses the following functions to install the i2c driver.   
-This function determines which i2c port to use inside the function.   
+This function determines which I2C port to use within the function according to the config value.   
 ```
 i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
 ```
@@ -122,7 +122,7 @@ We need to run this code on the second device.
 ```
 
 This project uses the following functions to install the i2c driver.   
-This function determines which i2c port to use inside the function.   
+This function determines which I2C port to use within the function according to the config value.   
 ```
 i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
 ```
