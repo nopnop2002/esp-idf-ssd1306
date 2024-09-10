@@ -55,7 +55,8 @@ ________
 . indicates that the value is greater than 32 and less than 64.   
 _ indicates a value less than 32.
 
-Setting the threshold to 128 will only show # pixels.
+Setting the threshold to 128 will only show # pixels.   
+The first and second fonts in the photo use the same font file, but are displayed with different thresholds.   
 ```
 ________
 ________
