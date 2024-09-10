@@ -81,7 +81,8 @@ The i2c driver must be installed before using this initialization function.
 ```
 
 #### New i2c driver
-SSD1306 and other devices use different frequencies.   
+SSD1306 and other devices can use different frequencies.   
+This is one of the advantages of the new i2c driver.   
 ```
 I2C_NUM_1 --+-- I2C SSD1306 using 400KHz
             +---Any I2C Device using 100KHz
