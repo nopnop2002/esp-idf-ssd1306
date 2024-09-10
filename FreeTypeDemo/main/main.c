@@ -110,6 +110,7 @@ static void render_text(SSD1306_t * dev, int xpos, int ypos, int threshold, char
 		for (int iy = 0; iy < BITMAP_HEIGHT; iy++) {
 			for (int ix = 0; ix < width; ix++) {
 				int val = s_bitmap[iy][ix];
+				ESP_LOGD(tag, "val=%d", val);
 				if (val > 128) {
 					putchar('#');
 				} else if (val > 64) {
@@ -135,9 +136,10 @@ static void render_text(SSD1306_t * dev, int xpos, int ypos, int threshold, char
 			bitmap[i] = ssd1306_rotate_byte(bitmap[i]);
 		}
 		//ESP_LOG_BUFFER_HEXDUMP(tag, bitmap, BITMAP_HEIGHT, ESP_LOG_INFO);
-		ssd1306_bitmaps(dev, xpos, ypos, bitmap, 8, BITMAP_HEIGHT, false);
+		_ssd1306_bitmaps(dev, xpos, ypos, bitmap, 8, BITMAP_HEIGHT, false);
 		xpos += slot->advance.x / 64;
 	}
+	ssd1306_show_buffer(dev);
 }
 
 void app_main(void)
