@@ -204,7 +204,7 @@ SPI3_HOST --+-- SPI SSD1306
             +---Any SPI Device
 ```
 
-SSD1306 and other devices use different frequencies.
+SSD1306 and other devices can use different frequencies.
 ```
 SPI2_HOST --+-- SPI SSD1306 using 1MHz
             +---Any I2C Device using 2MHz
