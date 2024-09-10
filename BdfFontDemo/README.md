@@ -159,7 +159,7 @@ ENDCHAR
 ```
 
 Both the font bounding box (FONTBOUNDINGBOX) and the character bounding box (BBX) determine the display position.   
-This image takes into account the font bounding box (FONTBOUNDINGBOX) and character bounding box (BBX) of each character.   
+This image takes into account the font bounding box (FONTBOUNDINGBOX) and character bounding box (BBX).   
 ```
 ________,________,________,
 ________,________,________,
