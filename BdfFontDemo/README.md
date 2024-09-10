@@ -105,7 +105,7 @@ ________,________,________,
 
 # Font bounding box and character bounding box
 BDF font file has a font bounding box (FONTBOUNDINGBOX).   
-This shows that the origin of the font is X=-3, Y=-6.   
+This indicates that there is a 6 pixel margin below the font.   
 ```
 FONTBOUNDINGBOX 21 26 -3 -6
 ```
@@ -155,6 +155,42 @@ BITMAP
 63
 33
 1D8
+ENDCHAR
+```
+
+Fonts that take character bounding box (BBX) and font bounding box (FONTBOUNDINGBOX) into consideration change as follows.   
+```
+STARTCHAR d
+ENCODING 100
+SWIDTH 574 0
+DWIDTH 10 0
+BBX 9 12 0 0
+BITMAP
+00
+00
+00
+00
+00
+00
+00
+07
+03
+03
+03
+1F
+33
+63
+63
+63
+63
+33
+1D8
+00
+00
+00
+00
+00
+00
 ENDCHAR
 ```
 
