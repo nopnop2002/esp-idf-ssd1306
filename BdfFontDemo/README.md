@@ -126,6 +126,30 @@ C6
 ENDCHAR
 ```
 
+Fonts that take bounding box (BBX) into consideration are as follows.   
+```
+STARTCHAR d
+ENCODING 100
+SWIDTH 574 0
+DWIDTH 10 0
+BBX 9 12 0 0
+BITMAP
+07
+03
+03
+03
+1F
+33
+63
+63
+63
+63
+33
+1D8
+ENDCHAR
+```
+
+
 This image takes into account the bounding box (BBX) of each character.   
 ```
 ________,________,________,
