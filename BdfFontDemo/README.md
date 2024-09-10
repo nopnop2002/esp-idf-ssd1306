@@ -103,6 +103,7 @@ ________,________,________,
 
 Fonts are stored as follows.   
 Each character has a bounding box (BBX).   
+This BBX value indicates that it should be moved one pixel to the right when displayed.   
 ```
 STARTCHAR d
 ENCODING 100
