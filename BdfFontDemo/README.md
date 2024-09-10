@@ -164,8 +164,9 @@ STARTCHAR d
 ENCODING 100
 SWIDTH 574 0
 DWIDTH 10 0
-BBX 9 12 0 0
+BBX 9 26 0 0
 BITMAP
+00
 00
 00
 00
@@ -197,6 +198,7 @@ ENDCHAR
 Both the font bounding box (FONTBOUNDINGBOX) and the character bounding box (BBX) determine the display position.   
 This image takes into account the font bounding box (FONTBOUNDINGBOX) and character bounding box (BBX).   
 ```
+________,________,________,
 ________,________,________,
 ________,________,________,
 ________,________,________,
