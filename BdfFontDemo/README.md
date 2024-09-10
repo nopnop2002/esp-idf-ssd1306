@@ -101,6 +101,7 @@ ________,________,________,
 ________,________,________,
 ```
 
+# Font bounding box
 Fonts are stored as follows.   
 Each character has a bounding box (BBX).   
 This BBX value indicates that it should be moved one pixel to the right when displayed.   
