@@ -121,7 +121,7 @@ We need to run this code on the second device.
     ESP_ERROR_CHECK(i2c_master_bus_add_device(bus_handle, &dev_cfg, &dev_handle));
 ```
 
-This project uses the following functions to install the i2c driver.
+This project uses the following functions to install the i2c driver.   
 This function determines which i2c port to use inside the function.   
 ```
 i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
