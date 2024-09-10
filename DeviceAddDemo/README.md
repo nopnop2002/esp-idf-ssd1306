@@ -211,7 +211,7 @@ SPI2_HOST --+-- SPI SSD1306 using 1MHz
 ```
 
 We only need to run this code once.   
-
+No other code is required to use spi.
 ```
     spi_bus_config_t spi_bus_config = {
         .mosi_io_num = CONFIG_MOSI_GPIO,
