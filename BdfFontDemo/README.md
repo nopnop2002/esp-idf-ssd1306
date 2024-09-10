@@ -9,7 +9,9 @@ This library contains a lot of BDF format fonts.
 This project is a demo that displays BDF format fonts.   
 
 # How to use BDF Font
-- Download the BDF font file.
+- Download the BDF font file.   
+ Thank you olikraus for releasing useful software.   
+
  ```
  git clone https://github.com/olikraus/u8g2
  ls $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/bdf
