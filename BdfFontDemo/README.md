@@ -250,8 +250,19 @@ This shows the font information for the characters.
  |  |  +------------------ BBX X pixel
  |  +--------------------- Font width pixel
  +------------------------ Encoding
-
 ```
+
+You can find out the width (in bytes) of your font using the following calculation:
+```
+{Number of font patterns} / ({Last row in Y direction} - {First row in Y direction} + 1)
+```
+
+In ths case:
+```
+39 / (20 - 8 + 1) = 3
+```
+
+
 This marks the end of the font.   
 
 ```
