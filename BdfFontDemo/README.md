@@ -252,7 +252,7 @@ This shows the font information for the characters.
  +------------------------ Encoding
 ```
 
-You can find out the width (in bytes) of your font using the following calculation:
+You can find out the width (in bytes) of this font using the following calculation:
 ```
 {Number of font patterns} / ({Last row in Y direction} - {First row in Y direction} + 1)
 ```
