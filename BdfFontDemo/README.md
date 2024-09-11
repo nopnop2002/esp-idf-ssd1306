@@ -24,7 +24,11 @@ This project is a demo that displays BDF format fonts.
 cd esp-idf-ssd1306/BdfFontDemo
 
 cc -o bdf2c bdf2c.c
+```
 
+Specify the font variable name with the -n option.   
+Characters that cannot be used in C language variable names will result in an error during compilation.   
+```
 ./bdf2c -n ncenR12 -b < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/bdf/ncenR12.bdf > main/ncenR12.h
 
 ./bdf2c -n timR12 -b < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/bdf/timR12.bdf > main/timR12.h
@@ -33,6 +37,7 @@ cc -o bdf2c bdf2c.c
 
 ./bdf2c -n Scroll_o_Sprites -b < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/pbm/Scroll-o-Sprites.bdf > main/Scroll-o-Sprites.h
 ```
+
 
 - BDF font files can be viewed with the following command.
 ```
