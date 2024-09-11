@@ -47,7 +47,6 @@ cc -o bdf2c bdf2c.c
 
 - Add header files to main.c.
 ```
-#include "ssd1306.h"
 #include "ncenR12.h"
 #include "timR12.h"
 #include "emoticons.h"
