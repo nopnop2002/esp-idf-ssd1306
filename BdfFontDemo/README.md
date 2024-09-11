@@ -280,6 +280,10 @@ This is a bitmap of 24*13 pixels.
 0x00,0x00,0x00,
 ```
 
+You can display this bitmap with the following function.   
+```
+ssd1306_bitmaps(&dev, xpos, ypos+bdf_font.y_start, bitmap, 24, 13, false);
+```
 
 This marks the end of the font.   
 
