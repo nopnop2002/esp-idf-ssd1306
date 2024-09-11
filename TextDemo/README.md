@@ -4,3 +4,8 @@
 
 This repository uses [this](https://github.com/dhepper/font8x8) font file by default, but you can also use True Type Font and BDF Font.
 
+Using BDF Font.   
+https://github.com/nopnop2002/esp-idf-ssd1306/tree/master/BdfFontDemo   
+
+Using True Type Font.   
+https://github.com/nopnop2002/esp-idf-ssd1306/tree/master/FreeTypeDemo   
