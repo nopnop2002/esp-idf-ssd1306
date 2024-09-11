@@ -544,6 +544,8 @@ void ReadBdf(FILE * bdf, FILE * out, const char *name, int flag)
 	int bbw;
 	int bbh;
 	int width;
+	int _bbx;
+	int _width;
 	unsigned *width_table;
 	unsigned *encoding_table;
 	unsigned char *bitmap;
@@ -671,40 +673,52 @@ void ReadBdf(FILE * bdf, FILE * out, const char *name, int flag)
 		bby = atoi(p);
 	} else if (!strcasecmp(s, "BITMAP")) {
 		if (encoding >= 0 && encoding < 256) {
+		_width = width - fontboundingbox_xoff;
 #if 0
 		fprintf(out, "// %3d $%02x '%s'\n", encoding, encoding, charname);
 		fprintf(out, "//\twidth %d, bbx %d, bby %d, bbw %d, bbh %d\n",
 		width, bbx, bby, bbw, bbh);
 #endif
-		if (flag == 1) {
-			fprintf(out, "// '%s'\n", charname);
-			fprintf(out, "%3d,%d,%d,%d,%d,%d,", encoding, width, bbw, bbh, bbx, bby);
-		} else {
-			fprintf(out, "encoding=%3d charname='%s' widrh=%d bbw=%d bbh=%d bbx=%d bby=%d\n",
-				encoding, charname, width, bbw, bbh, bbx, bby);
-		}
-
 		if (n == chars) {
-		fprintf(stderr, "Too many bitmaps for characters\n");
-		exit(-1);
+			fprintf(stderr, "Too many bitmaps for characters\n");
+			exit(-1);
 		}
 		if (width == INT_MIN) {
-		fprintf(stderr, "character width not specified\n");
+			fprintf(stderr, "character width not specified\n");
 		exit(-1);
 		}
 		//
 		//	Adjust width based on bounding box
 		//
-		if (bbx < 0) {
-		width -= bbx;
-		bbx = 0;
+		//if (bbx < 0) {
+		if (bbx != 0) {
+			width += bbx;
+			//bbx = 0;
 		}
 		if (bbx + bbw > width) {
-		width = bbx + bbw;
+			width = bbx + bbw;
 		}
 		if (Outline) {		// Reserve space for outline border
-		++width;
+			++width;
 		}
+
+		if (fontboundingbox_xoff > 0) {
+			_width = width - fontboundingbox_xoff;
+			_bbx = bbx - fontboundingbox_xoff;
+		} else if (fontboundingbox_xoff < 0) {
+			_width = width + abs(fontboundingbox_xoff);
+			_bbx = bbx + abs(fontboundingbox_xoff);
+		}
+		if (flag == 1) {
+			fprintf(out, "// '%s'\n", charname);
+			fprintf(out, "%3d,%d,%d,%d,%d,%d,", encoding, _width, bbw, bbh, bbx, bby);
+		} else {
+			fprintf(out, "// width=%d fontboundingbox_xoff=%d\n", width, fontboundingbox_xoff);
+			fprintf(out, "// bbx=%d _bbx=%d\n", bbx, _bbx);
+			fprintf(out, "encoding=%3d charname='%s' width=%d bbw=%d bbh=%d bbx=%d bby=%d\n",
+				encoding, charname, _width, bbw, bbh, bbx, bby);
+		}
+
 		width_table[n] = width;
 		encoding_table[n] = encoding;
 		++n;
@@ -717,9 +731,9 @@ void ReadBdf(FILE * bdf, FILE * out, const char *name, int flag)
 		}
 	} else if (!strcasecmp(s, "ENDCHAR")) {
 		if (encoding >= 0 && encoding < 256) {
-		if (bbx) {
+		if (_bbx) {
 			//dump("Befor RotateBitmap", bitmap, bitmap_size);
-			RotateBitmap(bitmap, bbx, fontboundingbox_width,
+			RotateBitmap(bitmap, _bbx, fontboundingbox_width,
 				fontboundingbox_height);
 			//dump("After RotateBitmap", bitmap, bitmap_size);
 		}

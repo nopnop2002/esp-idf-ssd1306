@@ -29,8 +29,6 @@ cc -o bdf2c bdf2c.c
 
 ./bdf2c -n timR12 -b < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/bdf/timR12.bdf > main/timR12.h
 
-./bdf2c -n battery -b < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/battery/battery19.bdf > main/battery.h
-
 ./bdf2c -n emoticons -b < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/emoticons/emoticons21.bdf > main/emoticons.h
 
 ./bdf2c -n Scroll_o_Sprites -b < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/pbm/Scroll-o-Sprites.bdf > main/Scroll-o-Sprites.h
@@ -41,8 +39,6 @@ cc -o bdf2c bdf2c.c
 ./bdf2c -B < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/bdf/ncenR12.bdf | more
 
 ./bdf2c -B < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/bdf/timR12.bdf | more
-
-./bdf2c -B < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/battery/battery19.bdf | more
 
 ./bdf2c -B < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/emoticons/emoticons21.bdf | more
 
