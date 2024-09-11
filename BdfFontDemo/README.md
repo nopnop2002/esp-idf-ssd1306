@@ -304,7 +304,7 @@ This marks the end of the font.
 
 # BDF Font file editor
 I use [this](http://hukka.ncn.fi/?fony).   
-It's work fine on Windows11.   
+It's work fine on Windows10.   
 There are probably many more.   
 
 - Open BDF font file.   
