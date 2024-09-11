@@ -181,9 +181,6 @@ void app_main(void)
 		show_bdf_font_text(&dev, __ncenR12_bitmap__, "Hello World", 0, 0); // You can change font file
 #if CONFIG_SSD1306_128x64
 		show_bdf_font_text(&dev, __timR12_bitmap__, "Hello World", 0, 32); // You can change font file
-		//show_bdf_font_code(&dev, __battery_bitmap__, 51, 100, 32);
-		//show_bdf_font_code(&dev, __battery_bitmap__, 52, 110, 32);
-		//show_bdf_font_code(&dev, __battery_bitmap__, 53, 120, 32);
 #endif
 		vTaskDelay(500);
 
