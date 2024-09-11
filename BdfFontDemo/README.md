@@ -18,7 +18,7 @@ ls $HOME/u8g2/tools/font/bdf
 ```
 
 - Convert BDF font files to header files.   
- I used [this](https://github.com/pixelmatix/bdf2c) repository.   
+ I based it on [this](https://github.com/pixelmatix/bdf2c).   
  Thank you Pixelmatix for releasing useful software.   
 ```
 cd esp-idf-ssd1306/BdfFontDemo
