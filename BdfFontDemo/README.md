@@ -22,7 +22,6 @@ ls $HOME/u8g2/tools/font/bdf
  Thank you Pixelmatix for releasing useful software.   
 ```
 cd esp-idf-ssd1306/BdfFontDemo
-
 cc -o bdf2c bdf2c.c
 ```
 
