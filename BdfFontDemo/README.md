@@ -60,9 +60,6 @@ cc -o bdf2c bdf2c.c
 ssd1306_clear_screen(&dev, false);
 ssd1306_contrast(&dev, 0xff);
 show_bdf_font_text(&dev, __ncenR12_bitmap__, "Hello World", 0, 0);
-show_bdf_font_code(&dev, __battery_bitmap__, 48, 100, 0);
-show_bdf_font_code(&dev, __battery_bitmap__, 49, 110, 0);
-show_bdf_font_code(&dev, __battery_bitmap__, 50, 120, 0);
 ```
 
 
