@@ -97,14 +97,14 @@ ________,________,________,
 
 # Font bounding box and character bounding box
 BDF font file has a font bounding box (FONTBOUNDINGBOX).   
-This means that there is a 3 pixel margin to the left of the all font, and a 6 pixel margin below the all font.   
+This FONTBOUNDINGBOX value indicates that there is a 3 pixel margin to the left of the all font, and a 6 pixel margin below the all font.   
 ```
 FONTBOUNDINGBOX 21 26 -3 -6
 ```
 
-Each character has a character bounding box (BBX).   
-This BBX value indicates that it should be moved one pixel to the right when displayed.   
-By providing a character bounding box (BBX), this can omit the leftmost blank space.   
+Each character has a character-specific bounding box (BBX).
+This BBX value indicates that there should be a 1 pixel margin to the left of this character.
+By providing a character-specific bounding box (BBX), this can omit the leftmost blank space.   
 ```
 STARTCHAR d
 ENCODING 100
@@ -127,7 +127,7 @@ C6
 ENDCHAR
 ```
 
-Fonts that take character bounding box (BBX) into consideration change as follows.   
+Fonts that take character-specific bounding box (BBX) into consideration change as follows.   
 ```
 STARTCHAR d
 ENCODING 100
@@ -150,7 +150,7 @@ BITMAP
 ENDCHAR
 ```
 
-Fonts that take character bounding box (BBX) and font bounding box (FONTBOUNDINGBOX) into consideration change as follows.   
+Fonts that take character-specific bounding box (BBX) and font bounding box (FONTBOUNDINGBOX) into consideration change as follows.   
 ```
 STARTCHAR d
 ENCODING 100
@@ -187,8 +187,8 @@ BITMAP
 ENDCHAR
 ```
 
-Both the font bounding box (FONTBOUNDINGBOX) and character bounding box (BBX) determine which pixels are displayed.   
-This image takes into account the font bounding box (FONTBOUNDINGBOX) and character bounding box (BBX).   
+Both the font bounding box (FONTBOUNDINGBOX) and character-specific bounding box (BBX) determine which pixels are displayed.   
+This image takes into account the font bounding box (FONTBOUNDINGBOX) and character-specific bounding box (BBX).   
 ```
 ________,________,________,
 ________,________,________,
