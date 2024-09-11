@@ -27,7 +27,6 @@ cc -o bdf2c bdf2c.c
 ```
 
 Specify the font variable name with the -n option.   
-Characters that cannot be used in C language variable names will result in an error during compilation.   
 ```
 ./bdf2c -n ncenR12 -b < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/bdf/ncenR12.bdf > main/ncenR12.h
 
@@ -36,6 +35,12 @@ Characters that cannot be used in C language variable names will result in an er
 ./bdf2c -n emoticons -b < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/emoticons/emoticons21.bdf > main/emoticons.h
 
 ./bdf2c -n Scroll_o_Sprites -b < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/pbm/Scroll-o-Sprites.bdf > main/Scroll-o-Sprites.h
+```
+
+Characters that cannot be used in C language variable names will result in an error during compilation.   
+This is unacceptable.   
+```
+./bdf2c -n Scroll-o_Sprites -b < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/pbm/Scroll-o-Sprites.bdf > main/Scroll-o-Sprites.h
 ```
 
 
