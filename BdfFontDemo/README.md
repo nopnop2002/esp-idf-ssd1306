@@ -189,7 +189,7 @@ BITMAP
 ENDCHAR
 ```
 
-Both the font bounding box (FONTBOUNDINGBOX) and character-specific bounding box (BBX) determine which pixels are displayed.   
+Both the font bounding box (FONTBOUNDINGBOX) and character-specific bounding box (BBX) determine pixels position.   
 This creates a 4 pixel blank space on the left edge.   
 This creates a 6 pixel blank space on the buttomt edge.   
 This image takes into account the font bounding box (FONTBOUNDINGBOX) and character-specific bounding box (BBX).   
