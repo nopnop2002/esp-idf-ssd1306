@@ -13,6 +13,7 @@ This project is a demo that displays BDF format fonts.
  Thank you olikraus for releasing useful software.   
 
 ```
+cd $HOME
 git clone https://github.com/olikraus/u8g2
 ls $HOME/u8g2/tools/font/bdf
 ```
