@@ -222,3 +222,39 @@ ________,________,________,
 ________,________,________,
 ```
 
+# Heder file format   
+This indicates the width of the FONTBOUNDINGBOX.   
+``
+// fontboundingbox_width
+21,
+```
+
+This indicates the height of the FONTBOUNDINGBOX.   
+```
+// fontboundingbox_height
+26,
+```
+
+This shows the font information for the characters.   
+```
+// 'd'
+100,14,8,12,1,0,39,8,20,0x00,0xe0,0x00,0x00,---------------,0x00,0x00,0x00,
+ |  |  | |  | | |  | |  |
+ |  |  | |  | | |  | |  +- Font pattern
+ |  |  | |  | | |  | +---- Last row in Y direction
+ |  |  | |  | | |  +------ First row in Y direction
+ |  |  | |  | | +--------- Number of font patterns
+ |  |  | |  | +----------- BBX Y offset 
+ |  |  | |  +------------- BBX X offset 
+ |  |  | +---------------- BBX Y pixel
+ |  |  +------------------ BBX X pixel
+ |  +--------------------- Font width pixel
+ +------------------------ Encoding
+
+```
+This marks the end of the font.   
+
+```
+// EOF
+0,0,0,0,0,0,0,0,0
+```
