@@ -187,7 +187,7 @@ BITMAP
 ENDCHAR
 ```
 
-Both the font bounding box (FONTBOUNDINGBOX) and the character bounding box (BBX) determine the display position.   
+Both the font bounding box (FONTBOUNDINGBOX) and character bounding box (BBX) determine which pixels are displayed.   
 This image takes into account the font bounding box (FONTBOUNDINGBOX) and character bounding box (BBX).   
 ```
 ________,________,________,
