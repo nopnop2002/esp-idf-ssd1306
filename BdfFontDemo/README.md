@@ -305,6 +305,7 @@ This marks the end of the font.
 # BDF Font file editot
 I use [this](http://hukka.ncn.fi/?fony).   
 It's work fine on Windows11.   
+There are probably many more.   
 
 - Open BDF font file.   
  File->Import->BDF Font.   
