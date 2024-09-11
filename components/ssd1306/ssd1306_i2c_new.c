@@ -21,8 +21,6 @@
 #define I2C_MASTER_FREQ_HZ 400000 // I2C clock of SSD1306 can run at 400 kHz max.
 #define I2C_TICKS_TO_WAIT 100	  // Maximum ticks to wait before issuing a timeout.
 
-i2c_master_dev_handle_t dev_handle;
-
 void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 {
 	ESP_LOGI(TAG, "New i2c driver is used");
@@ -42,8 +40,8 @@ void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 		.device_address = I2C_ADDRESS,
 		.scl_speed_hz = I2C_MASTER_FREQ_HZ,
 	};
-	//i2c_master_dev_handle_t dev_handle;
-	ESP_ERROR_CHECK(i2c_master_bus_add_device(bus_handle, &dev_cfg, &dev_handle));
+	i2c_master_dev_handle_t i2c_dev_handle;
+	ESP_ERROR_CHECK(i2c_master_bus_add_device(bus_handle, &dev_cfg, &i2c_dev_handle));
 
 	if (reset >= 0) {
 		//gpio_pad_select_gpio(reset);
@@ -57,6 +55,7 @@ void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 	dev->_address = I2C_ADDRESS;
 	dev->_flip = false;
 	dev->_i2c_num = I2C_NUM;
+	dev->_i2c_dev_handle = i2c_dev_handle;
 }
 
 void i2c_bus_add(SSD1306_t * dev, i2c_master_bus_handle_t bus_handle, i2c_port_t i2c_num, int16_t reset)
@@ -81,8 +80,8 @@ void i2c_bus_add(SSD1306_t * dev, i2c_master_bus_handle_t bus_handle, i2c_port_t
 		.device_address = I2C_ADDRESS,
 		.scl_speed_hz = I2C_MASTER_FREQ_HZ,
 	};
-	//i2c_master_dev_handle_t dev_handle;
-	ESP_ERROR_CHECK(i2c_master_bus_add_device(bus_handle, &dev_cfg, &dev_handle));
+	i2c_master_dev_handle_t i2c_dev_handle;
+	ESP_ERROR_CHECK(i2c_master_bus_add_device(bus_handle, &dev_cfg, &i2c_dev_handle));
 
 	if (reset >= 0) {
 		//gpio_pad_select_gpio(reset);
@@ -96,6 +95,7 @@ void i2c_bus_add(SSD1306_t * dev, i2c_master_bus_handle_t bus_handle, i2c_port_t
 	dev->_address = I2C_ADDRESS;
 	dev->_flip = false;
 	dev->_i2c_num = i2c_num;
+	dev->_i2c_dev_handle = i2c_dev_handle;
 }
 
 void i2c_init(SSD1306_t * dev, int width, int height) {
@@ -146,7 +146,7 @@ void i2c_init(SSD1306_t * dev, int width, int height) {
 	out_buf[out_index++] = OLED_CMD_DISPLAY_ON;				// AF
 
 	esp_err_t res;
-	res = i2c_master_transmit(dev_handle, out_buf, out_index, I2C_TICKS_TO_WAIT);
+	res = i2c_master_transmit(dev->_i2c_dev_handle, out_buf, out_index, I2C_TICKS_TO_WAIT);
 	if (res == ESP_OK) {
 		ESP_LOGI(TAG, "OLED configured successfully");
 	} else {
@@ -184,14 +184,14 @@ void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int
 	out_buf[out_index++] = 0xB0 | _page;
 
 	esp_err_t res;
-	res = i2c_master_transmit(dev_handle, out_buf, out_index, I2C_TICKS_TO_WAIT);
+	res = i2c_master_transmit(dev->_i2c_dev_handle, out_buf, out_index, I2C_TICKS_TO_WAIT);
 	if (res != ESP_OK)
 		ESP_LOGE(TAG, "Could not write to device [0x%02x at %d]: %d (%s)", dev->_address, dev->_i2c_num, res, esp_err_to_name(res));
 
 	out_buf[0] = OLED_CONTROL_BYTE_DATA_STREAM;
 	memcpy(&out_buf[1], images, width);
 
-	res = i2c_master_transmit(dev_handle, out_buf, width + 1, I2C_TICKS_TO_WAIT);
+	res = i2c_master_transmit(dev->_i2c_dev_handle, out_buf, width + 1, I2C_TICKS_TO_WAIT);
 	if (res != ESP_OK)
 		ESP_LOGE(TAG, "Could not write to device [0x%02x at %d]: %d (%s)", dev->_address, dev->_i2c_num, res, esp_err_to_name(res));
 	free(out_buf);
@@ -208,7 +208,7 @@ void i2c_contrast(SSD1306_t * dev, int contrast) {
 	out_buf[out_index++] = OLED_CMD_SET_CONTRAST; // 81
 	out_buf[out_index++] = _contrast;
 
-	esp_err_t res = i2c_master_transmit(dev_handle, out_buf, 3, I2C_TICKS_TO_WAIT);
+	esp_err_t res = i2c_master_transmit(dev->_i2c_dev_handle, out_buf, 3, I2C_TICKS_TO_WAIT);
 	if (res != ESP_OK)
 		ESP_LOGE(TAG, "Could not write to device [0x%02x at %d]: %d (%s)", dev->_address, dev->_i2c_num, res, esp_err_to_name(res));
 }
@@ -283,7 +283,7 @@ void i2c_hardware_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll) {
 		out_buf[out_index++] = OLED_CMD_DEACTIVE_SCROLL; // 2E
 	}
 
-	esp_err_t res = i2c_master_transmit(dev_handle, out_buf, out_index, I2C_TICKS_TO_WAIT);
+	esp_err_t res = i2c_master_transmit(dev->_i2c_dev_handle, out_buf, out_index, I2C_TICKS_TO_WAIT);
 	if (res != ESP_OK)
 		ESP_LOGE(TAG, "Could not write to device [0x%02x at %d]: %d (%s)", dev->_address, dev->_i2c_num, res, esp_err_to_name(res));
 }

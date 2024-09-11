@@ -71,15 +71,15 @@ void spi_master_init(SSD1306_t * dev, int16_t mosi, int16_t sclk, int16_t cs, in
 	devcfg.spics_io_num = cs;
 	devcfg.queue_size = 1;
 
-	spi_device_handle_t handle;
-	ret = spi_bus_add_device( HOST_ID, &devcfg, &handle);
+	spi_device_handle_t spi_device_handle;
+	ret = spi_bus_add_device( HOST_ID, &devcfg, &spi_device_handle);
 	ESP_LOGI(TAG, "spi_bus_add_device=%d",ret);
 	assert(ret==ESP_OK);
 
 	dev->_dc = dc;
 	dev->_address = SPI_ADDRESS;
 	dev->_flip = false;
-	dev->_SPIHandle = handle;
+	dev->_spi_device_handle = spi_device_handle;
 }
 
 void spi_device_add(SSD1306_t * dev, int16_t cs, int16_t dc, int16_t reset)
@@ -127,15 +127,15 @@ void spi_device_add(SSD1306_t * dev, int16_t cs, int16_t dc, int16_t reset)
 	devcfg.spics_io_num = cs;
 	devcfg.queue_size = 1;
 
-	spi_device_handle_t handle;
-	ret = spi_bus_add_device( HOST_ID, &devcfg, &handle);
+	spi_device_handle_t spi_device_handle;
+	ret = spi_bus_add_device( HOST_ID, &devcfg, &spi_device_handle);
 	ESP_LOGI(TAG, "spi_bus_add_device=%d",ret);
 	assert(ret==ESP_OK);
 
 	dev->_dc = dc;
 	dev->_address = SPI_ADDRESS;
 	dev->_flip = false;
-	dev->_SPIHandle = handle;
+	dev->_spi_device_handle = spi_device_handle;
 }
 
 
@@ -158,13 +158,13 @@ bool spi_master_write_command(SSD1306_t * dev, uint8_t Command )
 	static uint8_t CommandByte = 0;
 	CommandByte = Command;
 	gpio_set_level( dev->_dc, SPI_COMMAND_MODE );
-	return spi_master_write_byte( dev->_SPIHandle, &CommandByte, 1 );
+	return spi_master_write_byte( dev->_spi_device_handle, &CommandByte, 1 );
 }
 
 bool spi_master_write_data(SSD1306_t * dev, const uint8_t* Data, size_t DataLength )
 {
 	gpio_set_level( dev->_dc, SPI_DATA_MODE );
-	return spi_master_write_byte( dev->_SPIHandle, Data, DataLength );
+	return spi_master_write_byte( dev->_spi_device_handle, Data, DataLength );
 }
 
 

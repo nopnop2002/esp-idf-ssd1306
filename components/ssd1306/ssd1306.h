@@ -103,7 +103,10 @@ typedef struct {
 	PAGE_t _page[8];
 	bool _flip;
 	i2c_port_t _i2c_num;
-	spi_device_handle_t _SPIHandle;
+	spi_device_handle_t _spi_device_handle;
+#if (ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 2, 0))
+	i2c_master_dev_handle_t _i2c_dev_handle;
+#endif
 } SSD1306_t;
 
 #ifdef __cplusplus
