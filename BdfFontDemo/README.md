@@ -263,6 +263,7 @@ In ths case:
 ```
 
 The font for lines 8 to 20 will be as follows:   
+This is a bitmap of 24*13 pixels.   
 ```
 0x00,0xe0,0x00,
 0x00,0x60,0x00,
