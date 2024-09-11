@@ -259,7 +259,7 @@ You can find out the width (in bytes) of your font using the following calculati
 
 In ths case:
 ```
-39 / (20 - 8 + 1) = 3
+39 / (20 - 8 + 1) = 3[bytes]
 ```
 
 
