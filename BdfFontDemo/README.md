@@ -129,6 +129,7 @@ ENDCHAR
 ```
 
 Fonts that take character-specific bounding box (BBX) into consideration change as follows.   
+This creates a 1 pixel blank space on the left edge.   
 ```
 STARTCHAR d
 ENCODING 100
@@ -189,6 +190,8 @@ ENDCHAR
 ```
 
 Both the font bounding box (FONTBOUNDINGBOX) and character-specific bounding box (BBX) determine which pixels are displayed.   
+This creates a 4 pixel blank space on the left edge.   
+This creates a 6 pixel blank space on the buttomt edge.   
 This image takes into account the font bounding box (FONTBOUNDINGBOX) and character-specific bounding box (BBX).   
 ```
 ________,________,________,
