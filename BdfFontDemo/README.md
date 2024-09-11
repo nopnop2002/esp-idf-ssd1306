@@ -50,7 +50,6 @@ cc -o bdf2c bdf2c.c
 #include "ssd1306.h"
 #include "ncenR12.h"
 #include "timR12.h"
-#include "battery.h"
 #include "emoticons.h"
 #include "Scroll-o-Sprites.h"
 ```
