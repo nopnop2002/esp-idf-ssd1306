@@ -12,10 +12,10 @@ This project is a demo that displays BDF format fonts.
 - Download the BDF font file.   
  Thank you olikraus for releasing useful software.   
 
- ```
- git clone https://github.com/olikraus/u8g2
- ls $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/bdf
- ```
+```
+git clone https://github.com/olikraus/u8g2
+ls $HOME/u8g2/tools/font/bdf
+```
 
 - Convert BDF font files to header files.   
  I used [this](https://github.com/pixelmatix/bdf2c) repository.   
