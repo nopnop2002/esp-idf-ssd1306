@@ -313,6 +313,6 @@ There are probably many more.
 ![fony](https://github.com/user-attachments/assets/18c71509-9a66-4b23-a2cf-6ecc66bf5920)
 
 - Save BDF font file.   
- File->Exmport->BDF Font.   
+ File->Export->BDF Font.   
 
 
