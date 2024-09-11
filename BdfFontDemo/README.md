@@ -98,7 +98,7 @@ ________,________,________,
 # Font bounding box and character bounding box
 BDF font file has a font bounding box (FONTBOUNDINGBOX).   
 This FONTBOUNDINGBOX value indicates that all fonts must have a 3-pixel margin to the left and a 6-pixel margin below the font.   
-By providing FONTBOUNDINGBOX, this can omit the leftmost and bottom blank spaces from the font pattern.   
+By providing a FONTBOUNDINGBOX, this can omit the leftmost and bottom blank spaces from the font pattern.   
 ```
 FONTBOUNDINGBOX 21 26 -3 -6
 ```
