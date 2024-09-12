@@ -395,6 +395,39 @@ void ssd1306_wrap_arround(SSD1306_t * dev, ssd1306_scroll_type_t scroll, int sta
 			dev->_page[0]._segs[seg] = wk2;
 		}
 
+	} else if (scroll == PAGE_SCROLL_DOWN) {
+		uint8_t save[128];
+		// Save pages 7
+		for (int seg=0;seg<128;seg++) {
+			save[seg] = dev->_page[dev->_pages-1]._segs[seg];
+		}
+		// Page7 to Page1
+		for (int page=dev->_pages-1;page>0;page--) {
+			for (int seg=0;seg<128;seg++) {
+				dev->_page[page]._segs[seg] = dev->_page[page-1]._segs[seg];
+			}
+		}
+		// Store  pages 0
+		for (int seg=0;seg<128;seg++) {
+			dev->_page[0]._segs[seg] = save[seg];
+		}
+
+	} else if (scroll == PAGE_SCROLL_UP) {
+		uint8_t save[128];
+		// Save pages 0
+		for (int seg=0;seg<128;seg++) {
+			save[seg] = dev->_page[0]._segs[seg];
+		}
+		// Page0 to Page6
+		for (int page=0;page<dev->_pages-1;page++) {
+			for (int seg=0;seg<128;seg++) {
+				dev->_page[page]._segs[seg] = dev->_page[page+1]._segs[seg];
+			}
+		}
+		// Store  pages 7
+		for (int seg=0;seg<128;seg++) {
+			dev->_page[dev->_pages-1]._segs[seg] = save[seg];
+		}
 	}
 
 	if (delay >= 0) {

@@ -81,7 +81,9 @@ typedef enum {
 	SCROLL_LEFT = 2,
 	SCROLL_DOWN = 3,
 	SCROLL_UP = 4,
-	SCROLL_STOP = 5
+	PAGE_SCROLL_DOWN = 5,
+	PAGE_SCROLL_UP = 6,
+	SCROLL_STOP = 7
 } ssd1306_scroll_type_t;
 
 typedef struct {
