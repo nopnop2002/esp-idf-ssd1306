@@ -264,7 +264,7 @@ ________,______,
 ________,______,
 ```
 
-Changing FONTBOUNDINGBOX changes the character spacing.
+Changing FONTBOUNDINGBOX changes the character spacing.   
 ```FONTBOUNDINGBOX 21 26 -3 -6```
 ![BdfFontDemo-1](https://github.com/user-attachments/assets/df733de1-b5b8-4142-8123-5a8f992246ff)
 
