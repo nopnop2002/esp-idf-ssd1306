@@ -107,14 +107,14 @@ void app_main(void)
 		ESP_LOGD(TAG, "height=%d", height);
 		for(int i=0;i<height;i++) {
 			ssd1306_wrap_arround(&dev, SCROLL_UP, 0, 31, 0);
-			ssd1306_wrap_arround(&dev, SCROLL_UP, 96, 127, 0);
+			ssd1306_wrap_arround(&dev, SCROLL_DOWN, 96, 127, 0);
 		}
 		vTaskDelay(2000 / portTICK_PERIOD_MS);
 
 		ESP_LOGD(TAG, "height=%d", height);
 		for(int i=0;i<height;i++) {
 			ssd1306_wrap_arround(&dev, SCROLL_DOWN, 0, 31, 0);
-			ssd1306_wrap_arround(&dev, SCROLL_DOWN, 96, 127, 0);
+			ssd1306_wrap_arround(&dev, SCROLL_UP, 96, 127, 0);
 		}
 		vTaskDelay(2000 / portTICK_PERIOD_MS);
 
@@ -127,6 +127,19 @@ void app_main(void)
 		for(int i=0;i<128;i++) {
 			ssd1306_wrap_arround(&dev, SCROLL_LEFT, 0, pages, 0);
 			ssd1306_wrap_arround(&dev, SCROLL_UP, 0, 127, 0);
+		}
+		vTaskDelay(2000 / portTICK_PERIOD_MS);
+
+		// PAGE_SCROLL is only a Byte operation, so it's very fast
+		for(int i=0;i<=pages;i++) {
+			ssd1306_wrap_arround(&dev, PAGE_SCROLL_DOWN, 0, 0, 0);
+			vTaskDelay(2);
+		}
+		vTaskDelay(1000 / portTICK_PERIOD_MS);
+
+		for(int i=0;i<=pages;i++) {
+			ssd1306_wrap_arround(&dev, PAGE_SCROLL_UP, 0, 0, 0);
+			vTaskDelay(2);
 		}
 		vTaskDelay(2000 / portTICK_PERIOD_MS);
 	} // end while
