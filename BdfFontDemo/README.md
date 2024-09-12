@@ -272,7 +272,7 @@ Changing FONTBOUNDINGBOX changes the character spacing.
 ![BdfFontDemo-4](https://github.com/user-attachments/assets/45dd3fab-a5df-4bc1-8436-6c7883001d93)
 
 
-# Heder file format   
+# Header file format   
 This indicates the width of the FONTBOUNDINGBOX.   
 ```
 // fontboundingbox_width
