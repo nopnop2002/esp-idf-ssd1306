@@ -163,6 +163,8 @@ ENDCHAR
 ```
 
 Fonts that take character-specific bounding box (BBX) and font bounding box (FONTBOUNDINGBOX) into consideration change as follows.   
+This creates more 3 pixel whitespace on the left edge.   
+And this creates 6 pixels of whitespace at the bottom.   
 ```
 STARTCHAR d
 ENCODING 100
