@@ -266,11 +266,11 @@ ________,______,
 
 Changing FONTBOUNDINGBOX changes the character spacing.   
 ```FONTBOUNDINGBOX 21 26 -3 -6```   
-A space of 3 pixels is created between characters.   
+A space of at least 3 pixels is generated between characters.   
 ![BdfFontDemo-1](https://github.com/user-attachments/assets/df733de1-b5b8-4142-8123-5a8f992246ff)
 
 ```FONTBOUNDINGBOX 21 26 -1 -6```   
-A space of 1 pixels is created between characters.   
+A space of at least 1 pixels is generated between characters.   
 ![BdfFontDemo-4](https://github.com/user-attachments/assets/45dd3fab-a5df-4bc1-8436-6c7883001d93)
 
 
