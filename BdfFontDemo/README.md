@@ -140,6 +140,7 @@ ENDCHAR
 
 Fonts that take character-specific bounding box (BBX) into consideration change as follows.   
 This creates a 1 pixel whitespace on the left edge.   
+DWIDTH will also change according to this change.   
 ```
 STARTCHAR d
 ENCODING 100
@@ -163,6 +164,7 @@ ENDCHAR
 ```
 
 Fonts that take character-specific bounding box (BBX) and font bounding box (FONTBOUNDINGBOX) into consideration change as follows.   
+DWIDTH will also change according to this change.   
 ```
 STARTCHAR d
 ENCODING 100
