@@ -269,7 +269,7 @@ Changing FONTBOUNDINGBOX changes the character spacing.
 ![BdfFontDemo-1](https://github.com/user-attachments/assets/df733de1-b5b8-4142-8123-5a8f992246ff)
 
 ```FONTBOUNDINGBOX 21 26 -1 -6```
-![BdfFontDemo-4](https://github.com/user-attachments/assets/ab36b0e1-f179-4b28-a7fd-1a630abb9994)
+![BdfFontDemo-4](https://github.com/user-attachments/assets/45dd3fab-a5df-4bc1-8436-6c7883001d93)
 
 
 # Heder file format   
