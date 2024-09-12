@@ -145,6 +145,8 @@ void ssd1306_flip(uint8_t *buf, size_t blen);
 uint8_t ssd1306_copy_bit(uint8_t src, int srcBits, uint8_t dst, int dstBits);
 uint8_t ssd1306_rotate_byte(uint8_t ch1);
 void ssd1306_fadeout(SSD1306_t * dev);
+void ssd1306_rotate_image(uint8_t *image, bool flip);
+void ssd1306_display_rotate_text(SSD1306_t * dev, int seg, char * text, int text_len, bool invert);
 void ssd1306_dump(SSD1306_t dev);
 void ssd1306_dump_page(SSD1306_t * dev, int page, int seg);
 

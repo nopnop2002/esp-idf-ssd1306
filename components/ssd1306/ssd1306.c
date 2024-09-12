@@ -672,6 +672,52 @@ void ssd1306_fadeout(SSD1306_t * dev)
 	}
 }
 
+// Rotate character image
+// Only valid for 8 dots x 8 dots
+void ssd1306_rotate_image(uint8_t *image, bool flip) {
+	uint8_t _image[8];
+	uint8_t _smask = 0x01;
+	for (int i=0;i<8;i++) {
+		uint8_t _dmask = 0x80;
+		_image[i] = 0;
+		for (int j=0;j<8;j++) {
+			uint8_t _wk = image[j] & _smask;
+			ESP_LOGD(TAG, "image[%d]=0x%x _smask=0x%x _wk=0x%x", j, image[j], _smask, _wk);
+			if (_wk != 0) {
+				_image[i] = _image[i] + _dmask;
+			}
+			_dmask = _dmask >> 1;
+		}
+		_smask = _smask << 1;
+	}
+
+	for (int i=0;i<8;i++) {
+		image[i] = _image[i];
+	}
+	if (flip) ssd1306_flip(image, 8);
+#if 0
+	for (int i=0;i<8;i++) {
+		ESP_LOGI(TAG, "image[%d]=0x%x", i, image[i]);
+	}
+#endif
+}
+
+void ssd1306_display_rotate_text(SSD1306_t * dev, int seg, char * text, int text_len, bool invert) {
+	int _text_len = text_len;
+	if (_text_len > 8) _text_len = 8;
+	uint8_t image[8];
+	int _page = dev->_pages-1;
+	for (uint8_t i = 0; i < _text_len; i++) {
+		memcpy(image, font8x8_basic_tr[(uint8_t)text[i]], 8);
+		ssd1306_rotate_image(image, dev->_flip);
+		ESP_LOGD(TAG, "_page=%d seg=%d", _page, seg);
+		if (invert) ssd1306_invert(image, 8);
+		ssd1306_display_image(dev, _page, seg, image, 8);
+		_page--;
+		if (_page < 0) return;
+	}
+}
+
 void ssd1306_dump(SSD1306_t dev)
 {
 	printf("_address=%x\n",dev._address);
