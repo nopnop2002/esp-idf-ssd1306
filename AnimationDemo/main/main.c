@@ -744,31 +744,27 @@ void app_main(void)
 	int count = 9;
 	uint8_t segs[128];
 	while(1) {
+#if 0
 		TickType_t startTick = xTaskGetTickCount();
-		// 1Ticks required
+#endif
 		for (int page=0;page<8;page++) {
 			for (int seg=0;seg<128;seg++) {
 				segs[seg] =  ssd1306_rotate_byte(monkeyAnimation[count][seg*8+page]);
 			}
 			ssd1306_display_image(&dev, page, 0, segs, 128);
 		}
+
 #if 0
-		int index = 0;
-		// 26Ticks required
-		for (int seg=0;seg<128;seg++) {
-			for (int page=0;page<8;page++) {
-				uint8_t wk[1];
-				wk[0] = monkeyAnimation[count][index++];
-				wk[0] = ssd1306_rotate_byte(wk[0]);
-				ssd1306_display_image(&dev, page, seg, wk, 1);
-			}
-		}
-#endif
+		// 1Ticks required
 		TickType_t endTick = xTaskGetTickCount();
 		ESP_LOGD(TAG, "diffTick=%"PRIu32, endTick - startTick);
+#endif
 		count--;
 		if (count<0) count = 9;
-		vTaskDelay(4);
+#if CONFIG_SPI_INTERFACE
+		// SPI is too fast, so wait a little.
+		vTaskDelay(3);
+#endif
 	}
 	vTaskDelay(2000 / portTICK_PERIOD_MS);
 }
