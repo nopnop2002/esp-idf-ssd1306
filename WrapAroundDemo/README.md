@@ -5,6 +5,8 @@
 A 128x32 panel has 4 pages of internal memory, and a 128x64 panel has 8 pages of internal memory.   
 PAGE_SCROLL_DOWN/PAGE_SCROLL_UP is page-by-page scrolling and works fast.   
 
+
+Image of PAGE_SCROLL_DOWN
 ```
 +--------+  +--------+
 | Page 1 |  | Page 2 |
