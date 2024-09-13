@@ -6,7 +6,7 @@ This is a demo that displays larger images.
 ![ImageMoveDemo](https://github.com/user-attachments/assets/84a65a43-72d9-4c06-b7ef-464ac2da5045)
 
 The original image resolution is 420x200.   
-I borrowed the BIT MAP data from [here](https://www.mischianti.org/2021/07/14/ssd1306-oled-display-draw-images-splash-and-animations-2/).   
+I borrowed the BIT MAP data from [here](https://iitestudent.blogspot.com/2013/01/displaying-bitmap-on-graphic-lcd.html).   
 
 # Displaying images with a width of 240 dots or more   
 Crop the original image to this image.   
