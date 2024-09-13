@@ -190,6 +190,19 @@ uint8_t segmentDisplay[IMAGES][192] = {
 }
 };
 
+// If you want show "1234":
+// show_digit(&dev, segmentImage, 3, 1);
+// show_digit(&dev, segmentImage, 2, 2);
+// show_digit(&dev, segmentImage, 1, 3);
+// show_digit(&dev, segmentImage, 0, 4);
+
+void show_digit(SSD1306_t * dev, uint8_t *segmentImage, int digit_position, int digit_number) {
+	int segmentImageIndex = digit_number * 256;
+	int seg = digit_position * 32;
+	for (int page=0;page<8;page++) {
+		ssd1306_display_image(dev, page, seg, &segmentImage[segmentImageIndex+page*32], 32);
+	}
+}
 
 void app_main(void)
 {
@@ -309,28 +322,16 @@ void app_main(void)
 						digit4 = 0;
 					}
 					// Update digit1
-					int segmentImageIndex1 = digit1 * 256;
-					for (int page=0;page<8;page++) {
-						ssd1306_display_image(&dev, page, 00, &segmentImage[segmentImageIndex1+page*32], 32);
-					}
+					show_digit(&dev, segmentImage, 0, digit1);
 				}
 				// Update digit2
-				int segmentImageIndex2 = digit2 * 256;
-				for (int page=0;page<8;page++) {
-					ssd1306_display_image(&dev, page, 32, &segmentImage[segmentImageIndex2+page*32], 32);
-				}
+				show_digit(&dev, segmentImage, 1, digit2);
 			}
 			// Update digit3
-			int segmentImageIndex3 = digit3 * 256;
-			for (int page=0;page<8;page++) {
-				ssd1306_display_image(&dev, page, 64, &segmentImage[segmentImageIndex3+page*32], 32);
-			}
+			show_digit(&dev, segmentImage, 2, digit3);
 		} else {	
 			// Update digit4
-			int segmentImageIndex4 = digit4 * 256;
-			for (int page=0;page<8;page++) {
-				ssd1306_display_image(&dev, page, 96, &segmentImage[segmentImageIndex4+page*32], 32);
-			}
+			show_digit(&dev, segmentImage, 3, digit4);
 		}
 		vTaskDelay(8);
 	} // end while
