@@ -191,10 +191,10 @@ uint8_t segmentDisplay[IMAGES][192] = {
 };
 
 // If you want show "1234":
-// show_digit(&dev, segmentImage, 3, 1);
-// show_digit(&dev, segmentImage, 2, 2);
-// show_digit(&dev, segmentImage, 1, 3);
-// show_digit(&dev, segmentImage, 0, 4);
+// show_digit(&dev, segmentImage, 3, 4);
+// show_digit(&dev, segmentImage, 2, 3);
+// show_digit(&dev, segmentImage, 1, 2);
+// show_digit(&dev, segmentImage, 0, 1);
 
 void show_digit(SSD1306_t * dev, uint8_t *segmentImage, int digit_position, int digit_number) {
 	int segmentImageIndex = digit_number * 256;
@@ -287,18 +287,31 @@ void app_main(void)
 	// I don't use this anymore
 	free(buffer);
 
+#if 0
+	// Test code
+	ssd1306_clear_screen(&dev, false);
+	show_digit(&dev, segmentImage, 3, 4);
+	show_digit(&dev, segmentImage, 2, 3);
+	show_digit(&dev, segmentImage, 1, 2);
+	show_digit(&dev, segmentImage, 0, 1);
+	vTaskDelay(200);
+	show_digit(&dev, segmentImage, 3, 6);
+	show_digit(&dev, segmentImage, 2, 5);
+	show_digit(&dev, segmentImage, 1, 4);
+	show_digit(&dev, segmentImage, 0, 3);
+	vTaskDelay(200);
+#endif
+
+	// Show initial screen
 	int digit1 = 0;
 	int digit2 = 0;
 	int digit3 = 0;
 	int digit4 = 0;
 	ssd1306_clear_screen(&dev, false);
-	for (int page=0;page<8;page++) {
-		ssd1306_display_image(&dev, page, 0, &segmentImage[page*32], 32);
-		ssd1306_display_image(&dev, page, 32, &segmentImage[page*32], 32);
-		ssd1306_display_image(&dev, page, 64, &segmentImage[page*32], 32);
-		ssd1306_display_image(&dev, page, 96, &segmentImage[page*32], 32);
-		vTaskDelay(2);
-	}
+	show_digit(&dev, segmentImage, 3, 0);
+	show_digit(&dev, segmentImage, 2, 0);
+	show_digit(&dev, segmentImage, 1, 0);
+	show_digit(&dev, segmentImage, 0, 0);
 
 	while(1) {
 		digit4++;
