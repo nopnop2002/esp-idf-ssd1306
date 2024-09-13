@@ -195,10 +195,9 @@ uint8_t segmentDisplay[IMAGES][192] = {
 // show_digit(&dev, segmentImage, 2, 3);
 // show_digit(&dev, segmentImage, 1, 2);
 // show_digit(&dev, segmentImage, 0, 1);
-
-void show_digit(SSD1306_t * dev, uint8_t *segmentImage, int digit_position, int digit_number) {
-	int segmentImageIndex = digit_number * 256;
-	int seg = digit_position * 32;
+void show_digit(SSD1306_t * dev, uint8_t *segmentImage, int digitPosition, int digitNumber) {
+	int segmentImageIndex = digitNumber * 256;
+	int seg = digitPosition * 32;
 	for (int page=0;page<8;page++) {
 		ssd1306_display_image(dev, page, seg, &segmentImage[segmentImageIndex+page*32], 32);
 	}
@@ -312,6 +311,7 @@ void app_main(void)
 	show_digit(&dev, segmentImage, 2, 0);
 	show_digit(&dev, segmentImage, 1, 0);
 	show_digit(&dev, segmentImage, 0, 0);
+	vTaskDelay(200);
 
 	while(1) {
 		digit4++;

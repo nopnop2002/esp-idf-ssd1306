@@ -190,6 +190,68 @@ uint8_t segmentDisplay[IMAGES][192] = {
 }
 };
 
+// If you want show "1234":
+// show_digit(&dev, segmentImage, 3, 4);
+// show_digit(&dev, segmentImage, 2, 3);
+// show_digit(&dev, segmentImage, 1, 2);
+// show_digit(&dev, segmentImage, 0, 1);
+void show_digit(SSD1306_t * dev, uint8_t *segmentImage, int digitPosition, int digitNumber) {
+	int segmentImageIndex = digitNumber * 256;
+	int seg = digitPosition * 32;
+	for (int page=0;page<8;page++) {
+		ssd1306_display_image(dev, page, seg, &segmentImage[segmentImageIndex+page*32], 32);
+	}
+}
+
+
+// If you want show "3456":
+// scroll_digit(&dev, segmentImage, 3, 6, buffer);
+// scroll_digit(&dev, segmentImage, 2, 5, buffer);
+// scroll_digit(&dev, segmentImage, 1, 4, buffer);
+// scroll_digit(&dev, segmentImage, 0, 3, buffer);
+void scroll_digit(SSD1306_t * dev, uint8_t *segmentImage, int digitPosition, int digitNumber, uint8_t *buffer) {
+	int segmentImageIndex = digitNumber * 256;
+	//memcpy(src, &segmentImage[digitNumber*256], 256);
+	uint8_t src[256];
+	memcpy(src, &segmentImage[segmentImageIndex], 256);
+
+	int height = ssd1306_get_height(dev);
+	ESP_LOGD(TAG, "height=%d", height);
+
+	int startSeg = digitPosition * 32; // startSeg=96->64->32->0
+
+	for (int _height=0;_height<height;_height++) {
+		// wrap_arround with no display
+		ssd1306_wrap_arround(dev, SCROLL_UP, startSeg, startSeg+31, -1);
+
+		// Get internal buffer
+		ssd1306_get_buffer(dev, buffer);
+		int page = _height/8;
+		int srcBits = (_height % 8);
+		ESP_LOGD(TAG,"_height=%d page=%d srcBits=%d", _height, page, srcBits);
+
+		// Update buffer
+		for (int seg=0;seg<32;seg++) {
+			int bufferIndex = 7*128+seg+startSeg;
+			uint8_t swk = src[page*32+seg];
+			uint8_t dwk = buffer[bufferIndex];
+			if (dev->_flip) swk = ssd1306_rotate_byte(swk);
+			if (dev->_flip) dwk = ssd1306_rotate_byte(dwk);
+			//buffer[bufferIndex] = ssd1306_copy_bit(src[page*32+seg], srcBits, buffer[bufferIndex], 7);
+			buffer[bufferIndex] = ssd1306_copy_bit(swk, srcBits, dwk, 7);
+			ESP_LOGD(TAG, "src[%d]=%02x buffer[bufferIndex]=%02x", page*32+seg, src[page*32+seg], buffer[bufferIndex]);
+		}
+
+		// Set internal buffer
+		ssd1306_set_buffer(dev, buffer);
+
+		// Show internal buffer
+		ssd1306_show_buffer(dev);
+	} // end _height
+
+	// Avoid WatchDog alerts
+	vTaskDelay(1);
+}
 
 void app_main(void)
 {
@@ -271,60 +333,46 @@ void app_main(void)
 #endif
 	}
 
+	// Test code
 	ssd1306_clear_screen(&dev, false);
-	for (int page=0;page<8;page++) {
-		ssd1306_display_image(&dev, page, 0, &segmentImage[page*32], 32);
-		ssd1306_display_image(&dev, page, 32, &segmentImage[page*32], 32);
-		ssd1306_display_image(&dev, page, 64, &segmentImage[page*32], 32);
-		ssd1306_display_image(&dev, page, 96, &segmentImage[page*32], 32);
-		vTaskDelay(2);
-	}
+	show_digit(&dev, segmentImage, 3, 4);
+	show_digit(&dev, segmentImage, 2, 3);
+	show_digit(&dev, segmentImage, 1, 2);
+	show_digit(&dev, segmentImage, 0, 1);
+	vTaskDelay(200);
+	scroll_digit(&dev, segmentImage, 3, 6, buffer);
+	scroll_digit(&dev, segmentImage, 2, 5, buffer);
+	scroll_digit(&dev, segmentImage, 1, 4, buffer);
+	scroll_digit(&dev, segmentImage, 0, 3, buffer);
+	vTaskDelay(200);
+
+	// Show initial screen
+	int digit1 = 3;
+	int digit2 = 2;
+	int digit3 = 1;
+	int digit4 = 0;
+	ssd1306_clear_screen(&dev, false);
+	show_digit(&dev, segmentImage, 3, digit1);
+	show_digit(&dev, segmentImage, 2, digit2);
+	show_digit(&dev, segmentImage, 1, digit3);
+	show_digit(&dev, segmentImage, 0, digit4);
+	vTaskDelay(200);
 
 	int height = ssd1306_get_height(&dev);
 	ESP_LOGD(TAG, "height=%d", height);
 
 	while(1) {
-		uint8_t src[256];
-		for (int imageIndex=1; imageIndex<=10; imageIndex++) {
-			int segmentImageIndex = imageIndex * 256;
-			if (imageIndex == 10) {
-				 segmentImageIndex = 0;
-			}
-			//memcpy(src, &segmentImage[imageIndex*256], 256);
-			memcpy(src, &segmentImage[segmentImageIndex], 256);
-
-			for (int digit=3;digit>=0;digit--) {
-				int startSeg = digit * 32; // startSeg=96->64->32->0
-
-				for (int _height=0;_height<height;_height++) {
-					// wrap_arround with no display
-					ssd1306_wrap_arround(&dev, SCROLL_UP, startSeg, startSeg+31, -1);
-					// Get internal buffer
-					ssd1306_get_buffer(&dev, buffer);
-					int page = _height/8;
-					int srcBits = (_height % 8);
-					ESP_LOGD(TAG,"_height=%d page=%d srcBits=%d", _height, page, srcBits);
-					// Update buffer
-					for (int seg=0;seg<32;seg++) {
-						int bufferIndex = 7*128+seg+startSeg;
-						uint8_t swk = src[page*32+seg];
-						uint8_t dwk = buffer[bufferIndex];
-						if (dev._flip) swk = ssd1306_rotate_byte(swk);
-						if (dev._flip) dwk = ssd1306_rotate_byte(dwk);
-						//buffer[bufferIndex] = ssd1306_copy_bit(src[page*32+seg], srcBits, buffer[bufferIndex], 7);
-						buffer[bufferIndex] = ssd1306_copy_bit(swk, srcBits, dwk, 7);
-						ESP_LOGD(TAG, "src[%d]=%02x buffer[bufferIndex]=%02x", page*32+seg, src[page*32+seg], buffer[bufferIndex]);
-					}
-					// Set internal buffer
-					ssd1306_set_buffer(&dev, buffer);
-					// Show internal buffer
-					ssd1306_show_buffer(&dev);
-					// Avoid WatchDog alerts
-					//vTaskDelay(1);
-				} // end _height
-				// Avoid WatchDog alerts
-				vTaskDelay(1);
-			} // end digit
-		} // end imageIndex
+		digit1 = digit1 + 1;
+		if (digit1 == 10) digit1 = 0;
+		scroll_digit(&dev, segmentImage, 3, digit1, buffer);
+		digit2 = digit2 + 1;
+		if (digit2 == 10) digit2 = 0;
+		scroll_digit(&dev, segmentImage, 2, digit2, buffer);
+		digit3 = digit3 + 1;
+		if (digit3 == 10) digit3 = 0;
+		scroll_digit(&dev, segmentImage, 1, digit3, buffer);
+		digit4 = digit4 + 1;
+		if (digit4 == 10) digit4 = 0;
+		scroll_digit(&dev, segmentImage, 0, digit4, buffer);
 	} // end while
 }
