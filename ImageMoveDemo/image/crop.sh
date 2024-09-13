@@ -11,7 +11,7 @@ convert fleischer_1.jpg -crop 128x64+116+10 fleischer1-3.jpg
 identify fleischer1.jpg
 # fleischer1.jpg JPEG 420x64 420x64+0+0 8-bit Gray 256c 6488B 0.000u 0:00.000
 
-# Crop to 128x190 image
+# Crop to 128x184 image
 convert fleischer_420.jpg -crop 128x184+144+10 fleischer2.jpg
 convert fleischer2.jpg -crop 128x64+0+0 fleischer2-1.jpg
 convert fleischer2.jpg -crop 128x64+0+8 fleischer2-2.jpg
