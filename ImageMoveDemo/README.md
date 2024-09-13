@@ -10,6 +10,7 @@ I borrowed the BIT MAP data from [here](https://www.mischianti.org/2021/07/14/ss
 
 # Displaying images with a width of 240 dots or more   
 Crop the original image to this image.   
+The image below has a resolution of 420x200.   
 ![fleischer1](https://github.com/user-attachments/assets/31ca12b8-c932-45e6-b021-d17f9865141b)
 
 Convert this image to a 240x64 image by shifting it by 8 dots, and display the converted image continuously.   
@@ -19,6 +20,7 @@ Convert this image to a 240x64 image by shifting it by 8 dots, and display the c
 
 # Display images with a height of 64 dots or more   
 Crop the original image to this image.   
+The image below has a resolution of 218x184.   
 ![fleischer2](https://github.com/user-attachments/assets/e04b71c6-8a3b-4a03-bc99-199ad489b67e)
 
 Convert this image to a 240x64 image by shifting it by 8 dots, and display the converted image continuously.   
