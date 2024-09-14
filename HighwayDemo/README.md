@@ -3,7 +3,7 @@
 ![Highway-1](https://github.com/user-attachments/assets/110aa599-4794-430b-bf05-4ab843510f4c)
 ![Highway-2](https://github.com/user-attachments/assets/8b7ba9ef-e1b4-4cb8-8e4c-abf8a6fad234)
 
-I found this image on the internet.   
+I found this public image on the internet.   
 So I played around with it a bit.   
 
 ![_451034](https://github.com/user-attachments/assets/97ed02c4-6432-4b6a-8808-49a7fe850abf)
