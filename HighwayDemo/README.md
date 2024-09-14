@@ -1,4 +1,4 @@
-# HigjwayDemo for SSD1306
+# HighwayDemo for SSD1306
 
 ![Highway-1](https://github.com/user-attachments/assets/110aa599-4794-430b-bf05-4ab843510f4c)
 ![Highway-2](https://github.com/user-attachments/assets/8b7ba9ef-e1b4-4cb8-8e4c-abf8a6fad234)
