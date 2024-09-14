@@ -40,7 +40,7 @@ Specify the font variable name with the -n option.
 Characters that cannot be used in C language variable names will result in an error during compilation.   
 This is unacceptable.   
 ```
-./bdf2c -n Scroll-o_Sprites -b < $HOME/u8g2-hal-esp-idf/examples/i2c/components/u8g2/tools/font/pbm/Scroll-o-Sprites.bdf > main/Scroll-o-Sprites.h
+./bdf2c -n Scroll-o_Sprites -b < $HOME/u8g2/tools/font/pbm/Scroll-o-Sprites.bdf > main/Scroll-o-Sprites.h
 ```
 
 
