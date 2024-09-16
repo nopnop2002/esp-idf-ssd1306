@@ -5,7 +5,7 @@
 This demo shows how to overlay background and foreground images.   
 
 Use this image as the background image and move from top to bottom.   
-![cloud1](https://github.com/user-attachments/assets/dc1ca1fd-2de1-4a01-a4e7-e4409348de99)
+![cloud1](https://github.com/user-attachments/assets/6b64cbaa-242f-45a9-8a55-766b0550942f)
 
 Use this image as the foreground image and move it left and right.   
 ![balloon48x48](https://github.com/user-attachments/assets/cd01a2b7-373b-4369-8cc6-f1ccac1bb9b4)
