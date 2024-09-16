@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 
 # Download the cloud image from here. Resize the image to width 128.
 # https://www.vecteezy.com/vector-art/28199306-clouds-icon-vector-illustration
