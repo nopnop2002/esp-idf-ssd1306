@@ -14,8 +14,6 @@ __Wire cables should be as short as possible.__
 I used a 10 cm wire cable.   
 However, it is sometimes affected by noise.   
 
-__Flip upside down cannot be enabled.__   
-
 __This demo does not support 128x32 panels.__   
 
 The SPI interface operates faster than the I2C interface.   
