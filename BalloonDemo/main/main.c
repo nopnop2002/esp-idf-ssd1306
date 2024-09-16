@@ -196,13 +196,13 @@ void app_main(void)
 	}
 
 	// Allocate memory for background frame
-	uint8_t *buffer = (uint8_t *)malloc(1024*4);
-	if (buffer == NULL) {
+	uint8_t *background = (uint8_t *)malloc(1024*4);
+	if (background == NULL) {
 		ESP_LOGE(TAG, "malloc failed");
 		while(1) { vTaskDelay(1); }
 	}
 
-	// Allocate memory for background frame
+	// Allocate memory for balloon frame
 	uint8_t *balloon = (uint8_t *)malloc(1024);
 	if (balloon == NULL) {
 		ESP_LOGE(TAG, "malloc failed");
@@ -213,22 +213,22 @@ void app_main(void)
 
 	ssd1306_clear_screen(&dev, false);
 	ssd1306_bitmaps(&dev, 0, 0, cloud11, 64, 32, true);
-	ssd1306_get_buffer(&dev, &buffer[1024*0]);
+	ssd1306_get_buffer(&dev, &background[1024*0]);
 	vTaskDelay(10);
 
 	ssd1306_clear_screen(&dev, false);
 	ssd1306_bitmaps(&dev, 0, 0, cloud12, 64, 32, true);
-	ssd1306_get_buffer(&dev, &buffer[1024*1]);
+	ssd1306_get_buffer(&dev, &background[1024*1]);
 	vTaskDelay(10);
 
 	ssd1306_clear_screen(&dev, false);
 	ssd1306_bitmaps(&dev, 0, 0, cloud13, 64, 32, true);
-	ssd1306_get_buffer(&dev, &buffer[1024*2]);
+	ssd1306_get_buffer(&dev, &background[1024*2]);
 	vTaskDelay(10);
 
 	ssd1306_clear_screen(&dev, false);
 	ssd1306_bitmaps(&dev, 0, 0, cloud14, 64, 32, true);
-	ssd1306_get_buffer(&dev, &buffer[1024*3]);
+	ssd1306_get_buffer(&dev, &background[1024*3]);
 	vTaskDelay(10);
 
 	ssd1306_clear_screen(&dev, false);
@@ -267,14 +267,14 @@ void app_main(void)
 		if (page1 < 4) {
 			for (int seg=0;seg<64;seg++) {
 				if (seg+segmentOffset1 > 0 && seg+segmentOffset1 < 128) 
-					wk[seg+segmentOffset1] = buffer[page1*128+seg+frameOffset1];
+					wk[seg+segmentOffset1] = background[page1*128+seg+frameOffset1];
 			}
 		}
 
 		if (page2 < 4) {
 			for (int seg=0;seg<64;seg++) {
 				if (seg+segmentOffset2 > 0 && seg+segmentOffset2 < 128) 
-					wk[seg+segmentOffset2] = buffer[page2*128+seg+frameOffset2];
+					wk[seg+segmentOffset2] = background[page2*128+seg+frameOffset2];
 			}
 		}
 		ssd1306_set_buffer(&dev, wk);
