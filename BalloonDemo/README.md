@@ -5,6 +5,7 @@
 This demo shows how to overlay background and foreground images.   
 
 Use this image as the background image and move from top to bottom.   
+This allows you to achieve animation effects.   
 ![cloud1](https://github.com/user-attachments/assets/6b64cbaa-242f-45a9-8a55-766b0550942f)
 
 Use this image as the foreground image and move it left and right.   
