@@ -43,4 +43,4 @@ convert highway_width.jpg _highway91.jpg -gravity northwest -geometry +79+0 -com
 convert highway_width.jpg _highway71.jpg -gravity northwest -geometry +83+0 -compose over -composite highway_width.jpg
 
 # Split image in half
-convert highway_width.jpg -crop 128x64+0+0 highway0.jpg
+convert highway_width.jpg -crop 128x64+0+0 highway_width0.jpg
