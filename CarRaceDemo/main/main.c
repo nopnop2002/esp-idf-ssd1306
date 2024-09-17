@@ -286,8 +286,8 @@ void app_main(void)
 
 	int page = 0;
 	int vehicleHorizontalPosition[3] = {20, 52, 84};
-	int vehicleVerticalPosition[3] = {4, 0, 2};
-	int vehicleVerticalMove[3] = {-1, 1, -1};
+	int vehicleVerticalPosition[3] = {-8, 1, -14};
+	int vehicleVerticalMove[3] = {1, 0, 1};
 	while(1) {
 		ssd1306_wrap_arround(&dev, PAGE_SCROLL_DOWN, 0, 0, -1);
 
@@ -310,7 +310,7 @@ void app_main(void)
 			for(int _page=startPage;_page<endPage;_page++) {
 				for(int seg=0;seg<24;seg++) {
 					int bufferIndex = _page*128+seg+vehicleHorizontalPosition[vehicleFrame];
-					if (bufferIndex < 1023)
+					if (bufferIndex >= 0 && bufferIndex < 1023)
 						wk[bufferIndex] = vehicle[vehicleIndex+vehicleOffset*128+seg];
 				}
 				vehicleOffset++;
@@ -333,13 +333,8 @@ void app_main(void)
 			page = 0;
 			for (int vehicleFrame=0;vehicleFrame<3;vehicleFrame++) {
 				vehicleVerticalPosition[vehicleFrame] = vehicleVerticalPosition[vehicleFrame] + vehicleVerticalMove[vehicleFrame];
-				if (vehicleVerticalPosition[vehicleFrame] == 8) {
-					vehicleVerticalPosition[vehicleFrame] = 7;
-					vehicleVerticalMove[vehicleFrame] = -1;
-				}
-				if (vehicleVerticalPosition[vehicleFrame] == -1) {
-					vehicleVerticalPosition[vehicleFrame] = 0;
-					vehicleVerticalMove[vehicleFrame] = 1;
+				if (vehicleVerticalPosition[vehicleFrame] > 8) {
+					vehicleVerticalPosition[vehicleFrame] = -8;
 				}
 			}
 		}
