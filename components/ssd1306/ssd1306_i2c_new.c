@@ -169,7 +169,7 @@ void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int
 	}
 
 	uint8_t *out_buf;
-	out_buf = malloc(width + 1);
+	out_buf = malloc(width < 4 ? 4 : width + 1);
 	if (out_buf == NULL) {
 		ESP_LOGE(TAG, "malloc fail");
 		return;
