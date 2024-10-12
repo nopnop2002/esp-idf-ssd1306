@@ -154,7 +154,9 @@ void ssd1306_dump_page(SSD1306_t * dev, int page, int seg);
 
 void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset);
 void i2c_device_add(SSD1306_t * dev, i2c_port_t i2c_num, int16_t reset);
+#if (ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 2, 0))
 void i2c_bus_add(SSD1306_t * dev, i2c_master_bus_handle_t bus_handle, i2c_port_t i2c_num, int16_t reset);
+#endif
 void i2c_init(SSD1306_t * dev, int width, int height);
 void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int width);
 void i2c_contrast(SSD1306_t * dev, int contrast);
