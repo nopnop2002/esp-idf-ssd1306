@@ -11,7 +11,33 @@ You can check the I2C address using [this](https://github.com/espressif/esp-idf/
 By changing the I2C address, up to two SSD1306 can be used at the same time.
 ![MultiDeviceDemo-I2C-3](https://github.com/user-attachments/assets/4ba02799-9110-4215-b3fc-b1722b11df61)   
 
+### Wireing    
+|ESP32||SSD1301#1|SSD1302#2||
+|:-:|:-:|:-:|:-:|:-:|
+|GPIO21|--|SDA|SDA|(*1)|
+|GPIO22|--|SCL|SCL|(*1)|
+|Vcc|--|VCC|VCC||
+|GND|--|GND|GND||
+
+(*1) You can change using menuconfig.   
+
 ## For SPI
 The ESP-IDF's SPI master has 6 CS lines to drive up to 6 SPI slaves.   
 By changing the CS line, up to six SSD1306 can be used at the same time.   
 ![MultiDeviceDemo-SPI](https://github.com/user-attachments/assets/3d8cbe1e-a882-468e-8299-c2ddd070bc12)
+
+### Wireing    
+|ESP32||SSD1301#1|SSD1302#2||
+|:-:|:-:|:-:|:-:|:-:|
+|GPIO16|--|CS||(*2)|
+|GPIO17|--||CS|(*2)|
+|GPIO04|--|DC|DC|(*1)|
+|GPIO15|--|RES|RES|(*1)|
+|GPIO23|--|MOSI|MOSI|(*1)|
+|GPIO18|--|SCLK|SCLK|(*1)|
+|Vcc|--|VCC|VCC||
+|GND|--|GND|GND||
+
+(*1) You can change using menuconfig.   
+
+(*2) You can change this by editing main.c.   
