@@ -32,8 +32,8 @@ void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 		.sda_io_num = sda,
 		.flags.enable_internal_pullup = true,
 	};
-	i2c_master_bus_handle_t bus_handle;
-	ESP_ERROR_CHECK(i2c_new_master_bus(&i2c_mst_config, &bus_handle));
+	i2c_master_bus_handle_t i2c_bus_handle;
+	ESP_ERROR_CHECK(i2c_new_master_bus(&i2c_mst_config, &i2c_bus_handle));
 
 	i2c_device_config_t dev_cfg = {
 		.dev_addr_length = I2C_ADDR_BIT_LEN_7,
@@ -41,7 +41,7 @@ void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 		.scl_speed_hz = I2C_MASTER_FREQ_HZ,
 	};
 	i2c_master_dev_handle_t i2c_dev_handle;
-	ESP_ERROR_CHECK(i2c_master_bus_add_device(bus_handle, &dev_cfg, &i2c_dev_handle));
+	ESP_ERROR_CHECK(i2c_master_bus_add_device(i2c_bus_handle, &dev_cfg, &i2c_dev_handle));
 
 	if (reset >= 0) {
 		//gpio_pad_select_gpio(reset);
@@ -55,6 +55,47 @@ void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 	dev->_address = I2C_ADDRESS;
 	dev->_flip = false;
 	dev->_i2c_num = I2C_NUM;
+	dev->_i2c_bus_handle = i2c_bus_handle;
+	dev->_i2c_dev_handle = i2c_dev_handle;
+}
+
+void i2c_device_add(SSD1306_t * dev, i2c_port_t i2c_num, int16_t reset, uint16_t i2c_address)
+{
+	ESP_LOGI(TAG, "New i2c driver is used");
+	ESP_LOGW(TAG, "Will not install i2c master driver");
+#if 0
+	i2c_master_bus_config_t i2c_mst_config = {
+		.clk_source = I2C_CLK_SRC_DEFAULT,
+		.glitch_ignore_cnt = 7,
+		.i2c_port = I2C_NUM,
+		.scl_io_num = scl,
+		.sda_io_num = sda,
+		.flags.enable_internal_pullup = true,
+	};
+	i2c_master_bus_handle_t i2c_bus_handle;
+	ESP_ERROR_CHECK(i2c_new_master_bus(&i2c_mst_config, &i2c_bus_handle));
+#endif
+
+	i2c_device_config_t dev_cfg = {
+		.dev_addr_length = I2C_ADDR_BIT_LEN_7,
+		.device_address = i2c_address,
+		.scl_speed_hz = I2C_MASTER_FREQ_HZ,
+	};
+	i2c_master_dev_handle_t i2c_dev_handle;
+	ESP_ERROR_CHECK(i2c_master_bus_add_device(dev->_i2c_bus_handle, &dev_cfg, &i2c_dev_handle));
+
+	if (reset >= 0) {
+		//gpio_pad_select_gpio(reset);
+		gpio_reset_pin(reset);
+		gpio_set_direction(reset, GPIO_MODE_OUTPUT);
+		gpio_set_level(reset, 0);
+		vTaskDelay(50 / portTICK_PERIOD_MS);
+		gpio_set_level(reset, 1);
+	}
+
+	dev->_address = i2c_address;
+	dev->_flip = false;
+	dev->_i2c_num = i2c_num;
 	dev->_i2c_dev_handle = i2c_dev_handle;
 }
 

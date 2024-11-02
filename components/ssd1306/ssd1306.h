@@ -107,6 +107,7 @@ typedef struct {
 	i2c_port_t _i2c_num;
 	spi_device_handle_t _spi_device_handle;
 #if (ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 2, 0))
+	i2c_master_bus_handle_t _i2c_bus_handle;
 	i2c_master_dev_handle_t _i2c_dev_handle;
 #endif
 } SSD1306_t;
@@ -153,7 +154,7 @@ void ssd1306_dump(SSD1306_t dev);
 void ssd1306_dump_page(SSD1306_t * dev, int page, int seg);
 
 void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset);
-void i2c_device_add(SSD1306_t * dev, i2c_port_t i2c_num, int16_t reset);
+void i2c_device_add(SSD1306_t * dev, i2c_port_t i2c_num, int16_t reset, uint16_t i2c_address);
 #if (ESP_IDF_VERSION >= ESP_IDF_VERSION_VAL(5, 2, 0))
 void i2c_bus_add(SSD1306_t * dev, i2c_master_bus_handle_t bus_handle, i2c_port_t i2c_num, int16_t reset);
 #endif
