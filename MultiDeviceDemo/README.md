@@ -12,10 +12,10 @@ By changing the I2C address, up to two SSD1306 can be used at the same time.
 ![MultiDeviceDemo-I2C-3](https://github.com/user-attachments/assets/4ba02799-9110-4215-b3fc-b1722b11df61)   
 
 ### Wireing    
-|ESP32||SSD1301#1|SSD1302#2||
-|:-:|:-:|:-:|:-:|:-:|
-|GPIO21|--|SDA|SDA|(*1)|
-|GPIO22|--|SCL|SCL|(*1)|
+|ESP32||SSD1301#1|SSD1302#2|
+|:-:|:-:|:-:|:-:|
+|GPIO21(*1)|--|SDA|SDA|
+|GPIO22(*1)|--|SCL|SCL|
 |Vcc|--|VCC|VCC||
 |GND|--|GND|GND||
 
@@ -27,14 +27,14 @@ By changing the CS line, up to six SSD1306 can be used at the same time.
 ![MultiDeviceDemo-SPI](https://github.com/user-attachments/assets/3d8cbe1e-a882-468e-8299-c2ddd070bc12)
 
 ### Wireing    
-|ESP32||SSD1301#1|SSD1302#2||
-|:-:|:-:|:-:|:-:|:-:|
-|GPIO16|--|CS||(*2)|
-|GPIO17|--||CS|(*2)|
-|GPIO04|--|DC|DC|(*1)|
-|GPIO15|--|RES|RES|(*1)|
-|GPIO23|--|MOSI|MOSI|(*1)|
-|GPIO18|--|SCLK|SCLK|(*1)|
+|ESP32||SSD1301#1|SSD1302#2|
+|:-:|:-:|:-:|:-:|
+|GPIO16(*2)|--|CS||
+|GPIO17(*2)|--||CS|
+|GPIO04(*1)|--|DC|DC|
+|GPIO15(*1)|--|RES|RES|
+|GPIO23(*1)|--|MOSI|MOSI|
+|GPIO18(*1)|--|SCLK|SCLK|
 |Vcc|--|VCC|VCC||
 |GND|--|GND|GND||
 
