@@ -64,7 +64,7 @@ void app_main(void)
 	ESP_ERROR_CHECK(i2c_driver_install(i2c_num, I2C_MODE_MASTER, 0, 0, 0));
 
 	// add new device to i2c bus
-	i2c_device_add(&dev, i2c_num, CONFIG_RESET_GPIO);
+	i2c_device_add(&dev, i2c_num, CONFIG_RESET_GPIO, I2C_ADDRESS);
 #endif
 
 #ifdef NEW_DRIVER
