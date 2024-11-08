@@ -130,7 +130,7 @@ If you use this module at the same time as another I2C device using I2C port 0, 
 XTENSA's ESP32 has two i2c port: I2C_NUM_0/1.   
 I2C_NUM_0/1 are initialized independently, but legacy i2c drivers and new i2c drivers cannot be mixed.   
 If I2C_NUM_0 is initialized with the legacy i2c driver, I2C_NUM_1 must also be initialized with the legacy i2c driver.   
-If you use the SSD1306 at the same time as other I2C devices that use legacy I2C drivers, the SSD1306 must also be initialized with the legacy I2C driver.
+If you use the SSD1306 at the same time as other I2C devices that use legacy I2C drivers, the SSD1306 must also be initialized with the legacy I2C driver.   
 Enabling this will use the legacy i2c driver even after ESP-IDF V5.2.   
 ![config-i2c-driver](https://github.com/user-attachments/assets/d07076d0-1c94-43d1-aa5a-aec810d2f7bc)
 
