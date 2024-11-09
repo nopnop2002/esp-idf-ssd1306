@@ -57,7 +57,7 @@ i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
 ```
 
 This project allows you to use an initialization function that does not install the i2c driver.   
-This function specifies the i2c port to use as the function argument.   
+This function specifies the I2C port number and I2C address to use as arguments to the function.   
 ```
 i2c_device_add(&dev, i2c_num, CONFIG_RESET_GPIO, I2C_ADDRESS);
 ```
@@ -128,7 +128,7 @@ i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
 ```
 
 This project allows you to use an initialization function that does not install the i2c driver.   
-This function specifies the i2c port to use as the function argument.   
+This function specifies the I2C port number and I2C address to use as arguments to the function.   
 ```
 i2c_device_add(&dev, i2c_num, CONFIG_RESET_GPIO, I2C_ADDRESS);
 ```
