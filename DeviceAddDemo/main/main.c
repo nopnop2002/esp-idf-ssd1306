@@ -82,7 +82,8 @@ void app_main(void)
 	ESP_ERROR_CHECK(i2c_new_master_bus(&i2c_mst_config, &bus_handle));
 
 	// add new device to i2c bus
-	i2c_bus_add(&dev, bus_handle, i2c_num, CONFIG_RESET_GPIO);
+	dev._i2c_bus_handle = bus_handle;
+	i2c_device_add(&dev, i2c_num, CONFIG_RESET_GPIO, I2C_ADDRESS);
 #endif
 
 #endif // CONFIG_I2C_INTERFACE

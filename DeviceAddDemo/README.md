@@ -130,7 +130,7 @@ i2c_master_init(&dev, CONFIG_SDA_GPIO, CONFIG_SCL_GPIO, CONFIG_RESET_GPIO);
 This project allows you to use an initialization function that does not install the i2c driver.   
 This function specifies the i2c port to use as the function argument.   
 ```
-i2c_bus_add(&dev, bus_handle, i2c_num, CONFIG_RESET_GPIO);
+i2c_device_add(&dev, i2c_num, CONFIG_RESET_GPIO, I2C_ADDRESS);
 ```
 
 The i2c driver must be installed before using this initialization function.   
@@ -147,8 +147,9 @@ The i2c driver must be installed before using this initialization function.
     i2c_master_bus_handle_t bus_handle;
     ESP_ERROR_CHECK(i2c_new_master_bus(&i2c_mst_config, &bus_handle));
 
-    // add SSD1306 to i2c bus
-    i2c_bus_add(&dev, bus_handle, I2C_NUM_0, CONFIG_RESET_GPIO);
+    // add new device to i2c bus
+    dev._i2c_bus_handle = bus_handle;
+    i2c_device_add(&dev, i2c_num, CONFIG_RESET_GPIO, I2C_ADDRESS);
 ```
 
 
