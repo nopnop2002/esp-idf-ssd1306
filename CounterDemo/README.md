@@ -2,7 +2,7 @@
 
 ![CounterDemo](https://user-images.githubusercontent.com/6020549/166628057-fc8c0f7f-7d94-4ffe-8866-d145d953f94d.JPG)
 
-I borrowed the PNG image from [here](https://www.iconspng.com/image/5656/seven-segment-display-gray-0).   
+I borrowed the PNG image from [here](https://freesvg.org/seven-segment-display-gray-0).   
 
 __Wire cables should be as short as possible.__   
 
