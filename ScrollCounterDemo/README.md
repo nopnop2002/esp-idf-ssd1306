@@ -3,6 +3,7 @@
 ![ScrollCounterDemo](https://user-images.githubusercontent.com/6020549/166837973-4a380663-fb77-4417-802a-7f63a2a829c3.JPG)
 
 I borrowed the PNG image from [here](https://freesvg.org/seven-segment-display-gray-0).   
+[0](https://freesvg.org/seven-segment-display-gray-0)
 
 __Wire cables should be as short as possible.__   
 
