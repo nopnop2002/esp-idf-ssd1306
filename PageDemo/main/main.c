@@ -183,7 +183,7 @@ void app_main(void)
 	}
 
 	while(1) {
-		ssd1306_clear_screen(&dev, false);
+		//ssd1306_clear_screen(&dev, false);
 		for (int page=0;page<8;page++) {
 			int index = page * 128;
 			ssd1306_set_page(&dev, page, &buffer1[index]);
@@ -192,7 +192,7 @@ void app_main(void)
 		}
 		vTaskDelay(2000 / portTICK_PERIOD_MS);
 
-		ssd1306_clear_screen(&dev, false);
+		//ssd1306_clear_screen(&dev, false);
 		int index = 0;
 		for (int page=7;page>=0;page--) {
 			ssd1306_set_page(&dev, page, &buffer2[index]);
