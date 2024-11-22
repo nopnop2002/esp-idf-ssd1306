@@ -76,6 +76,16 @@ void ssd1306_get_buffer(SSD1306_t * dev, uint8_t * buffer)
 	}
 }
 
+void ssd1306_set_page(SSD1306_t * dev, int page, uint8_t * buffer)
+{
+	memcpy(&dev->_page[page]._segs, buffer, 128);
+}
+
+void ssd1306_get_page(SSD1306_t * dev, int page, uint8_t * buffer)
+{
+	memcpy(buffer, &dev->_page[page]._segs, 128);
+}
+
 void ssd1306_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int width)
 {
 	if (dev->_address == SPI_ADDRESS) {

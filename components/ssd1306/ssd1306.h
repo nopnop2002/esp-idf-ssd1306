@@ -124,6 +124,8 @@ int ssd1306_get_pages(SSD1306_t * dev);
 void ssd1306_show_buffer(SSD1306_t * dev);
 void ssd1306_set_buffer(SSD1306_t * dev, uint8_t * buffer);
 void ssd1306_get_buffer(SSD1306_t * dev, uint8_t * buffer);
+void ssd1306_set_page(SSD1306_t * dev, int page, uint8_t * buffer);
+void ssd1306_get_page(SSD1306_t * dev, int page, uint8_t * buffer);
 void ssd1306_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int width);
 void ssd1306_display_text(SSD1306_t * dev, int page, char * text, int text_len, bool invert);
 void ssd1306_display_text_box1(SSD1306_t * dev, int page, int seg, char * text, int box_width, int text_len, bool invert, int delay);
