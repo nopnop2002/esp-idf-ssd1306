@@ -148,9 +148,20 @@ void app_main(void)
 		while(1) { vTaskDelay(1); }
 	}
 
-	// Allocate memory for work frame
 	uint8_t *buffer2 = (uint8_t *)malloc(1024);
 	if (buffer2 == NULL) {
+		ESP_LOGE(TAG, "malloc failed");
+		while(1) { vTaskDelay(1); }
+	}
+
+	uint8_t *buffer3 = (uint8_t *)malloc(1024);
+	if (buffer3 == NULL) {
+		ESP_LOGE(TAG, "malloc failed");
+		while(1) { vTaskDelay(1); }
+	}
+
+	uint8_t *buffer4 = (uint8_t *)malloc(1024);
+	if (buffer4 == NULL) {
 		ESP_LOGE(TAG, "malloc failed");
 		while(1) { vTaskDelay(1); }
 	}
@@ -167,6 +178,17 @@ void app_main(void)
 	ESP_LOGI(TAG, "ch1=0x%x ch2=0x%x", ch1, ch2);
 #endif
 
+	// generate inverted image
+	for (int page=0;page<8;page++) {
+		int index1 = page * 128;
+		ssd1306_get_page(&dev, page, &buffer1[index1]);
+		for (int seg=0;seg<128;seg++) {
+			buffer2[index1+seg] = ~buffer1[index1+seg];
+		}
+		vTaskDelay(1);
+	}
+
+	// generate fliped image
 	for (int page=0;page<8;page++) {
 		int index1 = page * 128;
 		int index2 = index1 + 127;
@@ -177,13 +199,22 @@ void app_main(void)
 			uint8_t wk2 = buffer1[index2];
 			wk1 = RotateByte(wk1);
 			wk2 = RotateByte(wk2);
-			buffer2[index1++] = wk2;
-			buffer2[index2--] = wk1;
+			buffer3[index1++] = wk2;
+			buffer3[index2--] = wk1;
 		}
+		vTaskDelay(1);
+	}
+
+	// generate fliped and inverted image
+	for (int page=0;page<8;page++) {
+		int index1 = page * 128;
+		for (int seg=0;seg<128;seg++) {
+			buffer4[index1+seg] = ~buffer3[index1+seg];
+		}
+		vTaskDelay(1);
 	}
 
 	while(1) {
-		//ssd1306_clear_screen(&dev, false);
 		for (int page=0;page<8;page++) {
 			int index = page * 128;
 			ssd1306_set_page(&dev, page, &buffer1[index]);
@@ -192,11 +223,36 @@ void app_main(void)
 		}
 		vTaskDelay(2000 / portTICK_PERIOD_MS);
 
-		//ssd1306_clear_screen(&dev, false);
-		int index = 0;
-		for (int page=7;page>=0;page--) {
+		//for (int page=0;page<8;page++) {
+		for (int page=0;page<4;page++) {
+			int index = page * 128;
 			ssd1306_set_page(&dev, page, &buffer2[index]);
-			index = index + 128;
+			ssd1306_show_buffer(&dev);
+			vTaskDelay(5);
+		}
+		vTaskDelay(2000 / portTICK_PERIOD_MS);
+
+		//for (int page=7;page>=0;page--) {
+		for (int page=7;page>=4;page--) {
+			int index = (7-page)*128;
+			ssd1306_set_page(&dev, page, &buffer3[index]);
+			ssd1306_show_buffer(&dev);
+			vTaskDelay(5);
+		}
+		vTaskDelay(2000 / portTICK_PERIOD_MS);
+
+		//for (int page=7;page>=0;page--) {
+		for (int page=3;page>=0;page--) {
+			int index = (7-page)*128;
+			ssd1306_set_page(&dev, page, &buffer4[index]);
+			ssd1306_show_buffer(&dev);
+			vTaskDelay(5);
+		}
+		vTaskDelay(2000 / portTICK_PERIOD_MS);
+
+		for (int page=7;page>=4;page--) {
+			int index = (7-page)*128;
+			ssd1306_set_page(&dev, page, &buffer4[index]);
 			ssd1306_show_buffer(&dev);
 			vTaskDelay(5);
 		}
