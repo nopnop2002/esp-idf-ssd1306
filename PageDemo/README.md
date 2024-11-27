@@ -4,7 +4,7 @@
 This is a demo of operating the display page area of SSD1306.   
 
 ![PageDemo-1](https://github.com/user-attachments/assets/4d75ad03-4421-4091-a2a7-936835f03c55)
-![PageDemo-2](https://github.com/user-attachments/assets/fcf8a85c-4f8e-49e9-a423-6a5c9f4b8963)
+![PageDemo-2](https://github.com/user-attachments/assets/b8243dc5-1e05-4bf5-b435-927911b28cfc)
 ![PageDemo-3](https://github.com/user-attachments/assets/dfc3598b-4bad-4201-ab18-afc8986d1af2)
 
 I borrowed the BIT MAP data from [here](https://www.instructables.com/How-to-use-OLED-display-arduino-module/).   
