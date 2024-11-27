@@ -6,7 +6,7 @@
 
 I borrowed the BIT MAP data from [here](https://iitestudent.blogspot.com/2013/01/displaying-bitmap-on-graphic-lcd.html).   
 
-I generated BIT MAP data from [this](https://www.mischianti.org/2021/07/14/ssd1306-oled-display-draw-images-splash-and-animations-2/) file.   
+I generated BIT MAP data using [this](https://www.mischianti.org/2021/07/14/ssd1306-oled-display-draw-images-splash-and-animations-2/) page.   
 
 
 # How to make your original BIT MAP data   
