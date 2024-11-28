@@ -7,8 +7,6 @@ convert vehicle2.jpg -resize 24x vehicle2.jpg
 convert istockphoto-1282378168-1024x1024.jpg -crop 256x512+138+512 vehicle3.jpg
 convert vehicle3.jpg -resize 24x vehicle3.jpg
 
-convert 365470.jpg -resize 128x _365470.jpg
-
 # Crop image
 convert 365470.jpg -crop 382x382+106+125 _highway1.jpg
 
@@ -44,3 +42,5 @@ convert highway_width.jpg _highway71.jpg -gravity northwest -geometry +83+0 -com
 
 # Split image in half
 convert highway_width.jpg -crop 128x64+0+0 highway_width0.jpg
+
+rm _highway*.jpg
