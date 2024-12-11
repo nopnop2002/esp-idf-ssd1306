@@ -38,15 +38,22 @@ Now the device will enter DFU mode, the USB device (/dev/ttyACM0) will appear, a
 Once the firmware upload is complete, press ButtonRST again.   
 The firmware will now start.   
 If you press ButtonRST without pressing Button0, the USB device will disappear.   
-In other words, USB can be used for writing, but not for STDOUT.   
-This board is not suitable for debugging.   
-On ESP32-S2, GPIO43/44 are U0TXD/U0RXD, but this GPIO is not present on the pin header.
+
+To use STDOUT, you need to change Channel for console output to USB CDC in menuconfig.   
+![esp32-s2-mini-4](https://github.com/user-attachments/assets/d9dab093-7882-4f57-a978-38fa69c71bb6)
+
+After changing Channel for console output to USB CDC in menuconfig, upload the firmware again.   
+Once the firmware has been uploaded, the following display will appear.   
+![esp32-s2-mini-5](https://github.com/user-attachments/assets/32f7e2e9-b50c-423f-ac93-9081995c7763)
+
+__Now press ButtonRST.__   
+The firmware with USB CDC enabled will now start running.   
+From now on, you will be able to write and monitor the firmware without pressing Button0 or ButtonRST.
 
 This board has 4MB of FLASH and ___2MB of PSRAM___.   
 It's strange that it is recognized as having an external flash.   
 There is no external flash anywhere on the board.   
-
-![esp32s2-mini](https://github.com/nopnop2002/esp-idf-net-logging/assets/6020549/f36327cf-7e7b-4f1f-aa20-1eb16a0650ea)
+![esp32-s2-mini-6](https://github.com/user-attachments/assets/f185ad9b-299b-4c23-a63a-63ed4404af3f)
 
 # Enable PSRAM   
 ESP32S2's RAM is very small.   
