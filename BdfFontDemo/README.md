@@ -115,7 +115,7 @@ FONTBOUNDINGBOX 21 26 -3 -6
 
 Each character has a character-specific bounding box (BBX).   
 This BBX value indicates that this character is 8 dots wide by 12 dots high, and requires a 1 pixel margin to the left of this character.   
-By providing a character-specific bounding box (BBX), this can omit the leftmost whitespace.   
+By providing a character-specific bounding box (BBX), this can omit the left edge whitespace from the font pattern.   
 ```
 STARTCHAR d
 ENCODING 100
