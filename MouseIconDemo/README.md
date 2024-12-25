@@ -18,7 +18,7 @@ https://thenounproject.com/icon/mouse-6617048/
 - USB Connector   
  I used this:   
  ![usb-conector-3](https://github.com/user-attachments/assets/05f3f79d-00d1-4d65-ad46-67d2e987bc88)
-
+ 
  We can buy this breakout on Ebay or AliExpress.   
  ![usb-conector-11](https://github.com/user-attachments/assets/848998d4-fb0c-4b4f-97ae-0b3ae8b8996a)
  ![usb-conector-12](https://github.com/user-attachments/assets/6fc34dcf-0b13-4233-8c71-07234e8c6d06)
