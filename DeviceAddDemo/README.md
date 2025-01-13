@@ -20,8 +20,8 @@ I2C_NUM_0 --+-- I2C SSD1306
 
 In the XTENSA series, you can use I2C_NUM_1 bus instead of I2C_NUM_0 bus.
 ```
-I2C_NUM_0 ----- Any I2C Device
-I2C_NUM_1 ----- I2C SSD1306
+I2C_NUM_1 --+-- I2C SSD1306
+            +---Any I2C Device
 ```
 
 
