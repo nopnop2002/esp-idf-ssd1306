@@ -184,6 +184,25 @@ void app_main(void)
 #endif
 		vTaskDelay(500);
 
+#if 0
+		// Non-Ascii character
+		ssd1306_clear_screen(&dev, false);
+		ssd1306_contrast(&dev, 0xff);
+		int xpos = 0;
+		for (int code=161;code<170;code++) {
+			show_bdf_font_code(&dev, __ncenR12_bitmap__, code, xpos, 0);
+			xpos = xpos + 12;
+		}
+#if CONFIG_SSD1306_128x64
+		xpos = 0;
+		for (int code=181;code<190;code++) {
+			show_bdf_font_code(&dev, __ncenR12_bitmap__, code, xpos, 32);
+			xpos = xpos + 12;
+		}
+#endif
+		vTaskDelay(500);
+#endif
+
 		ssd1306_clear_screen(&dev, false);
 		ssd1306_contrast(&dev, 0xff);
 		show_bdf_font_code(&dev, __emoticons_bitmap__, 32, 0, 5);
