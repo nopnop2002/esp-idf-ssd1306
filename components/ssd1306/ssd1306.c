@@ -537,15 +537,6 @@ void _ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int
 		ESP_LOGE(__FUNCTION__, "width must be a multiple of 8");
 		return;
 	}
-	ESP_LOGD(__FUNCTION__, "dev->_height=%d dev->_width=%d", dev->_height, dev->_width);
-	if ( xpos + width > dev->_width-1) {
-		ESP_LOGE(__FUNCTION__, "X position must be %d pixels or less. xpos=%d width=%d", dev->_width-1, xpos, width);
-		return;
-	}
-	if ( ypos + height > dev->_height-1) {
-		ESP_LOGE(__FUNCTION__, "Y position must be %d pixels or less. ypos=%d height=%d", dev->_height-1, ypos, height);
-		return;
-	}
 	int _width = width / 8;
 	uint8_t wk0;
 	uint8_t wk1;
@@ -569,6 +560,14 @@ void _ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int
 				if (dev->_flip) wk2 = ssd1306_rotate_byte(wk2);
 
 				ESP_LOGD(__FUNCTION__, "index=%d offset=%d wk1=0x%x page=%d _seg=%d, wk2=%02x", index, offset, wk1, page, _seg, wk2);
+				if (_seg >= 128) {
+					ESP_LOGW(__FUNCTION__, "segment is out of range");
+					break;
+				}
+				if (page >= dev->_pages) {
+					ESP_LOGW(__FUNCTION__, "page is out of range");
+					break;
+				}
 				dev->_page[page]._segs[_seg] = wk2;
 				_seg++;
 			}
