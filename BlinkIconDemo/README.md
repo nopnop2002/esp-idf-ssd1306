@@ -21,3 +21,7 @@ https://thenounproject.com/icon/data-send-3753855/
 - Paste the BMP data into your code.   
 
 
+# Hwo to use Bootstrap Icons   
+There are over 2000 icons available [here](https://icons.getbootstrap.com/).    
+All icons are free to use.   
+On [this](https://www.mischianti.org/2021/07/14/ssd1306-oled-display-draw-images-splash-and-animations-2/) site, you can create BMP data from not only JPEG and PNG files, but also SVG files.   
