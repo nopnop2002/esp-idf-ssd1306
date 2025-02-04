@@ -169,7 +169,6 @@ Create idf_component.yml in the same directory as main.c.
 When you build a projects esp-idf will automaticly fetch repository to managed_component dir and link with your code.   
 ```
 YourProject --+-- CMakeLists.txt
-              +-- sdkconfig
               +-- main --+-- main.c
                          +-- CMakeLists.txt
                          +-- idf_component.yml
