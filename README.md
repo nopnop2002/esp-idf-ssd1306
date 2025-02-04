@@ -166,6 +166,7 @@ Previously it was called HSPI_HOST / VSPI_HOST, but now it is called SPI2_HOST /
 
 # How to use this component in your project   
 Create idf_component.yml in the same directory as main.c.   
+When you build a projects esp-idf will automaticly fetch repository to managed_component dir and link with your code.   
 ```
 YourProject --+-- CMakeLists.txt
               +-- sdkconfig
@@ -173,7 +174,7 @@ YourProject --+-- CMakeLists.txt
                          +-- CMakeLists.txt
                          +-- idf_component.yml
 ```
-When you build a projects esp-idf will automaticly fetch repository to managed_component dir and link with your code.   
+
 ```
 dependencies:
   ssd1306:
