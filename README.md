@@ -51,8 +51,6 @@ You have to set this config value with menuconfig.
 
 ![config-main](https://user-images.githubusercontent.com/6020549/101276030-7387f980-37ed-11eb-85af-3babe939f0a1.jpg)
 
----
-
 # Generic SSD1306 128x32 i2c
 
 ![128x32](https://user-images.githubusercontent.com/6020549/56449097-6d12e880-6350-11e9-8edd-7a8fc5eaeedc.JPG)
@@ -87,8 +85,6 @@ You need to change the Main XTAL frequency to 26MHz using menuconfig.
 ![ESP32-OLED-2](https://user-images.githubusercontent.com/6020549/57063327-d229ef00-6cfd-11e9-98ab-8448e14d81e2.JPG)
 ![config-ESP-WROOM-32](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/72434f83-8496-43bb-9333-8c35db155c74)
 
----
-
 # Generic SSD1306 128x32 SPI
 
 ![128x32_spi](https://user-images.githubusercontent.com/6020549/106338743-ef775d00-62d7-11eb-8e0c-42c09e6045b9.JPG)
@@ -112,7 +108,6 @@ Right:0.96 inch SSD1306
 ![SH1106_spi](https://user-images.githubusercontent.com/6020549/106343561-58b39c00-62e9-11eb-8ce7-913bf15cb803.JPG)
 ![config-sh1106_spi](https://user-images.githubusercontent.com/6020549/202815762-f2431f59-8d21-4b9b-a822-330cb2bc9afd.jpg)
 
----
 
 # I2C Clock speed   
 According to the SSD1306 datasheet, the minimum i2c clock cycle time is 2.5us.   
@@ -133,8 +128,6 @@ If I2C_NUM_0 is initialized with the legacy i2c driver, I2C_NUM_1 must also be i
 If you use the SSD1306 at the same time as other I2C devices that use legacy I2C drivers, the SSD1306 must also be initialized with the legacy I2C driver.   
 Enabling this will use the legacy i2c driver even after ESP-IDF V5.2.   
 ![config-i2c-driver](https://github.com/user-attachments/assets/d07076d0-1c94-43d1-aa5a-aec810d2f7bc)
-
----
 
 # SPI Clock speed   
 According to the SSD1306 datasheet, the minimum SPI clock cycle time is 100ns.   
@@ -164,11 +157,21 @@ When using this module at the same time as SDSPI or other SPI device using SPI2_
 When you don't use SDSPI, both SPI2_HOST and SPI3_HOST will work.   
 Previously it was called HSPI_HOST / VSPI_HOST, but now it is called SPI2_HOST / SPI3_HOST.   
 
----
 
 # Flip upside down
 
 ![config_flip](https://user-images.githubusercontent.com/6020549/115942179-e3b8c280-a4e3-11eb-9b08-8eb830c9f7f4.jpg)
 
 ![ssd1306_flip](https://user-images.githubusercontent.com/6020549/115942191-f0d5b180-a4e3-11eb-879e-e7be89eb3e50.JPG)
+
+# How to use this component in your project   
+Create idf_component.yml in the same directory as main.c.   
+When you build a projects esp-idf will automaticly fetch repository to managed_component dir and link with your code.   
+```
+dependencies:
+  ssd1306:
+    path: components/ssd1306/
+    git: https://github.com/nopnop2002/esp-idf-ssd1306.git
+```
+
 
