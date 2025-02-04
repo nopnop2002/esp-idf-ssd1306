@@ -187,6 +187,7 @@ YourProject --+-- CMakeLists.txt
                          +-- CMakeLists.txt
                          +-- idf_component.yml
               +-- managed_components ----- ssd1306
+              +-- dependencies.lock
 ```
 
 
