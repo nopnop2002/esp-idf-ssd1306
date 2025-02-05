@@ -173,6 +173,7 @@ YourProject --+-- CMakeLists.txt
                          +-- idf_component.yml
 ```
 
+Contents of idf_component.yml.
 ```
 dependencies:
   ssd1306:
