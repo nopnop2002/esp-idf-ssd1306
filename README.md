@@ -185,8 +185,8 @@ When you build a projects esp-idf will automaticly fetch repository to managed_c
 ```
 YourProject --+-- CMakeLists.txt
               +-- main --+-- main.c
-                         +-- CMakeLists.txt
-                         +-- idf_component.yml
+              |          +-- CMakeLists.txt
+              |          +-- idf_component.yml
               +-- managed_components ----- nopnop2002__ssd1306
 ```
 
