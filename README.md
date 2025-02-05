@@ -176,7 +176,7 @@ YourProject --+-- CMakeLists.txt
 Contents of idf_component.yml.
 ```
 dependencies:
-  ssd1306:
+  nopnop2002/ssd1306:
     path: components/ssd1306/
     git: https://github.com/nopnop2002/esp-idf-ssd1306.git
 ```
@@ -187,7 +187,7 @@ YourProject --+-- CMakeLists.txt
               +-- main --+-- main.c
                          +-- CMakeLists.txt
                          +-- idf_component.yml
-              +-- managed_components ----- ssd1306
+              +-- managed_components ----- nopnop2002__ssd1306
 ```
 
 
