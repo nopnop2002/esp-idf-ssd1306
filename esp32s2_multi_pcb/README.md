@@ -11,10 +11,6 @@ Although this product is very small, it is equipped with 2MB of PSRAM.
 ![esp32s2-pcb-3](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/75cec085-c336-453c-b10e-0d3ba5e59ede)
 ![esp32s2-pcb-4](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/8ebc94ee-1ff9-4591-a0a5-3057ea397bf2)
 
-You can download the Garbers file from [here](https://www.pcbway.com/project/shareproject/esp32s2_ssd1306_multi_pcb_2d6e5b26.html).   
-You can use the zip file to order it yourself from PCB manufacturing vendors such as Elecrow/FusionPCB/PCBWay.   
-I ordered it on 3/31 and it arrived on 4/9.   
-You can repeat my order from [here](https://www.pcbway.com/project/shareproject/esp32s2_ssd1306_multi_pcb_2d6e5b26.html).
 
 # Configuration   
 for SPI interface   
@@ -66,5 +62,26 @@ Please note that this procedure is for ESP-IDF V5.2 and may change in the future
 ![psram-4](https://github.com/nopnop2002/esp-idf-net-logging/assets/6020549/ae980ac1-470e-4b9d-bd2b-82ec4777f204)
 ![psram-5](https://github.com/nopnop2002/esp-idf-net-logging/assets/6020549/76a7a4f3-e231-4509-b997-c1d710ee7301)
 
+# How to order PCB   
+You can repeat my order from [here](https://www.pcbway.com/project/shareproject/esp32s2_ssd1306_multi_pcb_2d6e5b26.html).   
 
+# Why PCBWay?
+I have used several PCB manufacturers in the past, but lately I have only used PCBWay.   
+
+- Quality and Reliability   
+ PCBWay's PCBs meet the highest standards of quality and reliability, they are also capable of meeting the technical demands of any project, from simple projects like mine to very complicated projects.
+
+- Customization and Flexibility   
+ They offer extensive customization options, allowing board designers to tailor their PCBs precisely to their project's needs.
+
+- Easy order   
+ Many PCB manufacturers have pages for ordering, but PCBWay's ordering page is the easiest to use.   
+ This is very important to me as English is not my native language.   
+ The easiest way to order is to select your PCB size, Quantity and Solder Mask color. Other selections remain default.   
+ PCBWay will provide you with a price after verifying the validity of your board manufacturing information.   
+
+- Shipping options   
+ I always use the cheaper option and am very happy with the delivery quality and delivery time.   
+ It will arrive in Japan in about 7 to 10 days.   
+ You can further reduce delivery time by choosing another option.   
 
