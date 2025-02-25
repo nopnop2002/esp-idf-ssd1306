@@ -153,12 +153,17 @@ bool spi_master_write_byte(spi_device_handle_t SPIHandle, const uint8_t* Data, s
 	return true;
 }
 
+bool spi_master_write_commands(SSD1306_t * dev, const uint8_t * Commands, size_t DataLength )
+{
+	gpio_set_level( dev->_dc, SPI_COMMAND_MODE );
+	return spi_master_write_byte( dev->_spi_device_handle, Commands, DataLength );
+}
+
 bool spi_master_write_command(SSD1306_t * dev, uint8_t Command )
 {
 	static uint8_t CommandByte = 0;
 	CommandByte = Command;
-	gpio_set_level( dev->_dc, SPI_COMMAND_MODE );
-	return spi_master_write_byte( dev->_spi_device_handle, &CommandByte, 1 );
+	return spi_master_write_commands( dev, &CommandByte, 1 );
 }
 
 bool spi_master_write_data(SSD1306_t * dev, const uint8_t* Data, size_t DataLength )
@@ -228,12 +233,9 @@ void spi_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int
 		_page = (dev->_pages - page) - 1;
 	}
 
-	// Set Lower Column Start Address for Page Addressing Mode
-	spi_master_write_command(dev, (0x00 + columLow));
-	// Set Higher Column Start Address for Page Addressing Mode
-	spi_master_write_command(dev, (0x10 + columHigh));
-	// Set Page Start Address for Page Addressing Mode
-	spi_master_write_command(dev, 0xB0 | _page);
+	// Set Lower Column Start Address for Page Addressing Mode, Higher Column Start Address for Page Addressing Mode and Page Start Address for Page Addressing Mode
+	uint8_t commands[3] = { 0x00 + columLow, 0x10 + columHigh, 0xB0 | _page };
+	spi_master_write_commands(dev, commands, 3);
 
 	spi_master_write_data(dev, images, width);
 
