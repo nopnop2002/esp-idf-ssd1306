@@ -166,6 +166,7 @@ void spi_clock_speed(int speed);
 void spi_master_init(SSD1306_t * dev, int16_t mosi, int16_t sclk, int16_t cs, int16_t dc, int16_t reset);
 void spi_device_add(SSD1306_t * dev, int16_t cs, int16_t dc, int16_t reset);
 bool spi_master_write_byte(spi_device_handle_t SPIHandle, const uint8_t* Data, size_t DataLength );
+bool spi_master_write_commands(SSD1306_t * dev, const uint8_t * Commands, size_t DataLength );
 bool spi_master_write_command(SSD1306_t * dev, uint8_t Command );
 bool spi_master_write_data(SSD1306_t * dev, const uint8_t* Data, size_t DataLength );
 void spi_init(SSD1306_t * dev, int width, int height);
