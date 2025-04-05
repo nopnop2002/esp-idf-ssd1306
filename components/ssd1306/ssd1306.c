@@ -599,18 +599,18 @@ void ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int 
 	_ssd1306_bitmaps(dev, xpos, ypos, bitmap, width, height, invert);
 	
 	// Calculate the range of pages and segments to update
-    int start_page = ypos / 8;
-    int end_page = (ypos + height - 1) / 8;
-    int start_seg = xpos;
-    int end_seg = xpos + width - 1;
+	int start_page = ypos / 8;
+	int end_page = (ypos + height - 1) / 8;
+	int start_seg = xpos;
+	int end_seg = xpos + width - 1;
 
-    // Update only the modified pages and segments
-    for (int page = start_page; page <= end_page; page++) {
-        int seg_start = (page == start_page) ? start_seg : 0;
-        int seg_end = (page == end_page) ? end_seg : 127;
-        int seg_width = seg_end - seg_start + 1;
-        ssd1306_display_image(dev, page, seg_start, &dev->_page[page]._segs[seg_start], seg_width);
-    }
+	// Update only the modified pages and segments
+	for (int page = start_page; page <= end_page; page++) {
+		int seg_start = (page == start_page) ? start_seg : 0;
+		int seg_end = (page == end_page) ? end_seg : 127;
+		int seg_width = seg_end - seg_start + 1;
+		ssd1306_display_image(dev, page, seg_start, &dev->_page[page]._segs[seg_start], seg_width);
+	}
 }
 
 
