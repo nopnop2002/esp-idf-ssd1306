@@ -141,7 +141,7 @@ void i2c_init(SSD1306_t * dev, int width, int height) {
 }
 
 
-void i2c_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int width) {
+void i2c_display_image(SSD1306_t * dev, int page, int seg, const uint8_t * images, int width) {
 	if (page >= dev->_pages) return;
 	if (seg >= dev->_width) return;
 

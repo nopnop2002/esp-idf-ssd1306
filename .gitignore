@@ -1,0 +1,12 @@
+.*
+!.git?*
+
+build/
+CMakeFiles/
+
+sdkconfig*
+!sdkconfig.defaults
+
+managed_components
+
+dependencies.lock

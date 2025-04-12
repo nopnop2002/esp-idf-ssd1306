@@ -139,7 +139,7 @@ void spi_device_add(SSD1306_t * dev, int16_t cs, int16_t dc, int16_t reset)
 }
 
 
-bool spi_master_write_byte(spi_device_handle_t SPIHandle, const uint8_t* Data, size_t DataLength )
+bool spi_master_write_byte(const spi_device_handle_t SPIHandle, const uint8_t* Data, size_t DataLength )
 {
 	spi_transaction_t SPITransaction;
 
@@ -219,7 +219,7 @@ void spi_init(SSD1306_t * dev, int width, int height)
 }
 
 
-void spi_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int width)
+void spi_display_image(SSD1306_t * dev, int page, int seg, const uint8_t * images, int width)
 {
 	if (page >= dev->_pages) return;
 	if (seg >= dev->_width) return;
