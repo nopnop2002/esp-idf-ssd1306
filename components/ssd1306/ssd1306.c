@@ -56,7 +56,7 @@ void ssd1306_show_buffer(SSD1306_t * dev)
 	}
 }
 
-void ssd1306_set_buffer(SSD1306_t * dev, uint8_t * buffer)
+void ssd1306_set_buffer(SSD1306_t * dev, const uint8_t * buffer)
 {
 	int index = 0;
 	for (int page=0; page<dev->_pages;page++) {
@@ -74,7 +74,7 @@ void ssd1306_get_buffer(SSD1306_t * dev, uint8_t * buffer)
 	}
 }
 
-void ssd1306_set_page(SSD1306_t * dev, int page, uint8_t * buffer)
+void ssd1306_set_page(SSD1306_t * dev, int page, const uint8_t * buffer)
 {
 	memcpy(&dev->_page[page]._segs, buffer, 128);
 }
@@ -84,7 +84,7 @@ void ssd1306_get_page(SSD1306_t * dev, int page, uint8_t * buffer)
 	memcpy(buffer, &dev->_page[page]._segs, 128);
 }
 
-void ssd1306_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images, int width)
+void ssd1306_display_image(SSD1306_t * dev, int page, int seg, const uint8_t * images, int width)
 {
 	if (dev->_address == SPI_ADDRESS) {
 		spi_display_image(dev, page, seg, images, width);
@@ -95,7 +95,7 @@ void ssd1306_display_image(SSD1306_t * dev, int page, int seg, uint8_t * images,
 	memcpy(&dev->_page[page]._segs[seg], images, width);
 }
 
-void ssd1306_display_text(SSD1306_t * dev, int page, char * text, int text_len, bool invert)
+void ssd1306_display_text(SSD1306_t * dev, int page, const char * text, int text_len, bool invert)
 {
 	if (page >= dev->_pages) return;
 	int _text_len = text_len;
@@ -112,7 +112,7 @@ void ssd1306_display_text(SSD1306_t * dev, int page, char * text, int text_len, 
 	}
 }
 
-void ssd1306_display_text_box1(SSD1306_t * dev, int page, int seg, char * text, int box_width, int text_len, bool invert, int delay)
+void ssd1306_display_text_box1(SSD1306_t * dev, int page, int seg, const char * text, int box_width, int text_len, bool invert, int delay)
 {
 	if (page >= dev->_pages) return;
 	int text_box_pixel = box_width * 8;
@@ -146,7 +146,7 @@ void ssd1306_display_text_box1(SSD1306_t * dev, int page, int seg, char * text, 
 	}
 }
 
-void ssd1306_display_text_box2(SSD1306_t * dev, int page, int seg, char * text, int box_width, int text_len, bool invert, int delay)
+void ssd1306_display_text_box2(SSD1306_t * dev, int page, int seg, const char * text, int box_width, int text_len, bool invert, int delay)
 {
 	if (page >= dev->_pages) return;
 	int text_box_pixel = box_width * 8;
@@ -201,7 +201,7 @@ void ssd1306_display_text_box2(SSD1306_t * dev, int page, int seg, char * text, 
 
 // by Coert Vonk
 void 
-ssd1306_display_text_x3(SSD1306_t * dev, int page, char * text, int text_len, bool invert)
+ssd1306_display_text_x3(SSD1306_t * dev, int page, const char * text, int text_len, bool invert)
 {
 	if (page >= dev->_pages) return;
 	int _text_len = text_len;
@@ -295,12 +295,12 @@ void ssd1306_software_scroll(SSD1306_t * dev, int start, int end)
 }
 
 
-void ssd1306_scroll_text(SSD1306_t * dev, char * text, int text_len, bool invert)
+void ssd1306_scroll_text(SSD1306_t * dev, const char * text, int text_len, bool invert)
 {
 	ESP_LOGD(__FUNCTION__, "dev->_scEnable=%d", dev->_scEnable);
 	if (dev->_scEnable == false) return;
 
-	void (*func)(SSD1306_t * dev, int page, int seg, uint8_t * images, int width);
+	void (*func)(SSD1306_t * dev, int page, int seg, const uint8_t * images, int width);
 	if (dev->_address == SPI_ADDRESS) {
 		func = spi_display_image;
 	} else {
@@ -531,7 +531,7 @@ void ssd1306_wrap_arround(SSD1306_t * dev, ssd1306_scroll_type_t scroll, int sta
 
 }
 
-void _ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int width, int height, bool invert)
+void _ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, const uint8_t * bitmap, int width, int height, bool invert)
 {
 	if ( (width % 8) != 0) {
 		ESP_LOGE(__FUNCTION__, "width must be a multiple of 8");
@@ -594,7 +594,7 @@ void _ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int
 }
 
 
-void ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, uint8_t * bitmap, int width, int height, bool invert)
+void ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, const uint8_t * bitmap, int width, int height, bool invert)
 {
 	_ssd1306_bitmaps(dev, xpos, ypos, bitmap, width, height, invert);
 	
@@ -757,7 +757,7 @@ uint8_t ssd1306_rotate_byte(uint8_t ch1) {
 
 void ssd1306_fadeout(SSD1306_t * dev)
 {
-	void (*func)(SSD1306_t * dev, int page, int seg, uint8_t * images, int width);
+	void (*func)(SSD1306_t * dev, int page, int seg, const uint8_t * images, int width);
 	if (dev->_address == SPI_ADDRESS) {
 		func = spi_display_image;
 	} else {
@@ -811,7 +811,7 @@ void ssd1306_rotate_image(uint8_t *image, bool flip) {
 #endif
 }
 
-void ssd1306_display_rotate_text(SSD1306_t * dev, int seg, char * text, int text_len, bool invert) {
+void ssd1306_display_rotate_text(SSD1306_t * dev, int seg, const char * text, int text_len, bool invert) {
 	int _text_len = text_len;
 	if (_text_len > 8) _text_len = 8;
 	uint8_t image[8];
