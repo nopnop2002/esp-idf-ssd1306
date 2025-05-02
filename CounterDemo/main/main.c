@@ -317,10 +317,8 @@ void app_main(void)
 		digit4++;
 		if (digit4 == 10) {
 			digit4 = 0;
-			int segmentImageIndex4 = digit4 * 256;
-			for (int page=0;page<8;page++) {
-				ssd1306_display_image(&dev, page, 96, &segmentImage[segmentImageIndex4+page*32], 32);
-			}
+			// Update digit4
+			show_digit(&dev, segmentImage, 3, digit4);
 			digit3++;
 			if (digit3 == 10) {
 				digit3 = 0;
