@@ -76,6 +76,12 @@ Usage:
 #define I2C_ADDRESS 0x3C
 #define SPI_ADDRESS 0xFF
 
+#define OLED_DRAW_UPPER_RIGHT 0x01
+#define OLED_DRAW_UPPER_LEFT  0x02
+#define OLED_DRAW_LOWER_LEFT  0x04
+#define OLED_DRAW_LOWER_RIGHT 0x08
+#define OLED_DRAW_ALL (OLED_DRAW_UPPER_RIGHT|OLED_DRAW_UPPER_LEFT|OLED_DRAW_LOWER_RIGHT|OLED_DRAW_LOWER_LEFT)
+
 typedef enum {
 	SCROLL_RIGHT = 1,
 	SCROLL_LEFT = 2,
@@ -143,7 +149,8 @@ void _ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, const uint8_t * bitma
 void ssd1306_bitmaps(SSD1306_t * dev, int xpos, int ypos, const uint8_t * bitmap, int width, int height, bool invert);
 void _ssd1306_pixel(SSD1306_t * dev, int xpos, int ypos, bool invert);
 void _ssd1306_line(SSD1306_t * dev, int x1, int y1, int x2, int y2,  bool invert);
-void _ssd1306_circle(SSD1306_t * dev, int x0, int y0, int r, bool invert);
+void _ssd1306_circle(SSD1306_t * dev, int x0, int y0, int r, unsigned int opt, bool invert);
+void _ssd1306_disc(SSD1306_t * dev, int x0, int y0, int r, unsigned int opt, bool invert);
 void _ssd1306_cursor(SSD1306_t * dev, int x0, int y0, int r, bool invert);
 void ssd1306_invert(uint8_t *buf, size_t blen);
 void ssd1306_flip(uint8_t *buf, size_t blen);

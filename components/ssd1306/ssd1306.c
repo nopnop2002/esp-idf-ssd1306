@@ -678,7 +678,7 @@ void _ssd1306_line(SSD1306_t * dev, int x1, int y1, int x2, int y2,  bool invert
 }
 
 // Draw circle
-void _ssd1306_circle(SSD1306_t * dev, int x0, int y0, int r, bool invert)
+void _ssd1306_circle(SSD1306_t * dev, int x0, int y0, int r, unsigned int opt, bool invert)
 {
 	int x;
 	int y;
@@ -689,13 +689,52 @@ void _ssd1306_circle(SSD1306_t * dev, int x0, int y0, int r, bool invert)
 	y=-r;
 	err=2-2*r;
 	do{
-		_ssd1306_pixel(dev, x0-x, y0+y, invert); 
-		_ssd1306_pixel(dev, x0-y, y0-x, invert); 
-		_ssd1306_pixel(dev, x0+x, y0-y, invert); 
-		_ssd1306_pixel(dev, x0+y, y0+x, invert); 
-		if ((old_err=err)<=x)	err+=++x*2+1;
+		if ((opt & OLED_DRAW_UPPER_LEFT) == OLED_DRAW_UPPER_LEFT)
+			_ssd1306_pixel(dev, x0-x, y0+y, invert); 
+		if ((opt & OLED_DRAW_UPPER_RIGHT) == OLED_DRAW_UPPER_RIGHT)
+			_ssd1306_pixel(dev, x0-y, y0-x, invert); 
+		if ((opt & OLED_DRAW_LOWER_RIGHT) == OLED_DRAW_LOWER_RIGHT)
+			_ssd1306_pixel(dev, x0+x, y0-y, invert); 
+		if ((opt & OLED_DRAW_LOWER_LEFT) == OLED_DRAW_LOWER_LEFT)
+			_ssd1306_pixel(dev, x0+y, y0+x, invert); 
+		if ((old_err=err)<=x) err+=++x*2+1;
 		if (old_err>y || err>x) err+=++y*2+1;	 
 	} while(y<0);
+}
+
+// Draw disc (fill circle)
+void _ssd1306_disc(SSD1306_t * dev, int x0, int y0, int r, unsigned int opt, bool invert)
+{
+	int x;
+	int y;
+	int err;
+	int old_err;
+	int ChangeX;
+
+	x=0;
+	y=-r;
+	err=2-2*r;
+	ChangeX=1;
+	do{
+		if(ChangeX) {
+			//_ssd1306_line(dev, x0-x, y0-y, x0-x, y0+y, invert);
+			//_ssd1306_line(dev, x0+x, y0-y, x0+x, y0+y, invert);
+			if ((opt & OLED_DRAW_LOWER_LEFT) == OLED_DRAW_LOWER_LEFT)
+				_ssd1306_line(dev, x0-x, y0-y, x0-x, y0, invert);
+			if ((opt & OLED_DRAW_UPPER_LEFT) == OLED_DRAW_UPPER_LEFT)
+				_ssd1306_line(dev, x0-x, y0, x0-x, y0+y, invert);
+			if ((opt & OLED_DRAW_LOWER_RIGHT) == OLED_DRAW_LOWER_RIGHT)
+				_ssd1306_line(dev, x0+x, y0-y, x0+x, y0, invert);
+			if ((opt & OLED_DRAW_UPPER_RIGHT) == OLED_DRAW_UPPER_RIGHT)
+				_ssd1306_line(dev, x0+x, y0, x0+x, y0+y, invert);
+
+		} // endif
+		ChangeX=(old_err=err)<=x;
+		if (ChangeX) err+=++x*2+1;
+		if (old_err>y || err>x) err+=++y*2+1;
+	} while(y<=0);
+
+
 }
 
 // Draw cursor
