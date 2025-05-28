@@ -86,7 +86,7 @@ void app_main(void)
 	int radius = 4;
 	ESP_LOGD(TAG, "x_current=%d", x_current);
 	ESP_LOGD(TAG, "y_current=%d", y_current);
-	_ssd1306_circle(&dev, x_current, y_current, radius, draw);
+	_ssd1306_circle(&dev, x_current, y_current, radius, OLED_DRAW_ALL, draw);
 	ssd1306_show_buffer(&dev);
 
 	// Wait event
@@ -105,18 +105,18 @@ void app_main(void)
 			if ((x_temp+radius) <= xmax && (x_temp-radius) >= 0) x_current = x_temp;
 			int y_temp = y_current + hidEvent.mouse_event.y_displacement;
 			if ((y_temp+radius) <= ymax && (y_temp-radius) >= 0) y_current = y_temp;
-			_ssd1306_circle(&dev, x_previus, y_previus, radius, !draw);
-			_ssd1306_circle(&dev, x_current, y_current, radius, draw);
+			_ssd1306_circle(&dev, x_previus, y_previus, radius, OLED_DRAW_ALL, !draw);
+			_ssd1306_circle(&dev, x_current, y_current, radius, OLED_DRAW_ALL, draw);
 			ssd1306_show_buffer(&dev);
 			if (hidEvent.mouse_event.button1 == 1) {
 				draw = true; // background is white
 				ssd1306_clear_screen(&dev, draw);
-				_ssd1306_circle(&dev, x_current, y_current, radius, draw);
+				_ssd1306_circle(&dev, x_current, y_current, radius, OLED_DRAW_ALL, draw);
 				ssd1306_show_buffer(&dev);
 			} else if (hidEvent.mouse_event.button2 == 1) {
 				draw = false; // background is black
 				ssd1306_clear_screen(&dev, draw);
-				_ssd1306_circle(&dev, x_current, y_current, radius, draw);
+				_ssd1306_circle(&dev, x_current, y_current, radius, OLED_DRAW_ALL, draw);
 				ssd1306_show_buffer(&dev);
 			}
 		}

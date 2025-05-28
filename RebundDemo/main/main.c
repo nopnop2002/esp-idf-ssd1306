@@ -80,8 +80,8 @@ void app_main(void)
 	ssd1306_contrast(&dev, 0xff);
 
 	while(1) {
-		_ssd1306_circle(&dev, x_previus, y_previus, radius, true);
-		_ssd1306_circle(&dev, x_current, y_current, radius, false);
+		_ssd1306_circle(&dev, x_previus, y_previus, radius, OLED_DRAW_ALL, true);
+		_ssd1306_circle(&dev, x_current, y_current, radius, OLED_DRAW_ALL, false);
 		ssd1306_show_buffer(&dev);
 		x_previus = x_current;
 		y_previus = y_current;
