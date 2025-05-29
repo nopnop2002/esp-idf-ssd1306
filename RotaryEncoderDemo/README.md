@@ -24,4 +24,5 @@ I used [this](https://github.com/nopnop2002/esp-idf-RotaryEncoder) component.
 |SDA|--|GPIO21|GPIO01|GPIO05|(*1)|
 |CON|--|N/C|N/C|N/C||
 
+(*1) You can change any GPIO using menuconfig.
 
