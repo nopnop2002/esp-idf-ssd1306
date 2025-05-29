@@ -16,13 +16,15 @@ I used [this](https://github.com/nopnop2002/esp-idf-RotaryEncoder) component.
 |:-:|:-:|:-:|:-:|:-:|:-:|
 |VCC|--|3V3|3V3|3V3||
 |GND|--|GND|GND|GND||
-|BAK|--|N/C|N/C|N/C||
+|BAK|--|N/C|N/C|N/C|(*2)|
 |TRB|--|GPIO16|GPIO16|GPIO02|(*1)|
 |TRA|--|GPIO15|GPIO15|GPIO01|(*1)|
 |PSH|--|GPIO17|GPIO17|GPIO03|(*1)|
 |SCL|--|GPIO22|GPIO02|GPIO06|(*1)|
 |SDA|--|GPIO21|GPIO01|GPIO05|(*1)|
-|CON|--|N/C|N/C|N/C||
+|CON|--|N/C|N/C|N/C|(*2)|
 
-(*1) You can change any GPIO using menuconfig.
+(*1) You can change any GPIO using menuconfig.   
+
+(*2) These ports are simple digital ports. Not used in this project.   
 
