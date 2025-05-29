@@ -1,5 +1,5 @@
 # RoraryEncoderDemo for SSD1306
-We got an SSD1306 with rotary encoding like this.   
+We got an SSD1306 with rotary encoder like this.   
 So I played around with it a little.   
 I used [this](https://steemit.com/utopian-io/@pakganern/oled-display-gauge-meter-using-potentiometer-arduino) article as a reference.   
 I used [this](https://github.com/nopnop2002/esp-idf-RotaryEncoder) component.   
