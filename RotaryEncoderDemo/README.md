@@ -28,3 +28,5 @@ I used [this](https://github.com/nopnop2002/esp-idf-RotaryEncoder) component.
 
 (*2) These ports are simple digital ports. Not used in this project.   
 
+This demo also works with generic SPI panels.   
+![Image](https://github.com/user-attachments/assets/2dd99695-11a2-44fd-83f0-a3f023d2a8cc)
