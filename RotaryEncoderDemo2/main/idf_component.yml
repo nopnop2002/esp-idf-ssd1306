@@ -1,0 +1,4 @@
+dependencies:
+  nopnop2002/RotaryEncoder:
+    path: components/RotaryEncoder/
+    git: https://github.com/nopnop2002/esp-idf-RotaryEncoder.git
