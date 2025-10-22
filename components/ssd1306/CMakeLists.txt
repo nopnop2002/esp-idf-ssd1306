@@ -13,4 +13,4 @@ else()
 	list(APPEND component_srcs "ssd1306_i2c_legacy.c")
 endif()
 
-idf_component_register(SRCS "${component_srcs}" PRIV_REQUIRES driver INCLUDE_DIRS ".")
+idf_component_register(SRCS "${component_srcs}" REQUIRES driver INCLUDE_DIRS ".")
