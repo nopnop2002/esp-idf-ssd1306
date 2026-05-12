@@ -140,7 +140,7 @@ menu "SSD1306 Configuration"
 			help
 				Use I2C_PORT_0.
 		config I2C_PORT_1
-			depends on IDF_TARGET_ARCH_XTENSA
+			depends on SOC_HP_I2C_NUM > 1
 			bool "I2C_PORT_1"
 			help
 				Use I2C_PORT_1.
@@ -164,7 +164,7 @@ menu "SSD1306 Configuration"
 			help
 				Use SPI2_HOST. This is also called HSPI_HOST.
 		config SPI3_HOST
-			depends on IDF_TARGET_ARCH_XTENSA
+			depends on SOC_SPI_PERIPH_NUM > 2
 			bool "SPI3_HOST"
 			help
 				USE SPI3_HOST. This is also called VSPI_HOST
