@@ -99,7 +99,7 @@ void i2c_device_add(SSD1306_t * dev, i2c_port_t i2c_num, int16_t reset, uint16_t
 	dev->_i2c_dev_handle = i2c_dev_handle;
 }
 
-void i2c_init(SSD1306_t * dev, int width, int height) {
+esp_err_t i2c_init(SSD1306_t * dev, int width, int height) {
 	dev->_width = width;
 	dev->_height = height;
 	dev->_pages = 8;
@@ -153,6 +153,7 @@ void i2c_init(SSD1306_t * dev, int width, int height) {
 	} else {
 		ESP_LOGE(TAG, "Could not write to device [0x%02x at %d]: %d (%s)", dev->_address, dev->_i2c_num, res, esp_err_to_name(res));
 	}
+	return res;
 }
 
 
