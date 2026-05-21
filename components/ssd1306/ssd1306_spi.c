@@ -78,7 +78,7 @@ void spi_master_init(SSD1306_t * dev, int16_t mosi, int16_t sclk, int16_t cs, in
 
 	dev->_dc = dc;
 	dev->_address = SPI_ADDRESS;
-	dev->_flip = false;
+	dev->_flip = CONFIG_FLIP;
 	dev->_spi_device_handle = spi_device_handle;
 }
 
@@ -134,7 +134,7 @@ void spi_device_add(SSD1306_t * dev, int16_t cs, int16_t dc, int16_t reset)
 
 	dev->_dc = dc;
 	dev->_address = SPI_ADDRESS;
-	dev->_flip = false;
+	dev->_flip = CONFIG_FLIP;
 	dev->_spi_device_handle = spi_device_handle;
 }
 

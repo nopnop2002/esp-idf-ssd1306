@@ -53,7 +53,7 @@ void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 	}
 
 	dev->_address = I2C_ADDRESS;
-	dev->_flip = false;
+	dev->_flip = CONFIG_FLIP;
 	dev->_i2c_num = I2C_NUM;
 	dev->_i2c_bus_handle = i2c_bus_handle;
 	dev->_i2c_dev_handle = i2c_dev_handle;
@@ -94,7 +94,7 @@ void i2c_device_add(SSD1306_t * dev, i2c_port_t i2c_num, int16_t reset, uint16_t
 	}
 
 	dev->_address = i2c_address;
-	dev->_flip = false;
+	dev->_flip = CONFIG_FLIP;
 	dev->_i2c_num = i2c_num;
 	dev->_i2c_dev_handle = i2c_dev_handle;
 }
