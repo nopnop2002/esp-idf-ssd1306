@@ -80,7 +80,7 @@ void i2c_device_add(SSD1306_t * dev, i2c_port_t i2c_num, int16_t reset, uint16_t
 	dev->_i2c_num = i2c_num;
 }
 
-void i2c_init(SSD1306_t * dev, int width, int height) {
+esp_err_t i2c_init(SSD1306_t * dev, int width, int height) {
 	dev->_width = width;
 	dev->_height = height;
 	dev->_pages = 8;
@@ -138,6 +138,7 @@ void i2c_init(SSD1306_t * dev, int width, int height) {
 		ESP_LOGE(TAG, "OLED configuration failed. code: 0x%.2X", res);
 	}
 	i2c_cmd_link_delete(cmd);
+	return res;
 }
 
 

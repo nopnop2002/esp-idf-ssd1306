@@ -123,7 +123,7 @@ extern "C"
 {
 #endif
 
-void ssd1306_init(SSD1306_t * dev, int width, int height);
+esp_err_t ssd1306_init(SSD1306_t * dev, int width, int height);
 int ssd1306_get_width(SSD1306_t * dev);
 int ssd1306_get_height(SSD1306_t * dev);
 int ssd1306_get_pages(SSD1306_t * dev);
@@ -164,7 +164,7 @@ void ssd1306_dump_page(SSD1306_t * dev, int page, int seg);
 
 void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset);
 void i2c_device_add(SSD1306_t * dev, i2c_port_t i2c_num, int16_t reset, uint16_t i2c_address);
-void i2c_init(SSD1306_t * dev, int width, int height);
+esp_err_t i2c_init(SSD1306_t * dev, int width, int height);
 void i2c_display_image(SSD1306_t * dev, int page, int seg, const uint8_t * images, int width);
 void i2c_contrast(SSD1306_t * dev, int contrast);
 void i2c_hardware_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll);
@@ -176,7 +176,7 @@ bool spi_master_write_byte(spi_device_handle_t SPIHandle, const uint8_t* Data, s
 bool spi_master_write_commands(SSD1306_t * dev, const uint8_t * Commands, size_t DataLength );
 bool spi_master_write_command(SSD1306_t * dev, uint8_t Command );
 bool spi_master_write_data(SSD1306_t * dev, const uint8_t* Data, size_t DataLength );
-void spi_init(SSD1306_t * dev, int width, int height);
+esp_err_t spi_init(SSD1306_t * dev, int width, int height);
 void spi_display_image(SSD1306_t * dev, int page, int seg, const uint8_t * images, int width);
 void spi_contrast(SSD1306_t * dev, int contrast);
 void spi_hardware_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll);

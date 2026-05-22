@@ -167,7 +167,7 @@ menu "SSD1306 Configuration"
 			depends on SOC_SPI_PERIPH_NUM > 2
 			bool "SPI3_HOST"
 			help
-				USE SPI3_HOST. This is also called VSPI_HOST
+				USE SPI3_HOST. This is also called VSPI_HOST.
 	endchoice
 
 endmenu
