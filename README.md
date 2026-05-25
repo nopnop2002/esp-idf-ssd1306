@@ -86,7 +86,7 @@ You need to change the Main XTAL frequency to 26MHz using menuconfig.
 
 # 128x64 ESP32C3
 
-There are no markings anywhere.   
+There are no manufacturer or model number markings anywhere.   
 I don't know where the TFT's RESET pin is connected.   
 
 <img width="864" height="576" alt="Image" src="https://github.com/user-attachments/assets/4776197e-dd3a-4769-8ec3-85bb088fc66a" />
