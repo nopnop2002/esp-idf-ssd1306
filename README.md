@@ -89,7 +89,7 @@ You need to change the Main XTAL frequency to 26MHz using menuconfig.
 There are no manufacturer or model number markings anywhere.   
 I don't know where the TFT's RESET pin is connected.   
 
-<img width="864" height="576" alt="Image" src="https://github.com/user-attachments/assets/4776197e-dd3a-4769-8ec3-85bb088fc66a" />
+<img width="864" height="576" alt="Image" src="https://github.com/user-attachments/assets/eb92d649-e034-4ee9-b3da-5284dafc8a0d" />
 <img width="864" height="576" alt="Image" src="https://github.com/user-attachments/assets/f8d6868a-3075-4bef-afb0-c1e2930f210d" />
 <img width="659" height="486" alt="Image" src="https://github.com/user-attachments/assets/fdfdcf6f-22a1-4c09-8a3d-0dc88b7feef1" />
 
