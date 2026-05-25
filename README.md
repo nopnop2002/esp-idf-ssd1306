@@ -84,6 +84,15 @@ You need to change the Main XTAL frequency to 26MHz using menuconfig.
 ![ESP32-OLED-2](https://user-images.githubusercontent.com/6020549/57063327-d229ef00-6cfd-11e9-98ab-8448e14d81e2.JPG)
 ![config-ESP-WROOM-32](https://github.com/nopnop2002/esp-idf-ssd1306/assets/6020549/72434f83-8496-43bb-9333-8c35db155c74)
 
+# 128x64 ESP32C3
+
+There are no markings anywhere.   
+I don't know where the TFT's RESET pin is connected.   
+
+<img width="864" height="576" alt="Image" src="https://github.com/user-attachments/assets/4776197e-dd3a-4769-8ec3-85bb088fc66a" />
+<img width="864" height="576" alt="Image" src="https://github.com/user-attachments/assets/f8d6868a-3075-4bef-afb0-c1e2930f210d" />
+<img width="659" height="486" alt="Image" src="https://github.com/user-attachments/assets/fdfdcf6f-22a1-4c09-8a3d-0dc88b7feef1" />
+
 # Generic SSD1306 128x32 SPI
 
 ![128x32_spi](https://user-images.githubusercontent.com/6020549/106338743-ef775d00-62d7-11eb-8e0c-42c09e6045b9.JPG)
