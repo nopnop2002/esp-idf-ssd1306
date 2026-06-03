@@ -162,7 +162,6 @@ void app_main(void)
 #endif // CONFIG_SPI_INTERFACE
 
 #if CONFIG_FLIP
-	dev._flip = true;
 	ESP_LOGW(tag, "Flip upside down");
 #endif
 
