@@ -157,6 +157,14 @@ esp_err_t i2c_init(SSD1306_t * dev, int width, int height) {
 }
 
 
+esp_err_t i2c_master_write_command(SSD1306_t * dev, uint8_t * command, size_t length)
+{
+	esp_err_t res;
+	res = i2c_master_transmit(dev->_i2c_dev_handle, command, length, I2C_TICKS_TO_WAIT);
+	return res;
+}
+
+
 void i2c_display_image(SSD1306_t * dev, int page, int seg, const uint8_t * images, int width) {
 	if (page >= dev->_pages) return;
 	if (seg >= dev->_width) return;

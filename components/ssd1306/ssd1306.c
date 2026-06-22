@@ -280,6 +280,18 @@ void ssd1306_contrast(SSD1306_t * dev, int contrast)
 	}
 }
 
+void ssd1306_sleep(SSD1306_t * dev, bool asleep) {
+	uint8_t cmd[] = {
+		OLED_CONTROL_BYTE_CMD_SINGLE,
+		asleep ? OLED_CMD_DISPLAY_OFF : OLED_CMD_DISPLAY_ON,
+	};
+	if (dev->_address == SPI_ADDRESS) {
+		spi_master_write_data(dev, cmd, sizeof(cmd));
+	} else {
+		i2c_master_write_command(dev, cmd, sizeof(cmd));
+    }
+}
+
 void ssd1306_software_scroll(SSD1306_t * dev, int start, int end)
 {
 	ESP_LOGD(__FUNCTION__, "software_scroll start=%d end=%d _pages=%d", start, end, dev->_pages);
