@@ -208,6 +208,23 @@ void i2c_contrast(SSD1306_t * dev, int contrast) {
 	i2c_cmd_link_delete(cmd);
 }
 
+void i2c_display_control(SSD1306_t * dev, bool display) {
+	int _display = OLED_CMD_DISPLAY_OFF;
+	if (display) _display = OLED_CMD_DISPLAY_ON;
+
+	i2c_cmd_handle_t cmd = i2c_cmd_link_create();
+	i2c_master_start(cmd);
+	i2c_master_write_byte(cmd, (dev->_address << 1) | I2C_MASTER_WRITE, true);
+	i2c_master_write_byte(cmd, OLED_CONTROL_BYTE_CMD_SINGLE, true); // 80
+	i2c_master_write_byte(cmd, _display, true);
+	i2c_master_stop(cmd);
+
+	esp_err_t res = i2c_master_cmd_begin(dev->_i2c_num, cmd, I2C_TICKS_TO_WAIT);
+	if (res != ESP_OK) {
+		ESP_LOGE(TAG, "Contrast command failed. code: 0x%.2X", res);
+	}
+	i2c_cmd_link_delete(cmd);
+}
 
 void i2c_hardware_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll) {
 	i2c_cmd_handle_t cmd = i2c_cmd_link_create();

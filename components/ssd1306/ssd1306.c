@@ -280,6 +280,24 @@ void ssd1306_contrast(SSD1306_t * dev, int contrast)
 	}
 }
 
+void ssd1306_display_on(SSD1306_t * dev)
+{
+	if (dev->_address == SPI_ADDRESS) {
+		spi_display_control(dev, true);
+	} else {
+		i2c_display_control(dev, true);
+	}
+}
+
+void ssd1306_display_off(SSD1306_t * dev)
+{
+	if (dev->_address == SPI_ADDRESS) {
+		spi_display_control(dev, false);
+	} else {
+		i2c_display_control(dev, false);
+	}
+}
+
 void ssd1306_software_scroll(SSD1306_t * dev, int start, int end)
 {
 	ESP_LOGD(__FUNCTION__, "software_scroll start=%d end=%d _pages=%d", start, end, dev->_pages);

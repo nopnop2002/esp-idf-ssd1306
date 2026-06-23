@@ -140,6 +140,8 @@ void ssd1306_display_text_x3(SSD1306_t * dev, int page, const char * text, int t
 void ssd1306_clear_screen(SSD1306_t * dev, bool invert);
 void ssd1306_clear_line(SSD1306_t * dev, int page, bool invert);
 void ssd1306_contrast(SSD1306_t * dev, int contrast);
+void ssd1306_display_on(SSD1306_t * dev);
+void ssd1306_display_off(SSD1306_t * dev);
 void ssd1306_software_scroll(SSD1306_t * dev, int start, int end);
 void ssd1306_scroll_text(SSD1306_t * dev, const char * text, int text_len, bool invert);
 void ssd1306_scroll_clear(SSD1306_t * dev);
@@ -167,6 +169,7 @@ void i2c_device_add(SSD1306_t * dev, i2c_port_t i2c_num, int16_t reset, uint16_t
 esp_err_t i2c_init(SSD1306_t * dev, int width, int height);
 void i2c_display_image(SSD1306_t * dev, int page, int seg, const uint8_t * images, int width);
 void i2c_contrast(SSD1306_t * dev, int contrast);
+void i2c_display_control(SSD1306_t * dev, bool display);
 void i2c_hardware_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll);
 
 void spi_clock_speed(int speed);
@@ -179,6 +182,7 @@ bool spi_master_write_data(SSD1306_t * dev, const uint8_t* Data, size_t DataLeng
 esp_err_t spi_init(SSD1306_t * dev, int width, int height);
 void spi_display_image(SSD1306_t * dev, int page, int seg, const uint8_t * images, int width);
 void spi_contrast(SSD1306_t * dev, int contrast);
+void spi_display_control(SSD1306_t * dev, bool display);
 void spi_hardware_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll);
 
 #ifdef __cplusplus

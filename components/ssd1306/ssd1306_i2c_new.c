@@ -215,6 +215,16 @@ void i2c_contrast(SSD1306_t * dev, int contrast) {
 		ESP_LOGE(TAG, "Could not write to device [0x%02x at %d]: %d (%s)", dev->_address, dev->_i2c_num, res, esp_err_to_name(res));
 }
 
+void i2c_display_control(SSD1306_t * dev, bool display) {
+	uint8_t out_buf[2] = {
+		OLED_CONTROL_BYTE_CMD_SINGLE,
+		display ? OLED_CMD_DISPLAY_ON : OLED_CMD_DISPLAY_OFF,
+	};
+
+	esp_err_t res = i2c_master_transmit(dev->_i2c_dev_handle, out_buf, 2, I2C_TICKS_TO_WAIT);
+	if (res != ESP_OK)
+		ESP_LOGE(TAG, "Could not write to device [0x%02x at %d]: %d (%s)", dev->_address, dev->_i2c_num, res, esp_err_to_name(res));
+}
 
 void i2c_hardware_scroll(SSD1306_t * dev, ssd1306_scroll_type_t scroll) {
 	uint8_t out_buf[11];
