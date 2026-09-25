@@ -39,7 +39,7 @@ menu "SSD1306 Configuration"
 
 	config FLIP
 		bool "Flip upside down"
-		default false
+		default n
 		help
 			Flip upside down.
 
@@ -149,7 +149,7 @@ menu "SSD1306 Configuration"
 	config LEGACY_DRIVER
 		depends on I2C_INTERFACE
 		bool "Force legacy i2c driver"
-		default false
+		default n
 		help
 			Force legacy i2c driver.
 
