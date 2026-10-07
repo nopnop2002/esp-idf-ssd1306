@@ -45,7 +45,11 @@ void i2c_master_init(SSD1306_t * dev, int16_t sda, int16_t scl, int16_t reset)
 	}
 
 	dev->_address = I2C_ADDRESS;
+#if CONFIG_FLIP
+	dev->_flip = true;
+#else
 	dev->_flip = false;
+#endif
 	dev->_i2c_num = I2C_NUM;
 }
 
