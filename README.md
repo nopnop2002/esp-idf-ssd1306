@@ -33,6 +33,34 @@ For some reason, there are development boards that cannot use GPIO06, GPIO08, GP
 According to the ESP32C3 specifications, these pins can also be used as SPI clocks.   
 I used a raw ESP-C3-13 to verify that these pins could be used as SPI clocks.   
 
+# How to use this component in your project   
+Create idf_component.yml in the same directory as main.c.   
+```
+YourProject --+-- CMakeLists.txt
+              +-- main --+-- main.c
+                         +-- CMakeLists.txt
+                         +-- idf_component.yml
+```
+
+Contents of idf_component.yml.
+```
+dependencies:
+  nopnop2002/ssd1306:
+    path: components/ssd1306/
+    git: https://github.com/nopnop2002/esp-idf-ssd1306.git
+```
+
+When you build a projects esp-idf will automaticly fetch repository to managed_components dir and link with your code.   
+```
+YourProject --+-- CMakeLists.txt
+              +-- main --+-- main.c
+              |          +-- CMakeLists.txt
+              |          +-- idf_component.yml
+              +-- managed_components ----- nopnop2002__ssd1306
+```
+
+
+
 # Configuration   
 You have to set this config value with menuconfig.   
 - CONFIG_INTERFACE   
@@ -171,31 +199,4 @@ Previously it was called HSPI_HOST / VSPI_HOST, but now it is called SPI2_HOST /
 ![config_flip](https://user-images.githubusercontent.com/6020549/115942179-e3b8c280-a4e3-11eb-9b08-8eb830c9f7f4.jpg)
 
 ![ssd1306_flip](https://user-images.githubusercontent.com/6020549/115942191-f0d5b180-a4e3-11eb-879e-e7be89eb3e50.JPG)
-
-# How to use this component in your project   
-Create idf_component.yml in the same directory as main.c.   
-```
-YourProject --+-- CMakeLists.txt
-              +-- main --+-- main.c
-                         +-- CMakeLists.txt
-                         +-- idf_component.yml
-```
-
-Contents of idf_component.yml.
-```
-dependencies:
-  nopnop2002/ssd1306:
-    path: components/ssd1306/
-    git: https://github.com/nopnop2002/esp-idf-ssd1306.git
-```
-
-When you build a projects esp-idf will automaticly fetch repository to managed_components dir and link with your code.   
-```
-YourProject --+-- CMakeLists.txt
-              +-- main --+-- main.c
-              |          +-- CMakeLists.txt
-              |          +-- idf_component.yml
-              +-- managed_components ----- nopnop2002__ssd1306
-```
-
 
